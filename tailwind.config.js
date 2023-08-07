@@ -12,6 +12,8 @@ export default {
                 content: {
                     ['text']: '#595959',
                     ['title']: '#061421',
+                    ['bg']: '#f8f8f8',
+                    ['border']: '#eee',
                 },
                 blur: {
                     100: 'rgba(0,0,0,.6)',
