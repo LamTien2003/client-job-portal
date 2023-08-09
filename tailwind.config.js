@@ -31,10 +31,10 @@ export default {
             lg: { max: '1023px' },
             // => @media (max-width: 1023px) { ... }
 
-            tablet: { max: '767px' },
+            tb: { max: '767px' },
             // => @media (max-width: 767px) { ... }
 
-            mobile: { max: '639px' },
+            mb: { max: '639px' },
             // => @media (max-width: 639px) { ... }
         },
     },
