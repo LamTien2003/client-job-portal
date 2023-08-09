@@ -5,7 +5,7 @@ const Home = () => {
         toast.success('Test thông bao');
     }, []);
 
-    return <div>Home</div>;
+    return <div>Hello World</div>;
 };
 
 export default Home;

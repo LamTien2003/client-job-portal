@@ -12,11 +12,24 @@ export default {
                 content: {
                     ['text']: '#595959',
                     ['title']: '#061421',
+                    ['bg']: '#f8f8f8',
+                    ['bgsave']: '#eff3f2',
+                    ['border']: '#eee',
+                    ['bg-full-time']: '#f3e8c1',
+                    ['bg-part-time']: '#915bfe2e',
+                    ['bg-remote']: '#b4f2ee',
                 },
                 blur: {
                     100: 'rgba(0,0,0,.6)',
                 },
             },
+            width: {
+                '13': '3.25rem',
+            },
+            fontSize: {
+                'small': '0.875rem',
+                'cb': '0.9375rem',
+            }
         },
         keyframes: {
             wiggle: {
