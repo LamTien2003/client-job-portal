@@ -1,77 +1,76 @@
-import { url } from 'inspector';
-import { useEffect } from 'react';
+// import { url } from 'inspector';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { urlToHttpOptions } from 'url';
+// import { toast } from 'react-toastify';
+// import { urlToHttpOptions } from 'url';
+
+import ListGutter from '@/components/Icons/ListGutter';
+import ListColumn from '@/components/Icons/ListColumnt';
+import Banner from '@/components/Banner/Banner';
+import Job from './Job/Job';
+import JobGutter from './JobGutter/JobGutter';
+
+
 const JobListing = () => {
-    useEffect(() => {
-        toast.success('Test thông bao');
-    }, []);
+    const [listStyle, setListStyle] = useState('column')
+
+    // useEffect(() => {
+    //     toast.success('Test thông bao');
+    // }, []);
 
     return (
         <div>
             {/* banner */}
-            <div className=' pt-24 pb-24 m-auto text-center relative' style={{background: `url('https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/breadcrumb-bg.png')`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}} >
-                <h1 className='text-content-title text-2xl font-bold'>Job Listing</h1>
-                <span className='h-2 w-2 bg-primary-100 rounded-full m-auto mt-1 mb-3 block relative'>
-                    <div className='w-16 h-px right-4 top-1/3 bg-primary-100 translate-y-2/4 absolute'></div>
-                    <div className='w-16 h-px left-4 top-1/3 bg-primary-100 translate-y-2/4 absolute'></div>
-                </span>
-                <div className='font-medium flex justify-center'>
-                    <Link to={'/'} className='text-content-title text-center font-medium transition ease-in-out delay-0 duration-350 hover:text-primary-100'>Home </Link>
-                    <p className='ml-1.5 mr-1.5'>/</p>
-                    <p className='text-primary-100'>Job Listing</p>
-                </div>
-            </div>
+            <Banner page='Job Listing' />
 
             {/* job listing */}
-            <div className='max-w-7xl m-auto pt-32 flex justify-between xl:max-w-6xl lg:max-w-4xl lg:flex-col tablet:max-w-3xl mobile:max-w-2xl'>
+            <div className=' max-w-7xl ml-auto mr-auto pt-28 flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:max-w-3xl mb:max-w-2xl'>
 
                 {/* job sidebar */}
-                <div className=' w-4/12 pr-6 m-auto lg:pr-0 lg:w-3/4 mobile:w-11/12'>
+                <div className=' w-4/12 pr-3 mr-auto ml-auto mb-8 xl:w-5/12 lg:pr-0 lg:w-10/12 mb:w-11/12'>
                     <div className=' w-full bg-content-bg rounded-xl pl-5 pr-5 pt-10 pb-10'>
                         <div className=' bg-white border-content-border border rounded-md pt-10 pb-10 pl-6 pr-3 mb-5'>
                             <h3 className=' text-content-title font-semibold text-xl mb-2 lg:text-lg'>Job Category</h3>
                             <div>
                             <div className=' mb-2 flex relative'>
                                 <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Health Care</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
+                                <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Health Care</span>
+                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
                             </div>
                             <div className=' mb-2 flex relative'>
                                 <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Accounts & Finance</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
+                                <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Accounts & Finance</span>
+                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
                             </div>
                             <div className=' mb-2 flex relative'>
                                 <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Transportation</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
+                                <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Transportation</span>
+                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
                             </div>
                             <div className=' mb-2 flex relative'>
                                 <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Medical & Finance</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
+                                <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Medical & Finance</span>
+                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
                             </div>
                             <div className=' mb-2 flex relative'>
                                 <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Development</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
+                                <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Development</span>
+                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
                             </div>
                             <div className=' mb-2 flex relative'>
                                 <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Engineering</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
+                                <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Engineering</span>
+                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
                             </div>
                             <div className=' mb-2 flex relative'>
                                 <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Receptionist</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
+                                <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Receptionist</span>
+                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
                             </div>
                             <div className=' mb-2 flex relative'>
                                 <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Non-Profile Org.</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
+                                <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Non-Profile Org.</span>
+                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
                             </div>
                             </div>
                         </div>
@@ -124,11 +123,33 @@ const JobListing = () => {
                 </div>
 
                 {/* list */}
-                <div className=' w-2/3'>
-                    <div className='flex justify-between'>
+                <div className=' w-2/3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 tb:w-11/12'>
+                    <div className=' mb-6 pl-3 pr-3 flex justify-between lg:flex-col'>
                         <p className='text-content-text font-medium pt-2 pb-2'>Showing results 10 in 200 jobs list</p>
                         <div>
+                            <button className=' mr-5 ml-7' onClick={() => setListStyle('gutter')}>
+                                <ListGutter color={listStyle} />
+                            </button>
+                            <button onClick={() => setListStyle('column')}>
+                                <ListColumn color={listStyle} />
+                            </button>
                         </div>
+                    </div>
+                    <div>
+                        {/* item */}
+                        {listStyle === 'column' && (
+                            <div>
+                                <Job position='Senior Receptionist' location='Medico.co Ltd' salary='$20K-$50K' deadline='05 April, 2023' logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-01.png' />
+                                <Job position='Senior PHP Developer' location='Marko Land Conpany' salary='$50K-$70K' deadline='05 April, 2023' remote={false} logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-02.png' />
+                            </div>
+                            
+                        )}
+                        {listStyle === 'gutter' && (
+                            <div className=' flex flex-wrap tb:flex-col '>
+                                <JobGutter position='Senior Receptionist' companyName='Bistro Tech Ltd' experience='3-3.5 Years' location='Dhaka, Bangladesh' salaryHour='$60-$90' deadline='5 April, 2023' partTime={false} banner='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-1.png' logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-01.png' />
+                                <JobGutter position='Assistant Manager' companyName='Hangman Gold' experience='2-2.5 Years'  location='Sylhet, Bangladesh' salaryMonth='$20K-$50K' deadline='3 April, 2023' partTime={false} banner='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-2.png' logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-02.png' />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

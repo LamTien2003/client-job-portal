@@ -6,6 +6,7 @@ import JobListing from './pages/user/JobListing/JobListing';
 import Erorr from './pages/user/Erorr/Erorr';
 import Login from './pages/user/Login/Login'
 import Register from './pages/user/Register/Register';
+import JobDetail from './pages/user/JobDetail/JobDetail';
 
 function App() {
     return (
@@ -14,7 +15,7 @@ function App() {
             <Route path="" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
                 <Route path='job-listing' index element={<JobListing />} />
-                <Route path='job-detail' index element={<JobListing />} />
+                <Route path='job-detail' index element={<JobDetail />} />
                 <Route path='company-listing' index element={<JobListing />} />
                 <Route path='company-detail' index element={<JobListing />} />
             </Route>
