@@ -18,17 +18,26 @@ export default {
                     ['bg-full-time']: '#f3e8c1',
                     ['bg-part-time']: '#915bfe2e',
                     ['bg-remote']: '#b4f2ee',
+                    ['link']: '#0279cf',
                 },
                 blur: {
                     100: 'rgba(0,0,0,.6)',
                 },
             },
             width: {
-                '13': '3.25rem',
+                '13': '3.25rem', // 52px
+                '18': '4.5rem', // 72px
             },
             fontSize: {
-                'small': '0.875rem',
-                'cb': '0.9375rem',
+                'cb': '0.9375rem', // 15px
+            },
+            spacing: {
+                '1.25': '0.3125rem', // 5px
+                '6.5': '1.625rem', // 26px
+                '7.5': '1.875rem', // 30px
+                '17.5': '4.375rem', // 70px
+                '25': '6.25rem', // 100px
+                
             }
         },
         keyframes: {
