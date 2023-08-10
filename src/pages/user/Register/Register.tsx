@@ -6,7 +6,7 @@ const Register = () => {
     }, []);
 
     return (
-        <div className="login-area pt-120 tb-120 mb-120 m-0 p-0 m-auto my-32">
+        <div className="login-area pt-120 tb-120 mb-120 m-auto my-32">
             <div className="container">
                 <div className="border-black text-center ">
                     <h3 className="sn-h3 text-center text-teal-500 m-120 text-3xl font-bold">Register Account</h3>
@@ -17,7 +17,7 @@ const Register = () => {
                         Candidate
                     </button>
                     <button className="bg-white hover:bg-teal-400 hover:text-white text-black font-bold py-2 px-4 mx-3 w-44 focus:outline-none focus:shadow-outline rounded-full border-teal-100 border" type="button">
-                        Companydfasfdasfadfafdas
+                        Company
                     </button>
                 </div>
                 <div className="w-5/12 h-2/3 m-auto">
