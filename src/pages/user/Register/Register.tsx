@@ -17,7 +17,7 @@ const Register = () => {
                         Candidate
                     </button>
                     <button className="bg-white hover:bg-teal-400 hover:text-white text-black font-bold py-2 px-4 mx-3 w-44 focus:outline-none focus:shadow-outline rounded-full border-teal-100 border" type="button">
-                        Company
+                        Companydfasfdasfadfafdas
                     </button>
                 </div>
                 <div className="w-5/12 h-2/3 m-auto">
