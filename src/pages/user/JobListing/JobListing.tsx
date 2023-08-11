@@ -1,6 +1,5 @@
 // import { url } from 'inspector';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 // import { toast } from 'react-toastify';
 // import { urlToHttpOptions } from 'url';
 
@@ -123,7 +122,7 @@ const JobListing = () => {
                 </div>
 
                 {/* list */}
-                <div className=' w-2/3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 tb:w-11/12'>
+                <div className=' w-2/3 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 tb:w-11/12'>
                     <div className=' mb-6 pl-3 pr-3 flex justify-between lg:flex-col'>
                         <p className='text-content-text font-medium pt-2 pb-2'>Showing results 10 in 200 jobs list</p>
                         <div>

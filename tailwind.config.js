@@ -52,10 +52,10 @@ export default {
             // => @media (max-width: 1279px) { ... }
 
       keyframes: {
-          wiggle: {
-              '0%': { transform: 'translateX(100%)' },
-              '100%': { transform: 'translateX(0)' },
-          },
+            wiggle: {
+                '0%': { transform: 'translateX(100%)' },
+                '100%': { transform: 'translateX(0)' },
+            },
       },
       screens: {
           xl: { max: '1279px' },
@@ -64,10 +64,10 @@ export default {
           lg: { max: '1023px' },
           // => @media (max-width: 1023px) { ... }
 
-          tablet: { max: '767px' },
+          tb: { max: '767px' },
           // => @media (max-width: 767px) { ... }
 
-          mobile: { max: '639px' },
+          mb: { max: '639px' },
           // => @media (max-width: 639px) { ... }
       },
         },
