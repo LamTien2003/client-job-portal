@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
-function Job({logo='', position='', location='', salary='', deadline='', fullTime=true, partTime=true, remote=true}) {
+function JobColumn({logo='', position='', location='', salary='', deadline='', fullTime=true, partTime=true, remote=true}) {
     return (
         <div className=' mb-7 flex flex-col'>
             <div className='bg-white border border-content-border rounded pt-7 pb-7 pr-6 pl-6 duration-300 hover:border-primary-blur '>
@@ -51,4 +51,4 @@ function Job({logo='', position='', location='', salary='', deadline='', fullTim
     );
 }
 
-export default Job;
+export default JobColumn;
