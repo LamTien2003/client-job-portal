@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,29 +14,29 @@ import Banner from "@/components/Banner/Banner";
 
 function JobDetail() {
 
-    const [windowSize, setWindowSize] = useState(getWindowSize())
-    const [slidePerViewCompany, setslidePerCompany] = useState(5)
-    const [slidePerViewJob, setslidePerViewJob] = useState(3)
+    // const [windowSize, setWindowSize] = useState(getWindowSize())
+    // const [slidePerViewCompany, setslidePerCompany] = useState(5)
+    // const [slidePerViewJob, setslidePerViewJob] = useState(3)
 
-    function getWindowSize() {
-        const { innerWidth } = window
-        return { innerWidth }
-    }
+    // function getWindowSize() {
+    //     const { innerWidth } = window
+    //     return { innerWidth }
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        function handleWindowResize() {
-            setWindowSize(getWindowSize())
-        }
+    //     function handleWindowResize() {
+    //         setWindowSize(getWindowSize())
+    //     }
 
-        window.addEventListener('resize', handleWindowResize)
+    //     window.addEventListener('resize', handleWindowResize)
         
 
 
-        return () => {
-            window.removeEventListener('resize', handleWindowResize)
-        }
-    }, [])
+    //     return () => {
+    //         window.removeEventListener('resize', handleWindowResize)
+    //     }
+    // }, [])
     
 
     return (
@@ -222,9 +222,8 @@ function JobDetail() {
                         <p className=" text-content-title text-cb font-semibold mr-6 mb-7.5">Get Location:</p>
                         <div>
                             <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.8770501856025!2d106.62763122385324!3d10.854294556256413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752bee0b0ef9e5%3A0x5b4da59e47aa97a8!2zQ8O0bmcgVmnDqm4gUGjhuqduIE3hu4FtIFF1YW5nIFRydW5n!5e0!3m2!1svi!2s!4v1691659559618!5m2!1svi!2s" 
-                                className=" w-full h-52 rounded-md lg:h-72"
-                            >
+                                className=" w-full h-52 rounded-md lg:h-72" 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5383.759320360064!2d106.62307466104055!3d10.853877228666475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752bee0b0ef9e5%3A0x5b4da59e47aa97a8!2zQ8O0bmcgVmnDqm4gUGjhuqduIE3hu4FtIFF1YW5nIFRydW5n!5e0!3m2!1svi!2s!4v1691931941360!5m2!1svi!2s">
                             </iframe>
                         </div>
                     </div>
@@ -236,7 +235,7 @@ function JobDetail() {
                     <h2 className=" text-content-title text-xl font-semibold mb-9">Company Gallery View</h2>
                     <Swiper
                         spaceBetween={30}
-                        slidesPerView={slidePerViewCompany}
+                        slidesPerView={5}
 
                     >
                         <SwiperSlide>
@@ -293,7 +292,7 @@ function JobDetail() {
                     <h1 className=" text-content-title text-2xl font-semibold mb-10">Related Jobs:</h1>
                     <Swiper
                         spaceBetween={30}
-                        slidesPerView={slidePerViewJob}
+                        slidesPerView={3}
                         // modules={[Pagination, Navigation]}
 
                     >
