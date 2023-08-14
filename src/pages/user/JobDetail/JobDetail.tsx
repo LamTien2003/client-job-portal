@@ -231,16 +231,40 @@ function JobDetail() {
             </div>
 
             <div className=" w-10/12 mr-auto ml-auto">
-                <div className=" mb-28">
+                <div className=" w-full mr-auto ml-auto mb-28">
                     <h2 className=" text-content-title text-xl font-semibold mb-9">Company Gallery View</h2>
                     <Swiper
-                        spaceBetween={30}
-                        slidesPerView={5}
+                        breakpoints={{
+                            0: {
+                                spaceBetween: 10,
+                                slidesPerView: 1
+                            },
+                            380: {
+                                spaceBetween: 10,
+                                slidesPerView: 2
+                            },
+                            639: {
+                                spaceBetween: 15,
+                                slidesPerView: 2
+                            },
+                            767: {
+                                spaceBetween: 20,
+                                slidesPerView: 3
+                            },
+                            1023: {
+                                spaceBetween: 25,
+                                slidesPerView: 4
+                            },
+                            1279: {
+                                spaceBetween: 30,
+                                slidesPerView: 5
+                            },
+                        }}
 
                     >
                         <SwiperSlide>
                             <div className=" group ">
-                                <img className=" rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-01.png" />
+                                <img className=" w-full rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-01.png" />
                                 <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
                                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
                                 </div>
@@ -248,7 +272,7 @@ function JobDetail() {
                         </SwiperSlide>
                         <SwiperSlide>
                             <div className=" group ">
-                                <img className=" rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-02.png" />
+                                <img className=" w-full rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-02.png" />
                                 <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
                                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
                                 </div>
@@ -256,7 +280,7 @@ function JobDetail() {
                         </SwiperSlide>
                         <SwiperSlide>
                             <div className=" group ">
-                                <img className=" rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-03.png" />
+                                <img className=" w-full rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-03.png" />
                                 <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
                                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
                                 </div>
@@ -264,7 +288,7 @@ function JobDetail() {
                         </SwiperSlide>
                         <SwiperSlide>
                             <div className=" group ">
-                                <img className=" rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-04.png" />
+                                <img className=" w-full rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-04.png" />
                                 <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
                                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
                                 </div>
@@ -272,7 +296,7 @@ function JobDetail() {
                         </SwiperSlide>
                         <SwiperSlide>
                             <div className=" group ">
-                                <img className=" rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-05.png" />
+                                <img className=" w-full rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-05.png" />
                                 <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
                                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
                                 </div>
@@ -280,7 +304,7 @@ function JobDetail() {
                         </SwiperSlide>
                         <SwiperSlide>
                             <div className=" group ">
-                                <img className=" rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-01.png" />
+                                <img className=" w-full rounded-md cursor-pointer relative " src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-01.png" />
                                 <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
                                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
                                 </div>
@@ -291,8 +315,20 @@ function JobDetail() {
                 <div>
                     <h1 className=" text-content-title text-2xl font-semibold mb-10">Related Jobs:</h1>
                     <Swiper
-                        spaceBetween={30}
-                        slidesPerView={3}
+                        breakpoints={{
+                            0: {
+                                spaceBetween: 10,
+                                slidesPerView: 1
+                            },
+                            870: {
+                                spaceBetween: 20,
+                                slidesPerView: 2
+                            },
+                            1400: {
+                                spaceBetween: 30,
+                                slidesPerView: 3
+                            },
+                        }}
                         // modules={[Pagination, Navigation]}
 
                     >
