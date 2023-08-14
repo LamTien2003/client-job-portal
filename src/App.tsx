@@ -10,6 +10,13 @@ import JobDetail from './pages/user/JobDetail/JobDetail';
 import CompanyListing from './pages/user/CompanyListing/CompanyListing';
 import CompanyDetail from './pages/user/CompanyDetail/CompanyDetail';
 
+
+
+
+import BlogGrid from './pages/user/BlogGrid/BlogGrid';
+import BlogDetail from './pages/user/BlogDetail/BlogDetail';
+import Contact from './pages/user/Contact/Contact';
+
 function App() {
     return (
         <Routes>
@@ -27,6 +34,15 @@ function App() {
                 <Route path='Login' index element={<Login />} />
                 <Route path='Register' index element={<Register />} />
                 <Route path='Erorr' index element={<Erorr />} />
+            </Route>
+
+
+            {/* Link các phần công việc của Thưởng */}
+            <Route path="" element={<DefaultLayout />}>\
+                <Route index element={<Home />} />
+                <Route path='/BlogGird' index element={<BlogGrid />} />
+                <Route path='/BlogDetail' index element={< BlogDetail/>} />
+                <Route path='/Contact' index element={<Contact />} />
             </Route>
 
             {/* Protected Routes */}
