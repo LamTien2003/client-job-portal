@@ -64,3 +64,22 @@ select:-webkit-autofill:focus {
     box-shadow: 0 0 0 1px #39f;
     outline: 0;
 }
+
+
+
+@layer components{
+    .title-ft{
+       @apply font-semibold text-[1.25rem]
+    }
+    .text-ft{
+        @apply text-footer-text text-[1rem] leading-[35px] mt-[20px] 
+    }
+    
+}
+
+@layer base{
+    li{
+        @apply hover:text-footer-color-hover
+    }
+  
+}
