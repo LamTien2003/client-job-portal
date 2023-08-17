@@ -1,10 +1,20 @@
 /** @type {import('tailwindcss').Config} */
+const withMT = require('@material-tailwind/react/utils/withMT');
+module.exports = withMT({
+    content: [
+        './src/**/*.{js,jsx,ts,tsx}',
+        'path-to-your-node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}',
+        'path-to-your-node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}',
+    ],
 
-export default {
-    content: ['./src/**/*.{js,jsx,ts,tsx}'],
     darkMode: 'class',
     theme: {
         extend: {
+            
+            backgroundImage: {
+                bannerHome: "url('https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/h1-hero-bg.png')",
+            },
+            
             colors: {
                 primary: {
                     ['blur']: 'rgba(0,167,172,.3)',
@@ -24,38 +34,42 @@ export default {
                     ['bg-remote']: '#b4f2ee',
                     ['link']: '#0279cf',
                 },
+
+               
+
                 blur: {
                     100: 'rgba(0,0,0,.6)',
                 },
             },
             width: {
-                '13': '3.25rem', // 52px
-                '15': '3.75rem', // 60px
-                '18': '4.5rem', // 72px
-                '22': '5.5rem', // 88px
-                '22.5': '5.625rem', // 90px
+                13: '3.25rem', // 52px
+                15: '3.75rem', // 60px
+                18: '4.5rem', // 72px
+                22: '5.5rem', // 88px
+                22.5: '5.625rem', // 90px
             },
             height: {
-                '13': '3.25rem', // 52px
-                '15': '3.75rem', // 60px
-                '18': '4.5rem', // 72px
-                '22': '5.5rem', // 88px
-                '22.5': '5.625rem', // 90px
+                13: '3.25rem', // 52px
+                15: '3.75rem', // 60px
+                18: '4.5rem', // 72px
+                22: '5.5rem', // 88px
+                22.5: '5.625rem', // 90px
             },
             fontSize: {
-                'cb': '0.9375rem', // 15px
+                cb: '0.9375rem', // 15px
             },
             spacing: {
-                '1.25': '0.3125rem', // 5px
-                '1.75': '0.4375rem', // 7px
-                '2.25': '0.5625rem', // 5px
-                '6.5': '1.625rem', // 26px
-                '7.5': '1.875rem', // 30px
-                '10.5': '2.625rem', // 42x
-                '11.25': '2.8125rem', // 45x
-                '17.5': '4.375rem', // 70px
-                '25': '6.25rem', // 100px
+                1.25: '0.3125rem', // 5px
+                1.75: '0.4375rem', // 7px
+                2.25: '0.5625rem', // 5px
+                6.5: '1.625rem', // 26px
+                7.5: '1.875rem', // 30px
+                10.5: '2.625rem', // 42x
+                11.25: '2.8125rem', // 45x
+                17.5: '4.375rem', // 70px
+                25: '6.25rem', // 100px
             },
+            
         },
         keyframes: {
             wiggle: {
@@ -76,7 +90,6 @@ export default {
             mb: { max: '639px' },
             // => @media (max-width: 639px) { ... }
         },
-        },
+    },
     plugins: [require('tailwind-scrollbar')],
-};
-
+});
