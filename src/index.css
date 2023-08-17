@@ -67,6 +67,10 @@ select:-webkit-autofill:focus {
 
 
 
+
+
+
+
 @layer components{
     .title-ft{
        @apply font-semibold text-[1.25rem]
