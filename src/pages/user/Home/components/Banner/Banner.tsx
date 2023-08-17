@@ -33,7 +33,7 @@ const Banner: React.FC = () => {
                         <img src={images.logo.jobMini} alt={images.logo.jobMini} />
                         <span className="w-[1px] h-6 bg-gray-300 mx-2"></span>
                         <input
-                            className="w-full outline-none text-black bg-gray-100"
+                            className="w-full outline-none text-black bg-[#eff3f2]"
                             type="text"
                             placeholder="Job Title"
                         />
