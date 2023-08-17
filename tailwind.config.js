@@ -40,6 +40,12 @@ module.exports = withMT({
                 blur: {
                     100: 'rgba(0,0,0,.6)',
                 },
+                footer:{
+                    ['text']: '#b3b3b3',
+                    ['bg']: '#1A1A1A',
+                    ['color-hover']:'#009FAC',
+                    ['color-boder']: 'rgba(255,255,255,.1)',
+                }
             },
             width: {
                 13: '3.25rem', // 52px
