@@ -13,13 +13,20 @@ import finance from './account-finance.svg';
 import technology from './technology.svg';
 import architect from './architect.svg';
 import transportation from './transportation.svg';
-import design from './design-job.svg'
+import design from './design-job.svg';
 import marketing from './marketing.svg';
 import medical from './medical.svg';
-import profit from './non-profit-org.svg'
-import receotionist from './receotionist.svg'
+import profit from './non-profit-org.svg';
+import receotionist from './receotionist.svg';
 import next from './slick-next.svg';
 import prev from './slick-prev.svg';
+
+import accoutCreate from './account-create.svg';
+import findJob from './job-find.svg';
+import jobApply from './job-apply.svg';
+import up from './work-up-arrow.svg';
+import down from './work-down-arrow.svg';
+
 const images = {
     elliose,
     arrow,
@@ -27,6 +34,15 @@ const images = {
     slick: {
         next,
         prev,
+    },
+
+    process: {
+        up,
+        down,
+        findJob,
+        accoutCreate,
+        resume,
+        jobApply,
     },
     categories: {
         receotionist,

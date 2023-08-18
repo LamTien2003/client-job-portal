@@ -10,17 +10,18 @@ module.exports = withMT({
     darkMode: 'class',
     theme: {
         extend: {
-            
             backgroundImage: {
                 bannerHome: "url('https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/h1-hero-bg.png')",
             },
-            
+
             colors: {
                 primary: {
                     ['blur']: 'rgba(0,167,172,.3)',
                     100: '#00A7AC',
                     70: '#9ceaec',
                     40: '#b6ebec66',
+
+                    10: 'rgba(0,167,172,.1)',
                 },
                 content: {
                     ['text']: '#595959',
@@ -35,15 +36,13 @@ module.exports = withMT({
                     ['link']: '#0279cf',
                 },
 
-               
-
                 blur: {
                     100: 'rgba(0,0,0,.6)',
                 },
-                footer:{
+                footer: {
                     ['text']: '#b3b3b3',
                     ['bg']: '#1A1A1A',
-                    ['color-hover']:'#009FAC',
+                    ['color-hover']: '#009FAC',
                     ['color-boder']: 'rgba(255,255,255,.1)',
                 },
                 menu:{
@@ -78,7 +77,6 @@ module.exports = withMT({
                 17.5: '4.375rem', // 70px
                 25: '6.25rem', // 100px
             },
-            
         },
         keyframes: {
             wiggle: {
