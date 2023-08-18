@@ -80,7 +80,9 @@ select:-webkit-autofill:focus {
     }
     .icon{
     @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white}
-    
+    .the_a_menu{
+    @apply font-medium hover:text-footer-color-hover 
+    }
 }
 
 @layer base{
