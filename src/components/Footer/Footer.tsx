@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightDots } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookF, faXTwitter, faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
     return (
@@ -177,25 +178,53 @@ const Footer = () => {
                         <a href="#" className="text-ft hover:text-footer-color-hover">
                             Our Sitemap
                         </a>
+                        {/* <FontAwesomeIcon className="" icon={faFacebook} /> */}
                     </div>
                 </div>
-            </div>
-            <div className="w-full -translate-y-10">
-                <img
-                    className="m-auto mt-[-40px]"
-                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/footer-logo.svg"
-                    alt=""
-                />
-                <div className="flex items-center justify-between px-4 my-2 border-t-2 border-footer-color-boder -translate-y-20">
-                    <div className="text-center text-[14px] p-4">
-                        <p className="tracking-wider">
+
+                <div className="grid grid-cols-3">
+                    <div className="border-t-2 border-footer-color-boder mt-[40px] w-[125%] pt-5">
+                        <p className="tracking-wider ">
                             ©Copyright 2023 <span className="text-footer-color-hover">JOBES</span> | Design By{' '}
                             <span className="text-footer-color-hover">Egenslab</span>
                         </p>
                     </div>
 
-                    <div className=" text-center text-[14px] py-2">
-                        <p className="w-full tracking-wider float-right font-medium">Follow JOBES: </p>
+                    <div>
+                        <img
+                            className="m-auto mt-[-40px]"
+                            src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/footer-logo.svg"
+                            alt=""
+                        />
+                    </div>
+
+                    <div className="border-t-2 border-footer-color-boder mt-[40px] w-[125%] ml-[-105px] pt-5 ">
+                        <div className="w-[60%] float-right grid grid-cols-8">
+                            <div className="col-span-4 font-medium ">Follow JOBES:</div>
+                            <div className="icon pl-[9px]">
+                                <FontAwesomeIcon icon={faFacebookF} />
+                            </div>
+                            <div className="icon pl-[6px]">
+                                <FontAwesomeIcon icon={faXTwitter} />
+                            </div>
+
+                            <div className="icon pl-[7px]">
+                                <FontAwesomeIcon icon={faLinkedinIn} />
+                            </div>
+
+                            <div className="icon pl-[6px]">
+                                <FontAwesomeIcon icon={faInstagram} />
+                            </div>
+                        </div>
+
+                        {/* <p className="space-x-5  font-medium">
+                            <a className="w-10 h-10 border rounded-full border-footer-color-hover ml-5">
+                            <FontAwesomeIcon icon={faFacebookF} />
+                            </a>
+
+                            <FontAwesomeIcon icon={faFacebookF} />
+                            <FontAwesomeIcon icon={faFacebookF} />
+                            <FontAwesomeIcon icon={faFacebookF} /></p> */}
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ThemeProvider } from '@material-tailwind/react';
 import { Provider } from 'react-redux';
 import store from './store/store.ts';
 
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Provider store={store}>
             <Router>
-                <App />
+                <ThemeProvider>
+                    <App />
+                </ThemeProvider>
             </Router>
         </Provider>
         <ToastContainer

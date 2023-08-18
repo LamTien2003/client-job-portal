@@ -67,6 +67,10 @@ select:-webkit-autofill:focus {
 
 
 
+
+
+
+
 @layer components{
     .title-ft{
        @apply font-semibold text-[1.25rem]
@@ -74,6 +78,8 @@ select:-webkit-autofill:focus {
     .text-ft{
         @apply text-footer-text text-[1rem] leading-[35px] mt-[20px] 
     }
+    .icon{
+    @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white}
     
 }
 
