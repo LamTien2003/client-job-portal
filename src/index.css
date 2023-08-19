@@ -85,4 +85,10 @@ select:-webkit-autofill:focus {
     li {
         @apply hover:text-footer-color-hover;
     }
+    label{
+        @apply text-[.938rem] font-medium mb-1
+    }
+    input{
+        @apply pl-10 text-[.875rem] font-normal h-[48px] w-[90%] rounded-md border-[0.5px] hover:border-2 border-footer-color-hover  focus:outline-none
+    }
 }

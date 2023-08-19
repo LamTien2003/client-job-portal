@@ -47,6 +47,9 @@ module.exports = withMT({
                 },
                 menu:{
                     ['bg']: '#061421',
+                },
+                linehr:{
+                    ['boder']: 'rgba(0,167,172,.1607843137)',
                 }
             },
             width: {
