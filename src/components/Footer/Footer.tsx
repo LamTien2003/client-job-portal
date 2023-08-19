@@ -132,7 +132,7 @@ const Footer = () => {
                         <a href="#" className="text-ft hover:text-footer-color-hover">Privacy Policy</a>
                         <a href="#" className="text-ft hover:text-footer-color-hover">Terms of Services</a>
                         <a href="#" className="text-ft hover:text-footer-color-hover">Our Sitemap</a>
-                        {/* <FontAwesomeIcon className="" icon={faFacebook} /> */}
+                       
                     </div>
                 </div>
 
@@ -168,14 +168,7 @@ const Footer = () => {
 
 
 
-                        {/* <p className="space-x-5  font-medium">
-                            <a className="w-10 h-10 border rounded-full border-footer-color-hover ml-5">
-                            <FontAwesomeIcon icon={faFacebookF} />
-                            </a>
-
-                            <FontAwesomeIcon icon={faFacebookF} />
-                            <FontAwesomeIcon icon={faFacebookF} />
-                            <FontAwesomeIcon icon={faFacebookF} /></p> */}
+                      
 
 
                     </div>

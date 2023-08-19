@@ -47,6 +47,9 @@ module.exports = withMT({
                     ['color-hover']: '#009FAC',
                     ['color-boder']: 'rgba(255,255,255,.1)',
                 },
+                menu:{
+                    ['bg']: '#061421',
+                }
             },
             width: {
                 13: '3.25rem', // 52px
