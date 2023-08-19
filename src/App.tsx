@@ -34,7 +34,7 @@ function App() {
 
             {/* Link các phần công việc của Thưởng */}
             <Route path="blog" element={<DefaultLayout />}>
-                <Route path="blogGrid" element={<BlogGrid />} />
+                <Route index element={<BlogGrid />} />
                 <Route path="blogDetail" element={<BlogDetail />} />
                 <Route path="contact" element={<Contact />} />
             </Route>

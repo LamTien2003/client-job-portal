@@ -178,7 +178,6 @@ const Footer = () => {
                         <a href="#" className="text-ft hover:text-footer-color-hover">
                             Our Sitemap
                         </a>
-                        {/* <FontAwesomeIcon className="" icon={faFacebook} /> */}
                     </div>
                 </div>
 
