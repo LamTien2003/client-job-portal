@@ -26,7 +26,13 @@ import findJob from './job-find.svg';
 import jobApply from './job-apply.svg';
 import up from './work-up-arrow.svg';
 import down from './work-down-arrow.svg';
+import location from './location.svg'
+import quat from './quat-icon.svg'
 
+import person from './person-2.svg'
+
+import comment from './comment.svg'
+import user from './user.svg'
 const images = {
     elliose,
     arrow,
@@ -57,6 +63,11 @@ const images = {
         transportation,
     },
     logo: {
+        user,
+        comment,
+        person,
+        quat,
+        location,
         newJob,
         search,
         category,

@@ -92,3 +92,8 @@ select:-webkit-autofill:focus {
         @apply pl-10 text-[.875rem] font-normal h-[48px] w-[90%] rounded-md border-[0.5px] hover:border-2 border-footer-color-hover  focus:outline-none
     }
 }
+
+.transform-gpu {
+    transform-origin: center center;
+    will-change: transform;
+}
