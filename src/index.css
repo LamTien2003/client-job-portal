@@ -82,3 +82,8 @@ select:-webkit-autofill:focus {
         @apply hover:text-footer-color-hover;
     }
 }
+
+.transform-gpu {
+    transform-origin: center center;
+    will-change: transform;
+}

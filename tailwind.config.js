@@ -14,13 +14,14 @@ module.exports = withMT({
                 bannerHome: "url('https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/h1-hero-bg.png')",
             },
 
+
             colors: {
                 primary: {
                     ['blur']: 'rgba(0,167,172,.3)',
                     100: '#00A7AC',
                     70: '#9ceaec',
                     40: '#b6ebec66',
-
+                    20: 'rgba(0,167,172,.15)',
                     10: 'rgba(0,167,172,.1)',
                 },
                 content: {
@@ -29,6 +30,7 @@ module.exports = withMT({
                     ['bg']: '#f8f8f8',
                     ['bgjob']: '#fdf9f9',
                     ['bgsave']: '#eff3f2',
+
                     ['border']: '#eee',
                     ['bg-full-time']: '#f3e8c1',
                     ['bg-part-time']: '#915bfe2e',
@@ -62,6 +64,8 @@ module.exports = withMT({
             },
             fontSize: {
                 cb: '0.9375rem', // 15px
+                lxl: '1.375rem', // 15px
+
             },
             spacing: {
                 1.25: '0.3125rem', // 5px
