@@ -65,7 +65,7 @@ select:-webkit-autofill:focus {
     outline: 0;
 }
 
-@layer components {
+/* @layer components {
     .title-ft {
         @apply font-semibold text-[1.25rem];
     }
@@ -75,17 +75,22 @@ select:-webkit-autofill:focus {
     .icon {
         @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white;
     }
-    .icon{
-    @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white;
+    .icon {
+        @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white;
     }
-    
-}
+} */
 
-@layer base {
+/* @layer base {
     li {
         @apply hover:text-footer-color-hover;
     }
-}
+    label{
+        @apply text-[.938rem] font-medium mb-1
+    }
+    input{
+        @apply pl-10 text-[.875rem] font-normal h-[48px] w-[90%] rounded-md border-[0.5px] hover:border-2 border-footer-color-hover  focus:outline-none
+    }
+} */
 
 .transform-gpu {
     transform-origin: center center;
