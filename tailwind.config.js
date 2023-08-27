@@ -28,6 +28,7 @@ module.exports = withMT({
                     ['text']: '#595959',
                     ['title']: '#061421',
                     ['bg']: '#f8f8f8',
+                    ['bgtrans']: 'rgba(0, 0, 0, 0.8)',
                     ['bgjob']: '#fdf9f9',
                     ['bgsave']: '#eff3f2',
 

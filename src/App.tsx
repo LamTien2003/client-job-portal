@@ -3,7 +3,7 @@ import DefaultLayout from '@/layouts/user/DefaultLayout/DefaultLayout.tsx';
 import Home from './pages/user/Home/Home';
 import ProtectedRoutes from './layouts/auth/ProtectedRoutes/ProtectedRoutes';
 import JobListing from './pages/user/JobListing/JobListing';
-import Erorr from './pages/user/Erorr/Erorr';
+import Error from './pages/user/Error/Error';
 import Login from './pages/user/Login/Login'
 import Register from './pages/user/Register/Register';
 import JobDetail from './pages/user/JobDetail/JobDetail';
@@ -33,7 +33,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path='Login' index element={<Login />} />
                 <Route path='Register' index element={<Register />} />
-                <Route path='Erorr' index element={<Erorr />} />
+                <Route path='Error' index element={<Error />} />
             </Route>
 
 
