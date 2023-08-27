@@ -65,8 +65,13 @@ select:-webkit-autofill:focus {
     outline: 0;
 }
 
+<<<<<<< HEAD
 @layer components {
     /* .title-ft {
+=======
+/* @layer components {
+    .title-ft {
+>>>>>>> 756801df643c9350cd54e051b013d9c26c0640f3
         @apply font-semibold text-[1.25rem];
     }
     .text-ft {
@@ -75,6 +80,7 @@ select:-webkit-autofill:focus {
     .icon {
         @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white;
     }
+<<<<<<< HEAD
     .icon{
     @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white;
     } */
@@ -83,6 +89,15 @@ select:-webkit-autofill:focus {
 
 @layer base {
     /* li {
+=======
+    .icon {
+        @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white;
+    }
+} */
+
+/* @layer base {
+    li {
+>>>>>>> 756801df643c9350cd54e051b013d9c26c0640f3
         @apply hover:text-footer-color-hover;
     }
     label{
@@ -90,8 +105,13 @@ select:-webkit-autofill:focus {
     }
     input{
         @apply pl-10 text-[.875rem] font-normal h-[48px] w-[90%] rounded-md border-[0.5px] hover:border-2 border-footer-color-hover  focus:outline-none
+<<<<<<< HEAD
     } */
 }
+=======
+    }
+} */
+>>>>>>> 756801df643c9350cd54e051b013d9c26c0640f3
 
 .transform-gpu {
     transform-origin: center center;
