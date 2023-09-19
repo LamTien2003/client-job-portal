@@ -33,6 +33,7 @@ import person from './person-2.svg'
 
 import comment from './comment.svg'
 import user from './user.svg'
+import user2 from './user-2.svg'
 const images = {
     elliose,
     arrow,
@@ -63,6 +64,7 @@ const images = {
         transportation,
     },
     logo: {
+        user2,
         user,
         comment,
         person,
