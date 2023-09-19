@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const withMT = require('@material-tailwind/react/utils/withMT');
-module.exports = withMT({
+import withMT from '@material-tailwind/react/utils/withMT';
+export default withMT({
     content: [
         './src/**/*.{js,jsx,ts,tsx}',
         'path-to-your-node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}',
@@ -23,9 +23,11 @@ module.exports = withMT({
                     20: 'rgba(0,167,172,.15)',
                     10: 'rgba(0,167,172,.1)',
                 },
+                
                 content: {
                     ['text']: '#595959',
                     ['title']: '#061421',
+                    ['s-text']: "#595959",
                     ['bg']: '#f8f8f8',
                     ['bgtrans']: 'rgba(0, 0, 0, 0.8)',
                     ['bgjob']: '#fdf9f9',
@@ -104,5 +106,5 @@ module.exports = withMT({
             // => @media (max-width: 639px) { ... }
         },
     },
-    plugins: [require('tailwind-scrollbar')],
+    plugins: ['tailwind-scrollbar'],
 });
