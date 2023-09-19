@@ -3,8 +3,12 @@ import DefaultLayout from '@/layouts/user/DefaultLayout/DefaultLayout.tsx';
 import Home from './pages/user/Home/Home';
 import ProtectedRoutes from './layouts/auth/ProtectedRoutes/ProtectedRoutes';
 import JobListing from './pages/user/JobListing/JobListing';
+<<<<<<< HEAD
+import Error from './pages/user/Error/Error';
+import Login from './pages/user/Login/Login'
+=======
 import Erorr from './pages/user/Erorr/Erorr';
-import Login from './pages/user/Login/Login';
+import Login from './pages/user/Login/Login'
 import Register from './pages/user/Register/Register';
 import JobDetail from './pages/user/JobDetail/JobDetail';
 import CompanyListing from './pages/user/CompanyListing/CompanyListing';
@@ -21,26 +25,25 @@ function App() {
             {/* Public routes */}
             <Route path="" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
-                <Route path="job-listing" index element={<JobListing />} />
-                <Route path="job-detail" index element={<JobDetail />} />
-                <Route path="job-post" index element={<PostJob />} />
-                <Route path="company-listing" index element={<CompanyListing />} />
-                <Route path="company-detail" index element={<CompanyDetail />} />
+                <Route path='job-listing' index element={<JobListing />} />
+                <Route path='job-detail' index element={<JobDetail />} />
+                <Route path='company-listing' index element={<CompanyListing />} />
+                <Route path='company-detail' index element={<CompanyDetail />} />
             </Route>
 
-            <Route path="" element={<DefaultLayout />}>
+            <Route path="" element={<DefaultLayout />}>\
                 <Route index element={<Home />} />
-                <Route path="Login" index element={<Login />} />
-                <Route path="Register" index element={<Register />} />
-                <Route path="Erorr" index element={<Erorr />} />
+                <Route path='Login' index element={<Login />} />
+                <Route path='Register' index element={<Register />} />
+                <Route path='Erorr' index element={<Erorr />} />
             </Route>
 
             {/* Link các phần công việc của Thưởng */}
             <Route path="" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
-                <Route path="/BlogGird" index element={<BlogGrid />} />
-                <Route path="/BlogDetail" index element={<BlogDetail />} />
-                <Route path="/Contact" index element={<Contact />} />
+                <Route path='/BlogGird' index element={<BlogGrid />} />
+                <Route path='/BlogDetail' index element={< BlogDetail/>} />
+                <Route path='/Contact' index element={<Contact />} />
             </Route>
 
             {/* Protected Routes */}
@@ -48,7 +51,7 @@ function App() {
                 <Route index element={<div>Admin page</div>} />
             </Route>
 
-            <Route path="*" element={<div>Page not found</div>} />
+            <Route path="*" element={<Erorr />} />
         </Routes>
     );
 }

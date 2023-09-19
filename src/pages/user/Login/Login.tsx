@@ -18,48 +18,65 @@ const Login = () => {
                 </div>
                 <div className="w-5/12 h-2/3 m-auto mt-16 pt-12">
                     <form className="bg-white rounded-2xl border-teal-100 border  px-16 py-12  mb-4">
-                        <div className="email mb-4 pb-2 relative" >
+                        <div className="email mb-4 pb-2 relative">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                                 Email*
                             </label>
-                            <img className=" absolute top-10.5 left-1 pl-5" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/email-2.svg"/>
-                            <input className="appearance-none border border-teal-100 rounded w-full py-2 px-3 pl-14 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="info@example.com" />
+                            <img
+                                className=" absolute top-10.5 left-1 pl-5"
+                                src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/email-2.svg"
+                            />
+                            <input
+                                className="appearance-none border border-teal-100 rounded w-full py-2 px-3 pl-14 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="email"
+                                type="text"
+                                placeholder="info@example.com"
+                            />
                         </div>
                         <div className="mb-4 pb-2">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                                 Password*
                             </label>
-                            <input className="appearance-none border border-teal-100 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" />
+                            <input
+                                className="appearance-none border border-teal-100 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                id="password"
+                                type="password"
+                                placeholder="******************"
+                            />
                             <p className="text-red-500 text-xs italic">Please choose a password.</p>
                         </div>
                         <div className="flex flex-wrap place-content-between ">
                             <label className="md:w-2/3 block text-gray-500 font-bold">
                                 <input className="mr-2 leading-tight" type="checkbox" />
-                                <span className="text-sm ">
-                                    Remember Me
-                                </span>
+                                <span className="text-sm ">Remember Me</span>
                             </label>
-                            <a className="inline-block align-baseline font-bold  text-blue-500 hover:text-teal-500 underline underline-offset-3" href="#">
+                            <a
+                                className="inline-block align-baseline font-bold  text-blue-500 hover:text-teal-500 underline underline-offset-3"
+                                href="#"
+                            >
                                 Forget Password?
                             </a>
                         </div>
                         <div className="flex items-center justify-between">
-                            <button className="bg-teal-500 duration-300 hover:bg-teal-900 text-white font-bold py-2 px-4 my-6 w-full rounded focus:outline-none focus:shadow-outline" type="button">
+                            <button
+                                className="bg-teal-500 duration-300 hover:bg-teal-900 text-white font-bold py-2 px-4 my-6 w-full rounded focus:outline-none focus:shadow-outline"
+                                type="button"
+                            >
                                 Login
                             </button>
                         </div>
                         <div className="flex flex-wrap">
                             <h6>Don’t have an account? </h6>
-                            <a className="font-bold  text-teal-500 pl-2" href="#">Register </a>
+                            <a className="font-bold  text-teal-500 pl-2" href="#">
+                                Register{' '}
+                            </a>
                         </div>
                     </form>
-                    <p className="text-center text-gray-500 text-xs">
-                        &copy;2020 Acme Corp. All rights reserved. ...
-                    </p>
+                    <p className="text-center text-gray-500 text-xs">&copy;2020 Acme Corp. All rights reserved. ...</p>
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default Login;

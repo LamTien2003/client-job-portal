@@ -55,6 +55,9 @@ const Home = () => {
         </span>
     );
 
+    console.log(!('email' || !('password')));
+    
+
     return (
         <div>
             <Banner />

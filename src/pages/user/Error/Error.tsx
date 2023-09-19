@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-const Erorr = () => {
+const Error = () => {
     useEffect(() => {
         toast.success('Test thông bao');
     }, []);
@@ -21,4 +21,4 @@ const Erorr = () => {
 
 };
 
-export default Erorr;
+export default Error;

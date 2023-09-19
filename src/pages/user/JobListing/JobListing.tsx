@@ -2,24 +2,22 @@
 import { useState } from 'react';
 // import { toast } from 'react-toastify';
 // import { urlToHttpOptions } from 'url';
+// import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 import ListGutter from '@/components/Icons/ListGutter';
 import ListColumn from '@/components/Icons/ListColumnt';
 import Banner from '@/components/Banner/Banner';
 
-import JobColumn from './JobColumn/JobColumn';
-import JobGutter from './JobGutter/JobGutter';
-
+import JobColumn from './components/JobColumn/JobColumn';
+import JobGutter from './components/JobGutter/JobGutter';
+import Sidebar from './components/Sidebar/Sidebar';
 
 const JobListing = () => {
     const [listStyle, setListStyle] = useState('column')
 
-    // useEffect(() => {
-    //     toast.success('Test thông bao');
-    // }, []);
-
     return (
-        <div>
+        <div className="selection:bg-primary-100 selection:text-white">
             {/* banner */}
             <Banner page='Job Listing' />
 
@@ -29,136 +27,7 @@ const JobListing = () => {
                 {/* job sidebar */}
                 <div className=' w-4/12 pr-3 mr-auto ml-auto mb-8 xl:w-5/12 lg:pr-0 lg:w-10/12 mb:w-11/12'>
                     <div className=' w-full bg-content-bg rounded-xl pl-5 pr-5 pt-10 pb-10'>
-                        <div className=' bg-white border-content-border border rounded-md pt-10 pb-10 pl-6 pr-3 mb-5'>
-                            <h3 className=' text-content-title font-semibold text-xl mb-2 lg:text-lg'>Job Category</h3>
-                            <div className=' max-h-64 overflow-scroll'>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Health Care</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Accounts & Finance</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Transportation</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Medical & Finance</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Development</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Engineering</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Receptionist</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Non-Profile Org.</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Health Care</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Accounts & Finance</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Transportation</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Medical & Finance</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Development</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Engineering</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Receptionist</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                                <div className=' mb-2 flex relative'>
-                                    <input type='checkbox' className=' mr-1.5' />
-                                    <span className=' text-content-text font-medium lg:text-sm cursor-pointer'>Non-Profile Org.</span>
-                                    <p className=' text-content-text font-medium right-2 absolute lg:text-sm cursor-pointer'>(80)</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className=' bg-white border-content-border border rounded-md pt-10 pb-10 pl-6 pr-3 mb-5'>
-                            <h3 className=' text-content-title font-semibold text-xl mb-2 lg:text-lg'>Job Category</h3>
-                            <div>
-                            <div className=' mb-2 flex relative'>
-                                <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Health Care</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
-                            </div>
-                            <div className=' mb-2 flex relative'>
-                                <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Accounts & Finance</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
-                            </div>
-                            <div className=' mb-2 flex relative'>
-                                <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Transportation</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
-                            </div>
-                            <div className=' mb-2 flex relative'>
-                                <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Medical & Finance</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
-                            </div>
-                            <div className=' mb-2 flex relative'>
-                                <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Development</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
-                            </div>
-                            <div className=' mb-2 flex relative'>
-                                <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Engineering</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
-                            </div>
-                            <div className=' mb-2 flex relative'>
-                                <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Receptionist</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
-                            </div>
-                            <div className=' mb-2 flex relative'>
-                                <input type='checkbox' className=' mr-1.5' />
-                                <span className=' text-content-text font-medium lg:text-sm'>Non-Profile Org.</span>
-                                <p className=' text-content-text font-medium right-2 absolute lg:text-sm'>(80)</p>
-                            </div>
-                            </div>
-                        </div>
+                        <Sidebar/>
                         <button className=' w-full bg-primary-100 text-white text-base font-semibold rounded pt-3 pb-3 duration-300 cursor-pointer hover:bg-black'>Make A Job Post</button>
                     </div>
                 </div>
