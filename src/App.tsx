@@ -3,11 +3,8 @@ import DefaultLayout from '@/layouts/user/DefaultLayout/DefaultLayout.tsx';
 import Home from './pages/user/Home/Home';
 import ProtectedRoutes from './layouts/auth/ProtectedRoutes/ProtectedRoutes';
 import JobListing from './pages/user/JobListing/JobListing';
-<<<<<<< HEAD
-import Error from './pages/user/Error/Error';
-import Login from './pages/user/Login/Login'
-=======
-import Erorr from './pages/user/Erorr/Erorr';
+
+import Erorr from './pages/user/Error/Error';
 import Login from './pages/user/Login/Login'
 import Register from './pages/user/Register/Register';
 import JobDetail from './pages/user/JobDetail/JobDetail';
