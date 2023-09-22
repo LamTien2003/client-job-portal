@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 const Login = () => {
-    useEffect(() => {
-        toast.success('Test thông bao');
-    }, []);
+    // useEffect(() => {
+    //     toast.success('Test thông bao');
+    // }, []);
 
     return (
         <div className="login-area pt-120 tb-120 mb-120 m-0 p-0 m-auto my-32">

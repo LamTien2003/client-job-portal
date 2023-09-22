@@ -14,9 +14,9 @@ function CompanyListing() {
 
     return (
         <div className="selection:bg-primary-100 selection:text-white">
-            <div>
-                <Banner page="Company Listing" />
-            </div>
+
+            <Banner page="Company Listing" />
+            
             <div className=' max-w-7xl ml-auto mr-auto pt-28 flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:max-w-3xl mb:max-w-2xl'>
                 {/* job sidebar */}
                 <div className=' w-4/12 pr-3 mr-auto ml-auto mb-8 xl:w-5/12 lg:pr-0 lg:w-10/12 mb:w-11/12'>
@@ -69,23 +69,12 @@ function CompanyListing() {
                     </div>
                     <div>
                         {/* item */}
-                        {listStyle === 'column' && (
-                            <div className=' flex flex-wrap tb:flex-col tb:w-9/12 tb:mr-auto tb:ml-auto mb:w-full'>
-                                <CompanyColumn companyName='Marko-Land Company' location='Dhaka, Bangladesh' vacancies={1} logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-01.png' />
-                                <CompanyColumn companyName='Laballo.Tech Ltd' location='Dhaka, Bangladesh' vacancies={10} logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-02.png' />
-                            </div>
-                            
-                        )}
-                        {listStyle === 'gutter' && (
-                            <div className=' flex flex-wrap tb:flex-col '>
-                                <CompanyGutter companyName='UI.UX Company' location='Dhaka, Bangladesh' vacancies={1215} logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-06.png' />
-                                <CompanyGutter companyName='Bistro.Tech Group of Industry' location='Dhaka, Bangladesh' vacancies={643} logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-02.png' />
-                            </div>
-                        )}
+                        {listStyle === 'column' && <CompanyColumn/>}
+                        {listStyle === 'gutter' && <CompanyGutter/>}
                     </div>
                 </div>
-                </div>
-                        </div>
+            </div>
+        </div>
     );
 }
 
