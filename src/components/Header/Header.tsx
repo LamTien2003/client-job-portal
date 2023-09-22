@@ -17,7 +17,7 @@ const Header = () => {
                             Home
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
                         </a>
-                        <div className="absolute left-0 w-[200px] bg-menu-bg text-footer-color-hover shadow-md rounded-lg mt-2 p-4 hidden group-hover:block z-50">
+                        <div className="absolute left-0 w-[200px] bg-menu-bg text-footer-color-hover shadow-md rounded-lg mt-2 p-4 hidden z-20 group-hover:block">
                             {/* Thêm nội dung menu con tại đây */}
                             <a href="#" className="block">
                                 Submenu Item 1

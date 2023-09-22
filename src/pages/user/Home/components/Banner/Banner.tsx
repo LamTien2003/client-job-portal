@@ -43,7 +43,13 @@ const Banner: React.FC = () => {
                         <img className="py-5 pl-5" src={images.logo.category} alt={images.logo.category} />
                         <span className="w-[1px] h-6 bg-gray-300 mx-2"></span>
                         <div className="w-full">
-                            <Select color="blue" size="md" variant="standard" label={labelVisible ? 'Category' : ''}>
+                            <Select
+                                className="border-none outline-none"
+                                color="blue"
+                                size="md"
+                                variant="standard"
+                                label={labelVisible ? 'Category' : ''}
+                            >
                                 <Option onClick={handleOptionClick}>Category 1</Option>
                                 <Option onClick={handleOptionClick}>Category 2</Option>
                                 <Option onClick={handleOptionClick}>Category 3</Option>

@@ -13,6 +13,7 @@ import CompanyDetail from './pages/user/CompanyDetail/CompanyDetail';
 import BlogGrid from './pages/user/BlogGrid/BlogGrid';
 import BlogDetail from './pages/user/BlogDetail/BlogDetail';
 import Contact from './pages/user/Contact/Contact';
+import PostJob from './pages/user/PostJob/PostJob';
 
 function App() {
     return (
@@ -20,10 +21,11 @@ function App() {
             {/* Public routes */}
             <Route path="" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
-                <Route path="job-listing" index element={<JobListing />} />
-                <Route path="job-detail/:id" index element={<JobDetail />} />
-                <Route path="company-listing" index element={<CompanyListing />} />
-                <Route path="company-detail/:id" index element={<CompanyDetail />} />
+                <Route path='job-listing' index element={<JobListing />} />
+                <Route path='job-detail' index element={<JobDetail />} />
+                <Route path='company-listing/:id' index element={<CompanyListing />} />
+                <Route path='company-detail/:id' index element={<CompanyDetail />} />
+                <Route path='post-job' index element={<PostJob />} />
             </Route>
 
             <Route path="" element={<DefaultLayout />}>\
@@ -34,10 +36,11 @@ function App() {
             </Route>
 
             {/* Link các phần công việc của Thưởng */}
-            <Route path="blog" element={<DefaultLayout />}>
-                <Route index element={<BlogGrid />} />
-                <Route path="blogDetail" element={<BlogDetail />} />
-                <Route path="contact" element={<Contact />} />
+            <Route path="" element={<DefaultLayout />}>
+                <Route index element={<Home />} />
+                <Route path='/BlogGird' index element={<BlogGrid />} />
+                <Route path='/BlogDetail' index element={< BlogDetail/>} />
+                <Route path='/Contact' index element={<Contact />} />
             </Route>
 
             {/* Protected Routes */}
