@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { useEffect, useState, useRef } from "react";
 // import { Link } from "react-router-dom";
-=======
-import { useEffect, useState, useRef } from 'react';
-import { Link } from "react-router-dom";
->>>>>>> 705204354fa0e033ef7344d1a00b16bc89e39244
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -12,7 +7,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,16 +17,6 @@ import JobSumary from "./components/JobSumary/JobSumary";
 import JobInfo from "./components/JobInfo/JobInfo";
 import MoreInfo from "./components/MoreInfo/MoreInfo";
 import { useParams } from "react-router-dom";
-=======
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
-import Banner from '@/components/Banner/Banner';
-import RelatedJob from './components/RelatedJob/RelatedJob';
-import MainDescription from './components/MainDescription/MainDescription';
-import JobSumary from './components/JobSumary/JobSumary';
-import JobInfo from './components/JobInfo/JobInfo';
-import MoreInfo from './components/MoreInfo/MoreInfo';
->>>>>>> 705204354fa0e033ef7344d1a00b16bc89e39244
 
 function JobDetail() {
     const [modal, setModal] = useState(false);
@@ -54,16 +38,11 @@ function JobDetail() {
         if (!(e.target.children.length === 0)) {
             setModal(false);
         }
-<<<<<<< HEAD
     }
     
     const {id} = useParams()
     console.log(id);
     
-=======
-    };
-
->>>>>>> 705204354fa0e033ef7344d1a00b16bc89e39244
     useEffect(() => {
         const handleModal = (event: any) => {
             if (!imgRef.current?.contains(event.target)) {
@@ -286,207 +265,6 @@ function JobDetail() {
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
-
-            <div className=" w-10/12 mr-auto ml-auto">
-                <div className=" w-full mr-auto ml-auto mb-28">
-                    <h2 className=" text-content-title text-xl font-semibold mb-9">Company Gallery View</h2>
-                    <Swiper
-                        breakpoints={{
-                            0: {
-                                spaceBetween: 10,
-                                slidesPerView: 1,
-                            },
-                            380: {
-                                spaceBetween: 10,
-                                slidesPerView: 2,
-                            },
-                            639: {
-                                spaceBetween: 15,
-                                slidesPerView: 2,
-                            },
-                            767: {
-                                spaceBetween: 20,
-                                slidesPerView: 3,
-                            },
-                            1023: {
-                                spaceBetween: 25,
-                                slidesPerView: 4,
-                            },
-                            1279: {
-                                spaceBetween: 30,
-                                slidesPerView: 5,
-                            },
-                        }}
-                    >
-                        <SwiperSlide>
-                            <div className=" group ">
-                                <img
-                                    className=" w-full rounded-md cursor-pointer relative "
-                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-01.png"
-                                />
-                                <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className=" group ">
-                                <img
-                                    className=" w-full rounded-md cursor-pointer relative "
-                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-02.png"
-                                />
-                                <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className=" group ">
-                                <img
-                                    className=" w-full rounded-md cursor-pointer relative "
-                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-03.png"
-                                />
-                                <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className=" group ">
-                                <img
-                                    className=" w-full rounded-md cursor-pointer relative "
-                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-04.png"
-                                />
-                                <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className=" group ">
-                                <img
-                                    className=" w-full rounded-md cursor-pointer relative "
-                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-05.png"
-                                />
-                                <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className=" group ">
-                                <img
-                                    className=" w-full rounded-md cursor-pointer relative "
-                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-gallery-sm-01.png"
-                                />
-                                <div className=" w-0 h-0 bg-black rounded-full flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-30 duration-300 cursor-pointer group-hover:w-11 group-hover:h-11 group-hover:opacity-90 ">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/eye.svg" />
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    </Swiper>
-                </div>
-                <div>
-                    <h1 className=" text-content-title text-2xl font-semibold mb-10">Related Jobs:</h1>
-                    <Swiper
-                        breakpoints={{
-                            0: {
-                                spaceBetween: 10,
-                                slidesPerView: 1,
-                            },
-                            870: {
-                                spaceBetween: 20,
-                                slidesPerView: 2,
-                            },
-                            1400: {
-                                spaceBetween: 30,
-                                slidesPerView: 3,
-                            },
-                        }}
-                        // modules={[Pagination, Navigation]}
-                    >
-                        {[...Array(10)].map((_, index) => (
-                            <SwiperSlide key={index}>
-                                <div className=" group ">
-                                    <div className=" bg-content-bgjob rounded-r pt-9 pb-9 pr-6 pl-6 border-l-4 border-primary-blur group-hover:border-primary-100 ">
-                                        <div className=" flex items-start mb-5 relative">
-                                            <img
-                                                className=" rounded-full mr-5"
-                                                src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-02.png"
-                                            />
-                                            <div className=" w-full flex flex-col border-b border-content-border pb-3">
-                                                <h3 className=" text-content-title text-lg font-semibold mb-1">
-                                                    Assistant Laboratorist
-                                                </h3>
-                                                <p className=" text-sm">Full Time, Part Time</p>
-                                            </div>
-                                            <div className=" right-0 top-3 absolute cursor-pointer">
-                                                <div className=" w-7 h-7 rounded-full border border-primary-100 flex justify-center items-center duration-300 hover:bg-primary-100">
-                                                    <FontAwesomeIcon
-                                                        className=" text-primary-100 text-sm duration-300 hover:text-white"
-                                                        icon={faBookmarkRegular}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className=" bg-white pt-7.5 pb-7.5 pr-6 pl-6 flex flex-col">
-                                            <div className=" flex items-start mb-2">
-                                                <img
-                                                    className=" mt-1.25"
-                                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg"
-                                                />
-                                                <p className=" text-content-text text-cb font-medium ml-1.5">
-                                                    Salary:{' '}
-                                                    <span className=" text-content-title font-semibold ml-1 mr-1.5">
-                                                        $60-76$ /
-                                                    </span>
-                                                    Per month
-                                                </p>
-                                            </div>
-                                            <div className=" flex items-start mb-2">
-                                                <img
-                                                    className=" mt-1.25"
-                                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg"
-                                                />
-                                                <p className=" text-content-text text-cb font-medium ml-1.5">
-                                                    Vacancy: Per month
-                                                </p>
-                                            </div>
-                                            <div className=" flex items-start mb-2">
-                                                <img
-                                                    className=" mt-1.25"
-                                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg"
-                                                />
-                                                <p className=" text-content-text text-cb font-medium ml-1.5">
-                                                    Deadline: Per month
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className=" group pt-7.5 ml-2.5">
-                                            <Link
-                                                to="/job-detail"
-                                                className=" text-primary-100 flex items-center relative group-hover:cursor-pointer "
-                                            >
-                                                <img
-                                                    className="-left-2 top-1.5 absolute duration-300 group-hover:-left-1 mb:top-1"
-                                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/apply-arrow.svg"
-                                                />
-                                                <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/apply-ellipse.svg" />
-                                                <span className=" text-sm font-medium ml-1 mb:text-xs ">
-                                                    View Details
-                                                </span>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </div>
-            </div>
->>>>>>> 705204354fa0e033ef7344d1a00b16bc89e39244
         </div>
     );
 }

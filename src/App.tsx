@@ -22,8 +22,8 @@ function App() {
             <Route path="" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
                 <Route path='job-listing' index element={<JobListing />} />
-                <Route path='job-detail' index element={<JobDetail />} />
-                <Route path='company-listing/:id' index element={<CompanyListing />} />
+                <Route path='job-detail/:id' index element={<JobDetail />} />
+                <Route path='company-listing' index element={<CompanyListing />} />
                 <Route path='company-detail/:id' index element={<CompanyDetail />} />
                 <Route path='post-job' index element={<PostJob />} />
             </Route>
