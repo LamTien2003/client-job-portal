@@ -32,6 +32,7 @@ export default withMT({
                     ['bgtrans']: 'rgba(0, 0, 0, 0.8)',
                     ['bgjob']: '#fdf9f9',
                     ['bgsave']: '#eff3f2',
+                    ['underline']: '#e7e7e7',
 
                     ['border']: '#eee',
                     ['bg-full-time']: '#f3e8c1',
