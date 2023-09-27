@@ -46,10 +46,8 @@ function App() {
             </Route>
 
             {/* Protected Routes */}
-            <Route element={<PersistLogin/>}>
-                <Route element={<ProtectedRoutes allowedRoles={'user'} />}>
-                    <Route path="admin" index element={<div>Admin page</div>} />
-                </Route>
+            <Route element={<ProtectedRoutes allowedRoles={'user'} />}>
+                <Route path="admin" index element={<div>Admin page</div>} />
             </Route>
 
             <Route path="*" element={<Error />} />

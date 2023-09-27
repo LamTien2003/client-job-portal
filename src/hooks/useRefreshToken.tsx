@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import useAuth from "./useAuth";
 import axiosClient from "@/services/axiosClient";
 
@@ -17,7 +17,7 @@ const useRefleshToken = () => {
             console.log(JSON.stringify(response.data.accessToken))
             return { 
                 ...prev, 
-                roles: response.data.roles,
+                roles: response?.data?.data?.role,
                 accessToken: response.data.accessToken}
         })
         return response.data.accessToken

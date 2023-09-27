@@ -1,16 +1,20 @@
 import { useLocation, Outlet, Navigate } from "react-router-dom";
-import useAuth from "@/hooks/useAuth";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { selectCurrentToken, selectCurrentEmail, selectCurrentRole } from "@/store/authSlice";
 
 const ProtectedRoutes = (props:any) => {
-    const {auth} = useAuth() 
+    
+    const token = useSelector(selectCurrentToken)
+    const email = useSelector(selectCurrentEmail)
+    const role = useSelector(selectCurrentRole)
     const location = useLocation()
 
-    console.log(props.allowedRoles?.includes(auth?.roles))
+    console.log(token, role, props.allowedRoles)
 
     return (
-        props.allowedRoles?.includes(auth?.roles)
+        token && role === props.allowedRoles
             ? <Outlet />
-            : auth?.email
+            : email
                 ? <Navigate to={'/unauthorized'} state={{ from: location }} replace />
                 : <Navigate to={'/login'} state={{ from: location }} replace />
     )
