@@ -14,6 +14,7 @@ import BlogGrid from './pages/user/BlogGrid/BlogGrid';
 import BlogDetail from './pages/user/BlogDetail/BlogDetail';
 import Contact from './pages/user/Contact/Contact';
 import PostJob from './pages/user/PostJob/PostJob';
+import PersistLogin from './components/PersistLogin/PersistLogin';
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                 <Route path='Login' index element={<Login />} />
                 <Route path='Register' index element={<Register />} />
                 <Route path='Error' index element={<Error />} />
+                <Route path='unauthorized' index element={<>unauthorized</>} />
             </Route>
 
             {/* Link các phần công việc của Thưởng */}
@@ -44,8 +46,10 @@ function App() {
             </Route>
 
             {/* Protected Routes */}
-            <Route path="admin" element={<ProtectedRoutes />}>
-                <Route index element={<div>Admin page</div>} />
+            <Route element={<PersistLogin/>}>
+                <Route element={<ProtectedRoutes allowedRoles={'user'} />}>
+                    <Route path="admin" index element={<div>Admin page</div>} />
+                </Route>
             </Route>
 
             <Route path="*" element={<Error />} />

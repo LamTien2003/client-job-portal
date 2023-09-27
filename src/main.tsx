@@ -9,16 +9,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@material-tailwind/react';
 import { Provider } from 'react-redux';
 import store from './store/store.ts';
+import { AuthProvider } from './context/AuthProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <Provider store={store}>
-            <Router>
-                <ThemeProvider>
-                    <App />
-                </ThemeProvider>
-            </Router>
-        </Provider>
+        <AuthProvider>
+            <Provider store={store}>
+                <Router>
+                    <ThemeProvider>
+                        <App />
+                    </ThemeProvider>
+                </Router>
+            </Provider>
+        </AuthProvider>
         <ToastContainer
             position="top-right"
             autoClose={5000}

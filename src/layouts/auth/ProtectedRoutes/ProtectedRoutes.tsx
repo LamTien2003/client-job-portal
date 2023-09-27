@@ -1,12 +1,19 @@
-import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useLocation, Outlet, Navigate } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
 
-const ProtectedRoutes = () => {
-    useEffect(() => {
-        //   Xử lý auth tại đây
-    }, []);
+const ProtectedRoutes = (props:any) => {
+    const {auth} = useAuth() 
+    const location = useLocation()
 
-    return <Outlet />;
+    console.log(props.allowedRoles?.includes(auth?.roles))
+
+    return (
+        props.allowedRoles?.includes(auth?.roles)
+            ? <Outlet />
+            : auth?.email
+                ? <Navigate to={'/unauthorized'} state={{ from: location }} replace />
+                : <Navigate to={'/login'} state={{ from: location }} replace />
+    )
 };
 
 export default ProtectedRoutes;
