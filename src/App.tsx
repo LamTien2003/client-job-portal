@@ -15,6 +15,7 @@ import BlogDetail from './pages/user/BlogDetail/BlogDetail';
 import Contact from './pages/user/Contact/Contact';
 import PostJob from './pages/user/PostJob/PostJob';
 import PersistLogin from './components/PersistLogin/PersistLogin';
+import Admin from './components/Admin/Admin';
 
 function App() {
     return (
@@ -47,7 +48,9 @@ function App() {
 
             {/* Protected Routes */}
             <Route element={<ProtectedRoutes allowedRoles={'user'} />}>
-                <Route path="admin" index element={<div>Admin page</div>} />
+                <Route path="admin" index element={<Admin />} />
+                <Route path="admin/user" index element={<>User list</>} />
+                <Route path="edit" index element={<Admin />} />
             </Route>
 
             <Route path="*" element={<Error />} />

@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '@/store/authSlice';
 import { useLoginMutation } from '@/store/authApiSlice';
+import { setToken } from '@/utils/storage';
 
 const Login = () => {
 
@@ -36,6 +37,7 @@ const Login = () => {
 
         try {
             const userData = await login({email, password})
+            console.log(userData)
             const role = userData.data.data.data.role
             const accessToken = userData.data.data.accessToken
             dispatch(setCredentials({ email, accessToken, role }))
@@ -47,6 +49,7 @@ const Login = () => {
             // const accessToken = response?.data?.accessToken
             // const roles = response?.data?.data?.role
             // setAuth({email, password, roles, accessToken})
+            accessToken && setToken(accessToken)
             setEmail('')
             setPassword('')
             navigate(from, { replace: true })
