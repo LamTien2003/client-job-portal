@@ -1,5 +1,5 @@
 // import { url } from 'inspector';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { toast } from 'react-toastify';
 // import { urlToHttpOptions } from 'url';
 // import Slider from 'rc-slider';
@@ -15,6 +15,10 @@ import Sidebar from './components/Sidebar/Sidebar';
 
 const JobListing = () => {
     const [listStyle, setListStyle] = useState('column')
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <div className="selection:bg-primary-100 selection:text-white">
