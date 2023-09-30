@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { faUser, faBell } from '@fortawesome/free-regular-svg-icons';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -13,10 +14,10 @@ const Header = () => {
             <div className="col-span-7 flex justify-between items-center gap-4">
                 <div className=" w-[100%] grid grid-cols-7">
                     <div className="text-center relative group">
-                        <a href="#" className="the_a_menu">
+                        <NavLink to="#" className="the_a_menu">
                             Home
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
-                        </a>
+                        </NavLink>
                         <div className="absolute left-0 w-[200px] bg-menu-bg text-footer-color-hover shadow-md rounded-lg mt-2 p-4 hidden z-20 group-hover:block">
                             {/* Thêm nội dung menu con tại đây */}
                             <a href="#" className="block">
@@ -30,31 +31,24 @@ const Header = () => {
                     </div>
 
                     <div className="text-center">
-                        <a href="#" className="the_a_menu">
+                        <NavLink to="job-listing" className="the_a_menu">
                             Find Jobs
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
-                        </a>
+                        </NavLink>
                     </div>
 
                     <div className="text-center">
-                        <a href="#" className="the_a_menu">
-                            Pages
-                            <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
-                        </a>
-                    </div>
-
-                    <div className="text-center">
-                        <a href="#" className="the_a_menu">
+                        <NavLink to="company-listing" className="the_a_menu">
                             Company
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
-                        </a>
+                        </NavLink>
                     </div>
 
                     <div className="text-center">
-                        <a href="#" className="the_a_menu">
+                        <NavLink to="blogGird" className="the_a_menu">
                             Blog
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
-                        </a>
+                        </NavLink>
                     </div>
 
                     <div className="text-center">
@@ -78,18 +72,18 @@ const Header = () => {
                     </li>
                     <li className="col-span-2">
                         <div className="w-[133px] h-[45px] rounded-md text-center pt-[10px] font-medium  border-solid border  border-footer-color-hover hover:bg-footer-color-hover hover:text-white">
-                            <a href="#">
+                            <NavLink to="/login">
                                 <FontAwesomeIcon icon={faUser} className="mr-[5px]" />
                                 Sign In
-                            </a>
+                            </NavLink>
                         </div>
                     </li>
                     <li className="col-span-2">
                         <div className="w-[133px] h-[45px] rounded-md text-center pt-[10px] font-medium   bg-footer-color-hover hover:bg-black text-white">
-                            <a href="#">
+                            <NavLink to="post-job">
                                 Post Job
                                 <FontAwesomeIcon icon={faBriefcase} className="ml-[5px]" />
-                            </a>
+                            </NavLink>
                         </div>
                     </li>
                 </ul>

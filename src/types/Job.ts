@@ -3,6 +3,7 @@ import Company from './Company';
 import JobApplication from './JobApplication';
 
 export default interface Job {
+    id: string;
     postedBy: Company;
     title: string;
     description: string;

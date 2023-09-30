@@ -1,6 +1,7 @@
 import Notification from './Notification';
 
 export default interface User {
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -13,4 +14,5 @@ export default interface User {
     role: 'user' | 'admin';
     ban: boolean;
     notifications: Notification[];
+    type: 'jobseeker' | 'company';
 }

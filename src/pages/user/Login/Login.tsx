@@ -1,71 +1,61 @@
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux'
-import { setCredentials } from '@/store/authSlice';
-import { useLoginMutation } from '@/store/authApiSlice';
+import { useDispatch } from 'react-redux';
+import { useLoginMutation } from '@/services/authApiSlice';
 import { setToken } from '@/utils/storage';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from.pathname || '/';
 
-    const navigate = useNavigate()
-    const location = useLocation()
-    const from = location.state?.from.pathname || '/'
-
-    const [login, { isLoading }] = useLoginMutation()
-    const dispatch = useDispatch()
+    const [login, { isLoading }] = useLoginMutation();
+    const dispatch = useDispatch();
 
     // const {setAuth} = useAuth()
 
-    const emailRef = useRef<HTMLInputElement | null>()
-    const errRef = useRef<HTMLElement | null>()
+    const emailRef = useRef<HTMLInputElement | null>();
+    const errRef = useRef<HTMLElement | null>();
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [errMsg, setErrMsg] = useState('')
-
-    useEffect(() => {
-        emailRef?.current?.focus()
-    }, [])
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
-        setErrMsg('')
-    }, [email, password])
+        emailRef?.current?.focus();
+    }, []);
 
-    const handleSubmit = async (e:any) => {
-        e.preventDefault()
+    useEffect(() => {
+        setErrMsg('');
+    }, [email, password]);
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
 
         try {
-            const userData = await login({email, password})
-            console.log(userData)
-            const role = userData.data.data.data.role
-            const accessToken = userData.data.data.accessToken
-            dispatch(setCredentials({ email, accessToken, role }))
-            // const response = await axiosClient.post(LOGIN_URL,
-            //     {email, password}    
-            // )
-            // console.log(JSON.stringify(response?.data?.data))
-
-            // const accessToken = response?.data?.accessToken
-            // const roles = response?.data?.data?.role
-            // setAuth({email, password, roles, accessToken})
-            accessToken && setToken(accessToken)
-            setEmail('')
-            setPassword('')
-            navigate(from, { replace: true })
+            const userData = await login({ email, password });
+            console.log(userData);
+            const role = userData.data.data.data.role;
+            const accessToken = userData.data.data.accessToken;
+            dispatch(setCredentials({ email, accessToken, role }));
+            accessToken && setToken(accessToken);
+            setEmail('');
+            setPassword('');
+            navigate(from, { replace: true });
         } catch (error) {
-            if(!error?.response) {
-                setErrMsg('No server response')
+            if (!error?.response) {
+                setErrMsg('No server response');
             } else if (error.response?.status === 400) {
-                setErrMsg('Thiếu email hoặc mật khẩu')
+                setErrMsg('Thiếu email hoặc mật khẩu');
             } else if (error.response?.status === 401) {
-                setErrMsg('unauthorized')
+                setErrMsg('unauthorized');
             } else {
-                setErrMsg('Đăng nhập không thành công')
+                setErrMsg('Đăng nhập không thành công');
             }
-            errRef?.current?.focus()
+            errRef?.current?.focus();
         }
-    }
+    };
 
     return (
         <>
@@ -73,11 +63,15 @@ const Login = () => {
                 <h1>Loading...</h1>
             ) : (
                 <section>
-                    <p ref={errRef} className={errMsg ? 'flex' : 'hidden'} aria-live='assertive'>{errMsg}</p>
+                    <p ref={errRef} className={errMsg ? 'flex' : 'hidden'} aria-live="assertive">
+                        {errMsg}
+                    </p>
                     <div className="login-area pt-120 tb-120 mb-120 p-0 m-auto my-32">
                         <div className="container mr-auto ml-auto">
                             <div className="border-black">
-                                <h3 className="sn-h3 text-center text-teal-500 m-120 text-3xl font-bold">Log In Here!!!</h3>
+                                <h3 className="sn-h3 text-center text-teal-500 m-120 text-3xl font-bold">
+                                    Log In Here!!!
+                                </h3>
                                 <div className=" mr-auto ml-auto justify-center items-center flex">
                                     <div className="w-10 border-t border-red-600 justify-center"></div>
                                     <div className="w-2 h-2 rounded-full bg-red-500 justify-center m-2"></div>
@@ -85,8 +79,10 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="w-5/12 h-2/3 m-auto mt-16 pt-12">
-                                <form onSubmit={handleSubmit} className="bg-white rounded-2xl border-teal-100 border  px-16 py-12  mb-4">
-
+                                <form
+                                    onSubmit={handleSubmit}
+                                    className="bg-white rounded-2xl border-teal-100 border  px-16 py-12  mb-4"
+                                >
                                     {/* Email */}
                                     <div className="email mb-4 pb-2 relative">
                                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -100,8 +96,8 @@ const Login = () => {
                                             type="text"
                                             id="email"
                                             ref={emailRef}
-                                            autoComplete='off'
-                                            onChange={e => setEmail(e.target.value)}
+                                            autoComplete="off"
+                                            onChange={(e) => setEmail(e.target.value)}
                                             value={email}
                                             required
                                             placeholder="info@example.com"
@@ -111,13 +107,16 @@ const Login = () => {
 
                                     {/* Password */}
                                     <div className="mb-4 pb-2">
-                                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                        <label
+                                            className="block text-gray-700 text-sm font-bold mb-2"
+                                            htmlFor="password"
+                                        >
                                             Password*
                                         </label>
                                         <input
                                             type="password"
                                             id="password"
-                                            onChange={e => setPassword(e.target.value)}
+                                            onChange={(e) => setPassword(e.target.value)}
                                             value={password}
                                             required
                                             placeholder="******************"
@@ -139,20 +138,20 @@ const Login = () => {
                                         </a>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <button
-                                            className="bg-teal-500 duration-300 hover:bg-teal-900 text-white font-bold py-2 px-4 my-6 w-full rounded focus:outline-none focus:shadow-outline"
-                                        >
+                                        <button className="bg-teal-500 duration-300 hover:bg-teal-900 text-white font-bold py-2 px-4 my-6 w-full rounded focus:outline-none focus:shadow-outline">
                                             Login
                                         </button>
                                     </div>
                                     <div className="flex flex-wrap">
                                         <h6>Don't have an account? </h6>
-                                        <a className="font-bold  text-teal-500 pl-2" href="#">
-                                            Register{' '}
-                                        </a>
+                                        <NavLink to="/register" className="font-bold  text-teal-500 pl-2" href="#">
+                                            Register
+                                        </NavLink>
                                     </div>
                                 </form>
-                                <p className="text-center text-gray-500 text-xs">&copy;2020 Acme Corp. All rights reserved. ...</p>
+                                <p className="text-center text-gray-500 text-xs">
+                                    &copy;2020 Acme Corp. All rights reserved. ...
+                                </p>
                             </div>
                         </div>
                     </div>

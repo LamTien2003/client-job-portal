@@ -18,22 +18,22 @@ export default withMT({
                 primary: {
                     ['blur']: 'rgba(0,167,172,.3)',
                     100: '#00A7AC',
-                    70: '#9ceaec',
-                    40: '#b6ebec66',
-                    20: 'rgba(0,167,172,.15)',
-                    10: 'rgba(0,167,172,.1)',
+                    200: '#b2e4e6',
                 },
-                
+                secondary: {
+                    100: '#915bfe2e',
+                },
+
                 content: {
                     ['text']: '#595959',
                     ['title']: '#061421',
-                    ['s-text']: "#595959",
+
+                    // Phần này kh xài
                     ['bg']: '#f8f8f8',
                     ['bgtrans']: 'rgba(0, 0, 0, 0.8)',
                     ['bgjob']: '#fdf9f9',
                     ['bgsave']: '#eff3f2',
                     ['underline']: '#e7e7e7',
-
                     ['border']: '#eee',
                     ['bg-full-time']: '#f3e8c1',
                     ['bg-part-time']: '#915bfe2e',
@@ -41,22 +41,47 @@ export default withMT({
                     ['link']: '#0279cf',
                 },
 
+                // Phần này kh xài
                 blur: {
                     100: 'rgba(0,0,0,.6)',
                 },
+
+                // Phần này kh xài
                 footer: {
                     ['text']: '#b3b3b3',
                     ['bg']: '#1A1A1A',
                     ['color-hover']: '#009FAC',
                     ['color-boder']: 'rgba(255,255,255,.1)',
                 },
+
+                // Phần này kh xài
                 menu: {
                     ['bg']: '#061421',
                 },
+
+                // Phần này kh xài
                 linehr: {
                     ['boder']: 'rgba(0,167,172,.1607843137)',
                 },
             },
+
+            fontWeight: {
+                ['title']: '700',
+                ['content']: '400',
+
+                // Phần này kh xài
+                cb: '0.9375rem', // 15px
+                lxl: '1.375rem', // 15px
+            },
+
+            padding: {
+                ['section']: '60px',
+            },
+            margin: {
+                ['section']: '60px',
+            },
+
+            // Phần này kh xài
             width: {
                 13: '3.25rem', // 52px
                 15: '3.75rem', // 60px
@@ -64,6 +89,7 @@ export default withMT({
                 22: '5.5rem', // 88px
                 22.5: '5.625rem', // 90px
             },
+            // Phần này kh xài
             height: {
                 13: '3.25rem', // 52px
                 15: '3.75rem', // 60px
@@ -71,10 +97,12 @@ export default withMT({
                 22: '5.5rem', // 88px
                 22.5: '5.625rem', // 90px
             },
+            // Phần này kh xài
             fontSize: {
                 cb: '0.9375rem', // 15px
                 lxl: '1.375rem', // 15px
             },
+            // Phần này kh xài
             spacing: {
                 1.25: '0.3125rem', // 5px
                 1.75: '0.4375rem', // 7px

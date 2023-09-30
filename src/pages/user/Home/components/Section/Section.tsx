@@ -12,7 +12,7 @@ type SectionHome = {
 
 const Section: React.FC<SectionHome> = ({ title, subTitle, children, bg, right, slick }) => {
     return (
-        <div className={`py-20 ${bg ? bg : ' '}`}>
+        <div className={`py-section ${bg ? bg : ' '}`}>
             <div className="flex flex-col max-w-7xl mx-auto">
                 {right ? (
                     <Title title={title} subTitle={subTitle}>

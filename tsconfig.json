@@ -1,8 +1,7 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
-        "useDefineForClassFields": true,
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "target": "ESNext",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "module": "ESNext",
         "skipLibCheck": true,
 
@@ -26,6 +25,9 @@
             "@/*": ["./src/*"]
         }
     },
-    "include": ["src", "tailwind.config.js"],
+    "include": ["src"],
+    "rules": {
+        "no-unused-vars": "off"
+    },
     "references": [{ "path": "./tsconfig.node.json" }]
 }
