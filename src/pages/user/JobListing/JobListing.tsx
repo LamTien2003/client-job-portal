@@ -47,19 +47,8 @@ const JobListing = () => {
                     </div>
                     <div>
                         {/* item */}
-                        {listStyle === 'column' && (
-                            <div>
-                                <JobColumn position='Senior Receptionist' location='Medico.co Ltd' salary='$20K-$50K' deadline='05 April, 2023' logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-01.png' />
-                                <JobColumn position='Senior PHP Developer' location='Marko Land Conpany' salary='$50K-$70K' deadline='05 April, 2023' remote={false} logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-02.png' />
-                            </div>
-                            
-                        )}
-                        {listStyle === 'gutter' && (
-                            <div className=' flex flex-wrap tb:flex-col '>
-                                <JobGutter position='Senior Receptionist' companyName='Bistro Tech Ltd' experience='3-3.5 Years' location='Dhaka, Bangladesh' salaryHour='$60-$90' deadline='5 April, 2023' partTime={false} banner='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-1.png' logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-01.png' />
-                                <JobGutter position='Assistant Manager' companyName='Hangman Gold' experience='2-2.5 Years'  location='Sylhet, Bangladesh' salaryMonth='$20K-$50K' deadline='3 April, 2023' partTime={false} banner='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-2.png' logo='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-02.png' />
-                            </div>
-                        )}
+                        {listStyle === 'column' && <JobColumn />}
+                        {listStyle === 'gutter' && <JobGutter/>}
                     </div>
                 </div>
             </div>

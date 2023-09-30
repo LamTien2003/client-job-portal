@@ -10,10 +10,17 @@ import Review from './components/Section/Review/Review';
 import Company from './components/Section/Company/Company';
 import Recruiters from './components/Section/Recruiters/Recruiters';
 import Article from './components/Section/Article/Article';
+import { Swiper as SwiperType } from 'swiper';
+import { useRef } from 'react';
 const Home = () => {
     // useEffect(() => {
     //     toast.success('Test thông bao');
     // }, []);
+
+    const swiperRefLocation = useRef<SwiperType>();
+    const swiperRefReview = useRef<SwiperType>();
+    const swiperRefRecruiters = useRef<SwiperType>();
+
     const titleCategory = (
         <span>
             Trending Jobs <span className="text-primary-100">Category</span>
@@ -55,18 +62,15 @@ const Home = () => {
         </span>
     );
 
-    console.log(!('email' || !('password')));
-    
-
     return (
         <div>
             <Banner />
             <Section
                 title={titleCategory}
+                path="category"
                 subTitle="To choose your trending job dream & to make future bright."
                 bg=""
                 right={true}
-                slick={false}
             >
                 <Category />
             </Section>
@@ -75,7 +79,7 @@ const Home = () => {
                 subTitle="To choose your trending job dream & to make future bright."
                 bg="bg-content-bg"
                 right={true}
-                slick={false}
+                path="job-listing"
             >
                 <Features />
             </Section>
@@ -83,9 +87,8 @@ const Home = () => {
             <Section
                 title={titleProcess}
                 subTitle="To choose your trending job dream & to make future bright."
+                path=""
                 bg=""
-                right={false}
-                slick={false}
             >
                 <Process />
             </Section>
@@ -95,9 +98,11 @@ const Home = () => {
                 subTitle="To choose your trending job dream & to make future bright."
                 bg="bg-content-bg"
                 right={true}
+                path=""
                 slick={true}
+                swiperRef={swiperRefLocation}
             >
-                <Location />
+                <Location swiperRef={swiperRefLocation} />
             </Section>
 
             <Section
@@ -105,9 +110,11 @@ const Home = () => {
                 subTitle="To choose your trending job dream & to make future bright."
                 bg=""
                 right={true}
+                path=""
                 slick={true}
+                swiperRef={swiperRefReview}
             >
-                <Review />
+                <Review swiperRef={swiperRefReview} />
             </Section>
 
             <Company />
@@ -117,19 +124,20 @@ const Home = () => {
                 subTitle="To choose your trending job dream & to make future bright."
                 bg=""
                 right={true}
+                path=""
                 slick={true}
+                swiperRef={swiperRefRecruiters}
             >
-                <Recruiters />
+                <Recruiters swiperRef={swiperRefRecruiters} />
             </Section>
 
             <Section
+                path="article"
                 title={titleArticle}
                 subTitle="To choose your trending job dream & to make future bright."
                 bg=""
-                right={false}
-                slick={false}
             >
-                <Article/>
+                <Article />
             </Section>
         </div>
     );

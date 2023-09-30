@@ -4,11 +4,14 @@ import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF, faTwitter, faLinkedinIn, faInstagram} from '@fortawesome/free-brands-svg-icons'
 
 import Banner from "@/components/Banner/Banner";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Job from "./components/Job/Job";
 import Info from "./components/Info/Info";
 
 function CompanyDetail() {
+    const { id } = useParams()
+    console.log(id);
+    
     return (
         <div className="selection:bg-primary-100 selection:text-white">
             <Banner page="Company Detail" />

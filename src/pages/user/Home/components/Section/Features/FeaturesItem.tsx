@@ -15,7 +15,7 @@ const FeaturesItem = () => {
                         <h3 className=" text-content-title text-lg font-semibold mb-1">Assistant Laboratorist</h3>
                         <p className=" text-sm">Full Time, Part Time</p>
                     </div>
-                    <div className=" right-0 top-3 absolute cursor-pointer">
+                    <div className=" right-0 top-3 absolute cursor-pointer lg:hidden">
                         <div className=" w-7 h-7 rounded-full border border-primary-100 flex justify-center items-center duration-300 group-hover:bg-primary-100">
                             <FontAwesomeIcon
                                 className=" text-primary-100 text-sm duration-300 group-hover:text-white"

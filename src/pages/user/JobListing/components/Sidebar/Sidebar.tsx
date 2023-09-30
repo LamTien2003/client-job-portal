@@ -12,15 +12,11 @@ function Sidebar() {
         maxValue: 1500,
     })
 
-    console.log(salaryRange.maxValue);
-    
-    
-
     // useEffect(() => {
     //     toast.success('Test thông bao');
     // }, []);
 
-    const handleRange = value => {
+    const handleRange = (value:any) => {
         setSalaryRange(prev => {
             return {
                 minValue: value[0],

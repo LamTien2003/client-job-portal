@@ -1,12 +1,26 @@
-import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useLocation, Outlet, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { selectCurrentToken, selectCurrentEmail, selectCurrentRole } from "@/store/authSlice";
+import { getToken, setToken } from "@/utils/storage";
 
-const ProtectedRoutes = () => {
-    useEffect(() => {
-        //   Xử lý auth tại đây
-    }, []);
+const ProtectedRoutes = (props:any) => {
+    
+    const token = useSelector(selectCurrentToken)
+    const tokenFromSession = getToken()
+    const email = useSelector(selectCurrentEmail)
+    const role = useSelector(selectCurrentRole)
+    const location = useLocation()
 
-    return <Outlet />;
+    console.log('token from redux: ' + token)
+    console.log('token from session: ' + tokenFromSession)
+
+    return (
+        tokenFromSession || token && role === props.allowedRoles
+            ? <Outlet />
+            : email
+                ? <Navigate to={'/unauthorized'} state={{ from: location }} replace />
+                : <Navigate to={'/login'} state={{ from: location }} replace />
+    )
 };
 
 export default ProtectedRoutes;

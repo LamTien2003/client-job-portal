@@ -23,15 +23,16 @@ export default withMT({
                     20: 'rgba(0,167,172,.15)',
                     10: 'rgba(0,167,172,.1)',
                 },
-                
+
                 content: {
                     ['text']: '#595959',
                     ['title']: '#061421',
-                    ['s-text']: "#595959",
+                    ['s-text']: '#595959',
                     ['bg']: '#f8f8f8',
                     ['bgtrans']: 'rgba(0, 0, 0, 0.8)',
                     ['bgjob']: '#fdf9f9',
                     ['bgsave']: '#eff3f2',
+                    ['underline']: '#e7e7e7',
 
                     ['border']: '#eee',
                     ['bg-full-time']: '#f3e8c1',
@@ -96,10 +97,10 @@ export default withMT({
             xl: { max: '1279px' },
             // => @media (max-width: 1279px) { ... }
 
-            lg: { max: '1023px' },
+            lg: { max: '1024px' },
             // => @media (max-width: 1023px) { ... }
 
-            tb: { max: '767px' },
+            tb: { max: '768px' },
             // => @media (max-width: 767px) { ... }
 
             mb: { max: '639px' },

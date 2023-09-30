@@ -6,22 +6,39 @@ import RecruitersItem from './RecruitersItem';
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
-const Recruiters = () => {
+import { Swiper as SwiperType } from 'swiper';
+
+const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
     return (
-        <div className="w-full">
+        <div className="w-full ">
             <Swiper
-                slidesPerView={3}
-                spaceBetween={20}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                }}
+                onBeforeInit={(swiper) => {
+                    swiperRef.current = swiper;
+                }}
+                spaceBetween={25}
+                slidesPerView={1}
+                breakpoints={{
+                    767: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+
+                    1279: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    },
+                }}
                 grid={{
                     rows: 2,
                     fill: 'row',
                 }}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: true,
-                }}
                 modules={[Grid, Autoplay]}
-                onSwiper={(swiper) => console.log(swiper)}
+                className="w-full"
             >
                 <SwiperSlide>
                     <RecruitersItem
@@ -32,7 +49,6 @@ const Recruiters = () => {
                         amount="21"
                     />
                 </SwiperSlide>
-
                 <SwiperSlide>
                     <RecruitersItem
                         name="Germanie Company"
@@ -51,7 +67,6 @@ const Recruiters = () => {
                         amount="21"
                     />
                 </SwiperSlide>
-
                 <SwiperSlide>
                     <RecruitersItem
                         name="Germanie Company"
@@ -61,7 +76,6 @@ const Recruiters = () => {
                         amount="32"
                     />
                 </SwiperSlide>
-
                 <SwiperSlide>
                     <RecruitersItem
                         name="Norland Company"
@@ -71,7 +85,6 @@ const Recruiters = () => {
                         amount="21"
                     />
                 </SwiperSlide>
-
                 <SwiperSlide>
                     <RecruitersItem
                         name="Germanie Company"
@@ -81,7 +94,6 @@ const Recruiters = () => {
                         amount="32"
                     />
                 </SwiperSlide>
-
                 <SwiperSlide>
                     <RecruitersItem
                         name="Norland Company"
@@ -91,7 +103,6 @@ const Recruiters = () => {
                         amount="21"
                     />
                 </SwiperSlide>
-
                 <SwiperSlide>
                     <RecruitersItem
                         name="Germanie Company"
@@ -101,7 +112,6 @@ const Recruiters = () => {
                         amount="32"
                     />
                 </SwiperSlide>
-
                 <SwiperSlide>
                     <RecruitersItem
                         name="Norland Company"
@@ -111,7 +121,6 @@ const Recruiters = () => {
                         amount="21"
                     />
                 </SwiperSlide>
-
                 <SwiperSlide>
                     <RecruitersItem
                         name="Germanie Company"
@@ -121,8 +130,6 @@ const Recruiters = () => {
                         amount="32"
                     />
                 </SwiperSlide>
-
-                
             </Swiper>
         </div>
     );

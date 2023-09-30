@@ -2,7 +2,7 @@ import images from '@/assets/images';
 import ProcessItem from './ProcessItem';
 const Process = () => {
     return (
-        <div className="flex justify-between items-center">
+        <div className="flex justify-center items-center gap-16 lg:flex-wrap mb:flex-col ">
             <ProcessItem
                 title="Account Create"
                 paragraph="To create your account be confident & safely."
