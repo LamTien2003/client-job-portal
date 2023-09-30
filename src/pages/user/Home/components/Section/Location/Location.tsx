@@ -1,15 +1,38 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import LocationItem from './LocationItem';
-import { Navigation } from 'swiper/modules';
-const Location = () => {
+import { Navigation, Autoplay } from 'swiper/modules';
+import { Swiper as SwiperType } from 'swiper';
+
+const Location = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
     return (
         <div className="flex">
             <Swiper
-                spaceBetween={25}
-                slidesPerView={4}
-                modules={[Navigation]}
-                navigation={true}
-                onSwiper={(swiper) => console.log(swiper)}
+                spaceBetween={10}
+                slidesPerView={1}
+                modules={[Navigation, Autoplay]}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                }}
+                onBeforeInit={(swiper) => {
+                    swiperRef.current = swiper;
+                }}
+                breakpoints={{
+                    767: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1023: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    },
+                    1279: {
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                    },
+                }}
+                className="w-full"
             >
                 <SwiperSlide>
                     <LocationItem

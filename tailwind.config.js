@@ -125,10 +125,10 @@ export default withMT({
             xl: { max: '1279px' },
             // => @media (max-width: 1279px) { ... }
 
-            lg: { max: '1023px' },
+            lg: { max: '1024px' },
             // => @media (max-width: 1023px) { ... }
 
-            tb: { max: '767px' },
+            tb: { max: '768px' },
             // => @media (max-width: 767px) { ... }
 
             mb: { max: '639px' },

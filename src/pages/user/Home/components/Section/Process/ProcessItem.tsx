@@ -11,7 +11,7 @@ const ProcessItem: React.FC<Process> = ({ title, paragraph, image, arrow }) => {
         <div className="relative group">
             {arrow === 'up' && (
                 <img
-                    className="absolute -top-7 group-hover:-top-5 duration-300"
+                    className="absolute -top-7 group-hover:-top-5 duration-300 mb:hidden"
                     src={images.process.up}
                     alt={images.process.up}
                 />
@@ -27,7 +27,7 @@ const ProcessItem: React.FC<Process> = ({ title, paragraph, image, arrow }) => {
 
             {arrow === 'down' && (
                 <img
-                    className="absolute -bottom-7 group-hover:-bottom-5 duration-300"
+                    className="absolute -bottom-7 group-hover:-bottom-5 duration-300 mb:hidden"
                     src={images.process.down}
                     alt={images.process.down}
                 />

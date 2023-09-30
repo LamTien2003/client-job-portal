@@ -1,4 +1,5 @@
 import images from '@/assets/images';
+
 type Article = {
     month: string;
     date: string;
@@ -10,15 +11,15 @@ type Article = {
 const ArticleItem: React.FC<Article> = ({ month, date, comment, name, title, imgArticle }) => {
     return (
         <div className="flex flex-col">
-            <div className="relative w-[416px] h-[240px]">
-                <img className="  object-cover rounded-md" src={imgArticle} />
-                <div className="absolute rounded-xl -bottom-8 left-4 p-2 bg-primary-100 flex flex-col items-center">
+            <div className="relative ">
+                <img className="object-cover rounded-md" src={imgArticle} />
+                <div className="absolute rounded-xl -bottom-8 left-4 p-2 bg-primary-100 flex flex-col items-center lg:bottom-0 lg:left-0 lg:rounded-none">
                     <span className="font-semibold text-lg text-white">{date}</span>
                     <h5 className="font-normal text-white">{month}</h5>
                 </div>
             </div>
 
-            <div className="flex pl-28 py-2 pr-5 justify-between items-center">
+            <div className="flex pl-28 py-2 justify-between items-center lg:pl-0 lg:pt-5 lg:text-sm">
                 <div className="flex">
                     <img src={images.logo.comment} alt={images.logo.comment} />
                     <h5 className="ml-1 font-medium text-content-text">{comment}</h5>
@@ -30,7 +31,7 @@ const ArticleItem: React.FC<Article> = ({ month, date, comment, name, title, img
                 </div>
             </div>
 
-            <h4 className="my-3 font-semibold text-content-title text-lxl">{title}</h4>
+            <h4 className="my-3 font-semibold text-content-title text-lxl lg:text-lg">{title}</h4>
             <div className="group">
                 <div className="flex items-center group-hover:cursor-pointer ">
                     <div className="mr-2 relative">
@@ -41,7 +42,7 @@ const ArticleItem: React.FC<Article> = ({ month, date, comment, name, title, img
                         />
                         <img src={images.elliose} alt={images.elliose} />
                     </div>
-                    <span className="text-base font-medium group-hover:text-primary-100">Explore More</span>
+                    <span className="text-base font-medium group-hover:text-primary-100 ">Explore More</span>
                 </div>
             </div>
         </div>

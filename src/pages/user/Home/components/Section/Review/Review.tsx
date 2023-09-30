@@ -1,19 +1,31 @@
 import ReviewItem from './ReviewItem';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
-const Review = () => {
+import { Swiper as SwiperType } from 'swiper';
+
+const Review = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
     return (
         <div>
             <Swiper
-                spaceBetween={40}
-                slidesPerView={2}
+                spaceBetween={0}
+                slidesPerView={1}
                 autoplay={{
                     delay: 2500,
-                    disableOnInteraction: true,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                }}
+                onBeforeInit={(swiper) => {
+                    swiperRef.current = swiper;
+                }}
+                breakpoints={{
+                    1279: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
                 }}
                 modules={[Navigation, Autoplay]}
-                navigation={true}
-                onSwiper={(swiper) => console.log(swiper)}
+                navigation={false}
+                className="w-ful"
             >
                 <SwiperSlide>
                     <ReviewItem

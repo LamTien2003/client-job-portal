@@ -2,8 +2,8 @@ import CategoryItem from './CategoryItem';
 import images from '@/assets/images';
 const Category = () => {
     return (
-        <div className="w-full grid grid-cols-5 grid-row-2 gap-3">
-            <CategoryItem title="Account & Finance" amount="44" index="01" images={images.categories.finance} />
+        <div className="w-full grid grid-cols-5 grid-row-2 gap-3 mb:grid-cols-1 tb:grid-cols-2 lg:grid-cols-3 ">
+            <CategoryItem title="Account Finance" amount="44" index="01" images={images.categories.finance} />
             <CategoryItem title="Technology" amount="04" index="02" images={images.categories.technology} />
             <CategoryItem title="Medical & Nurse" amount="33" index="03" images={images.categories.medical} />
             <CategoryItem title="Marketing & Sales" amount="56" index="04" images={images.categories.marketing} />
