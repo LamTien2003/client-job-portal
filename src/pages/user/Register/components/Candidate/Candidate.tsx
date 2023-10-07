@@ -12,7 +12,6 @@ const PNUMBER_REGEX = /[0-9]{2}\d{7}/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function Candidate() {
-
     const navigate = useNavigate();
 
     const firstNameRef = useRef<HTMLInputElement>();
