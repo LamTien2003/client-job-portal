@@ -1,4 +1,4 @@
-import JobSeeker from '@/types/JoobSeeker';
+import JobSeeker from '@/types/JobSeeker';
 import { apiSlice } from './apiSlice';
 import Company from '@/types/Company';
 import { ResponseApi } from '@/types/ResponseApi';
@@ -26,7 +26,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 return [{ type: 'Users' as const, id: 'LIST' }];
             },
         }),
+        getCurrentUser: builder.query<ResponseApi<MixinUser>, void>({
+            query: () => `user/getMe/`,
+            providesTags: () => [{ type: 'Users' as const, id: 'CURRENT'}]
+        })
     }),
 });
 
-export const { useGetUsersQuery } = usersApiSlice;
+export const { useGetUsersQuery, useGetCurrentUserQuery } = usersApiSlice;

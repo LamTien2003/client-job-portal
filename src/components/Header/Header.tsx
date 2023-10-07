@@ -2,12 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { faUser, faBell } from '@fortawesome/free-regular-svg-icons';
 import { NavLink } from 'react-router-dom';
+import images from '@/assets/images';
 
 const Header = () => {
     return (
         <header className="w-[90%] h-[86px] m-auto grid grid-cols-12 gap-4 text-[15px] ">
-            <div className="col-span-2 pt-4 border-r-[0.5px] border-gray-400">
-                <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/header1-logo.svg" alt="" />
+            <div className=" w-full col-span-2 pt-4 ">
+                <img className=' w-32 ' src="/src/assets/images/logo.png" alt="" />
             </div>
 
             {/* MENU CHÍNH */}

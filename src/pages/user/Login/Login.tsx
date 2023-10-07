@@ -3,7 +3,8 @@ import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/services/authApiSlice';
-import { setToken } from '@/utils/storage';
+import { removeToken, setToken } from '@/utils/storage';
+import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -15,15 +16,15 @@ const Login = () => {
 
     // const {setAuth} = useAuth()
 
-    const emailRef = useRef<HTMLInputElement | null>();
-    const errRef = useRef<HTMLElement | null>();
+    const emailRef = useRef<HTMLInputElement>();
+    const errRef = useRef<HTMLElement>();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
-        emailRef?.current?.focus();
+        emailRef.current?.focus();
     }, []);
 
     useEffect(() => {
@@ -34,25 +35,33 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const userData = await login({ email, password });
-            console.log(userData);
-            const role = userData.data.data.data.role;
-            const accessToken = userData.data.data.accessToken;
-            dispatch(setCredentials({ email, accessToken, role }));
-            accessToken && setToken(accessToken);
-            setEmail('');
-            setPassword('');
+            removeToken()
+            const response:any = await login({ email, password });
+
+            console.log(response)
+            const user = response.data.data.data
+            if(user) {
+                dispatch(setCurrentUser(user))
+            }
+
+            const accessToken = response.data.data.accessToken;
+            if(accessToken) {
+                dispatch(setcredentialsToken(accessToken));
+                setToken(accessToken);
+            }
+            // setEmail('');
+            // setPassword('');
             navigate(from, { replace: true });
         } catch (error) {
-            if (!error?.response) {
-                setErrMsg('No server response');
-            } else if (error.response?.status === 400) {
-                setErrMsg('Thiếu email hoặc mật khẩu');
-            } else if (error.response?.status === 401) {
-                setErrMsg('unauthorized');
-            } else {
+            // if (!error?.response) {
+            //     setErrMsg('No server response');
+            // } else if (error.response?.status === 400) {
+            //     setErrMsg('Thiếu email hoặc mật khẩu');
+            // } else if (error.response?.status === 401) {
+            //     setErrMsg('unauthorized');
+            // } else {
                 setErrMsg('Đăng nhập không thành công');
-            }
+            // }
             errRef?.current?.focus();
         }
     };
@@ -144,7 +153,7 @@ const Login = () => {
                                     </div>
                                     <div className="flex flex-wrap">
                                         <h6>Don't have an account? </h6>
-                                        <NavLink to="/register" className="font-bold  text-teal-500 pl-2" href="#">
+                                        <NavLink to="/register" className="font-bold  text-teal-500 pl-2">
                                             Register
                                         </NavLink>
                                     </div>

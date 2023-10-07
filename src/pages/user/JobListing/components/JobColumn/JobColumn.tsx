@@ -9,6 +9,7 @@ interface Props {
 
 function JobColumn(props: Props) {
     const { data: jobs } = props;
+    console.log(jobs)
     return (
         <>
             {jobs?.map((job) => {
@@ -18,7 +19,7 @@ function JobColumn(props: Props) {
                             <div className=" mb-8 relative tb:mb-6">
                                 <div className=" flex items-center tb:flex-col tb:items-start ">
                                     <div className=" flex tb:mb-8">
-                                        <img className=" w-13 rounded-full mr-2.5 lg:w-12" src={job.postedBy.photo} />
+                                        <img className=" w-13 h-13 rounded-full mr-2.5 lg:w-12" src={job.postedBy.photo} />
                                         <div className=" flex flex-col">
                                             <h3 className=" text-content-title text-lg font-semibold cursor-pointer duration-300 hover:text-primary-100 lg:text-base ">
                                                 {job.title}

@@ -3,129 +3,85 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
-const FNAME_REGEX = /^[a-zA-Z]{2,30}/;
-const LNAME_REGEX = /^[a-zA-Z]{2,30}/;
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { RegisterJobseekerRequest, useRegisterJobseekerMutation } from '@/services/authApiSlice';
+
 const EMAIL_REGEX = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/;
-const PNUMBER_REGEX = /[0-9]{2}\d{8}/;
+const PNUMBER_REGEX = /[0-9]{2}\d{7}/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-const REGISTER_URL = 'https://job-portal-server-e9q1.onrender.com/auth/signup';
-
 function Candidate() {
+
     const navigate = useNavigate();
 
-    const firstNameRef = useRef();
-    // const errRef = useRef()
-
-    const [firstName, setFirstName] = useState('');
-    const [validFirstName, setValidFirstName] = useState(false);
-    const [firstNameFocus, setFirstNameFocus] = useState(false);
-
-    const [lastName, setLastName] = useState('');
-    const [validLastName, setValidLastName] = useState(false);
-    const [lastNameFocus, setLastNameFocus] = useState(false);
-
-    const [email, setEmail] = useState('');
-    const [validEmail, setValidEmail] = useState(false);
-    const [emailFocus, setEmailFocus] = useState(false);
-
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [validPhoneNumber, setValidPhoneNumber] = useState(false);
-    const [phoneNumberFocus, setPhoneNumberFocus] = useState(false);
-
-    const [pwd, setPwd] = useState('');
-    const [validPwd, setValidPwd] = useState(false);
-    const [pwdFocus, setPwdFocus] = useState(false);
-
-    const [matchPwd, setMatchPwd] = useState('');
-    const [validMatch, setValidMatch] = useState(false);
-    const [matchFocus, setMatchFocus] = useState(false);
+    const firstNameRef = useRef<HTMLInputElement>();
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
-    // focus input username when access page
-    useEffect(() => {
-        firstNameRef.current.focus();
-    }, []);
+    const [registerJobSeeker] = useRegisterJobseekerMutation()
 
-    // check valid first name
-    useEffect(() => {
-        const result = FNAME_REGEX.test(firstName);
-        setValidFirstName(result);
-    }, [firstName]);
-
-    // check valid last name
-    useEffect(() => {
-        const result = LNAME_REGEX.test(lastName);
-        setValidLastName(result);
-    }, [lastName]);
-
-    // check valid email
-    useEffect(() => {
-        const result = EMAIL_REGEX.test(email);
-        setValidEmail(result);
-    }, [email]);
-
-    // check valid phone number
-    useEffect(() => {
-        const result = PNUMBER_REGEX.test(phoneNumber);
-        setValidPhoneNumber(result);
-    }, [phoneNumber]);
-
-    // check valid password and match password
-    useEffect(() => {
-        const result = PWD_REGEX.test(pwd);
-        console.log(result);
-        console.log(pwd);
-        setValidPwd(result);
-        const match = pwd === matchPwd;
-        setValidMatch(match);
-    }, [pwd, matchPwd]);
-
-    // clear error msg when user, pwd, matchpwd change
-    useEffect(() => {
-        setErrMsg('');
-    }, [firstName, lastName, email, phoneNumber, pwd, matchPwd]);
-
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        console.log(e);
-        const v1 = FNAME_REGEX.test(firstName);
-        const v2 = LNAME_REGEX.test(lastName);
-        const v3 = EMAIL_REGEX.test(email);
-        const v4 = PNUMBER_REGEX.test(phoneNumber);
-        const v5 = PWD_REGEX.test(pwd);
-        if (!v1 || !v2 || !v3 || !v4 || !v5) {
-            setErrMsg('Invalid Entry');
-            return;
-        }
-        const userInfo = {
-            type: 'jobseeker',
-            firstName,
-            lastName,
-            email,
-            location: 'Tp Hồ Chí Minh',
-            phoneNumber,
-            password: pwd,
-            passwordConfirm: matchPwd,
-            introduce: 'Giới thiệu về Duy',
-        };
-
-        try {
-            const response = await axiosClient.post(REGISTER_URL, userInfo);
-            console.log(response);
-            console.log(response.data);
-            setSuccess(true);
-        } catch (error) {
-            if (!error?.response) {
-                setErrMsg('No Server response');
-            } else {
-                console.log(error.response.data);
+    const formik = useFormik({
+        initialValues: {
+            firstName: "",
+            lastName: "",
+            email: "",
+            phoneNumber: "",
+            location: "Tp Hồ Chí Minh, (Quận 1)",
+            password: "",
+            passwordConfirm: "",
+        },
+        validationSchema: Yup.object({
+            firstName: Yup
+                .string()
+                .required("Không được để trống")
+                .min(2, "Họ phải tối thiểu 2 kí tự")
+                .max(30, "Họ chỉ tối đa 30 kí tự"),
+            lastName: Yup
+                .string()
+                .required("Không được để trống")
+                .min(2, "Tên phải tối thiểu 2 kí tự")
+                .max(30, "Họ chỉ tối đa 30 kí tự"),
+            email: Yup.string()
+                .required("Không được để trống")
+                .matches(EMAIL_REGEX, "Email phải đúng định dạng"),
+            phoneNumber: Yup.string()
+                .required("Không được để trống")
+                .matches(PNUMBER_REGEX, "Số điện thoại phải đủ 10 số"),
+            location: Yup.string()
+                .required("Không được để trống"),
+            password: Yup
+                .string()
+                .required("Không được để trống")
+                .matches(PWD_REGEX, "Mật khẩu phải từ 8 đến 24 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, số và 1 kí tự đặc biệt"),
+            passwordConfirm: Yup
+                .string()
+                .required("Không được để trống")
+                .oneOf([Yup.ref("password")], "Mật khẩu không trùng khớp"),
+        }),
+        onSubmit: (values) => {
+            const myValues = {
+                ...values,
+                type: "jobseeker",
+                introduce: "Giới thiệu về tôi"
+            } as RegisterJobseekerRequest
+            console.log(myValues)
+            try {
+                const response = registerJobSeeker(myValues)
+                console.log(response);
+                setSuccess(true);
+            } catch (error) {
+                console.log(error)
                 setErrMsg('Đăng ký không thành công');
             }
-        }
-    };
+        },
+    })
+
+    // focus input username when access page
+    useEffect(() => {
+        firstNameRef.current?.focus()
+    }, []);
 
     return (
         <>
@@ -138,17 +94,17 @@ function Candidate() {
                 <section>
                     <p>{errMsg}</p>
                     <form
-                        onSubmit={handleSubmit}
+                        onSubmit={formik.handleSubmit}
                         className="bg-white rounded-2xl border-teal-100 border px-16 py-12 mb-4"
                     >
                         {/* First name */}
                         <div className=" mb-4 pb-2">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstname">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
                                 Họ
-                                <span className={validFirstName ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span className={!formik.errors.firstName && formik.values.firstName ? 'text-primary-100 ml-1' : 'hidden'}>
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={validFirstName || !firstName ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span className={!formik.errors.firstName || !formik.values.firstName ? 'hidden' : ' text-red-400 ml-1'}>
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -161,39 +117,34 @@ function Candidate() {
                                 </span>
                                 <input
                                     type="text"
-                                    id="firstname"
+                                    id="firstName"
                                     ref={firstNameRef}
                                     autoComplete="off"
-                                    onChange={(e) => setFirstName(e.target.value)}
+                                    value={formik.values.firstName}
+                                    onChange={formik.handleChange}
                                     required
-                                    aria-invalid={validFirstName ? 'false' : 'true'}
+                                    aria-invalid={formik.errors.firstName ? 'false' : 'true'}
                                     aria-describedby="uidnote"
-                                    onFocus={() => setFirstNameFocus(true)}
-                                    onBlur={() => setFirstNameFocus(false)}
                                     className=" placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-9 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"
                                 />
                             </div>
                             <p
                                 id="uidnote"
-                                className={
-                                    firstNameFocus && firstName && !validFirstName
-                                        ? 'text-red-500 text-xs italic'
-                                        : 'hidden'
+                                className={formik.errors.firstName ? 'text-red-500 text-xs italic' : 'hidden'
                                 }
                             >
-                                tối đa 30 ký tự <br />
-                                Chỉ được sử dụng chữ <br />
+                                {formik.errors.firstName}
                             </p>
                         </div>
 
                         {/* Last name */}
                         <div className=" mb-4 pb-2">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastname">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
                                 Tên
-                                <span className={validLastName ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span className={!formik.errors.lastName && formik.values.lastName ? 'text-primary-100 ml-1' : 'hidden'}>
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={validLastName || !lastName ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span className={!formik.errors.lastName || !formik.values.lastName ? 'hidden' : ' text-red-400 ml-1'}>
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -206,27 +157,22 @@ function Candidate() {
                                 </span>
                                 <input
                                     type="text"
-                                    id="lastname"
+                                    id="lastName"
                                     autoComplete="off"
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    value={formik.values.lastName}
+                                    onChange={formik.handleChange}
                                     required
-                                    aria-invalid={validFirstName ? 'false' : 'true'}
+                                    aria-invalid={formik.errors.lastName ? 'false' : 'true'}
                                     aria-describedby="uidnote"
-                                    onFocus={() => setLastNameFocus(true)}
-                                    onBlur={() => setLastNameFocus(false)}
                                     className=" placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-9 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"
                                 />
                             </div>
                             <p
                                 id="uidnote"
-                                className={
-                                    lastNameFocus && lastName && !validLastName
-                                        ? 'text-red-500 text-xs italic'
-                                        : 'hidden'
+                                className={formik.errors.lastName ? 'text-red-500 text-xs italic' : 'hidden'
                                 }
                             >
-                                tối đa 30 ký tự <br />
-                                Chỉ được sử dụng chữ <br />
+                                {formik.errors.lastName}
                             </p>
                         </div>
 
@@ -234,10 +180,10 @@ function Candidate() {
                         <div className=" mb-4 pb-2">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                                 Email
-                                <span className={validEmail ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span className={!formik.errors.email && formik.values.email ? 'text-primary-100 ml-1' : 'hidden'}>
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={validEmail || !email ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span className={!formik.errors.email || !formik.values.email ? 'hidden' : ' text-red-400 ml-1'}>
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -252,33 +198,30 @@ function Candidate() {
                                     type="email"
                                     id="email"
                                     autoComplete="off"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
                                     required
-                                    aria-invalid={validFirstName ? 'false' : 'true'}
+                                    aria-invalid={formik.errors.email ? 'false' : 'true'}
                                     aria-describedby="uidnote"
-                                    onFocus={() => setEmailFocus(true)}
-                                    onBlur={() => setEmailFocus(false)}
                                     className=" placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-9 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"
                                 />
                             </div>
                             <p
                                 id="uidnote"
-                                className={
-                                    emailFocus && email && !validEmail ? 'text-red-500 text-xs italic' : 'hidden'
-                                }
+                                className={formik.errors.email ? 'text-red-500 text-xs italic' : 'hidden'}
                             >
-                                Yêu cầu đúng định dạng gmail <br />
+                                {formik.errors.email}
                             </p>
                         </div>
 
                         {/* Phone Number */}
                         <div className=" mb-4 pb-2">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phonenumber">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
                                 Số điện thoại
-                                <span className={validPhoneNumber ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span className={!formik.errors.phoneNumber && formik.values.phoneNumber ? 'text-primary-100 ml-1' : 'hidden'}>
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={validPhoneNumber || !phoneNumber ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span className={!formik.errors.phoneNumber || !formik.values.phoneNumber ? 'hidden' : ' text-red-400 ml-1'}>
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -291,58 +234,31 @@ function Candidate() {
                                 </span>
                                 <input
                                     type="number"
-                                    id="phonenumber"
+                                    id="phoneNumber"
                                     autoComplete="off"
-                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                    value={formik.values.phoneNumber}
+                                    onChange={formik.handleChange}
                                     required
-                                    aria-invalid={validFirstName ? 'false' : 'true'}
+                                    aria-invalid={formik.errors.phoneNumber ? 'false' : 'true'}
                                     aria-describedby="uidnote"
-                                    onFocus={() => setPhoneNumberFocus(true)}
-                                    onBlur={() => setPhoneNumberFocus(false)}
                                     className=" placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-9 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"
                                 />
                             </div>
                             <p
                                 id="uidnote"
-                                className={
-                                    phoneNumberFocus && phoneNumber && !validPhoneNumber
-                                        ? 'text-red-500 text-xs italic'
-                                        : 'hidden'
-                                }
+                                className={formik.errors.phoneNumber ? 'text-red-500 text-xs italic' : 'hidden'}
                             >
-                                Số điện thoại phải đúng 10 số <br />
+                                {formik.errors.phoneNumber}
                             </p>
                         </div>
 
                         {/* Location */}
                         <div className=" mb-4 pb-2">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phonenumber">
-                                Nơi ở
-                                <span className={validPhoneNumber ? 'text-primary-100 ml-1' : 'hidden'}>
-                                    <FontAwesomeIcon icon={faCheck} />
-                                </span>
-                                <span className={validPhoneNumber || !phoneNumber ? 'hidden' : ' text-red-400 ml-1'}>
-                                    <FontAwesomeIcon icon={faTimes} />
-                                </span>
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor='location'>
+                                Địa chỉ
                             </label>
-                            {/* <span className="w-1 h-1 border-black bg-black absolute inset-y-0 left-0 flex items-center pl-2"></span> */}
                             <div className="relative block mb-3">
-                                {/* <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                                    <svg className="h-5 w-5 fill-teal-700" viewBox="0 0 20 20"><path d="M17.388,4.751H2.613c-0.213,0-0.389,0.175-0.389,0.389v9.72c0,0.216,0.175,0.389,0.389,0.389h14.775c0.214,0,0.389-0.173,0.389-0.389v-9.72C17.776,4.926,17.602,4.751,17.388,4.751 M16.448,5.53L10,11.984L3.552,5.53H16.448zM3.002,6.081l3.921,3.925l-3.921,3.925V6.081z M3.56,14.471l3.914-3.916l2.253,2.253c0.153,0.153,0.395,0.153,0.548,0l2.253-2.253l3.913,3.916H3.56z M16.999,13.931l-3.921-3.925l3.921-3.925V13.931z"></path></svg>
-                                </span> */}
-                                {/* <input 
-                                    type="number" 
-                                    id="phonenumber"
-                                    autoComplete="off"
-                                    onChange={e => setPhoneNumber(e.target.value)}
-                                    required
-                                    aria-invalid={validFirstName ? "false" : "true"}
-                                    aria-describedby="uidnote"
-                                    onFocus={() => setPhoneNumberFocus(true)}
-                                    onBlur={() => setPhoneNumberFocus(false)}
-                                    className=" placeholder:text-slate-400 block bg-white w-full border border-teal-100 hover:border-teal-400 rounded-md py-2 pl-2 pr-3 focus:outline-none focus:border-teal-200 focus:shadow-outline" 
-                                /> */}
-                                <select>
+                                <select id='location' value={formik.values.location} onChange={formik.handleChange}>
                                     <option>Tp Hồ Chí Minh, (Quận 1)</option>
                                     <option>Tp Hồ Chí Minh, (Quận 2)</option>
                                     <option>Tp Hồ Chí Minh, (Quận 3)</option>
@@ -399,16 +315,6 @@ function Candidate() {
                                     <option>Khác</option>
                                 </select>
                             </div>
-                            <p
-                                id="uidnote"
-                                className={
-                                    phoneNumberFocus && phoneNumber && !validPhoneNumber
-                                        ? 'text-red-500 text-xs italic'
-                                        : 'hidden'
-                                }
-                            >
-                                Số điện thoại phải đúng 10 số <br />
-                            </p>
                         </div>
 
                         {/* password */}
@@ -416,10 +322,10 @@ function Candidate() {
                             {/* Label */}
                             <label className="block text-gray-700 text-sm font-bold mb-2 mr-2" htmlFor="password">
                                 Mật khẩu
-                                <span className={validPwd ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span className={!formik.errors.password && formik.values.password ? 'text-primary-100 ml-1' : 'hidden'}>
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={validPwd || !pwd ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span className={!formik.errors.password || !formik.values.password ? 'hidden' : ' text-red-400 ml-1'}>
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -428,40 +334,32 @@ function Candidate() {
                             <input
                                 type="password"
                                 id="password"
-                                onChange={(e) => setPwd(e.target.value)}
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
                                 required
-                                aria-invalid={validPwd ? 'false' : 'true'}
+                                aria-invalid={formik.errors.password ? 'false' : 'true'}
                                 aria-describedby="pwdnote"
-                                onFocus={() => setPwdFocus(true)}
-                                onBlur={() => setPwdFocus(false)}
                                 className=" mb-3 placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-2 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"
                             />
 
                             {/* Thông báo */}
                             <p
                                 id="pwdnote"
-                                className={pwdFocus && !validPwd ? 'text-red-500 text-xs italic' : 'hidden'}
+                                className={formik.errors.password ? 'text-red-500 text-xs italic' : 'hidden'}
                             >
-                                8 đến 25 ký tự <br />
-                                Phải bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt <br />
-                                Ký tự đặc biệt:
-                                <span aria-label="exclamation mark">!</span>
-                                <span aria-label="at symbol">@</span>
-                                <span aria-label="hashtag">#</span>
-                                <span aria-label="dollar sign">$</span>
-                                <span aria-label="percent">%</span>
+                                {formik.errors.password}
                             </p>
                         </div>
 
                         {/* Comfirm password */}
                         <div className=" mb-4 pb-2">
                             {/* Label */}
-                            <label className="block text-gray-700 text-sm font-bold mb-2 mr-2" htmlFor="comfirm_pwd">
+                            <label className="block text-gray-700 text-sm font-bold mb-2 mr-2" htmlFor="passwordConfirm">
                                 Nhập lại mật khẩu
-                                <span className={validMatch && matchPwd ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span className={!formik.errors.passwordConfirm && formik.values.passwordConfirm ? 'text-primary-100 ml-1' : 'hidden'}>
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={validMatch || !matchPwd ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span className={!formik.errors.passwordConfirm || !formik.values.passwordConfirm ? 'hidden' : ' text-red-400 ml-1'}>
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -469,22 +367,21 @@ function Candidate() {
                             {/* input */}
                             <input
                                 type="password"
-                                id="comfirm_pwd"
-                                onChange={(e) => setMatchPwd(e.target.value)}
+                                id="passwordConfirm"
+                                value={formik.values.passwordConfirm}
+                                onChange={formik.handleChange}
                                 required
-                                aria-invalid={validMatch ? 'false' : 'true'}
+                                aria-invalid={formik.errors.passwordConfirm ? 'false' : 'true'}
                                 aria-describedby="confirmnote"
-                                onFocus={() => setMatchFocus(true)}
-                                onBlur={() => setMatchFocus(false)}
                                 className=" placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-2 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"
                             />
 
                             {/* Thông báo */}
                             <p
                                 id="confirmnote"
-                                className={matchFocus && !validMatch ? 'text-red-500 text-xs italic' : 'hidden'}
+                                className={formik.errors.passwordConfirm ? 'text-red-500 text-xs italic' : 'hidden'}
                             >
-                                Bắt buộc phải giống mật khẩu đã nhập ở trên
+                                {formik.errors.passwordConfirm}
                             </p>
                         </div>
                         {/* <div className="mb-4 pb-2">

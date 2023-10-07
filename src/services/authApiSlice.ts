@@ -1,7 +1,7 @@
 import { ResponseApi } from '@/types/ResponseApi';
 import { apiSlice } from './apiSlice';
 
-import JobSeeker from '@/types/JoobSeeker';
+import JobSeeker from '@/types/JobSeeker';
 import Company from '@/types/Company';
 
 interface LoginRequest {
@@ -9,7 +9,7 @@ interface LoginRequest {
     password: string;
 }
 
-interface RegisterJobseekerRequest {
+export interface RegisterJobseekerRequest {
     type: 'jobseeker';
     firstName: string;
     lastName: string;
@@ -20,7 +20,7 @@ interface RegisterJobseekerRequest {
     password: string;
     passwordConfirm: string;
 }
-interface RegisterCompanyRequest {
+export interface RegisterCompanyRequest {
     type: 'company';
     firstName: string;
     lastName: string;

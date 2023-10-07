@@ -97,3 +97,8 @@ select:-webkit-autofill:focus {
     transform-origin: center center;
     will-change: transform;
 }
+
+::selection {
+    background-color: #00A7AC;
+    color: #fff;
+}

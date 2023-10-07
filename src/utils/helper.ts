@@ -1,4 +1,4 @@
-import JobSeeker from '@/types/JoobSeeker';
+import JobSeeker from '@/types/JobSeeker';
 
 export const isJobSeeker = (user: any): user is JobSeeker => {
     return (

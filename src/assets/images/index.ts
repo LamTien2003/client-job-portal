@@ -1,3 +1,5 @@
+import website from './logo.png'
+
 import candidates from './candidates.svg';
 import companies from './companies.svg';
 import jobMini from './job3.svg';
@@ -65,6 +67,7 @@ const images = {
         transportation,
     },
     logo: {
+        website,
         salary,
         user2,
         user,

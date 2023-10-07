@@ -16,12 +16,12 @@ function JobGutter(props: Props) {
                         <div className=" border-content-border border rounded p-4 relative">
                             <img
                                 className=" rounded tb:w-full"
-                                src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-1.png"
+                                src={"https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-1.png"}
                             />
                             <div className=" mt-5 mb-5 flex items-center">
                                 <img
-                                    className=" w-10 rounded-full mr-3"
-                                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-01.png"
+                                    className=" w-10 h-10 rounded-full mr-3"
+                                    src={job.postedBy.photo}
                                 />
                                 <div className="flex flex-col">
                                     <h3 className=" text-content-title font-semibold text-lg xl:text-base mb:text-cb">

@@ -1,4 +1,4 @@
-import Job from '@/types/Job';
+import Company from '@/types/Company';
 import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
@@ -14,34 +14,34 @@ interface ParamsGetAllJob {
     sort?: string;
 }
 
-export const jobsApiSlice = apiSlice.injectEndpoints({
+export const companyApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getJobs: builder.query<ResponseApi<Job[]>, ParamsGetAllJob>({
+        getCompanies: builder.query<ResponseApi<Company[]>, ParamsGetAllJob>({
             query: (arg) => {
                 const query = buildQueryString(arg);
                 return {
-                    url: `job?${query && query}`,
+                    url: `company?${query && query}`,
                 };
-            },
+            },  
             providesTags(result) {
                 if (result?.data?.data) {
                     const final = [
-                        ...result.data.data.map(({ id }) => ({ type: 'Jobs' as const, id })),
-                        { type: 'Jobs' as const, id: 'LIST' },
+                        ...result.data.data.map(({ id }) => ({ type: 'Companies' as const, id })),
+                        { type: 'Companies' as const, id: 'LIST' },
                     ];
                     return final;
                 }
-                return [{ type: 'Jobs' as const, id: 'LIST' }];
+                return [{ type: 'Companies' as const, id: 'LIST' }];
             },
         }),
-        getJob: builder.query<ResponseApi<Job>, string>({
-            query: (id) => `job/${id}`,
-            providesTags: () => [{ type: 'Jobs' as const, id: ''}]
+        getCompany: builder.query<ResponseApi<Company>, string>({
+            query: (id) => `company/${id}`,
+            providesTags: () => [{ type: 'Companies' as const, id: ''}]
         })
     }),
 });
 
 export const {
-    useGetJobsQuery,
-    useGetJobQuery
-} = jobsApiSlice;
+    useGetCompaniesQuery,
+    useGetCompanyQuery
+} = companyApiSlice;
