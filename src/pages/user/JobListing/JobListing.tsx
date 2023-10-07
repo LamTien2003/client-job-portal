@@ -20,20 +20,13 @@ const JobListing = () => {
     const [listStyle, setListStyle] = useState<'column' | 'gutter'>('column');
 
     // Không truyền params nào thì để {} rỗng
-    const { data, isLoading, isError } = useGetJobsQuery({
-    });
-
-    console.log(data)
+    const { data, isLoading, isError } = useGetJobsQuery({});
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
             setJobs(data?.data?.data);
         }
-
-        // console.log(isLoading);
-
     }, [data?.data?.data, isError, isLoading]);
-
 
     return (
         <div className="">

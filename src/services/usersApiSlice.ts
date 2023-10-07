@@ -28,8 +28,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         getCurrentUser: builder.query<ResponseApi<MixinUser>, void>({
             query: () => `user/getMe/`,
-            providesTags: () => [{ type: 'Users' as const, id: 'CURRENT'}]
-        })
+            providesTags: () => [{ type: 'Users' as const, id: 'CURRENT' }],
+        }),
     }),
 });
 

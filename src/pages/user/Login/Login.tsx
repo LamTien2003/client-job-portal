@@ -16,8 +16,8 @@ const Login = () => {
 
     // const {setAuth} = useAuth()
 
-    const emailRef = useRef<HTMLInputElement>();
-    const errRef = useRef<HTMLElement>();
+    const emailRef = useRef<HTMLInputElement>(null);
+    const errRef = useRef<HTMLParagraphElement>(null);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -35,17 +35,17 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            removeToken()
-            const response:any = await login({ email, password });
+            removeToken();
+            const response: any = await login({ email, password });
 
-            console.log(response)
-            const user = response.data.data.data
-            if(user) {
-                dispatch(setCurrentUser(user))
+            response;
+            const user = response.data.data.data;
+            if (user) {
+                dispatch(setCurrentUser(user));
             }
 
             const accessToken = response.data.data.accessToken;
-            if(accessToken) {
+            if (accessToken) {
                 dispatch(setcredentialsToken(accessToken));
                 setToken(accessToken);
             }
@@ -60,7 +60,7 @@ const Login = () => {
             // } else if (error.response?.status === 401) {
             //     setErrMsg('unauthorized');
             // } else {
-                setErrMsg('Đăng nhập không thành công');
+            setErrMsg('Đăng nhập không thành công');
             // }
             errRef?.current?.focus();
         }

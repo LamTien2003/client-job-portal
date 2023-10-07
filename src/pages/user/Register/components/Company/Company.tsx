@@ -2,86 +2,80 @@ import { useRef, useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { RegisterCompanyRequest, useRegisterCompanyMutation,  } from '@/services/authApiSlice';
+import { RegisterCompanyRequest, useRegisterCompanyMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
+// eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/;
 const PNUMBER_REGEX = /[0-9]{2}\d{8}/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-
 function Company() {
     const navigate = useNavigate();
 
-    const firstNameRef = useRef<HTMLInputElement | null>();
+    const firstNameRef = useRef<HTMLInputElement | null>(null);
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
-    const [RegisterCompany] = useRegisterCompanyMutation()
+    const [RegisterCompany] = useRegisterCompanyMutation();
 
     const formik = useFormik({
         initialValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            phoneNumber: "",
-            location: "Tp Hồ Chí Minh, (Quận 1)",
-            password: "",
-            companyName: "",
-            passwordConfirm: "",
+            firstName: '',
+            lastName: '',
+            email: '',
+            phoneNumber: '',
+            location: 'Tp Hồ Chí Minh, (Quận 1)',
+            password: '',
+            companyName: '',
+            passwordConfirm: '',
         },
         validationSchema: Yup.object({
-            firstName: Yup
-                .string()
-                .required("Không được để trống")
-                .min(2, "Họ phải tối thiểu 2 kí tự")
-                .max(30, "Họ chỉ tối đa 30 kí tự"),
-            lastName: Yup
-                .string()
-                .required("Không được để trống")
-                .min(2, "Tên phải tối thiểu 2 kí tự")
-                .max(30, "Họ chỉ tối đa 30 kí tự"),
-            email: Yup.string()
-                .required("Không được để trống")
-                .matches(EMAIL_REGEX, "Email phải đúng định dạng"),
+            firstName: Yup.string()
+                .required('Không được để trống')
+                .min(2, 'Họ phải tối thiểu 2 kí tự')
+                .max(30, 'Họ chỉ tối đa 30 kí tự'),
+            lastName: Yup.string()
+                .required('Không được để trống')
+                .min(2, 'Tên phải tối thiểu 2 kí tự')
+                .max(30, 'Họ chỉ tối đa 30 kí tự'),
+            email: Yup.string().required('Không được để trống').matches(EMAIL_REGEX, 'Email phải đúng định dạng'),
             phoneNumber: Yup.string()
-                .required("Không được để trống")
-                .matches(PNUMBER_REGEX, "Số điện thoại phải đủ 10 số"),
-            location: Yup.string()
-                .required("Không được để trống"),
-            companyName: Yup
-                .string()
-                .required("Không được để trống")
-                .min(2, "Tên công ty phải tối thiểu 2 kí tự")
-                .max(100, "Họ chỉ tối đa 30 kí tự"),
-            password: Yup
-                .string()
-                .required("Không được để trống")
-                .matches(PWD_REGEX, "Mật khẩu phải từ 8 đến 24 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, số và 1 kí tự đặc biệt"),
-            passwordConfirm: Yup
-                .string()
-                .required("Không được để trống")
-                .oneOf([Yup.ref("password")], "Mật khẩu không trùng khớp"),
+                .required('Không được để trống')
+                .matches(PNUMBER_REGEX, 'Số điện thoại phải đủ 10 số'),
+            location: Yup.string().required('Không được để trống'),
+            companyName: Yup.string()
+                .required('Không được để trống')
+                .min(2, 'Tên công ty phải tối thiểu 2 kí tự')
+                .max(100, 'Họ chỉ tối đa 30 kí tự'),
+            password: Yup.string()
+                .required('Không được để trống')
+                .matches(
+                    PWD_REGEX,
+                    'Mật khẩu phải từ 8 đến 24 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, số và 1 kí tự đặc biệt',
+                ),
+            passwordConfirm: Yup.string()
+                .required('Không được để trống')
+                .oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
         }),
         onSubmit: (values) => {
             const myValues = {
                 ...values,
-                type: "company",
-                introduce: "Giới thiệu về tôi"
-            } as RegisterCompanyRequest
-            console.log(myValues)
+                type: 'company',
+                introduce: 'Giới thiệu về tôi',
+            } as RegisterCompanyRequest;
+            myValues;
             try {
-                const response = RegisterCompany(myValues)
-                console.log(response);
+                const response = RegisterCompany(myValues);
                 setSuccess(true);
             } catch (error) {
-                console.log(error)
+                error;
                 setErrMsg('Đăng ký không thành công');
             }
         },
-    })
+    });
 
     // focus input username when access page
     useEffect(() => {
@@ -91,13 +85,14 @@ function Company() {
     // clear error msg when user, pwd, matchpwd change
     useEffect(() => {
         setErrMsg('');
-    }, [formik.values.firstName, 
-        formik.values.lastName, 
-        formik.values.email, 
-        formik.values.phoneNumber, 
-        formik.values.companyName, 
-        formik.values.password, 
-        formik.values.passwordConfirm
+    }, [
+        formik.values.firstName,
+        formik.values.lastName,
+        formik.values.email,
+        formik.values.phoneNumber,
+        formik.values.companyName,
+        formik.values.password,
+        formik.values.passwordConfirm,
     ]);
 
     return (
@@ -118,10 +113,22 @@ function Company() {
                         <div className=" mb-4 pb-2">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
                                 Họ
-                                <span className={!formik.errors.firstName && formik.values.firstName ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span
+                                    className={
+                                        !formik.errors.firstName && formik.values.firstName
+                                            ? 'text-primary-100 ml-1'
+                                            : 'hidden'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={!formik.errors.firstName || !formik.values.firstName ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span
+                                    className={
+                                        !formik.errors.firstName || !formik.values.firstName
+                                            ? 'hidden'
+                                            : ' text-red-400 ml-1'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -147,8 +154,7 @@ function Company() {
                             </div>
                             <p
                                 id="uidnote"
-                                className={formik.errors.firstName ? 'text-red-500 text-xs italic' : 'hidden'
-                                }
+                                className={formik.errors.firstName ? 'text-red-500 text-xs italic' : 'hidden'}
                             >
                                 {formik.errors.firstName}
                             </p>
@@ -158,10 +164,22 @@ function Company() {
                         <div className=" mb-4 pb-2">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
                                 Tên
-                                <span className={!formik.errors.lastName && formik.values.lastName ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span
+                                    className={
+                                        !formik.errors.lastName && formik.values.lastName
+                                            ? 'text-primary-100 ml-1'
+                                            : 'hidden'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={!formik.errors.lastName || !formik.values.lastName ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span
+                                    className={
+                                        !formik.errors.lastName || !formik.values.lastName
+                                            ? 'hidden'
+                                            : ' text-red-400 ml-1'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -186,8 +204,7 @@ function Company() {
                             </div>
                             <p
                                 id="uidnote"
-                                className={formik.errors.lastName ? 'text-red-500 text-xs italic' : 'hidden'
-                                }
+                                className={formik.errors.lastName ? 'text-red-500 text-xs italic' : 'hidden'}
                             >
                                 {formik.errors.lastName}
                             </p>
@@ -197,10 +214,18 @@ function Company() {
                         <div className=" mb-4 pb-2">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                                 Email
-                                <span className={!formik.errors.email && formik.values.email ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span
+                                    className={
+                                        !formik.errors.email && formik.values.email ? 'text-primary-100 ml-1' : 'hidden'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={!formik.errors.email || !formik.values.email ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span
+                                    className={
+                                        !formik.errors.email || !formik.values.email ? 'hidden' : ' text-red-400 ml-1'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -223,10 +248,7 @@ function Company() {
                                     className=" placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-9 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"
                                 />
                             </div>
-                            <p
-                                id="uidnote"
-                                className={formik.errors.email ? 'text-red-500 text-xs italic' : 'hidden'}
-                            >
+                            <p id="uidnote" className={formik.errors.email ? 'text-red-500 text-xs italic' : 'hidden'}>
                                 {formik.errors.email}
                             </p>
                         </div>
@@ -235,10 +257,22 @@ function Company() {
                         <div className=" mb-4 pb-2">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
                                 Số điện thoại
-                                <span className={!formik.errors.phoneNumber && formik.values.phoneNumber ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span
+                                    className={
+                                        !formik.errors.phoneNumber && formik.values.phoneNumber
+                                            ? 'text-primary-100 ml-1'
+                                            : 'hidden'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={!formik.errors.phoneNumber || !formik.values.phoneNumber ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span
+                                    className={
+                                        !formik.errors.phoneNumber || !formik.values.phoneNumber
+                                            ? 'hidden'
+                                            : ' text-red-400 ml-1'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -273,10 +307,22 @@ function Company() {
                         <div className=" mb-4 pb-2">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="companyName">
                                 Tên Công Ty
-                                <span className={!formik.errors.companyName && formik.values.companyName ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span
+                                    className={
+                                        !formik.errors.companyName && formik.values.companyName
+                                            ? 'text-primary-100 ml-1'
+                                            : 'hidden'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={!formik.errors.companyName || !formik.values.companyName ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span
+                                    className={
+                                        !formik.errors.companyName || !formik.values.companyName
+                                            ? 'hidden'
+                                            : ' text-red-400 ml-1'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -301,7 +347,7 @@ function Company() {
                             </div>
                             <p
                                 id="uidnote"
-                                className={formik.errors.companyName ? 'text-red-500 text-xs italic' : 'hidden' }
+                                className={formik.errors.companyName ? 'text-red-500 text-xs italic' : 'hidden'}
                             >
                                 {formik.errors.companyName}
                             </p>
@@ -309,11 +355,11 @@ function Company() {
 
                         {/* Location */}
                         <div className=" mb-4 pb-2">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor='location'>
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
                                 Địa chỉ
                             </label>
                             <div className="relative block mb-3">
-                                <select id='location' value={formik.values.location} onChange={formik.handleChange}>
+                                <select id="location" value={formik.values.location} onChange={formik.handleChange}>
                                     <option>Tp Hồ Chí Minh, (Quận 1)</option>
                                     <option>Tp Hồ Chí Minh, (Quận 2)</option>
                                     <option>Tp Hồ Chí Minh, (Quận 3)</option>
@@ -371,16 +417,28 @@ function Company() {
                                 </select>
                             </div>
                         </div>
-                        
+
                         {/* password */}
                         <div className=" mb-4 pb-2">
                             {/* Label */}
                             <label className="block text-gray-700 text-sm font-bold mb-2 mr-2" htmlFor="password">
                                 Mật khẩu
-                                <span className={!formik.errors.password && formik.values.password ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span
+                                    className={
+                                        !formik.errors.password && formik.values.password
+                                            ? 'text-primary-100 ml-1'
+                                            : 'hidden'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={!formik.errors.password || !formik.values.password ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span
+                                    className={
+                                        !formik.errors.password || !formik.values.password
+                                            ? 'hidden'
+                                            : ' text-red-400 ml-1'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>
@@ -409,12 +467,27 @@ function Company() {
                         {/* Comfirm password */}
                         <div className=" mb-4 pb-2">
                             {/* Label */}
-                            <label className="block text-gray-700 text-sm font-bold mb-2 mr-2" htmlFor="passwordConfirm">
+                            <label
+                                className="block text-gray-700 text-sm font-bold mb-2 mr-2"
+                                htmlFor="passwordConfirm"
+                            >
                                 Nhập lại mật khẩu
-                                <span className={!formik.errors.passwordConfirm && formik.values.passwordConfirm ? 'text-primary-100 ml-1' : 'hidden'}>
+                                <span
+                                    className={
+                                        !formik.errors.passwordConfirm && formik.values.passwordConfirm
+                                            ? 'text-primary-100 ml-1'
+                                            : 'hidden'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faCheck} />
                                 </span>
-                                <span className={!formik.errors.passwordConfirm || !formik.values.passwordConfirm ? 'hidden' : ' text-red-400 ml-1'}>
+                                <span
+                                    className={
+                                        !formik.errors.passwordConfirm || !formik.values.passwordConfirm
+                                            ? 'hidden'
+                                            : ' text-red-400 ml-1'
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faTimes} />
                                 </span>
                             </label>

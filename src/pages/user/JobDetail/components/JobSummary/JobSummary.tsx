@@ -1,16 +1,14 @@
-import { faBookmark } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import MoreInfo from "../MoreInfo/MoreInfo"
-import Job from "@/types/Job"
+import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MoreInfo from '../MoreInfo/MoreInfo';
+import Job from '@/types/Job';
 
 type Props = {
-    data: Job
-}
+    data: Job;
+};
 
 function JobSummary(props: Props) {
-
-    const {data: job} = props
-    console.log(job)
+    const { data: job } = props;
 
     // if(gender === null || gender === undefined || gender === 3) sex = 'Any'
     // if(gender === 1) sex = 'Man'
@@ -36,32 +34,38 @@ function JobSummary(props: Props) {
             </div>
 
             <div className=" w-full h-1.5 rounded-t-md bg-primary-100"></div>
-            
+
             <div className=" w-full bg-content-bg pt-17.5 pb-17.5 pl-10 pr-10 mb-12 ">
                 <h3 className=" text-content-title text-lg font-semibold mr-2 mb-6">Job Summary:</h3>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
-                    
-                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 "><span className=" text-content-title font-medium mr-2">Job Posted:</span>ngày bắt đầu</p>
+                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
+                        <span className=" text-content-title font-medium mr-2">Job Posted:</span>ngày bắt đầu
+                    </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
-                    
-                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 "><span className=" text-content-title font-medium mr-2">Expiration:</span>ngày kết thúc</p>
+                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
+                        <span className=" text-content-title font-medium mr-2">Expiration:</span>ngày kết thúc
+                    </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
-                    
-                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 "><span className=" text-content-title font-medium mr-2">Vacancy:</span>số lượng</p>
+                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
+                        <span className=" text-content-title font-medium mr-2">Vacancy:</span>số lượng
+                    </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
-                    
-                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 "><span className=" text-content-title font-medium mr-2">Experiences:</span>kinh nghiệm</p>
+                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
+                        <span className=" text-content-title font-medium mr-2">Experiences:</span>kinh nghiệm
+                    </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
-                    
-                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 "><span className=" text-content-title font-medium mr-2">Skills:</span>kĩ năng</p>
+                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
+                        <span className=" text-content-title font-medium mr-2">Skills:</span>kĩ năng
+                    </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
-                    
-                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 "><span className=" text-content-title font-medium mr-2">Gender:</span>any</p>
+                    <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
+                        <span className=" text-content-title font-medium mr-2">Gender:</span>any
+                    </p>
                 </div>
             </div>
             <MoreInfo />

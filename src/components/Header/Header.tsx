@@ -2,20 +2,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { faUser, faBell } from '@fortawesome/free-regular-svg-icons';
 import { NavLink } from 'react-router-dom';
-import images from '@/assets/images';
 
 const Header = () => {
     return (
         <header className="w-[90%] h-[86px] m-auto grid grid-cols-12 gap-4 text-[15px] ">
             <div className=" w-full col-span-2 pt-4 ">
-                <img className=' w-32 ' src="/src/assets/images/logo.png" alt="" />
+                <img className=" w-32 " src="/src/assets/images/logo.png" alt="" />
             </div>
 
             {/* MENU CHÍNH */}
             <div className="col-span-7 flex justify-between items-center gap-4">
                 <div className=" w-[100%] grid grid-cols-7">
                     <div className="text-center relative group">
-                        <NavLink to="#" className="the_a_menu">
+                        <NavLink to="/" className="the_a_menu">
                             Home
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
                         </NavLink>
@@ -32,21 +31,21 @@ const Header = () => {
                     </div>
 
                     <div className="text-center">
-                        <NavLink to="job-listing" className="the_a_menu">
+                        <NavLink to="/job-listing" className="the_a_menu">
                             Find Jobs
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
                         </NavLink>
                     </div>
 
                     <div className="text-center">
-                        <NavLink to="company-listing" className="the_a_menu">
+                        <NavLink to="/company-listing" className="the_a_menu">
                             Company
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
                         </NavLink>
                     </div>
 
                     <div className="text-center">
-                        <NavLink to="blogGird" className="the_a_menu">
+                        <NavLink to="/blogGird" className="the_a_menu">
                             Blog
                             <FontAwesomeIcon icon={faAngleDown} className="ml-1 translate-y-1" />
                         </NavLink>
@@ -81,7 +80,7 @@ const Header = () => {
                     </li>
                     <li className="col-span-2">
                         <div className="w-[133px] h-[45px] rounded-md text-center pt-[10px] font-medium   bg-footer-color-hover hover:bg-black text-white">
-                            <NavLink to="post-job">
+                            <NavLink to="/post-job">
                                 Post Job
                                 <FontAwesomeIcon icon={faBriefcase} className="ml-[5px]" />
                             </NavLink>
