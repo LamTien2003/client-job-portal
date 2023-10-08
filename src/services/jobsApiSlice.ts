@@ -33,7 +33,22 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
                 return [{ type: 'Jobs' as const, id: 'LIST' }];
             },
         }),
+
+        createJob: builder.mutation<ResponseApi<Job>, Omit<Job, 'id'>>({
+            query(body) {
+                try {
+                    return {
+                        url: 'job',
+                        method: 'POST',
+                        body,
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }]),
+        }),
     }),
 });
 
-export const { useGetJobsQuery } = jobsApiSlice;
+export const { useGetJobsQuery, useCreateJobMutation } = jobsApiSlice;

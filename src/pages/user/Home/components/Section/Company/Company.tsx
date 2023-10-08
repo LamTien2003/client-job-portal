@@ -8,11 +8,11 @@ const Company = () => {
     const swiperRef = useRef<SwiperType>();
 
     return (
-        <div className="bg-primary-20">
+        <div className="bg-[#D9F2F3]">
             <div className="max-w-7xl mx-auto  py-14 flex flex-col justify-between lg:px-3">
                 <div className="flex gap-3 items-center">
                     <h4 className="text-lg text-content-title font-medium">Our Trusted Company</h4>
-                    <span className="h-[2px] w-32 bg-primary-70"></span>
+                    <span className="h-[2px] w-32 bg-primary-200"></span>
                 </div>
                 <div className="flex mt-5">
                     <Swiper

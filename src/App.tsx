@@ -14,8 +14,9 @@ import BlogGrid from './pages/user/BlogGrid/BlogGrid';
 import BlogDetail from './pages/user/BlogDetail/BlogDetail';
 import Contact from './pages/user/Contact/Contact';
 import PostJob from './pages/user/PostJob/PostJob';
-// import PersistLogin from './components/PersistLogin/PersistLogin';
 import Admin from './components/Admin/Admin';
+import Manager from './pages/user/Manager/Manager';
+import MyProfile from './pages/user/Manager/MyProfile/MyProfile';
 
 function App() {
     return (
@@ -28,6 +29,9 @@ function App() {
                 <Route path="company-listing" index element={<CompanyListing />} />
                 <Route path="company-detail/:id" index element={<CompanyDetail />} />
                 <Route path="post-job" index element={<PostJob />} />
+                <Route path="manager" element={<Manager />}>
+                    <Route path="my-profile" element={<MyProfile />} />
+                </Route>
                 <Route path="login" index element={<Login />} />
                 <Route path="register" index element={<Register />} />
                 <Route path="error" index element={<Error />} />

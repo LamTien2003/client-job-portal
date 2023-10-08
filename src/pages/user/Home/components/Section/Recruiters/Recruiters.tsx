@@ -47,6 +47,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="45"
                         location="New-York, USA"
                         amount="21"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -56,6 +57,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="86"
                         location="Chicago, Australia"
                         amount="32"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -65,6 +67,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="45"
                         location="New-York, USA"
                         amount="21"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -74,6 +77,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="86"
                         location="Chicago, Australia"
                         amount="32"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -83,6 +87,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="45"
                         location="New-York, USA"
                         amount="21"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -92,6 +97,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="86"
                         location="Chicago, Australia"
                         amount="32"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -101,6 +107,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="45"
                         location="New-York, USA"
                         amount="21"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -110,6 +117,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="86"
                         location="Chicago, Australia"
                         amount="32"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -119,6 +127,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="45"
                         location="New-York, USA"
                         amount="21"
+                        path=""
                     />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -128,6 +137,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         people="86"
                         location="Chicago, Australia"
                         amount="32"
+                        path=""
                     />
                 </SwiperSlide>
             </Swiper>

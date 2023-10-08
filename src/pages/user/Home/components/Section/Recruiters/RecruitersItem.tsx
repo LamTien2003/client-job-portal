@@ -1,15 +1,20 @@
 import images from '@/assets/images';
+import { Link } from 'react-router-dom';
 type Recruiters = {
     name: string;
     imgRecruiters: string;
     people: string;
     location: string;
     amount: string;
+    path: string;
 };
-const RecruitersItem: React.FC<Recruiters> = ({ name, imgRecruiters, people, location, amount }) => {
+const RecruitersItem: React.FC<Recruiters> = ({ name, imgRecruiters, people, location, amount,path }) => {
     return (
-        <div className="flex flex-col rounded-md border-primary-70 border-[1px] hover:border-primary-100 duration-300">
-            <div className="flex justify-evenly items-center py-5 pr-20 bg-primary-10">
+        <Link
+            to={path}
+            className="flex flex-col rounded-md border-primary-200 border-[1px] hover:border-primary-100 duration-300"
+        >
+            <div className="flex justify-evenly items-center py-5 pr-20 bg-[#E5F6F7]">
                 <img className="rounded-full w-[60px] h-[60px]" src={imgRecruiters} alt="logo" />
                 <div className="flex flex-col gap-1">
                     <h5 className="text-content-title text-lg font-semibold">{name}</h5>
@@ -38,7 +43,7 @@ const RecruitersItem: React.FC<Recruiters> = ({ name, imgRecruiters, people, loc
                     Vacancies: <span className="text-primary-100 font-semibold">{amount}</span>
                 </p>
             </div>
-        </div>
+        </Link>
     );
 };
 
