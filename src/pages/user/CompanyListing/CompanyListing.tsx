@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Banner from '@/components/Banner/Banner';
 import ListColumn from '@/components/Icons/ListColumnt';
@@ -6,9 +6,21 @@ import ListGutter from '@/components/Icons/ListGutter';
 import CompanyColumn from './components/CompanyColumn/CompanyColumn';
 import CompanyGutter from './components/CompanyGutter/CompanyGutter';
 import Category from './components/Category/Category';
+import Company from '@/types/Company';
+import { useGetCompaniesQuery } from '@/services/companiesApiSlice';
 
 function CompanyListing() {
     const [listStyle, setListStyle] = useState('column');
+    const [companies, setCompanies] = useState<Company[]>([])
+
+    const { data, isLoading, isError } = useGetCompaniesQuery({
+    });
+
+    useEffect(() => {
+        if(!isLoading && !isError && data?.data?.data) {
+            setCompanies(data?.data?.data)
+        }
+    })
 
     return (
         <div className="selection:bg-primary-100 selection:text-white">
@@ -68,8 +80,9 @@ function CompanyListing() {
                     </div>
                     <div>
                         {/* item */}
-                        {listStyle === 'column' && <CompanyColumn data={[]} />}
-                        {listStyle === 'gutter' && <CompanyGutter data={[]} />}
+                        {isLoading && 'Loading...'} 
+                        {!isLoading && !isError && companies && listStyle === 'column' && <CompanyColumn data={companies} />}
+                        {!isLoading && !isError && companies && listStyle === 'gutter' && <CompanyGutter data={companies} />}
                     </div>
                 </div>
             </div>

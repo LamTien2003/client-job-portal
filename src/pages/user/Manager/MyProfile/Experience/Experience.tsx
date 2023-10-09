@@ -9,16 +9,14 @@ const Experience = () => {
         setIsOpen(!isOpen);
     };
     return (
-        <>
-            <CardSub
-                title="Kinh nghiệm làm việc"
-                sub="Thể hiện những thông tin chi tiết về quá trình làm việc"
-                toggleOpen={toggleOpen}
-                open={isOpen}
-            >
-                {isOpen && <FormExp toggleOpen={toggleOpen} />}
-            </CardSub>
-        </>
+        <CardSub
+            title="Kinh nghiệm làm việc"
+            sub="Thể hiện những thông tin chi tiết về quá trình làm việc"
+            toggleOpen={toggleOpen}
+            open={isOpen}
+        >
+            {isOpen && <FormExp toggleOpen={toggleOpen} />}
+        </CardSub>
     );
 };
 

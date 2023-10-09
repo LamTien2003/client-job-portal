@@ -10,6 +10,9 @@ const FieldImages = () => {
         const selectedImages: string[] = files.map((file) => URL.createObjectURL(file));
 
         setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...selectedImages]);
+
+        console.log('selectedImages', selectedImages);
+        console.log('files', files);
     };
 
     const handleClearFile = (index: number) => {

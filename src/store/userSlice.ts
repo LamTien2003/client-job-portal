@@ -8,8 +8,8 @@ export interface InitialValue {
     accessToken: string | null | undefined;
 }
 const initialState: InitialValue = {
-    user: null,
-    accessToken: null,
+    user: undefined,
+    accessToken: undefined,
 };
 
 const userSlice = createSlice({

@@ -20,28 +20,23 @@ const JobListing = () => {
     const [listStyle, setListStyle] = useState<'column' | 'gutter'>('column');
 
     // Không truyền params nào thì để {} rỗng
-    const { data, isLoading, isError } = useGetJobsQuery({
-        // page: 1,
-        // limit: 1,
-        // ['skillsRequire[in]']: ['NodeJS', 'ReactJS'],
-    });
+    const { data, isLoading, isError } = useGetJobsQuery({});
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
             setJobs(data?.data?.data);
         }
-        console.log(isLoading);
     }, [data?.data?.data, isError, isLoading]);
 
     return (
-        <div className="selection:bg-primary-100 selection:text-white">
+        <div className="">
             {/* banner */}
             <Banner page="Job Listing" />
 
             {/* job listing */}
             <div className=" max-w-7xl ml-auto mr-auto pt-28 flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:max-w-3xl mb:max-w-2xl">
                 {/* job sidebar */}
-                <div className=" w-4/12 pr-3 mr-auto ml-auto mb-8 xl:w-5/12 lg:pr-0 lg:w-10/12 mb:w-11/12">
+                <div className=" w-1/3 pr-3 mr-auto ml-auto mb-8 xl:w-5/12 lg:pr-0 lg:w-10/12 mb:w-11/12">
                     <div className=" w-full bg-content-bg rounded-xl pl-5 pr-5 pt-10 pb-10">
                         <Sidebar />
                         <button className=" w-full bg-primary-100 text-white text-base font-semibold rounded pt-3 pb-3 duration-300 cursor-pointer hover:bg-black">

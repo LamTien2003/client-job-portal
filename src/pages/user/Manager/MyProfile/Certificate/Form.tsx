@@ -8,29 +8,29 @@ import { BsCalendarWeek } from 'react-icons/bs';
 import { Checkbox } from '@material-tailwind/react';
 import BtnBot from '../../components/BtnBot';
 
-interface FormExp {
+interface FormCer {
     toggleOpen: () => void;
 }
 
 interface Values {
-    position: string;
-    company: string;
+    name: string;
+    organization: string;
     dateFrom: Date | null;
     dateTo: Date | null;
     isWorking: boolean;
 }
 const initialValues: Values = {
-    position: '',
-    company: '',
+    name: '',
+    organization: '',
     dateFrom: null,
     dateTo: null,
     isWorking: false,
 };
 const validation = Yup.object().shape({
-    position: Yup.string().required('Chức vụ không được bỏ trống!'),
-    company: Yup.string().required('Công ty không được bỏ trống!'),
+    name: Yup.string().required('Tên giải thưởng không được bỏ trống!'),
+    organization: Yup.string().required('Tổ chức không được bỏ trống!'),
     dateFrom: Yup.date()
-        .required('Từ ngày không được bỏ trống!')
+        .required('Ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
             const { dateTo } = this.parent; // Access the 'dateTo' field from the form values
             if (!dateTo) {
@@ -70,7 +70,7 @@ const validation = Yup.object().shape({
             return new Date(value) >= new Date(dateFrom);
         }),
 });
-const FormExp = ({ toggleOpen }: FormExp) => {
+const FormCer = ({ toggleOpen }: FormCer) => {
     return (
         <Formik
             initialValues={initialValues}
@@ -90,21 +90,21 @@ const FormExp = ({ toggleOpen }: FormExp) => {
 
                     <div className="grid grid-cols-2 gap-6">
                         <CustomField
-                            title="Chức vụ"
-                            fieldName="position"
-                            error={errors.position}
-                            touched={touched.position}
+                            title="Tên giải thưởng"
+                            fieldName="name"
+                            error={errors.name}
+                            touched={touched.name}
                             icon={<AiOutlineUser />}
-                            placeholder="Nhập họ của bạn"
+                            placeholder="Nhập tên giải thưởng của bạn"
                         />
 
                         <CustomField
-                            title="Công ty"
-                            fieldName="company"
-                            error={errors.company}
-                            touched={touched.company}
+                            title="Tổ chức"
+                            fieldName="organization"
+                            error={errors.organization}
+                            touched={touched.organization}
                             icon={<BiSolidFactory />}
-                            placeholder="Nhập họ của bạn"
+                            placeholder="Nhập tổ chức của bạn"
                         />
 
                         <CustomField
@@ -114,7 +114,6 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                             error={errors.dateFrom}
                             touched={touched.dateFrom}
                             icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
                         />
 
                         <CustomField
@@ -124,19 +123,8 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                             error={errors.dateTo}
                             touched={touched.dateTo}
                             icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
                         />
                     </div>
-
-                    <Field
-                        id="Stripe"
-                        type="checkbox"
-                        name="isWorking"
-                        as={Checkbox}
-                        label="Tôi đang làm việc tại đây"
-                        className="h-5 w-5  rounded-full border-primary-100 bg-primary-200 transition-all hover:scale-105 hover:before:opacity-0"
-                        color="blue"
-                    />
 
                     <BtnBot toggleOpen={toggleOpen} />
                 </Form>
@@ -145,4 +133,4 @@ const FormExp = ({ toggleOpen }: FormExp) => {
     );
 };
 
-export default FormExp;
+export default FormCer;

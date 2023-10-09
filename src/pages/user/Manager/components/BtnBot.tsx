@@ -7,11 +7,7 @@ const BtnBot = ({ toggleOpen }: { toggleOpen?: () => void }) => {
             >
                 Huỷ
             </button>
-            <button
-                type="submit"
-                onClick={toggleOpen}
-                className="bg-primary-100 py-2 px-6 text-white  font-semibold rounded-md"
-            >
+            <button type="submit" className="bg-primary-100 py-2 px-6 text-white  font-semibold rounded-md">
                 Lưu
             </button>
         </div>

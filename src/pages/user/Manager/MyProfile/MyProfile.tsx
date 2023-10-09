@@ -16,7 +16,6 @@ const MyProfile = () => {
             <Educate />
             <Certificate />
             <Projects />
-       
         </div>
     );
 };

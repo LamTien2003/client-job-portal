@@ -13,6 +13,7 @@ interface ParamsGetAllJob {
     ['skillsRequire[in]']?: string[];
     sort?: string;
 }
+
 export const jobsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getJobs: builder.query<ResponseApi<Job[]>, ParamsGetAllJob>({
@@ -33,6 +34,10 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
                 return [{ type: 'Jobs' as const, id: 'LIST' }];
             },
         }),
+        getJob: builder.query<ResponseApi<Job>, string>({
+            query: (id) => `job/${id}`,
+            providesTags: () => [{ type: 'Jobs' as const, id: '' }],
+        }),
 
         createJob: builder.mutation<ResponseApi<Job>, Omit<Job, 'id'>>({
             query(body) {
@@ -51,4 +56,4 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useGetJobsQuery, useCreateJobMutation } = jobsApiSlice;
+export const { useGetJobQuery, useGetJobsQuery, useCreateJobMutation } = jobsApiSlice;

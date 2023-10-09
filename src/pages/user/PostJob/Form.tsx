@@ -6,6 +6,7 @@ import CustomField from './Field';
 import SelectField from './SelectField';
 import images from '@/assets/images';
 import FieldImages from './FieldImages';
+import { useCreateJobMutation } from '@/services/jobsApiSlice';
 
 interface Values {
     title: string;
@@ -14,6 +15,7 @@ interface Values {
     salary: string;
     jobRequire: string;
     jobType: string;
+    photosJob: FileList | null;
 }
 const initialValues: Values = {
     title: '',
@@ -22,6 +24,7 @@ const initialValues: Values = {
     salary: '',
     jobRequire: '',
     jobType: '',
+    photosJob: null,
 };
 const validation = Yup.object().shape({
     title: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Tiêu đề không được bỏ trống!'),
@@ -38,12 +41,7 @@ const FormPostJob = () => {
         <Formik
             initialValues={initialValues}
             validationSchema={validation}
-            onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 500);
-            }}
+            onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {}}
         >
             {({ errors, touched }) => (
                 <Form>

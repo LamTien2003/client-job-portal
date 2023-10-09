@@ -3,32 +3,37 @@ import * as Yup from 'yup';
 import { Formik, Form, FormikHelpers, Field } from 'formik';
 import CustomField from './Field';
 import { AiOutlineUser } from 'react-icons/ai';
-import { BiSolidFactory } from 'react-icons/bi';
+import { PiBracketsCurlyBold } from 'react-icons/pi';
 import { BsCalendarWeek } from 'react-icons/bs';
+import { FaAudioDescription } from 'react-icons/fa';
+
 import { Checkbox } from '@material-tailwind/react';
 import BtnBot from '../../components/BtnBot';
 
-interface FormExp {
+interface FormProject {
     toggleOpen: () => void;
 }
 
 interface Values {
-    position: string;
-    company: string;
+    name: string;
+    url: string;
+    description: string;
     dateFrom: Date | null;
     dateTo: Date | null;
     isWorking: boolean;
 }
 const initialValues: Values = {
-    position: '',
-    company: '',
+    name: '',
+    url: '',
+    description: '',
     dateFrom: null,
     dateTo: null,
     isWorking: false,
 };
 const validation = Yup.object().shape({
-    position: Yup.string().required('Chức vụ không được bỏ trống!'),
-    company: Yup.string().required('Công ty không được bỏ trống!'),
+    name: Yup.string().required('Tên không được bỏ trống!'),
+    description: Yup.string().required('Mô tả không được bỏ trống!'),
+    url: Yup.string().required('URL không được bỏ trống!'),
     dateFrom: Yup.date()
         .required('Từ ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
@@ -70,7 +75,7 @@ const validation = Yup.object().shape({
             return new Date(value) >= new Date(dateFrom);
         }),
 });
-const FormExp = ({ toggleOpen }: FormExp) => {
+const FormProject = ({ toggleOpen }: FormProject) => {
     return (
         <Formik
             initialValues={initialValues}
@@ -88,55 +93,64 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                         Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
                     </p>
 
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="flex flex-col gap-6">
                         <CustomField
-                            title="Chức vụ"
-                            fieldName="position"
-                            error={errors.position}
-                            touched={touched.position}
+                            title="Tên dự án"
+                            fieldName="name"
+                            error={errors.name}
+                            touched={touched.name}
                             icon={<AiOutlineUser />}
                             placeholder="Nhập họ của bạn"
                         />
 
+                        <div className="flex gap-6">
+                            <CustomField
+                                type="date"
+                                title="Từ"
+                                fieldName="dateFrom"
+                                error={errors.dateFrom}
+                                touched={touched.dateFrom}
+                                icon={<BsCalendarWeek />}
+                                placeholder="Nhập họ của bạn"
+                            />
+
+                            <CustomField
+                                type="date"
+                                title="Đến"
+                                fieldName="dateTo"
+                                error={errors.dateTo}
+                                touched={touched.dateTo}
+                                icon={<BsCalendarWeek />}
+                                placeholder="Nhập họ của bạn"
+                            />
+                        </div>
                         <CustomField
-                            title="Công ty"
-                            fieldName="company"
-                            error={errors.company}
-                            touched={touched.company}
-                            icon={<BiSolidFactory />}
-                            placeholder="Nhập họ của bạn"
+                            title="Mô tả chi tiết"
+                            fieldName="description"
+                            error={errors.description}
+                            touched={touched.description}
+                            icon={<FaAudioDescription />}
+                            placeholder="Nhập chi tiết dự án của bạn"
+                        />
+                        <CustomField
+                            title="Đường dẫn website"
+                            fieldName="url"
+                            error={errors.url}
+                            touched={touched.url}
+                            icon={<PiBracketsCurlyBold />}
+                            placeholder="Nhập url website của bạn"
                         />
 
-                        <CustomField
-                            type="date"
-                            title="Từ"
-                            fieldName="dateFrom"
-                            error={errors.dateFrom}
-                            touched={touched.dateFrom}
-                            icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
-                        />
-
-                        <CustomField
-                            type="date"
-                            title="Đến"
-                            fieldName="dateTo"
-                            error={errors.dateTo}
-                            touched={touched.dateTo}
-                            icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
+                        <Field
+                            id="Stripe"
+                            type="checkbox"
+                            name="isWorking"
+                            as={Checkbox}
+                            label="Tôi vẫn đang làm dự án này"
+                            className="h-5 w-5  rounded-full border-primary-100 bg-primary-200 transition-all hover:scale-105 hover:before:opacity-0"
+                            color="blue"
                         />
                     </div>
-
-                    <Field
-                        id="Stripe"
-                        type="checkbox"
-                        name="isWorking"
-                        as={Checkbox}
-                        label="Tôi đang làm việc tại đây"
-                        className="h-5 w-5  rounded-full border-primary-100 bg-primary-200 transition-all hover:scale-105 hover:before:opacity-0"
-                        color="blue"
-                    />
 
                     <BtnBot toggleOpen={toggleOpen} />
                 </Form>
@@ -145,4 +159,4 @@ const FormExp = ({ toggleOpen }: FormExp) => {
     );
 };
 
-export default FormExp;
+export default FormProject;

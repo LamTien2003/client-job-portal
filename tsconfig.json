@@ -15,8 +15,9 @@
 
         /* Linting */
         "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+
         "noFallthroughCasesInSwitch": true,
 
         // Alias Path
@@ -27,7 +28,9 @@
     },
     "include": ["src"],
     "rules": {
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "noUnusedLocals": false,
+        "noUnusedParameters": false
     },
     "references": [{ "path": "./tsconfig.node.json" }]
 }

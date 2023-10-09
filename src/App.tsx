@@ -17,20 +17,23 @@ import PostJob from './pages/user/PostJob/PostJob';
 import Admin from './components/Admin/Admin';
 import Manager from './pages/user/Manager/Manager';
 import MyProfile from './pages/user/Manager/MyProfile/MyProfile';
+import AppliedJobs from './pages/user/Manager/AppliedJobs/AppliedJobs';
 
 function App() {
     return (
         <Routes>
             {/* Public routes */}
-            <Route path="" element={<DefaultLayout />}>
+            <Route element={<DefaultLayout />}>
                 <Route index element={<Home />} />
                 <Route path="job-listing" index element={<JobListing />} />
                 <Route path="job-detail/:id" index element={<JobDetail />} />
                 <Route path="company-listing" index element={<CompanyListing />} />
                 <Route path="company-detail/:id" index element={<CompanyDetail />} />
-                <Route path="post-job" index element={<PostJob />} />
+               
                 <Route path="manager" element={<Manager />}>
                     <Route path="my-profile" element={<MyProfile />} />
+                    <Route path="applied-jobs" element={<AppliedJobs />} />
+
                 </Route>
                 <Route path="login" index element={<Login />} />
                 <Route path="register" index element={<Register />} />
@@ -39,13 +42,18 @@ function App() {
                 <Route path="blogGird" index element={<BlogGrid />} />
                 <Route path="blogDetail" index element={<BlogDetail />} />
                 <Route path="contact" index element={<Contact />} />
+                <Route path="login" index element={<Login />} />
+                <Route path="register" index element={<Register />} />
             </Route>
 
             {/* Protected Routes */}
-            <Route element={<ProtectedRoutes allowedRoles={'user'} />}>
-                <Route path="admin" index element={<Admin />} />
-                <Route path="admin/user" index element={<>User list</>} />
-                <Route path="edit" index element={<Admin />} />
+            <Route element={<ProtectedRoutes />}>
+                <Route element={<DefaultLayout />}>
+                    <Route path="post-job" index element={<PostJob />} />
+                    <Route path="admin" index element={<Admin />} />
+                    <Route path="edit" index element={<Admin />} />
+                    <Route path="admin/user" index element={<>User list</>} />
+                </Route>
             </Route>
 
             <Route path="*" element={<Error />} />

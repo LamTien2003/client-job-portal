@@ -2,35 +2,37 @@ import * as Yup from 'yup';
 
 import { Formik, Form, FormikHelpers, Field } from 'formik';
 import CustomField from './Field';
-import { AiOutlineUser } from 'react-icons/ai';
+import { FaSchool } from 'react-icons/fa';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
 import { Checkbox } from '@material-tailwind/react';
 import BtnBot from '../../components/BtnBot';
 
-interface FormExp {
+interface FormEducation {
     toggleOpen: () => void;
 }
 
 interface Values {
-    position: string;
-    company: string;
+    school: string;
+    major: string;
     dateFrom: Date | null;
     dateTo: Date | null;
-    isWorking: boolean;
+
+    isLearning: boolean;
 }
 const initialValues: Values = {
-    position: '',
-    company: '',
+    school: '',
+    major: '',
+
     dateFrom: null,
     dateTo: null,
-    isWorking: false,
+    isLearning: false,
 };
 const validation = Yup.object().shape({
-    position: Yup.string().required('Chức vụ không được bỏ trống!'),
-    company: Yup.string().required('Công ty không được bỏ trống!'),
+    school: Yup.string().required('Trường học không được bỏ trống!'),
+    major: Yup.string().required('Ngành học không được bỏ trống!'),
     dateFrom: Yup.date()
-        .required('Từ ngày không được bỏ trống!')
+        .required('Ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
             const { dateTo } = this.parent; // Access the 'dateTo' field from the form values
             if (!dateTo) {
@@ -70,16 +72,13 @@ const validation = Yup.object().shape({
             return new Date(value) >= new Date(dateFrom);
         }),
 });
-const FormExp = ({ toggleOpen }: FormExp) => {
+const FormEducation = ({ toggleOpen }: FormEducation) => {
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validation}
             onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 500);
+                console.log(values);
             }}
         >
             {({ errors, touched }) => (
@@ -90,21 +89,21 @@ const FormExp = ({ toggleOpen }: FormExp) => {
 
                     <div className="grid grid-cols-2 gap-6">
                         <CustomField
-                            title="Chức vụ"
-                            fieldName="position"
-                            error={errors.position}
-                            touched={touched.position}
-                            icon={<AiOutlineUser />}
-                            placeholder="Nhập họ của bạn"
+                            title="Trường"
+                            fieldName="school"
+                            error={errors.school}
+                            touched={touched.school}
+                            icon={<FaSchool />}
+                            placeholder="Nhập trường của bạn"
                         />
 
                         <CustomField
-                            title="Công ty"
-                            fieldName="company"
-                            error={errors.company}
-                            touched={touched.company}
+                            title="Ngành học"
+                            fieldName="major"
+                            error={errors.major}
+                            touched={touched.major}
                             icon={<BiSolidFactory />}
-                            placeholder="Nhập họ của bạn"
+                            placeholder="Nhập ngành học của bạn"
                         />
 
                         <CustomField
@@ -114,7 +113,6 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                             error={errors.dateFrom}
                             touched={touched.dateFrom}
                             icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
                         />
 
                         <CustomField
@@ -124,14 +122,13 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                             error={errors.dateTo}
                             touched={touched.dateTo}
                             icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
                         />
                     </div>
 
                     <Field
                         id="Stripe"
                         type="checkbox"
-                        name="isWorking"
+                        name="isLearning"
                         as={Checkbox}
                         label="Tôi đang làm việc tại đây"
                         className="h-5 w-5  rounded-full border-primary-100 bg-primary-200 transition-all hover:scale-105 hover:before:opacity-0"
@@ -145,4 +142,4 @@ const FormExp = ({ toggleOpen }: FormExp) => {
     );
 };
 
-export default FormExp;
+export default FormEducation;

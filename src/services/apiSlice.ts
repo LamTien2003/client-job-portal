@@ -56,8 +56,8 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
                     await baseQuery('auth/logout', api, extraOptions);
                     api.dispatch({ type: 'user/logout' });
                     removeToken();
-                    alert('Token không hợp lệ, có thể người dùng đã được đăng nhập từ một thiết bị khác');
-                    window.location.href = '/auth';
+                    // alert('Token không hợp lệ, có thể người dùng đã được đăng nhập từ một thiết bị khác');
+                    // window.location.href = '/auth';
                 }
             } finally {
                 // release must be called once the mutex should be released again.
@@ -79,7 +79,7 @@ const staggeredBaseQuery = retry(baseQueryWithReauth, {
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    tagTypes: ['Jobs', 'Users', 'JobApplications', 'Comments', 'Notifications'],
+    tagTypes: ['Jobs', 'Companies', 'Users', 'JobApplications', 'Comments', 'Notifications'],
     baseQuery: staggeredBaseQuery,
 
     endpoints: (_builder) => ({}),

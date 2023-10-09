@@ -1,3 +1,5 @@
+import website from './logo.png';
+
 import candidates from './candidates.svg';
 import companies from './companies.svg';
 import jobMini from './job3.svg';
@@ -26,15 +28,17 @@ import findJob from './job-find.svg';
 import jobApply from './job-apply.svg';
 import up from './work-up-arrow.svg';
 import down from './work-down-arrow.svg';
-import location from './location.svg'
-import quat from './quat-icon.svg'
+import location from './location.svg';
+import quat from './quat-icon.svg';
 
-import person from './person-2.svg'
+import person from './person-2.svg';
 
-import comment from './comment.svg'
-import user from './user.svg'
-import user2 from './user-2.svg'
-import salary from './salary-2.svg'
+import comment from './comment.svg';
+import user from './user.svg';
+import user2 from './user-2.svg';
+import salary from './salary-2.svg';
+import calender2 from './calender2.svg';
+
 const images = {
     elliose,
     arrow,
@@ -65,6 +69,8 @@ const images = {
         transportation,
     },
     logo: {
+        calender2,
+        website,
         salary,
         user2,
         user,

@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Candidate from './components/Candidate/Candidate';
 import Company from './components/Company/Company';
 const Register = () => {
 
-    const [tab, setTab] = useState('candidate')
+    const [tab, setTab] = useState<string>('candidate')
 
     return (
         <div className="login-area pt-120 tb-120 mb-120 m-auto my-32">

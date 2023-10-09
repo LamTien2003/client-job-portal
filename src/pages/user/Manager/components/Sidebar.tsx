@@ -6,6 +6,7 @@ const Sidebar = () => {
         <div className="bg-white flex flex-col rounded-md border-[1px] border-primary-40 h-fit w-[304px]  text-lg ">
             <TitleProfile title="Dashboarch" path="dashboarch" logo={<MdOutlineDashboard />} />
             <TitleProfile title="My profile" path="my-profile" logo={<MdOutlineDashboard />} />
+            <TitleProfile title="Applied Jobs" path="applied-jobs" logo={<MdOutlineDashboard />} />
             <TitleProfile title="Views Resume" path="resume" logo={<MdOutlineDashboard />} />
             <TitleProfile title="Setting" path="setting" logo={<MdOutlineDashboard />} />
             <TitleProfile title="Log Out" path="logout" logo={<RiLogoutCircleRLine />} />

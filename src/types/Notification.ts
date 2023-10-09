@@ -1,5 +1,5 @@
 import Company from './Company';
-import JobSeeker from './JoobSeeker';
+import JobSeeker from './JobSeeker';
 
 export default interface Notification {
     id: string;
