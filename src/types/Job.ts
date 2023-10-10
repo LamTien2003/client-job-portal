@@ -11,7 +11,11 @@ export default interface Job {
     skillsRequire: string[];
     jobRequire: string[];
     salary: number;
-    type: 'Science' | 'IT' | 'Medical' | 'Copywrite';
+    type: {
+        categoryName: string;
+        isHotCategory: boolean;
+        id: string;
+    };
     available: boolean;
     isDelete: boolean;
     applications?: JobApplication[];
