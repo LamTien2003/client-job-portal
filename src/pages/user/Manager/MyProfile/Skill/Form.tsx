@@ -2,12 +2,16 @@ import { useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { CgUserList } from 'react-icons/cg';
 import BtnBot from '../../components/BtnBot';
+import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import JobSeeker, { Skill } from '@/types/JobSeeker';
 interface Form {
     toggleOpen?: () => void;
 }
 const Form = ({ toggleOpen }: Form) => {
     const [data, setData] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState<string>('');
+
+    const [changeSkill, { isLoading }] = useChangeMeMutation();
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setInputValue(e.target.value);
     };
@@ -31,8 +35,23 @@ const Form = ({ toggleOpen }: Form) => {
             handleAddSkill();
         }
     };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            if (data) {
+                const skillData: JobSeeker = {
+                    skills: data as Skill[],
+                };
+                await changeSkill(skillData);
+                setData([]);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return (
-        <form action="#" className=" flex flex-col gap-8 border-t-[1px] border-gray-600 pt-5">
+        <form onSubmit={handleSubmit} className=" flex flex-col gap-8 border-t-[1px] border-gray-600 pt-5">
             <div className="flex justify-between gap-2 h-12">
                 <div className="flex items-center w-full h-full border-2 text-content-text">
                     <div className="text-xl p-4">

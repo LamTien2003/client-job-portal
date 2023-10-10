@@ -39,7 +39,7 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
             providesTags: () => [{ type: 'Jobs' as const, id: '' }],
         }),
 
-        createJob: builder.mutation<ResponseApi<Job>, Omit<Job, 'id'>>({
+        createJob: builder.mutation<ResponseApi<Job>, FormData>({
             query(body) {
                 try {
                     return {

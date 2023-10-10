@@ -29,12 +29,7 @@ function App() {
                 <Route path="job-detail/:id" index element={<JobDetail />} />
                 <Route path="company-listing" index element={<CompanyListing />} />
                 <Route path="company-detail/:id" index element={<CompanyDetail />} />
-               
-                <Route path="manager" element={<Manager />}>
-                    <Route path="my-profile" element={<MyProfile />} />
-                    <Route path="applied-jobs" element={<AppliedJobs />} />
 
-                </Route>
                 <Route path="login" index element={<Login />} />
                 <Route path="register" index element={<Register />} />
                 <Route path="error" index element={<Error />} />
@@ -49,6 +44,10 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoutes />}>
                 <Route element={<DefaultLayout />}>
+                    <Route path="manager" element={<Manager />}>
+                        <Route path="my-profile" element={<MyProfile />} />
+                        <Route path="applied-jobs" element={<AppliedJobs />} />
+                    </Route>
                     <Route path="post-job" index element={<PostJob />} />
                     <Route path="admin" index element={<Admin />} />
                     <Route path="edit" index element={<Admin />} />

@@ -1,4 +1,3 @@
-import { Field } from 'formik';
 import { Select, MenuItem } from '@mui/material';
 interface SelectField {
     title: string;
@@ -7,8 +6,10 @@ interface SelectField {
     icon: string;
     error: string | undefined;
     touched: boolean | undefined;
+    value?: string;
+    onChange: any;
 }
-const SelectField = ({ title, fieldName, options, icon, error, touched }: SelectField) => {
+const SelectField = ({ title, fieldName, options, icon, error, touched, value, onChange }: SelectField) => {
     return (
         <div className="flex flex-col gap-2">
             <h5 className="text-[15px] font-medium text-content-text">{title}*</h5>
@@ -20,13 +21,19 @@ const SelectField = ({ title, fieldName, options, icon, error, touched }: Select
                 <img className="w-4 h-4" src={icon} alt={icon} />
                 <span className="w-[1px] h-6 bg-gray-300 mx-2"></span>
                 <div className="w-full h-[48px]">
-                    <Field as={Select} name={fieldName} className="w-full h-[48px] text-content-s-text items-center ">
+                    <Select
+                        value={value}
+                        onChange={onChange}
+                        name={fieldName}
+                        variant="standard"
+                        className="select w-full h-[48px]  text-content-s-text items-center"
+                    >
                         {options.map((option, index) => (
                             <MenuItem key={index} value={option}>
                                 {option}
                             </MenuItem>
                         ))}
-                    </Field>
+                    </Select>
                 </div>
             </div>
             {error && touched ? <div className="text-red-700 text-sm font-semibold">{error}</div> : null}

@@ -78,8 +78,6 @@ select:-webkit-autofill:focus {
     .icon{
     @apply w-7 h-7  border rounded-full border-footer-color-hover ml-[-20px] text-footer-color-hover hover:bg-footer-color-hover hover:text-white;
     } */
-    
-
 
 @layer base {
     /* li {
@@ -99,6 +97,6 @@ select:-webkit-autofill:focus {
 }
 
 ::selection {
-    background-color: #00A7AC;
+    background-color: #00a7ac;
     color: #fff;
 }

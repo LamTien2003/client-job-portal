@@ -3,9 +3,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper';
 
 import { Autoplay } from 'swiper/modules';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useGetCompaniesQuery } from '@/services/companiesApiSlice';
+import Company from '@/types/Company';
 const Company = () => {
     const swiperRef = useRef<SwiperType>();
+
+    const [companies, setCompanies] = useState<Company[]>([]);
+    const { data, isLoading, isError } = useGetCompaniesQuery({});
+
+    useEffect(() => {
+        if (!isLoading && !isError && data?.data?.data) {
+            setCompanies(data?.data?.data);
+        }
+    }, [data?.data?.data, isError, isLoading]);
+
+    console.log(companies);
 
     return (
         <div className="bg-[#D9F2F3]">
@@ -47,41 +60,12 @@ const Company = () => {
                         }}
                         className="w-full"
                     >
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-06.png" />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-02.png" />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-03.png" />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-04.png" />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-05.png" />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-06.png" />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-01.png" />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-02.png" />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <CompanyItem logo="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/trusted-company-03.png" />
-                        </SwiperSlide>
+                        {companies.map((company) => (
+                            <SwiperSlide>
+                                <CompanyItem logo={company.photo} />
+                            </SwiperSlide>
+                        ))}
+                       
                     </Swiper>
                 </div>
             </div>

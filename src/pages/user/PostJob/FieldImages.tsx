@@ -1,28 +1,30 @@
-import { Field } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { TiDelete } from 'react-icons/ti';
 
-const FieldImages = () => {
+const FieldImages = ({ formik, isFormSubmitted }: { formik: any; isFormSubmitted: boolean }) => {
     const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+    useEffect(() => {
+        if (isFormSubmitted) {
+            setSelectedFiles([]);
+        }
+    }, [isFormSubmitted]);
     const handleFiles = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const files = Array.from(event.target.files || []);
         const selectedImages: string[] = files.map((file) => URL.createObjectURL(file));
+        formik.setFieldValue('photosJob', files);
 
         setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...selectedImages]);
-
-        console.log('selectedImages', selectedImages);
-        console.log('files', files);
     };
 
     const handleClearFile = (index: number) => {
         const updatedFiles = [...selectedFiles];
-        updatedFiles.splice(index, 1); // Xóa tệp cụ thể khỏi danh sách
+        updatedFiles.splice(index, 1);
 
         setSelectedFiles(updatedFiles);
     };
     const handleClearFiles = (): void => {
-        setSelectedFiles([]); // Xóa danh sách các tệp đã chọn
+        setSelectedFiles([]);
     };
 
     return (
@@ -42,7 +44,7 @@ const FieldImages = () => {
                             <span className="font-semibold">Click the files</span>
                         </p>
                     </div>
-                    <Field name="photosJob" id="file" type="file" multiple className="hidden" onChange={handleFiles} />
+                    <input name="photosJob" id="file" type="file" multiple className="hidden" onChange={handleFiles} />
                 </label>
                 {selectedFiles.length > 0 && (
                     <>
