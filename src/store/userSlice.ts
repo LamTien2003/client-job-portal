@@ -1,10 +1,11 @@
-import User from '@/types/User';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { authApiSlice } from '@/services/authApiSlice';
+import JobSeeker from '@/types/JobSeeker';
+import Company from '@/types/Company';
 
 export interface InitialValue {
-    user: User | null | undefined;
+    user: JobSeeker | Company | null | undefined;
     accessToken: string | null | undefined;
 }
 const initialState: InitialValue = {
@@ -20,7 +21,7 @@ const userSlice = createSlice({
         setcredentialsToken: (state, action: PayloadAction<string>) => {
             state.accessToken = action.payload;
         },
-        setCurrentUser: (state, action: PayloadAction<User>) => {
+        setCurrentUser: (state, action: PayloadAction<JobSeeker | Company>) => {
             state.user = action.payload;
         },
     },
