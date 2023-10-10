@@ -7,8 +7,6 @@ import { setCurrentUser } from '@/store/userSlice';
 import { RootState } from '@/store/store';
 import { removeToken } from '@/utils/storage';
 
-import User from '@/types/User';
-
 const ProtectedRoutes = () => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const { data, isLoading, isFetching, isError, error } = useGetCurrentUserQuery(undefined, {
@@ -19,7 +17,7 @@ const ProtectedRoutes = () => {
     useLayoutEffect(() => {
         if (data?.data?.data) {
             const user = data.data.data;
-            dispatch(setCurrentUser(user as User));
+            dispatch(setCurrentUser(user));
         }
 
         if (isError && !isFetching && !isLoading) {
