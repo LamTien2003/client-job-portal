@@ -9,6 +9,7 @@ const Introduce = () => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
     console.log('isJobSeeker: ', jobSeeker);
+    
 
     const [open, setOpen] = useState<boolean>(false);
     const handleOpen = () => setOpen(!open);
