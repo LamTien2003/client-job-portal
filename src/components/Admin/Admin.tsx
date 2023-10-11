@@ -1,9 +1,9 @@
-import { removeToken } from "@/utils/storage";
-import { Link, useNavigate } from "react-router-dom";
+import { removeToken } from '@/utils/storage';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Admin() {
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+
     return (
         <>
             <div>admin page</div>
@@ -11,7 +11,6 @@ function Admin() {
             <Link to={'/admin/user'}>userlist</Link>
             <div onClick={() => removeToken()}>Logout</div>
         </>
-        
     );
 }
 
