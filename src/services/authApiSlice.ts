@@ -27,12 +27,17 @@ export interface RegisterCompanyRequest {
     email: string;
     location: string;
     phoneNumber: string;
-    introduce: string;
+    password: string;
+    passwordConfirm: string;
     companyName: string;
     description: string;
     establishDate: Date;
-    password: string;
-    passwordConfirm: string;
+    photo: string;
+    coverPhoto: string;
+    companySize: {
+        from: number;
+        to: number;
+    }
 }
 
 export const authApiSlice = apiSlice.injectEndpoints({

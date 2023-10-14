@@ -6,11 +6,11 @@ interface Props {
 }
 
 function CompanyColumn(props: Props) {
-    const { data: companies } = props;
-
+    const { data: companyList } = props;
     return (
         <div className=" flex flex-wrap tb:flex-col tb:w-9/12 tb:mr-auto tb:ml-auto mb:w-full">
-            {companies?.map((company) => {
+            {companyList.length === 0 && 'Hiện danh mục này chưa có công ty nào'}
+            {companyList?.map((company) => {
                 return (
                     <div key={company.id} className=" w-6/12 pr-3 pl-3 mb-6 relative tb:w-full ">
                         <div className=" border border-primary-blur rounded pl-4 duration-300 hover:border-primary-100">
@@ -33,7 +33,7 @@ function CompanyColumn(props: Props) {
                             </div>
                             <div className=" mr-4 mb-6 flex relative">
                                 <p className=" text-content-text text-base font-medium">
-                                    Vacancies: <span className=" text-primary-100 font-bold">22</span>
+                                    Số lượng: <span className=" text-primary-100 font-bold">22</span>
                                 </p>
                                 <div className=" group right-0 absolute ">
                                     <Link

@@ -26,15 +26,6 @@ function Sidebar(props: Props) {
     //     toast.success('Test thông bao');
     // }, []);
 
-    const handleRange = (value:any) => {
-        setSalaryRange(prev => {
-            return {
-                minValue: value[0],
-                maxValue: value[1]
-            }
-        })
-    }
-
     function myFilter(id:string) {
         props.filterJob(id)
     }
@@ -44,18 +35,7 @@ function Sidebar(props: Props) {
             
             <Category data={category} handleFilter={myFilter} />
             
-            <div className=' bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5'>
-                <h3 className=' text-content-title font-semibold text-lg mb-2 lg:text-lg'>Salary Range</h3>
-                <p>{salaryRange.minValue}K - {salaryRange.maxValue}K</p>
-                <Slider 
-                    range 
-                    min={1} 
-                    max={1500}
-                    onChange={handleRange}
-                />
-                <div className=' max-h-64 overflow-scroll'>
-                </div>
-            </div>
+            
             <div className=' bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5'>
                 <h3 className=' text-content-title font-semibold text-lg mb-2 lg:text-lg'>Date of Post</h3>
                 <div className=' flex flex-wrap'>

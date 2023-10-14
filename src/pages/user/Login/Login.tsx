@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/services/authApiSlice';
 import { removeToken, setToken } from '@/utils/storage';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
+import { useFormik } from 'formik';
+import * as Yup from 'Yup'
+import { EMAIL_REGEX, PWD_REGEX } from '../Register/components/Candidate/Candidate';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -23,6 +26,47 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
+    const formik = useFormik({
+        initialValues: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phoneNumber: '',
+            location: 'Tp Hồ Chí Minh, (Quận 1)',
+            password: '',
+            passwordConfirm: '',
+        },
+        validationSchema: Yup.object({
+            email: Yup
+                .string()
+                .required('Không được để trống')
+                .matches(EMAIL_REGEX, 'Email phải đúng định dạng'),
+            password: Yup
+                .string()
+                .required('Không được để trống')
+                .matches(
+                    PWD_REGEX,
+                    'Mật khẩu phải từ 8 đến 24 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, số và 1 kí tự đặc biệt',
+                )
+        }),
+        onSubmit: async (values) => {
+            try {
+                removeToken();
+                const response: any = await login(values);
+                const user = response.data.data.data;
+                const accessToken = response.data.data.accessToken;
+                if (user && accessToken) {
+                    dispatch(setCurrentUser(user));
+                    dispatch(setcredentialsToken(accessToken));
+                    setToken(accessToken);
+                }
+                navigate(from, { replace: true });
+            } catch (error) {
+                setErrMsg('Đăng ký không thành công');
+            }
+        },
+    });
+
     useEffect(() => {
         emailRef.current?.focus();
     }, []);
@@ -31,40 +75,6 @@ const Login = () => {
         setErrMsg('');
     }, [email, password]);
 
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-
-        try {
-            removeToken();
-            const response: any = await login({ email, password });
-
-            response;
-            const user = response.data.data.data;
-            if (user) {
-                dispatch(setCurrentUser(user));
-            }
-
-            const accessToken = response.data.data.accessToken;
-            if (accessToken) {
-                dispatch(setcredentialsToken(accessToken));
-                setToken(accessToken);
-            }
-            // setEmail('');
-            // setPassword('');
-            navigate(from, { replace: true });
-        } catch (error) {
-            // if (!error?.response) {
-            //     setErrMsg('No server response');
-            // } else if (error.response?.status === 400) {
-            //     setErrMsg('Thiếu email hoặc mật khẩu');
-            // } else if (error.response?.status === 401) {
-            //     setErrMsg('unauthorized');
-            // } else {
-            setErrMsg('Đăng nhập không thành công');
-            // }
-            errRef?.current?.focus();
-        }
-    };
 
     return (
         <>
@@ -75,26 +85,26 @@ const Login = () => {
                     <p ref={errRef} className={errMsg ? 'flex' : 'hidden'} aria-live="assertive">
                         {errMsg}
                     </p>
-                    <div className="login-area pt-120 tb-120 mb-120 p-0 m-auto my-32">
+                    <div className=" m-auto my-10">
                         <div className="container mr-auto ml-auto">
                             <div className="border-black">
-                                <h3 className="sn-h3 text-center text-teal-500 m-120 text-3xl font-bold">
-                                    Log In Here!!!
+                                <h3 className="sn-h3 text-center text-teal-500 text-3xl font-bold">
+                                    Login Here
                                 </h3>
-                                <div className=" mr-auto ml-auto justify-center items-center flex">
-                                    <div className="w-10 border-t border-red-600 justify-center"></div>
-                                    <div className="w-2 h-2 rounded-full bg-red-500 justify-center m-2"></div>
-                                    <div className="w-10 border-t border-red-600 justify-center"></div>
+                                <div className=' flex items-center justify-center'>
+                                    <div className=' w-20 h-0.5 bg-content-underline'></div>
+                                    <div className=' w-2 h-2 bg-content-underline rounded-full mr-2 ml-2'></div>
+                                    <div className=' w-20 h-0.5 bg-content-underline'></div>
                                 </div>
                             </div>
-                            <div className="w-5/12 h-2/3 m-auto mt-16 pt-12">
+                            <div className="w-5/12 h-2/3 m-auto mt-10">
                                 <form
-                                    onSubmit={handleSubmit}
+                                    onSubmit={formik.handleSubmit}
                                     className="bg-white rounded-2xl border-teal-100 border  px-16 py-12  mb-4"
                                 >
                                     {/* Email */}
                                     <div className="email mb-4 pb-2 relative">
-                                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                                        <label className="block text-gray-700 text-sm font-bold mb-2">
                                             Email*
                                         </label>
                                         <img
@@ -106,32 +116,38 @@ const Login = () => {
                                             id="email"
                                             ref={emailRef}
                                             autoComplete="off"
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            value={email}
+                                            onChange={formik.handleChange}
+                                            value={formik.values.email}
                                             required
                                             placeholder="info@example.com"
                                             className="appearance-none border border-teal-100 rounded w-full py-2 px-3 pl-14 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         />
+                                        <p
+                                            className={formik.errors.email && formik.values.email ? 'text-red-500 text-xs italic' : 'hidden'}
+                                        >
+                                            {formik.errors.email}
+                                        </p>
                                     </div>
 
                                     {/* Password */}
                                     <div className="mb-4 pb-2">
-                                        <label
-                                            className="block text-gray-700 text-sm font-bold mb-2"
-                                            htmlFor="password"
-                                        >
+                                        <label className="block text-gray-700 text-sm font-bold mb-2">
                                             Password*
                                         </label>
                                         <input
                                             type="password"
                                             id="password"
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            value={password}
+                                            onChange={formik.handleChange}
+                                            value={formik.values.password}
                                             required
                                             placeholder="******************"
                                             className="appearance-none border border-teal-100 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                         />
-                                        <p className="text-red-500 text-xs italic">Please choose a password.</p>
+                                        <p
+                                            className={formik.errors.password && formik.values.password ? 'text-red-500 text-xs italic' : 'hidden'}
+                                        >
+                                            {formik.errors.password}
+                                        </p>
                                     </div>
 
                                     <div className="flex flex-wrap place-content-between ">
@@ -140,7 +156,7 @@ const Login = () => {
                                             <span className="text-sm ">Remember Me</span>
                                         </label>
                                         <a
-                                            className="inline-block align-baseline font-bold  text-blue-500 hover:text-teal-500 underline underline-offset-3"
+                                            className="inline-block align-baseline font-bold  text-blue-500 hover:text-primary-100 duration-300 underline underline-offset-3"
                                             href="#"
                                         >
                                             Forget Password?

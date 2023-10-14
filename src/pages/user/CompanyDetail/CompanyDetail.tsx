@@ -21,7 +21,7 @@ function CompanyDetail() {
         if(!isLoading && !isError && data?.data?.data) {
             setCompany(data?.data?.data)
         } 
-    })
+    }, [data?.data?.data, isLoading, isError])
     
     return (
         <>

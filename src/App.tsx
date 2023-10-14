@@ -16,6 +16,7 @@ import Contact from './pages/user/Contact/Contact';
 import PostJob from './pages/user/PostJob/PostJob';
 // import PersistLogin from './components/PersistLogin/PersistLogin';
 import Admin from './components/Admin/Admin';
+import Setting from './components/Settings/Settings';
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path="contact" index element={<Contact />} />
                 <Route path="login" index element={<Login />} />
                 <Route path="register" index element={<Register />} />
+                <Route path="setting" index element={<Setting />} />
             </Route>
 
             {/* Protected Routes */}

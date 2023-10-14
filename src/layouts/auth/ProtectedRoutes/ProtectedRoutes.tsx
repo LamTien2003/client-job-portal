@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import { useGetCurrentUserQuery } from '@/services/usersApiSlice';
 import { setCurrentUser } from '@/store/userSlice';
@@ -13,6 +13,7 @@ const ProtectedRoutes = () => {
         refetchOnMountOrArgChange: 500,
     });
     const dispatch = useDispatch();
+    const location = useLocation()
 
     useLayoutEffect(() => {
         if (data?.data?.data) {
@@ -26,7 +27,9 @@ const ProtectedRoutes = () => {
         }
     }, [data, dispatch, isLoading, isFetching, currentUser, isError, error]);
 
-    return !currentUser && !data && !isFetching && !isLoading ? <Navigate to="/login" /> : <Outlet />;
+    return !currentUser && !data && !isFetching && !isLoading 
+        ? <Navigate to="/login" state={{from: location}} replace /> 
+        : <Outlet />;
 };
 
 export default ProtectedRoutes;
