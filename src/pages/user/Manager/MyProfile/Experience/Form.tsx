@@ -1,13 +1,19 @@
 import * as Yup from 'yup';
 
-import { Formik, Form, FormikHelpers, Field } from 'formik';
+import { Formik, Form, FormikHelpers, Field, useFormik } from 'formik';
 import CustomField from './Field';
 import { AiOutlineUser } from 'react-icons/ai';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
-import { Checkbox } from '@material-tailwind/react';
 import BtnBot from '../../components/BtnBot';
-
+import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import JobSeeker, { Experience } from '@/types/JobSeeker';
+import { useEffect, useState } from 'react';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import { isJobSeeker } from '@/utils/helper';
 interface FormExp {
     toggleOpen: () => void;
 }
@@ -15,15 +21,15 @@ interface FormExp {
 interface Values {
     position: string;
     company: string;
-    dateFrom: Date | null;
-    dateTo: Date | null;
+    dateFrom: Date | string;
+    dateTo: Date | string;
     isWorking: boolean;
 }
 const initialValues: Values = {
     position: '',
     company: '',
-    dateFrom: null,
-    dateTo: null,
+    dateFrom: '',
+    dateTo: '',
     isWorking: false,
 };
 const validation = Yup.object().shape({
@@ -32,9 +38,9 @@ const validation = Yup.object().shape({
     dateFrom: Yup.date()
         .required('Từ ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent; // Access the 'dateTo' field from the form values
+            const { dateTo } = this.parent;
             if (!dateTo) {
-                return true; // Allow empty 'dateTo' field to avoid conflicts
+                return true;
             }
             const dataNow = new Date();
             const date = new Date(value);
@@ -42,106 +48,146 @@ const validation = Yup.object().shape({
             return date <= dataNow;
         })
         .test('date-range', 'Ngày phải nhỏ hơn ngày kết thúc', function (value) {
-            const { dateTo } = this.parent; // Access the 'dateTo' field from the form values
+            const { dateTo } = this.parent;
             if (!dateTo) {
-                return true; // Allow empty 'dateTo' field to avoid conflicts
+                return true;
             }
             const date = new Date(value);
 
             return date <= new Date(dateTo);
         }),
-    dateTo: Yup.date()
-        .required('Ngày không được bỏ trống!')
-        .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent; // Access the 'dateTo' field from the form values
-            if (!dateTo) {
-                return true; // Allow empty 'dateTo' field to avoid conflicts
-            }
-            const dataNow = new Date();
-            const date = new Date(value);
-
+    dateTo: Yup.date().test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
+        const { dateTo } = this.parent;
+        let date;
+        if (!dateTo) {
+            return true;
+        }
+        const dataNow = new Date();
+        if (value) {
+            date = new Date(value);
+        }
+        if (date) {
             return date <= dataNow;
-        })
-        .test('date-range', 'Ngày phải lớn hơn ngày bắt đầu', function (value) {
-            const { dateFrom } = this.parent; // Access the 'dateFrom' field from the form values
-            if (!dateFrom) {
-                return true; // Allow empty 'dateFrom' field to avoid conflicts
-            }
-            return new Date(value) >= new Date(dateFrom);
-        }),
+        }
+        return;
+    }),
 });
 const FormExp = ({ toggleOpen }: FormExp) => {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const [experiences, setExp] = useState<Experience[]>([]);
+    useEffect(() => {
+        if (isJobSeeker(currentUser)) {
+            setExp(currentUser.experiences);
+        }
+    }, [currentUser]);
+
+    const [changeExp, { isLoading }] = useChangeMeMutation();
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: validation,
+        onSubmit: async (values) => {
+            try {
+                const exp: any = {
+                    position: values.position,
+                    company: values.company,
+                    date: {
+                        from: values.dateFrom,
+                        to: values.dateTo,
+                    },
+                    isWorking: values.isWorking,
+                };
+
+                if (values.isWorking) {
+                    exp.date = {
+                        from: values.dateFrom,
+                    };
+                } else {
+                    exp.date = {
+                        from: values.dateFrom,
+                        to: values.dateTo,
+                    };
+                }
+                const data = [...experiences, exp];
+
+                const expData: any = {
+                    experiences: data,
+                };
+                await changeExp(expData);
+                alert('Cập nhật thông tin thành công!');
+                formik.resetForm();
+            } catch (error) {
+                console.error('Lỗi khi gửi form:', error);
+            }
+        },
+    });
+
     return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validation}
-            onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 500);
-            }}
-        >
-            {({ errors, touched }) => (
-                <Form className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
-                    <p className="text-content-text text-sm font-semibold">
-                        Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
-                    </p>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
+            <p className="text-content-text text-sm font-semibold">
+                Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
+            </p>
 
-                    <div className="grid grid-cols-2 gap-6">
-                        <CustomField
-                            title="Chức vụ"
-                            fieldName="position"
-                            error={errors.position}
-                            touched={touched.position}
-                            icon={<AiOutlineUser />}
-                            placeholder="Nhập họ của bạn"
-                        />
+            <div className="grid grid-cols-2 gap-6">
+                <CustomField
+                    title="Chức vụ"
+                    fieldName="position"
+                    error={formik.errors.position}
+                    touched={formik.touched.position}
+                    icon={<AiOutlineUser />}
+                    placeholder="Nhập họ của bạn"
+                    value={formik.values.position}
+                    onChange={formik.handleChange}
+                />
 
-                        <CustomField
-                            title="Công ty"
-                            fieldName="company"
-                            error={errors.company}
-                            touched={touched.company}
-                            icon={<BiSolidFactory />}
-                            placeholder="Nhập họ của bạn"
-                        />
+                <CustomField
+                    title="Công ty"
+                    fieldName="company"
+                    error={formik.errors.company}
+                    touched={formik.touched.company}
+                    icon={<BiSolidFactory />}
+                    placeholder="Nhập họ của bạn"
+                    value={formik.values.company}
+                    onChange={formik.handleChange}
+                />
 
-                        <CustomField
-                            type="date"
-                            title="Từ"
-                            fieldName="dateFrom"
-                            error={errors.dateFrom}
-                            touched={touched.dateFrom}
-                            icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
-                        />
+                <CustomField
+                    type="date"
+                    title="Từ"
+                    fieldName="dateFrom"
+                    error={formik.errors.dateFrom}
+                    touched={formik.touched.dateFrom}
+                    icon={<BsCalendarWeek />}
+                    placeholder="Nhập họ của bạn"
+                    value={formik.values.dateFrom}
+                    onChange={formik.handleChange}
+                />
 
-                        <CustomField
-                            type="date"
-                            title="Đến"
-                            fieldName="dateTo"
-                            error={errors.dateTo}
-                            touched={touched.dateTo}
-                            icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
-                        />
-                    </div>
+                <CustomField
+                    type="date"
+                    title="Đến"
+                    fieldName="dateTo"
+                    error={formik.errors.dateTo}
+                    touched={formik.touched.dateTo}
+                    icon={<BsCalendarWeek />}
+                    placeholder="Nhập họ của bạn"
+                    value={formik.values.dateTo}
+                    onChange={formik.handleChange}
+                    disabled={formik.values.isWorking}
 
-                    <Field
-                        id="Stripe"
-                        type="checkbox"
-                        name="isWorking"
-                        as={Checkbox}
-                        label="Tôi đang làm việc tại đây"
-                        className="h-5 w-5  rounded-full border-primary-100 bg-primary-200 transition-all hover:scale-105 hover:before:opacity-0"
-                        color="blue"
-                    />
+                    
+                />
+            </div>
 
-                    <BtnBot toggleOpen={toggleOpen} />
-                </Form>
-            )}
-        </Formik>
+            <FormControlLabel
+                control={<Checkbox />}
+                name="isWorking"
+                label="Tôi đang làm việc tại đây"
+                value={formik.values.isWorking}
+                onChange={formik.handleChange}
+            />
+
+            <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />
+        </form>
     );
 };
 

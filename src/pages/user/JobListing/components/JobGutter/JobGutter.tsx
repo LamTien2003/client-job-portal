@@ -6,17 +6,18 @@ interface Props {
 }
 
 function JobGutter(props: Props) {
-    const { data: jobs } = props;
+    const { data: jobList } = props;
 
     return (
         <div className=" flex flex-wrap tb:flex-col ">
-            {jobs?.map((job) => {
+            {jobList.length === 0 && 'Hiện danh mục này chưa có công việc nào'}
+            {jobList?.map((job) => {
                 return (
                     <div key={job.id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full ">
                         <div className=" border-content-border border rounded p-4 relative">
                             <img
                                 className=" rounded tb:w-full"
-                                src={"https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-1.png"}
+                                src={job.postedBy.coverPhoto ? job.postedBy.coverPhoto : "https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-1.png"}
                             />
                             <div className=" mt-5 mb-5 flex items-center">
                                 <img

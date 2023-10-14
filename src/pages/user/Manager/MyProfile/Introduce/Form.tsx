@@ -1,8 +1,7 @@
-import { Button, Dialog, DialogHeader, DialogBody, DialogFooter, alert } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
 import BtnBot from '../../components/BtnBot';
 import { useState } from 'react';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
-import JobSeeker from '@/types/JobSeeker';
 interface FormIntro {
     handleOpen: () => void;
     open: boolean;
@@ -14,7 +13,7 @@ const Form = ({ handleOpen, open }: FormIntro) => {
         e.preventDefault();
         try {
             if (introduce) {
-                const data: JobSeeker = {
+                const data: any = {
                     introduce: introduce.trim(),
                 };
                 await changeIntroduce(data);
@@ -46,7 +45,7 @@ const Form = ({ handleOpen, open }: FormIntro) => {
                             cols={30}
                             rows={5}
                         ></textarea>
-                        <BtnBot toggleOpen={handleOpen} />
+                        <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />
                     </form>
                 </DialogBody>
             </Dialog>

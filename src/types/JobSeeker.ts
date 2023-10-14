@@ -41,7 +41,7 @@ export interface Project {
 export type Skill = 'ReactJS' | 'NodeJS' | 'PHP' | 'Java' | 'Javascript' | 'Golang' | 'React-native' | 'Python';
 
 export default interface JobSeeker extends User {
-    introduce?: string;
+    introduce: string;
     cvImage: string;
     skills: Skill[];
     educate: Education[];

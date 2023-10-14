@@ -1,15 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { CgUserList } from 'react-icons/cg';
 import BtnBot from '../../components/BtnBot';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
-import JobSeeker, { Skill } from '@/types/JobSeeker';
+import { Skill } from '@/types/JobSeeker';
+import { RootState } from '@/store/store';
+import { isJobSeeker } from '@/utils/helper';
+import { useSelector } from 'react-redux';
 interface Form {
     toggleOpen?: () => void;
 }
 const Form = ({ toggleOpen }: Form) => {
     const [data, setData] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState<string>('');
+
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const [skill, setSkill] = useState<Skill[]>([]);
+    useEffect(() => {
+        if (isJobSeeker(currentUser)) {
+            setSkill(currentUser.skills);
+        }
+    }, [currentUser]);
 
     const [changeSkill, { isLoading }] = useChangeMeMutation();
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -40,8 +51,8 @@ const Form = ({ toggleOpen }: Form) => {
         e.preventDefault();
         try {
             if (data) {
-                const skillData: JobSeeker = {
-                    skills: data as Skill[],
+                const skillData: any = {
+                    skills: [...skill, ...data],
                 };
                 await changeSkill(skillData);
                 setData([]);
@@ -93,7 +104,7 @@ const Form = ({ toggleOpen }: Form) => {
                     </div>
                 ))}
             </div>
-            <BtnBot toggleOpen={toggleOpen} />
+            <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />
         </form>
     );
 };

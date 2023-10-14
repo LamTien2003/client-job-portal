@@ -1,10 +1,13 @@
-import { Select, Option } from '@material-tailwind/react';
+import { Select, MenuItem } from '@mui/material';
 import { BsGenderTrans } from 'react-icons/bs';
 interface SelectInfo {
     title: string;
     fieldName: string;
+    value?: string;
+    onChange: any;
 }
-const SelectInfo = ({ title, fieldName }: SelectInfo) => {
+const SelectInfo = ({ title, fieldName, value, onChange }: SelectInfo) => {
+    const options: string[] = ['Nam', 'Nữ', 'Khác'];
     return (
         <div className="flex flex-col gap-1 w-full">
             <label className="font-bold text-primary-100" htmlFor={fieldName}>
@@ -14,15 +17,19 @@ const SelectInfo = ({ title, fieldName }: SelectInfo) => {
                 <div className="text-lg px-3">
                     <BsGenderTrans />
                 </div>
+
                 <Select
+                    value={value}
+                    onChange={onChange}
                     name={fieldName}
-                    className="w-full h-11 text-content-s-text border-none outline-none items-center"
                     variant="standard"
-                    color="blue"
+                    className="select w-full h-[48px]  text-content-s-text items-center"
                 >
-                    <Option>Nam</Option>
-                    <Option>Nữ</Option>
-                    <Option>Khác</Option>
+                    {options.map((option, index) => (
+                        <MenuItem key={index} value={option}>
+                            {option}
+                        </MenuItem>
+                    ))}
                 </Select>
             </div>
         </div>

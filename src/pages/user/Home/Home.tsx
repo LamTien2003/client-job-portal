@@ -20,6 +20,7 @@ const Home = () => {
     const swiperRefLocation = useRef<SwiperType>();
     const swiperRefReview = useRef<SwiperType>();
     const swiperRefRecruiters = useRef<SwiperType>();
+    const swiperRefFeatures = useRef<SwiperType>();
 
     const titleCategory = (
         <span>
@@ -80,8 +81,10 @@ const Home = () => {
                 bg="bg-content-bg"
                 right={true}
                 path="job-listing"
+                slick={true}
+                swiperRef={swiperRefFeatures}
             >
-                <Features />
+                <Features swiperRef={swiperRefFeatures} />
             </Section>
 
             <Section

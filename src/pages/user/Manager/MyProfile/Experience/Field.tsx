@@ -1,4 +1,4 @@
-import { Field, FormikErrors } from 'formik';
+import { FormikErrors } from 'formik';
 import { ReactNode } from 'react';
 
 interface CustomFieldProps {
@@ -9,9 +9,23 @@ interface CustomFieldProps {
     touched: boolean | undefined | FormikErrors<Date>;
     icon: ReactNode;
     type?: string;
+    value?: string | Date | null | boolean;
+    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    disabled?: boolean;
 }
 
-const CustomField = ({ fieldName, type, title, placeholder, error, touched, icon }: CustomFieldProps) => {
+const CustomField = ({
+    fieldName,
+    type,
+    title,
+    placeholder,
+    error,
+    touched,
+    icon,
+    value,
+    onChange,
+    disabled,
+}: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-1 w-full">
             <label className="font-bold text-primary-100" htmlFor={fieldName}>
@@ -23,11 +37,14 @@ const CustomField = ({ fieldName, type, title, placeholder, error, touched, icon
                 }`}
             >
                 <div className="text-xl px-3">{icon}</div>
-                <Field
+                <input
                     name={fieldName}
                     className={`w-full h-11 rounded-md py-2 outline-none bg-input ${type === 'date' && 'pr-3'}`}
                     type={type ? type : 'text'}
                     placeholder={placeholder}
+                    value={value !== undefined && value !== null ? value.toString() : ''}
+                    onChange={onChange}
+                    disabled={disabled}
                 />
             </div>
             {error && touched ? (

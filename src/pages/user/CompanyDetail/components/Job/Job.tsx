@@ -76,7 +76,7 @@ function Job(props: Props) {
                                 <div className=" flex lg:mb-4">
                                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/company-4.svg" />
                                     <p className=" text-sm font-medium ml-2">
-                                        Job Applied:<span className=" font-semibold ml-1.5">amountRecruit Person</span>
+                                        Job Applied:<span className=" font-semibold ml-1.5">{job.countApplication}</span>
                                     </p>
                                 </div>
                                 <div className=" group lg:absolute lg:right-0 lg:bottom-2 mb:static ">

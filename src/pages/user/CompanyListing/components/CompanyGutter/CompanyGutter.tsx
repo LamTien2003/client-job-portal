@@ -9,11 +9,12 @@ interface Props {
 }
 
 function CompanyGutter(props: Props) {
-    const { data: companies } = props;
+    const { data: companyList } = props;
 
     return (
         <div className=" flex flex-wrap tb:flex-col ">
-            {companies?.map((company) => {
+            {companyList.length === 0 && 'Hiện danh mục này chưa có công ty nào'}
+            {companyList?.map((company) => {
                 return (
                     <div key={company.id} className=" w-6/12 pr-3 pl-3 mb-6 relative tb:w-full ">
                         <div className=" border border-content-border p-7.5 rounded flex items-start duration-300 hover:border-primary-blur ">

@@ -1,12 +1,19 @@
 import * as Yup from 'yup';
 
-import { Formik, Form, FormikHelpers, Field } from 'formik';
+import { useFormik } from 'formik';
 import CustomField from './Field';
 import { FaSchool } from 'react-icons/fa';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
-import { Checkbox } from '@material-tailwind/react';
 import BtnBot from '../../components/BtnBot';
+import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { isJobSeeker } from '@/utils/helper';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { Education } from '@/types/JobSeeker';
 
 interface FormEducation {
     toggleOpen: () => void;
@@ -15,17 +22,16 @@ interface FormEducation {
 interface Values {
     school: string;
     major: string;
-    dateFrom: Date | null;
-    dateTo: Date | null;
+    dateFrom: Date | string;
+    dateTo: Date | string;
 
     isLearning: boolean;
 }
 const initialValues: Values = {
     school: '',
     major: '',
-
-    dateFrom: null,
-    dateTo: null,
+    dateFrom: '',
+    dateTo: '',
     isLearning: false,
 };
 const validation = Yup.object().shape({
@@ -34,9 +40,9 @@ const validation = Yup.object().shape({
     dateFrom: Yup.date()
         .required('Ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent; // Access the 'dateTo' field from the form values
+            const { dateTo } = this.parent;
             if (!dateTo) {
-                return true; // Allow empty 'dateTo' field to avoid conflicts
+                return true;
             }
             const dataNow = new Date();
             const date = new Date(value);
@@ -44,101 +50,146 @@ const validation = Yup.object().shape({
             return date <= dataNow;
         })
         .test('date-range', 'Ngày phải nhỏ hơn ngày kết thúc', function (value) {
-            const { dateTo } = this.parent; // Access the 'dateTo' field from the form values
+            const { dateTo } = this.parent;
             if (!dateTo) {
-                return true; // Allow empty 'dateTo' field to avoid conflicts
+                return true;
             }
             const date = new Date(value);
 
             return date <= new Date(dateTo);
         }),
-    dateTo: Yup.date()
-        .required('Ngày không được bỏ trống!')
-        .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent; // Access the 'dateTo' field from the form values
-            if (!dateTo) {
-                return true; // Allow empty 'dateTo' field to avoid conflicts
-            }
-            const dataNow = new Date();
-            const date = new Date(value);
-
+    dateTo: Yup.date().test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
+        const { dateTo } = this.parent;
+        let date;
+        if (!dateTo) {
+            return true;
+        }
+        const dataNow = new Date();
+        if (value) {
+            date = new Date(value);
+        }
+        if (date) {
             return date <= dataNow;
-        })
-        .test('date-range', 'Ngày phải lớn hơn ngày bắt đầu', function (value) {
-            const { dateFrom } = this.parent; // Access the 'dateFrom' field from the form values
-            if (!dateFrom) {
-                return true; // Allow empty 'dateFrom' field to avoid conflicts
-            }
-            return new Date(value) >= new Date(dateFrom);
-        }),
+        }
+        return;
+    }),
 });
 const FormEducation = ({ toggleOpen }: FormEducation) => {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const [education, setEducation] = useState<Education[]>([]);
+    useEffect(() => {
+        if (isJobSeeker(currentUser)) {
+            setEducation(currentUser.educate);
+        }
+    }, [currentUser]);
+
+    console.log(education);
+
+    const [changeEducation, { isLoading }] = useChangeMeMutation();
+
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: validation,
+        onSubmit: async (values) => {
+            try {
+                const educate: any = {
+                    date: {
+                        from: values.dateFrom,
+                        to: values.dateTo,
+                    },
+                    major: values.major,
+                    school: values.school,
+                    isLearning: values.isLearning,
+                };
+
+                if (values.isLearning) {
+                    educate.date = {
+                        from: values.dateFrom,
+                    };
+                } else {
+                    educate.date = {
+                        from: values.dateFrom,
+                        to: values.dateTo,
+                    };
+                }
+
+                const data = [...education, educate];
+
+                const eduData: any = {
+                    educate: data,
+                };
+
+                await changeEducation(eduData);
+                alert('Cập nhật thông tin thành công!');
+                formik.resetForm();
+            } catch (error) {
+                console.error('Lỗi khi gửi form:', error);
+            }
+        },
+    });
     return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validation}
-            onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-                console.log(values);
-            }}
-        >
-            {({ errors, touched }) => (
-                <Form className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
-                    <p className="text-content-text text-sm font-semibold">
-                        Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
-                    </p>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
+            <p className="text-content-text text-sm font-semibold">
+                Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
+            </p>
 
-                    <div className="grid grid-cols-2 gap-6">
-                        <CustomField
-                            title="Trường"
-                            fieldName="school"
-                            error={errors.school}
-                            touched={touched.school}
-                            icon={<FaSchool />}
-                            placeholder="Nhập trường của bạn"
-                        />
+            <div className="grid grid-cols-2 gap-6">
+                <CustomField
+                    title="Trường"
+                    fieldName="school"
+                    error={formik.errors.school}
+                    touched={formik.touched.school}
+                    icon={<FaSchool />}
+                    placeholder="Nhập trường của bạn"
+                    value={formik.values.school}
+                    onChange={formik.handleChange}
+                />
 
-                        <CustomField
-                            title="Ngành học"
-                            fieldName="major"
-                            error={errors.major}
-                            touched={touched.major}
-                            icon={<BiSolidFactory />}
-                            placeholder="Nhập ngành học của bạn"
-                        />
+                <CustomField
+                    title="Ngành học"
+                    fieldName="major"
+                    error={formik.errors.major}
+                    touched={formik.touched.major}
+                    icon={<BiSolidFactory />}
+                    placeholder="Nhập ngành học của bạn"
+                    value={formik.values.major}
+                    onChange={formik.handleChange}
+                />
 
-                        <CustomField
-                            type="date"
-                            title="Từ"
-                            fieldName="dateFrom"
-                            error={errors.dateFrom}
-                            touched={touched.dateFrom}
-                            icon={<BsCalendarWeek />}
-                        />
+                <CustomField
+                    type="date"
+                    title="Từ"
+                    fieldName="dateFrom"
+                    error={formik.errors.dateFrom}
+                    touched={formik.touched.dateFrom}
+                    icon={<BsCalendarWeek />}
+                    value={formik.values.dateFrom}
+                    onChange={formik.handleChange}
+                />
 
-                        <CustomField
-                            type="date"
-                            title="Đến"
-                            fieldName="dateTo"
-                            error={errors.dateTo}
-                            touched={touched.dateTo}
-                            icon={<BsCalendarWeek />}
-                        />
-                    </div>
+                <CustomField
+                    type="date"
+                    title="Đến"
+                    fieldName="dateTo"
+                    error={formik.errors.dateTo}
+                    touched={formik.touched.dateTo}
+                    icon={<BsCalendarWeek />}
+                    value={formik.values.dateTo}
+                    disabled={formik.values.isLearning}
+                    onChange={formik.handleChange}
+                />
+            </div>
 
-                    <Field
-                        id="Stripe"
-                        type="checkbox"
-                        name="isLearning"
-                        as={Checkbox}
-                        label="Tôi đang làm việc tại đây"
-                        className="h-5 w-5  rounded-full border-primary-100 bg-primary-200 transition-all hover:scale-105 hover:before:opacity-0"
-                        color="blue"
-                    />
+            <FormControlLabel
+                control={<Checkbox />}
+                name="isLearning"
+                label="Tôi đang học tập tại đây"
+                value={formik.values.isLearning}
+                onChange={formik.handleChange}
+            />
 
-                    <BtnBot toggleOpen={toggleOpen} />
-                </Form>
-            )}
-        </Formik>
+            <BtnBot toggleOpen={toggleOpen} />
+        </form>
     );
 };
 

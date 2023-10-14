@@ -7,7 +7,6 @@ type Props = {
 function CompanyOverview(props: Props) {
 
     const { data: company } = props
-    
     const monthsArray = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"]
 
@@ -35,7 +34,7 @@ function CompanyOverview(props: Props) {
                         <p className=" text-cb pl-3.5 font-medium"><span className=" text-content-title font-semibold mr-1.5">Member Since:</span>{myDateString}</p>
                     </div>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-1.75 before:absolute">
-                        <p className=" text-cb pl-3.5 font-medium"><span className=" text-content-title font-semibold mr-1.5">Company size:</span></p>
+                        <p className=" text-cb pl-3.5 font-medium"><span className=" text-content-title font-semibold mr-1.5">Company size:</span> {company.companySize.from + ' - ' + company.companySize.to} (người)</p>
                     </div>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-1.75 before:absolute">
                         <p className=" text-cb pl-3.5 font-medium"><span className=" text-content-title font-semibold mr-1.5">Completed Job:</span></p>

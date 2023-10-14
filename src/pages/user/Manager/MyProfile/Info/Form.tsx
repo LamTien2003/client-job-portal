@@ -1,14 +1,13 @@
-import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
 import * as Yup from 'yup';
-
-import { Formik, Form, FormikHelpers } from 'formik';
-
+import { useFormik } from 'formik';
 import { AiOutlinePhone, AiOutlineUser } from 'react-icons/ai';
 import AvatarSection from './AvatarSection';
 import CustomField from './Field';
 import { MdOutlineEmail } from 'react-icons/md';
 import { CiLocationOn } from 'react-icons/ci';
 import SelectInfo from './Select';
+import BtnBot from '../../components/BtnBot';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -42,90 +41,89 @@ const validation = Yup.object().shape({
         .required('Số điện thoại không được bỏ trống!'),
 });
 const FormInfo = ({ handleOpen, open }: FormInfo) => {
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: validation,
+        onSubmit: async (values) => {
+            try {
+                console.log(values);
+            } catch (error) {
+                console.error('Lỗi khi gửi form:', error);
+            }
+        },
+    });
     return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validation}
-            onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 500);
-            }}
-        >
-            {({ errors, touched }) => (
-                <Form>
-                    <Dialog size="lg" open={open} handler={handleOpen}>
-                        <DialogHeader>Thông tin cá nhân</DialogHeader>
-                        <DialogBody divider>
-                            <div className="flex flex-col items-center justify-center gap-4">
-                                <AvatarSection />
-                                <div className="grid grid-cols-2 w-full gap-6">
-                                    <CustomField
-                                        title="Họ"
-                                        fieldName="firstName"
-                                        error={errors.firstName}
-                                        touched={touched.firstName}
-                                        icon={<AiOutlineUser />}
-                                        placeholder="Nhập họ của bạn"
-                                    />
-                                    <CustomField
-                                        title="Tên"
-                                        fieldName="lastName"
-                                        error={errors.lastName}
-                                        touched={touched.lastName}
-                                        icon={<AiOutlineUser />}
-                                        placeholder="Nhập tên của bạn"
-                                    />
+        <Dialog size="lg" open={open} handler={handleOpen}>
+            <DialogHeader>Thông tin cá nhân</DialogHeader>
+            <DialogBody divider>
+                <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
+                    <AvatarSection />
+                    <div className="grid grid-cols-2 w-full gap-6">
+                        <CustomField
+                            title="Họ"
+                            fieldName="firstName"
+                            error={formik.errors.firstName}
+                            touched={formik.touched.firstName}
+                            icon={<AiOutlineUser />}
+                            placeholder="Nhập họ của bạn"
+                            value={formik.values.firstName}
+                            onChange={formik.handleChange}
+                        />
+                        <CustomField
+                            title="Tên"
+                            fieldName="lastName"
+                            error={formik.errors.lastName}
+                            touched={formik.touched.lastName}
+                            icon={<AiOutlineUser />}
+                            placeholder="Nhập tên của bạn"
+                            value={formik.values.lastName}
+                            onChange={formik.handleChange}
+                        />
 
-                                    <CustomField
-                                        type="email"
-                                        title="Email"
-                                        fieldName="email"
-                                        error={errors.email}
-                                        touched={touched.email}
-                                        icon={<MdOutlineEmail />}
-                                        placeholder="Nhập email của bạn"
-                                    />
-                                    <SelectInfo title="Giới tính" fieldName="gender" />
+                        <CustomField
+                            type="email"
+                            title="Email"
+                            fieldName="email"
+                            error={formik.errors.email}
+                            touched={formik.touched.email}
+                            icon={<MdOutlineEmail />}
+                            placeholder="Nhập email của bạn"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                        />
+                        <SelectInfo
+                            title="Giới tính"
+                            fieldName="gender"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                        />
 
-                                    <CustomField
-                                        title="Địa chỉ"
-                                        fieldName="location"
-                                        error={errors.location}
-                                        touched={touched.location}
-                                        icon={<CiLocationOn />}
-                                        placeholder="Nhập số điện thoại của bạn"
-                                    />
+                        <CustomField
+                            title="Địa chỉ"
+                            fieldName="location"
+                            error={formik.errors.location}
+                            touched={formik.touched.location}
+                            icon={<CiLocationOn />}
+                            placeholder="Nhập số điện thoại của bạn"
+                            value={formik.values.location}
+                            onChange={formik.handleChange}
+                        />
 
-                                    <CustomField
-                                        title="Số điện thoại"
-                                        fieldName="phoneNumber"
-                                        error={errors.phoneNumber}
-                                        touched={touched.phoneNumber}
-                                        icon={<AiOutlinePhone />}
-                                        placeholder="Nhập số điện thoại của bạn"
-                                    />
-                                </div>
-                            </div>
-                        </DialogBody>
-                        <DialogFooter>
-                            <div className="flex gap-2 justify-end">
-                                <button
-                                    onClick={handleOpen}
-                                    className="hover:bg-blue-gray-100 py-2 px-6 rounded-md font-medium text-content-text"
-                                >
-                                    Huỷ
-                                </button>
-                                <button className="bg-primary-100 py-2 px-6 text-white font-semibold rounded-md hover:bg-black duration-300">
-                                    Lưu
-                                </button>
-                            </div>
-                        </DialogFooter>
-                    </Dialog>
-                </Form>
-            )}
-        </Formik>
+                        <CustomField
+                            title="Số điện thoại"
+                            fieldName="phoneNumber"
+                            error={formik.errors.phoneNumber}
+                            touched={formik.touched.phoneNumber}
+                            icon={<AiOutlinePhone />}
+                            placeholder="Nhập số điện thoại của bạn"
+                            value={formik.values.phoneNumber}
+                            onChange={formik.handleChange}
+                        />
+                    </div>
+                    <BtnBot toggleOpen={handleOpen} />
+                </form>
+            </DialogBody>
+        </Dialog>
     );
 };
 

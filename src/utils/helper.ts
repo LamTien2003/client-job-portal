@@ -11,6 +11,7 @@ export const isJobSeeker = (user: any): user is JobSeeker => {
         !!user?.skills
     );
 };
+
 export const isCompany = (user: any): user is JobSeeker => {
     return user !== null && user?.__t === 'Company' && !!user?.companyName && !!user?.establishDate;
 };

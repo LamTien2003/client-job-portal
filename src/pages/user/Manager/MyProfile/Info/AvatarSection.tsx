@@ -21,7 +21,7 @@ const AvatarSection = () => {
                         </div>
                         Sửa
                     </label>
-                    <Field name="image" id="image" className="hidden" type="file" />
+                    <input name="image" id="image" className="hidden" type="file" />
                 </div>
 
                 <button className="flex items-center hover:text-primary-100">

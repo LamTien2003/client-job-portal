@@ -1,4 +1,3 @@
-import { Field } from 'formik';
 import { ReactNode } from 'react';
 
 interface CustomFieldProps {
@@ -9,9 +8,21 @@ interface CustomFieldProps {
     touched: boolean | undefined;
     icon: ReactNode;
     type?: string;
+    value?: string;
+    onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const CustomField = ({ fieldName, type, title, placeholder, error, touched, icon }: CustomFieldProps) => {
+const CustomField = ({
+    fieldName,
+    type,
+    title,
+    placeholder,
+    error,
+    touched,
+    icon,
+    value,
+    onChange,
+}: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-1 w-full">
             <label className="font-bold text-primary-100" htmlFor={fieldName}>
@@ -23,11 +34,13 @@ const CustomField = ({ fieldName, type, title, placeholder, error, touched, icon
                 }`}
             >
                 <div className="text-xl px-3">{icon}</div>
-                <Field
+                <input
                     name={fieldName}
                     className="w-full h-11 rounded-md py-2 outline-none bg-input"
                     type={type ? type : 'text'}
                     placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
                 />
             </div>
             {error && touched ? <div className="text-red-700 text-sm font-semibold">{error}</div> : null}

@@ -11,6 +11,7 @@ export default interface Job {
     skillsRequire: string[];
     jobRequire: string[];
     salary: number;
+    deadline: string;
     type: {
         categoryName: string;
         isHotCategory: boolean;

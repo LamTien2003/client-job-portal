@@ -91,6 +91,10 @@ select:-webkit-autofill:focus {
     } */
 }
 
+.primary-icon {
+    fill: #00A7AC;
+}
+
 .transform-gpu {
     transform-origin: center center;
     will-change: transform;

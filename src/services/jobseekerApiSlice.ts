@@ -17,7 +17,13 @@ export const jobseekerApiSlice = apiSlice.injectEndpoints({
                     throw error.message;
                 }
             },
-            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'JobSeeker', id: 'LIST' }]),
+            invalidatesTags: (_result, error, _body) =>
+                error
+                    ? []
+                    : [
+                          { type: 'JobSeeker', id: 'LIST' },
+                          { type: 'Users' as const, id: 'CURRENT' },
+                      ],
         }),
     }),
 });

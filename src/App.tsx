@@ -18,6 +18,7 @@ import Admin from './components/Admin/Admin';
 import Manager from './pages/user/Manager/Manager';
 import MyProfile from './pages/user/Manager/MyProfile/MyProfile';
 import AppliedJobs from './pages/user/Manager/AppliedJobs/AppliedJobs';
+import Setting from './components/Settings/Settings';
 
 function App() {
     return (
@@ -39,6 +40,7 @@ function App() {
                 <Route path="contact" index element={<Contact />} />
                 <Route path="login" index element={<Login />} />
                 <Route path="register" index element={<Register />} />
+                <Route path="setting" index element={<Setting />} />
             </Route>
 
             {/* Protected Routes */}

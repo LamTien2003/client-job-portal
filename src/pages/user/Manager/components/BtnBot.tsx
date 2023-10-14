@@ -1,4 +1,9 @@
-const BtnBot = ({ toggleOpen }: { toggleOpen?: () => void }) => {
+interface BtnBot {
+    toggleOpen?: () => void;
+    isLoading?: boolean;
+}
+
+const BtnBot = ({ toggleOpen, isLoading }: BtnBot) => {
     return (
         <div className="flex gap-2 justify-end">
             <button
@@ -7,8 +12,12 @@ const BtnBot = ({ toggleOpen }: { toggleOpen?: () => void }) => {
             >
                 Huỷ
             </button>
-            <button type="submit" className="bg-primary-100 py-2 px-6 text-white  font-semibold rounded-md">
-                Lưu
+            <button
+                type="submit"
+                className="bg-primary-100 py-2 px-6 text-white  font-semibold rounded-md"
+                disabled={isLoading}
+            >
+                {isLoading ? 'Đang lưu...' : 'Lưu'}
             </button>
         </div>
     );

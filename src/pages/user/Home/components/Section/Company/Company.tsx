@@ -18,8 +18,6 @@ const Company = () => {
         }
     }, [data?.data?.data, isError, isLoading]);
 
-    console.log(companies);
-
     return (
         <div className="bg-[#D9F2F3]">
             <div className="max-w-7xl mx-auto  py-14 flex flex-col justify-between lg:px-3">
@@ -60,12 +58,11 @@ const Company = () => {
                         }}
                         className="w-full"
                     >
-                        {companies.map((company) => (
-                            <SwiperSlide>
+                        {companies.map((company, index) => (
+                            <SwiperSlide key={index}>
                                 <CompanyItem logo={company.photo} />
                             </SwiperSlide>
                         ))}
-                       
                     </Swiper>
                 </div>
             </div>

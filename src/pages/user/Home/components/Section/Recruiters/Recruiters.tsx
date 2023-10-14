@@ -7,8 +7,20 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
 import { Swiper as SwiperType } from 'swiper';
+import { useGetCompaniesQuery } from '@/services/companiesApiSlice';
+import { useState, useEffect } from 'react';
+import Company from '../Company/Company';
 
 const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
+    const [companies, setCompanies] = useState<Company[]>([]);
+    const { data, isLoading, isError } = useGetCompaniesQuery({});
+
+    useEffect(() => {
+        if (!isLoading && !isError && data?.data?.data) {
+            setCompanies(data?.data?.data);
+        }
+    }, [data?.data?.data, isError, isLoading]);
+
     return (
         <div className="w-full ">
             <Swiper
@@ -40,106 +52,11 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                 modules={[Grid, Autoplay]}
                 className="w-full"
             >
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Norland Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-06.png"
-                        people="45"
-                        location="New-York, USA"
-                        amount="21"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Germanie Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-07.png"
-                        people="86"
-                        location="Chicago, Australia"
-                        amount="32"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Norland Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-06.png"
-                        people="45"
-                        location="New-York, USA"
-                        amount="21"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Germanie Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-07.png"
-                        people="86"
-                        location="Chicago, Australia"
-                        amount="32"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Norland Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-06.png"
-                        people="45"
-                        location="New-York, USA"
-                        amount="21"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Germanie Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-07.png"
-                        people="86"
-                        location="Chicago, Australia"
-                        amount="32"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Norland Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-06.png"
-                        people="45"
-                        location="New-York, USA"
-                        amount="21"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Germanie Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-07.png"
-                        people="86"
-                        location="Chicago, Australia"
-                        amount="32"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Norland Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-06.png"
-                        people="45"
-                        location="New-York, USA"
-                        amount="21"
-                        path=""
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <RecruitersItem
-                        name="Germanie Company"
-                        imgRecruiters="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-07.png"
-                        people="86"
-                        location="Chicago, Australia"
-                        amount="32"
-                        path=""
-                    />
-                </SwiperSlide>
+                {companies.map((company, index) => (
+                    <SwiperSlide key={index}>
+                        <RecruitersItem path={`company-detail/${company.id}`} company={company} />
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </div>
     );

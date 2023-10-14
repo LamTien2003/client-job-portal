@@ -8,10 +8,11 @@ interface Props {
 }
 
 function JobColumn(props: Props) {
-    const { data: jobs } = props;
+    const { data: jobList } = props;
     return (
         <>
-            {jobs?.map((job) => {
+            {jobList.length === 0 && 'Hiện danh mục này chưa có công việc nào'}
+            {jobList?.map((job) => {
                 return (
                     <div key={job.id} className=" mb-7 flex flex-col">
                         <div className="bg-white border border-content-border rounded pt-7 pb-7 pr-6 pl-6 duration-300 hover:border-primary-blur ">
@@ -61,14 +62,8 @@ function JobColumn(props: Props) {
                             </div>
                             <div className=" flex items-center relative mb:flex-col mb:items-start">
                                 <div className=" flex">
-                                    <div className=" text-content-title text-sm font-semibold bg-content-bg-full-time rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs mb:pb-1 mb:pt-1 mb:pl-4 mb:pr-3 mb:font-medium">
+                                    <div className=" text-content-title text-sm font-semibold bg-gray-300 rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs mb:pb-1 mb:pt-1 mb:pl-4 mb:pr-3 mb:font-medium">
                                         Full Time
-                                    </div>
-                                    <div className=" text-content-title text-sm font-semibold bg-content-bg-part-time rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 mr-5 ml-5 lg:text-xs mb:pb-1 mb:pt-1 mb:pl-3 mb:pr-4 mb:mr-2 mb:ml-2 mb:font-medium">
-                                        Part Time
-                                    </div>
-                                    <div className=" text-content-title text-sm font-semibold bg-content-bg-remote rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs mb:pb-1 mb:pt-1 mb:pl-4 mb:pr-3 mb:font-medium">
-                                        Remote
                                     </div>
                                 </div>
                                 <div className=" group right-0 absolute mb:static mb:mt-3 mb:ml-2">
