@@ -23,7 +23,7 @@ const Educate = () => {
     return (
         <CardSub
             title="Học vấn"
-            sub="Chia sẻ trình độ học vấn của bạn"
+            sub={education.length === 0 ? 'Chia sẻ trình độ học vấn của bạn' : ''}
             toggleOpen={toggleOpen}
             open={isOpen}
             data={education}

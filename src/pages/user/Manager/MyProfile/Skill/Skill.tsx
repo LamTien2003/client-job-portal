@@ -23,7 +23,7 @@ const Skill = () => {
     return (
         <CardSub
             title="Kỹ năng"
-            sub="Nêu bật các kỹ năng liên quan đến công việc"
+            sub={skills.length === 0 ? 'Nêu bật các kỹ năng liên quan đến công việc' : ''}
             data={skills}
             toggleOpen={toggleOpen}
             open={isOpen}

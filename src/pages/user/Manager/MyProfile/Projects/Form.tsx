@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import CustomField from './Field';
 import { AiOutlineUser } from 'react-icons/ai';

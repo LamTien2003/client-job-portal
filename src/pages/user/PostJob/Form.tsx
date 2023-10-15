@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import * as Yup from 'Yup';
 
 import { useFormik } from 'formik';
 
@@ -17,6 +17,7 @@ interface Values {
     jobRequire: string;
     type: string;
     photosJob: FileList | null;
+    deadline: Date | string;
 }
 const initialValues: Values = {
     title: '',
@@ -26,6 +27,7 @@ const initialValues: Values = {
     jobRequire: '',
     type: '',
     photosJob: null,
+    deadline: '',
 };
 const validation = Yup.object().shape({
     title: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Tiêu đề không được bỏ trống!'),
@@ -34,10 +36,12 @@ const validation = Yup.object().shape({
     skillsRequire: Yup.string().required('skill không được bỏ trống!'),
     type: Yup.string().required('type không được bỏ trống!'),
     salary: Yup.string().required('Lương không được bỏ trống!'),
+    deadline: Yup.date().min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!'),
 });
 const FormPostJob = () => {
     const [createJob, { isLoading }] = useCreateJobMutation();
     const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
+
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
@@ -53,6 +57,7 @@ const FormPostJob = () => {
                 }
             });
 
+
             try {
                 await createJob(form);
                 setIsFormSubmitted(true);
@@ -63,6 +68,9 @@ const FormPostJob = () => {
             }
         },
     });
+
+    console.log(formik);
+    
 
     const type = ['Science', 'IT', 'Medical', 'Copywrite'];
     const skills = ['ReactJS', 'NodeJS', 'Java', 'Python', 'Golang'];
@@ -129,6 +137,17 @@ const FormPostJob = () => {
                     icon={images.logo.salary}
                     placeholder="Salary"
                     value={formik.values.salary}
+                    onChange={formik.handleChange}
+                />
+                <CustomField
+                    title="Thời hạn"
+                    fieldName="deadline"
+                    type="date"
+                    error={formik.errors.deadline}
+                    touched={formik.touched.deadline}
+                    icon={images.logo.salary}
+                    placeholder="Nhập thời hạn của bạn!"
+                    value={formik.values.deadline}
                     onChange={formik.handleChange}
                 />
             </div>

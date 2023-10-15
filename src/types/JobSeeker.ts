@@ -2,6 +2,7 @@ import JobApplication from './JobApplication';
 import User from './User';
 
 export interface Education {
+    _id: string;
     major: string;
     school: string;
     date: {
@@ -11,6 +12,8 @@ export interface Education {
     isLearning: boolean;
 }
 export interface Certification {
+    _id: string;
+
     name: string;
     organization: string;
     date: {
@@ -19,6 +22,7 @@ export interface Certification {
     };
 }
 export interface Experience {
+    _id: string;
     position: string;
     company: string;
     date: {
@@ -29,6 +33,7 @@ export interface Experience {
 }
 
 export interface Project {
+    _id: string;
     name: string;
     description: string;
     url: string;

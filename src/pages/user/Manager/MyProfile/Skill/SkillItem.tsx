@@ -1,8 +1,35 @@
+import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { RootState } from '@/store/store';
 import { Skill } from '@/types/JobSeeker';
-import React from 'react';
+import { isJobSeeker } from '@/utils/helper';
+import { useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 const SkillItem = ({ data }: { data: Skill[] }) => {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const [skills, setSkills] = useState<Skill[]>([]);
+    useEffect(() => {
+        if (isJobSeeker(currentUser)) {
+            setSkills(currentUser.skills);
+        }
+    }, [currentUser]);
+
+    const [changeSkill] = useChangeMeMutation();
+
+    const deleteItem = (name: string) => {
+        const itemToDelete = skills.find((item) => item === name);
+
+        if (itemToDelete) {
+            const updatedSkills = skills.filter((item) => item !== name);
+            const skillsData: any = {
+                skills: updatedSkills,
+            };
+
+            changeSkill(skillsData);
+            alert('Xoá thành công!');
+        }
+    };
     return (
         <div className="flex flex-wrap gap-3">
             {data.map((item, index) => (
@@ -11,7 +38,7 @@ const SkillItem = ({ data }: { data: Skill[] }) => {
                     key={index}
                 >
                     {item}
-                    <button type="button" className=" text-red-800 hover:text-red-500 ">
+                    <button onClick={() => deleteItem(item)} className=" text-red-800 hover:text-red-500 ">
                         <AiOutlineCloseCircle />
                     </button>
                 </div>

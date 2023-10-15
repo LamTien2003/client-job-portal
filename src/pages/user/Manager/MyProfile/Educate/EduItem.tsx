@@ -1,19 +1,62 @@
+import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { RootState } from '@/store/store';
 import { Education } from '@/types/JobSeeker';
 import { formatDate } from '@/utils/date';
+import { isJobSeeker } from '@/utils/helper';
+import { useState, useEffect } from 'react';
+import { BiEdit } from 'react-icons/bi';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 
 const EduItem = ({ data }: { data: Education[] }) => {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const [education, setEducation] = useState<Education[]>([]);
+    useEffect(() => {
+        if (isJobSeeker(currentUser)) {
+            setEducation(currentUser.educate);
+        }
+    }, [currentUser]);
+
+    const [changeEdu] = useChangeMeMutation();
+
+    const deleteItem = (dataId: string) => {
+        const itemToDelete = education.find((item) => item._id === dataId);
+
+        if (itemToDelete) {
+            const updatedEducation = education.filter((item) => item._id !== dataId);
+            const educationData: any = {
+                educate: updatedEducation,
+            };
+
+            changeEdu(educationData);
+            alert('Xoá thành công!');
+        }
+    };
     return (
         <div className="grid grid-cols-2 gap-5 ">
             {data.map((item, index) => {
                 const dateFrom = item.date.from ? formatDate(new Date(item.date.from).toISOString()) : '';
                 const dateTo = item.date.to ? formatDate(new Date(item.date.from).toISOString()) : 'Đang học';
                 return (
-                    <div key={index} className="p-5 shadow-lg  flex flex-col gap-2">
-                        <h5 className="text-lg text-primary-100 font-title">{item.major}</h5>
-                        <h5 className="font-semibold">{item.school}</h5>
-                        <p className="text-sm text-content-text ">
-                            {dateFrom} - {dateTo}
-                        </p>
+                    <div key={index} className="p-5 shadow-lg  flex justify-between">
+                        <div className="flex flex-col gap-2">
+                            <h5 className="text-lg text-primary-100 font-title">{item.major}</h5>
+                            <h5 className="font-semibold">{item.school}</h5>
+                            <p className="text-sm text-content-text ">
+                                {dateFrom} - {dateTo}
+                            </p>
+                        </div>
+                        <div className="flex gap-4 items-start text-xl font-medium">
+                            <button className="text-content-text hover:text-primary-100 duration-300">
+                                <BiEdit />
+                            </button>
+                            <button
+                                onClick={() => deleteItem(item._id)}
+                                className="text-red-600 hover:text-primary-100 duration-300"
+                            >
+                                <RiDeleteBin6Line />
+                            </button>
+                        </div>
                     </div>
                 );
             })}

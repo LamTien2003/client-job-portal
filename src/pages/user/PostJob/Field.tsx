@@ -6,7 +6,7 @@ interface CustomFieldProps {
     touched: boolean | undefined;
     icon: string;
     type?: string;
-    value?: string;
+    value?: string | Date;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -33,10 +33,10 @@ const CustomField = ({
                 <span className="w-[1px] h-6 bg-gray-300 mx-2"></span>
                 <input
                     name={fieldName}
-                    className="text-content-s-text w-full h-[48px] outline-none"
+                    className={`text-content-s-text w-full h-[48px] outline-none ${type === 'date' && 'pr-3'}`}
                     type={type ? type : 'text'}
                     placeholder={placeholder}
-                    value={value}
+                    value={value !== undefined && value !== null ? value.toString() : ''}
                     onChange={onChange}
                 />
             </div>

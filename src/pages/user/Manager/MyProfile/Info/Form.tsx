@@ -1,5 +1,5 @@
 import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
-import * as Yup from 'yup';
+import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import { AiOutlinePhone, AiOutlineUser } from 'react-icons/ai';
 import AvatarSection from './AvatarSection';
@@ -8,6 +8,7 @@ import { MdOutlineEmail } from 'react-icons/md';
 import { CiLocationOn } from 'react-icons/ci';
 import SelectInfo from './Select';
 import BtnBot from '../../components/BtnBot';
+import SelectField from '@/pages/user/PostJob/SelectField';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -35,6 +36,8 @@ const validation = Yup.object().shape({
     firstName: Yup.string().max(30, 'Không được quá 30 kí tự!').required('Họ không được bỏ trống!'),
     lastName: Yup.string().max(30, 'Không được quá 30 kí tự!').required('Tên không được bỏ trống!'),
     location: Yup.string().required('Địa chỉ không được bỏ trống!'),
+    gender: Yup.string().required('Giới tính không được bỏ trống!'),
+
     email: Yup.string().email('Email không đúng định dạng!').required('Email không được bỏ trống!'),
     phoneNumber: Yup.string()
         .matches(/^(0|\+84)[0-9]{9}$/, 'Số điện thoại không hợp lệ')
@@ -52,6 +55,8 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
             }
         },
     });
+    const options = ['Nam', 'Nữ', 'Khác'];
+
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
             <DialogHeader>Thông tin cá nhân</DialogHeader>
@@ -94,8 +99,20 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                         <SelectInfo
                             title="Giới tính"
                             fieldName="gender"
-                            value={formik.values.email}
+                            value={formik.values.gender}
                             onChange={formik.handleChange}
+                            error={formik.errors.gender}
+                            touched={formik.touched.gender}
+                        />
+
+                        <SelectField
+                            options={options}
+                            title="Giới tính"
+                            fieldName="gender"
+                            value={formik.values.gender}
+                            onChange={formik.handleChange}
+                            error={formik.errors.gender}
+                            touched={formik.touched.gender}
                         />
 
                         <CustomField

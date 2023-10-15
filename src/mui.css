@@ -1,0 +1,9 @@
+.MuiInputBase-root {
+}
+.MuiInput-underline::before {
+    border: none !important;
+}
+
+.MuiInput-underline::after {
+    border-bottom: 2px solid #00a7ac !important;
+}

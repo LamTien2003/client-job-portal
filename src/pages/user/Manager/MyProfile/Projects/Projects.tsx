@@ -21,11 +21,16 @@ const Projects = () => {
             setProjects(currentUser.projects);
         }
     }, [jobSeeker, currentUser]);
+    console.log();
 
     return (
         <CardSub
             title="Dự án cá nhân"
-            sub="Liệt kê một số dự án có liên quan để cho thấy bạn đã áp dụng khả năng của mình như thế nào"
+            sub={
+                projects.length === 0
+                    ? 'Liệt kê một số dự án có liên quan để cho thấy bạn đã áp dụng khả năng của mình như thế nào'
+                    : ''
+            }
             toggleOpen={toggleOpen}
             open={isOpen}
             data={projects}

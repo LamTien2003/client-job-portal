@@ -13,7 +13,7 @@ interface Card {
     children?: ReactNode;
     toggleOpen?: () => void;
     open?: boolean;
-    data?: any;
+    data?: any[];
     type?: string;
 }
 const CardSub = ({ title, sub, children, toggleOpen, open, data, type }: Card) => {
@@ -38,7 +38,7 @@ const CardSub = ({ title, sub, children, toggleOpen, open, data, type }: Card) =
             <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-2">
                     <h6 className="text-xl font-title text-primary-100">{title}</h6>
-                    {data ? null : <p className="text-content-text font-medium">{sub}</p>}
+                    <p className="text-content-text font-medium">{sub}</p>
                 </div>
 
                 <button

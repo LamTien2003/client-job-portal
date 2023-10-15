@@ -17,14 +17,14 @@ const Certificate = () => {
             setCertification(currentUser.certificate);
         }
     }, [jobSeeker, currentUser]);
-    
+
     const toggleOpen = (): void => {
         setIsOpen(!isOpen);
     };
     return (
         <CardSub
             title="Chứng chỉ"
-            sub="Cung cấp bằng chứng về chuyên môn và kỹ năng cụ thể của bạn"
+            sub={certification.length === 0 ? 'Cung cấp bằng chứng về chuyên môn và kỹ năng cụ thể của bạn' : ''}
             toggleOpen={toggleOpen}
             open={isOpen}
             data={certification}

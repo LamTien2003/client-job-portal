@@ -1,13 +1,13 @@
-import * as Yup from 'yup';
+import * as Yup from 'Yup';
 
-import { Formik, Form, FormikHelpers, Field, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import CustomField from './Field';
 import { AiOutlineUser } from 'react-icons/ai';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
 import BtnBot from '../../components/BtnBot';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
-import JobSeeker, { Experience } from '@/types/JobSeeker';
+import { Experience } from '@/types/JobSeeker';
 import { useEffect, useState } from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -173,8 +173,6 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     value={formik.values.dateTo}
                     onChange={formik.handleChange}
                     disabled={formik.values.isWorking}
-
-                    
                 />
             </div>
 

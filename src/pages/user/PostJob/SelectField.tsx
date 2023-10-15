@@ -3,7 +3,7 @@ interface SelectField {
     title: string;
     fieldName: string;
     options: string[];
-    icon: string;
+    icon?: string;
     error: string | undefined;
     touched: boolean | undefined;
     value?: string;
