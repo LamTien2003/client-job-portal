@@ -57,7 +57,6 @@ const FormPostJob = () => {
                 }
             });
 
-
             try {
                 await createJob(form);
                 setIsFormSubmitted(true);
@@ -70,7 +69,6 @@ const FormPostJob = () => {
     });
 
     console.log(formik);
-    
 
     const type = ['Science', 'IT', 'Medical', 'Copywrite'];
     const skills = ['ReactJS', 'NodeJS', 'Java', 'Python', 'Golang'];
@@ -84,8 +82,9 @@ const FormPostJob = () => {
                     touched={formik.touched.title}
                     icon={images.logo.user2}
                     value={formik.values.title}
-                    onChange={formik.handleChange}
                     placeholder="Job Title"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
                 <SelectField
                     title="Skills Require"
@@ -106,6 +105,7 @@ const FormPostJob = () => {
                     placeholder="Nhập tên của bạn"
                     value={formik.values.description}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <SelectField
@@ -128,6 +128,7 @@ const FormPostJob = () => {
                     placeholder="Job Require"
                     value={formik.values.jobRequire}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
                 <CustomField
                     title="Lương"
@@ -138,6 +139,7 @@ const FormPostJob = () => {
                     placeholder="Salary"
                     value={formik.values.salary}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
                 <CustomField
                     title="Thời hạn"
@@ -149,6 +151,7 @@ const FormPostJob = () => {
                     placeholder="Nhập thời hạn của bạn!"
                     value={formik.values.deadline}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </div>
             <FieldImages formik={formik} isFormSubmitted={isFormSubmitted} />

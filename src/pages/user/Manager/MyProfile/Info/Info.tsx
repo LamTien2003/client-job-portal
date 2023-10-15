@@ -11,6 +11,7 @@ const Info = () => {
 
     const [open, setOpen] = useState<boolean>(false);
     const handleOpen = () => setOpen(!open);
+
     return (
         <>
             <Card handleOpen={handleOpen}>

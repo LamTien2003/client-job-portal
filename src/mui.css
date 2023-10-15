@@ -7,3 +7,6 @@
 .MuiInput-underline::after {
     border-bottom: 2px solid #00a7ac !important;
 }
+.MuiModal-root {
+    z-index: 99999999999999 !important;
+}

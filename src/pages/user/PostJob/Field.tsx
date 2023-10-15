@@ -8,6 +8,7 @@ interface CustomFieldProps {
     type?: string;
     value?: string | Date;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
+    onBlur: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const CustomField = ({
@@ -20,6 +21,7 @@ const CustomField = ({
     icon,
     value,
     onChange,
+    onBlur,
 }: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-2">
@@ -38,6 +40,7 @@ const CustomField = ({
                     placeholder={placeholder}
                     value={value !== undefined && value !== null ? value.toString() : ''}
                     onChange={onChange}
+                    onBlur={onBlur}
                 />
             </div>
             {error && touched ? <div className="text-red-700 text-sm font-semibold">{error}</div> : null}

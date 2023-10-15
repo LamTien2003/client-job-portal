@@ -31,8 +31,6 @@ const SelectInfo = ({ title, fieldName, value, onChange, error, touched }: Selec
                     className="select w-full h-[48px]  text-content-s-text items-center"
                 >
                     {options.map((option, index) => {
-                        console.log(option);
-
                         return (
                             <MenuItem key={index} value={option}>
                                 {option}

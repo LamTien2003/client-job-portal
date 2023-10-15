@@ -22,14 +22,14 @@ const JobListing = () => {
     // Không truyền params nào thì để {} rỗng
     const { data, isLoading, isError } = useGetJobsQuery({});
 
-    const countJobs = jobList.length
+    const countJobs = jobList.length;
 
-    const filterJob = (id:string) => {
-        const jobsFilter = jobs?.filter(job => {
-            return job.type.id === id
-        })
-        setJobList(jobsFilter)
-    }
+    const filterJob = (id: string) => {
+        const jobsFilter = jobs?.filter((job) => {
+            return job.type.id === id;
+        });
+        setJobList(jobsFilter);
+    };
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
@@ -58,7 +58,9 @@ const JobListing = () => {
                 {/* list */}
                 <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 tb:w-11/12">
                     <div className=" mb-6 pl-3 pr-3 flex justify-between lg:flex-col">
-                        <p className="text-content-text font-medium pt-2 pb-2">Hiện có <span className=' text-primary-100 font-semibold'>{countJobs}</span> công việc</p>
+                        <p className="text-content-text font-medium pt-2 pb-2">
+                            Hiện có <span className=" text-primary-100 font-semibold">{countJobs}</span> công việc
+                        </p>
                         <div>
                             <button className=" mr-5 ml-7" onClick={() => setListStyle('gutter')}>
                                 <ListGutter color={listStyle} />

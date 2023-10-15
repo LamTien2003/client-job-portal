@@ -46,8 +46,8 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoutes />}>
                 <Route element={<DefaultLayout />}>
-                    <Route path="manager" element={<Manager />}>
-                        <Route path="my-profile" element={<MyProfile />} />
+                    <Route path="profile" element={<Manager />}>
+                        <Route index element={<MyProfile />} />
                         <Route path="applied-jobs" element={<AppliedJobs />} />
                     </Route>
                     <Route path="post-job" index element={<PostJob />} />
