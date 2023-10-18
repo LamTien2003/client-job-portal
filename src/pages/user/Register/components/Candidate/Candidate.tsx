@@ -14,6 +14,11 @@ import PhoneNumber from './Fields/PhoneNumber';
 import Password from './Fields/Password';
 import PasswordConfirm from './Fields/PasswordConfirm';
 import Location from './Fields/Location';
+import { useDispatch } from 'react-redux';
+import { setcredentialsToken, setCurrentUser } from '@/store/userSlice';
+import { setToken } from '@/utils/storage';
+import { ResponseApi } from '@/types/ResponseApi';
+import JobSeeker from '@/types/JobSeeker';
 
 // eslint-disable-next-line no-useless-escape
 export const EMAIL_REGEX = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/;
@@ -85,12 +90,14 @@ export const locationArray = [
 ]
 
 function Candidate() {
+    const [registerJobSeeker] = useRegisterJobseekerMutation();
+    
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
-    const [registerJobSeeker] = useRegisterJobseekerMutation();
 
 
     const formik = useFormik({
@@ -99,7 +106,7 @@ function Candidate() {
             firstName: '',
             lastName: '',
             email: '',
-            location: '',
+            location: 'Hồ Chí Minh',
             phoneNumber: '',
             password: '',
             passwordConfirm: '',
@@ -143,11 +150,18 @@ function Candidate() {
                 )
                 .oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
         }),
-        onSubmit: (values: RegisterJobseekerRequest) => {
+        onSubmit: async (values: RegisterJobseekerRequest) => {
             try {
-                console.log('signup...')
-                const _ = registerJobSeeker(values);
-                setSuccess(true);
+                console.log(values)
+                const response:any = await registerJobSeeker(values);
+                const user = response.data.data.data;
+                const accessToken = response.data.data.accessToken;
+                if(user && accessToken) {
+                    dispatch(setCurrentUser(user));
+                    dispatch(setcredentialsToken(accessToken));
+                    setToken(accessToken);
+                }
+                navigate('/')
             } catch (error) {
                 error;
                 setErrMsg('Đăng ký không thành công');

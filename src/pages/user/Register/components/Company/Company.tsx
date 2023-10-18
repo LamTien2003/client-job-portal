@@ -17,14 +17,19 @@ import CompanyName from './Fields/CompanyName';
 import EstablishDate from './Fields/EstablishDate';
 import CompanySizeTo from './Fields/CompanySizeTo';
 import CompanySizeFrom from './Fields/CompanySizeFrom ';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
+import { setToken } from '@/utils/storage';
 
 function Company() {
+    const [RegisterCompany] = useRegisterCompanyMutation();
+    
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
-    const [RegisterCompany] = useRegisterCompanyMutation();
 
     const formik = useFormik({
         initialValues: {
@@ -95,7 +100,7 @@ function Company() {
                 .required('Không được để trống')
                 .oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
         }),
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             try {
                 const myValues = {
                     type: values.type,
@@ -116,8 +121,15 @@ function Company() {
                         to: values.companySizeTo,
                     } 
                 } as RegisterCompanyRequest
-                const response = RegisterCompany(myValues);
-                setSuccess(true);
+                const response:any = await RegisterCompany(myValues);
+                const user = response.data.data.data;
+                const accessToken = response.data.data.accessToken;
+                if(user && accessToken) {
+                    dispatch(setCurrentUser(user));
+                    dispatch(setcredentialsToken(accessToken));
+                    setToken(accessToken);
+                }
+                navigate('/')
             } catch (error) {
                 error;
                 setErrMsg('Đăng ký không thành công');

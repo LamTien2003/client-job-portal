@@ -2,6 +2,13 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MoreInfo from '../MoreInfo/MoreInfo';
 import Job from '@/types/Job';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { isJobSeeker } from '@/utils/helper';
+import { useApplyJobMutation } from '@/services/jobsApiSlice';
+import { toast } from 'react-toastify';
 
 type Props = {
     data: Job;
@@ -9,10 +16,39 @@ type Props = {
 
 function JobSummary(props: Props) {
     const { data: job } = props;
+    
+    const [applyJob] = useApplyJobMutation()
+    console.log(applyJob)
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const navigate = useNavigate()
+
+    const [isSuccess, setIsSuccess] = useState<boolean>(false)
+
+    const isjs = isJobSeeker(currentUser)
+    
+    const date = new Date(job.createdAt)
+    const postDate = date.getDate() +  ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear()
 
     // if(gender === null || gender === undefined || gender === 3) sex = 'Any'
     // if(gender === 1) sex = 'Man'
     // if(gender === 2) sex = 'Woman'
+
+    const handleApply = () => {
+        console.log(!currentUser)
+        if(!currentUser) {
+            navigate('/login')
+        }
+        if(isjs) {
+            applyJob(job.id)
+            setIsSuccess(true)
+        }
+    }
+
+    useEffect(() => {
+        if(isSuccess) {
+            toast.success('Bạn đã apply vị trí thành công');
+        }
+    }, [isSuccess]);
 
     return (
         <div className=" w-1/3 pl-3 pr-3 lg:w-full ">
@@ -28,7 +64,7 @@ function JobSummary(props: Props) {
                         />
                     </div>
                 </div>
-                <button className=" font-medium pt-2 pb-2 pl-7 pr-7 bg-primary-100 text-white rounded ml-8 duration-500 hover:bg-black xl:pl-3 xl:pr-3 xl:text-sm xl:ml-4 lg:pl-7 lg:pr-7 lg:text-base mb:pl-4 mb:pr-4">
+                <button onClick={handleApply} className=" font-medium pt-2 pb-2 pl-7 pr-7 bg-primary-100 text-white rounded ml-8 duration-500 hover:bg-black xl:pl-3 xl:pr-3 xl:text-sm xl:ml-4 lg:pl-7 lg:pr-7 lg:text-base mb:pl-4 mb:pr-4">
                     Apply Position
                 </button>
             </div>
@@ -39,27 +75,27 @@ function JobSummary(props: Props) {
                 <h3 className=" text-content-title text-lg font-semibold mr-2 mb-6">Job Summary:</h3>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
                     <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
-                        <span className=" text-content-title font-medium mr-2">Job Posted:</span>ngày bắt đầu
+                        <span className=" text-content-title font-medium mr-2">Ngày bắt đầu:</span>{postDate}
                     </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
                     <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
-                        <span className=" text-content-title font-medium mr-2">Expiration:</span>ngày kết thúc
+                        <span className=" text-content-title font-medium mr-2">Ngày kết thúc:</span>ngày kết thúc
                     </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
                     <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
-                        <span className=" text-content-title font-medium mr-2">Vacancy:</span>số lượng
+                        <span className=" text-content-title font-medium mr-2">Số lượng:</span>{job.numberRecruitment} người
                     </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
                     <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
-                        <span className=" text-content-title font-medium mr-2">Experiences:</span>kinh nghiệm
+                        <span className=" text-content-title font-medium mr-2">Kinh nghiệm:</span>kinh nghiệm
                     </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
                     <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
-                        <span className=" text-content-title font-medium mr-2">Skills:</span>kĩ năng
+                        <span className=" text-content-title font-medium mr-2">Kĩ năng:</span>{job.skillsRequire.join(', ')}
                     </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">

@@ -22,4 +22,6 @@ export default interface Job {
     applications?: JobApplication[];
     countApplication: number;
     comments: Comment[];
+    createdAt: Date;
+    numberRecruitment: number
 }

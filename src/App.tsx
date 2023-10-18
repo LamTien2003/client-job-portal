@@ -14,11 +14,13 @@ import BlogGrid from './pages/user/BlogGrid/BlogGrid';
 import BlogDetail from './pages/user/BlogDetail/BlogDetail';
 import Contact from './pages/user/Contact/Contact';
 import PostJob from './pages/user/PostJob/PostJob';
-import Admin from './components/Admin/Admin';
 import Manager from './pages/user/Manager/Manager';
 import MyProfile from './pages/user/Manager/MyProfile/MyProfile';
 import AppliedJobs from './pages/user/Manager/AppliedJobs/AppliedJobs';
 import Setting from './components/Settings/Settings';
+import Admin from './pages/admin/Home/Admin';
+import ManageUser from './pages/admin/ManageUser/ManageUser';
+import AdminLayout from './layouts/admin/AdminLayout/AdminLayout';
 
 function App() {
     return (
@@ -50,10 +52,11 @@ function App() {
                         <Route index element={<MyProfile />} />
                         <Route path="applied-jobs" element={<AppliedJobs />} />
                     </Route>
-                    <Route path="post-job" index element={<PostJob />} />
+                </Route>
+                <Route path="post-job" index element={<PostJob />} />
+                <Route element={<AdminLayout />}>
+                    <Route path="admin/users" index element={<ManageUser />} />
                     <Route path="admin" index element={<Admin />} />
-                    <Route path="edit" index element={<Admin />} />
-                    <Route path="admin/user" index element={<>User list</>} />
                 </Route>
             </Route>
 

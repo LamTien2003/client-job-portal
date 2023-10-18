@@ -18,11 +18,16 @@ const JobListing = () => {
     const [jobs, setJobs] = useState<Job[]>([]);
     const [jobList, setJobList] = useState<Job[]>([]);
     const [listStyle, setListStyle] = useState<'column' | 'gutter'>('column');
-
-    // Không truyền params nào thì để {} rỗng
-    const { data, isLoading, isError } = useGetJobsQuery({});
+    const [page, setPage] = useState<number>(1)
 
     const countJobs = jobList.length;
+    
+    console.log(page)
+
+    const { data, isLoading, isError } = useGetJobsQuery({
+        page: page,
+        limit: 5
+    });
 
     const filterJob = (id: string) => {
         const jobsFilter = jobs?.filter((job) => {
@@ -72,8 +77,8 @@ const JobListing = () => {
                     </div>
                     <div>
                         {isLoading && 'isLoading...'}
-                        {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} />}
-                        {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} />}
+                        {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} changePage={setPage} />}
+                        {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} changePage={setPage} />}
                     </div>
                 </div>
             </div>

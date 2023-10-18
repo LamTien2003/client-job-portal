@@ -22,7 +22,6 @@ function JobDetail() {
     const { id } = useParams();
 
     const { data, isLoading, isError } = useGetJobQuery(id!);
-
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
             setJob(data?.data?.data);
@@ -45,11 +44,7 @@ function JobDetail() {
                                     <div>
                                         <JobInfo data={job} />
 
-                                        <MainDescription
-                                            title="Job Description"
-                                            generalDesc="A UI/UX (User Interface/User Experience) designer is responsible for designing and creating engaging and effective interfaces for software and web applications. This includes designing the layout, visual design, and interactivity of the user interface."
-                                            jobDesc={[]}
-                                        />
+                                        <MainDescription data={job}/>
                                     </div>
                                 )}
                             </div>

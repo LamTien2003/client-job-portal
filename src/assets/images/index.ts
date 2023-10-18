@@ -22,6 +22,7 @@ import profit from './non-profit-org.svg';
 import receotionist from './receotionist.svg';
 import next from './slick-next.svg';
 import prev from './slick-prev.svg';
+import yellowStar from './yellowstar.png'
 
 import accoutCreate from './account-create.svg';
 import findJob from './job-find.svg';
@@ -39,7 +40,12 @@ import user2 from './user-2.svg';
 import salary from './salary-2.svg';
 import calender2 from './calender2.svg';
 
+import vnFlag from './vietnamflag.png'
+import japanFlag from './japanflag.png'
+import usaFlag from './usaflag.png'
+
 const images = {
+    yellowStar,
     elliose,
     arrow,
     arrowLeft,
@@ -86,6 +92,11 @@ const images = {
         candidates,
         companies,
     },
+    flag: {
+        vnFlag,
+        japanFlag,
+        usaFlag,
+    }
 };
 
 export default images;
