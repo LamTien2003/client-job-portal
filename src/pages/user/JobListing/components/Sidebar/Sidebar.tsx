@@ -33,13 +33,9 @@ function Sidebar(props: Props) {
         });
     };
 
-    function myFilter(id: string) {
-        props.filterJob(id);
-    }
-
     return (
         <div>
-            <Category data={category} handleFilter={myFilter} />
+            <Category data={category} handleFilter={props.filterJob} />
 
             <div className=" bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">
                 <h3 className=" text-content-title font-semibold text-lg mb-2 lg:text-lg">Salary Range</h3>

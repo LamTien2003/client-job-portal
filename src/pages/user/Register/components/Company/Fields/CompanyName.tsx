@@ -45,7 +45,6 @@ function CompanyName(props: Props) {
                     autoComplete="off"
                     value={value}
                     onChange={handleChange}
-                    required
                     aria-invalid={error ? 'false' : 'true'}
                     aria-describedby="uidnote"
                     className=" placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-9 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"

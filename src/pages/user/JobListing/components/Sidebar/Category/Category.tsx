@@ -25,18 +25,18 @@ function Category(props: Props) {
             <div className=" max-h-64 overflow-scroll">
                 {category?.map((cat) => {
                     return (
-                        <div key={cat.id} className=" mb-2 flex relative">
+                        <div key={cat.categoryName} className=" mb-2 flex relative">
                             <div className=" cursor-pointer">
                                 <input
-                                    id={cat.id}
-                                    name={cat.id}
+                                    id={cat.categoryName}
+                                    name={cat.categoryName}
                                     checked={check === true || isId === cat.id}
                                     type="radio"
                                     className=" mr-1.5"
                                     onChange={() => handleCheck(cat.id)}
                                 />
                                 <label
-                                    htmlFor={cat.id}
+                                    htmlFor={cat.categoryName}
                                     className=" text-content-text text-sm font-medium lg:text-sm cursor-pointer"
                                 >
                                     {cat.categoryName}

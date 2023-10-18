@@ -10,8 +10,6 @@ function JobInfo(props: Props) {
     const {data: job} = props
     const [categories, setCategories] = useState<CategoryType[]>([])
     const { data, isLoading, isError } = useGetCategoriesQuery()
-
-    console.log(data?.data?.data)
     
     const category = categories.map(item => {
         return job.type.id === item.id ? item.categoryName : ''
