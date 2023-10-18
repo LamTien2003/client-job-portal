@@ -16,7 +16,7 @@ const SelectInfo = ({ title, fieldName, value, onChange, error, touched }: Selec
     const options: Options[] = [
         { value: 'male', label: 'Nam' },
         { value: 'female', label: 'Nữ' },
-        { value: 'other', label: 'Khác' },
+        { value: 'others', label: 'Khác' },
     ];
     return (
         <div className="flex flex-col gap-1 w-full">

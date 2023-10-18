@@ -7,6 +7,8 @@ import { Skill } from '@/types/JobSeeker';
 import { RootState } from '@/store/store';
 import { isJobSeeker } from '@/utils/helper';
 import { useSelector } from 'react-redux';
+import { useGetSkillsQuery } from '@/services/utilsApiSlice';
+import { Select, MenuItem } from '@mui/material';
 interface Form {
     toggleOpen?: () => void;
 }
@@ -15,21 +17,25 @@ const Form = ({ toggleOpen }: Form) => {
     const [inputValue, setInputValue] = useState<string>('');
 
     const currentUser = useSelector((state: RootState) => state.user.user);
-    const [skill, setSkill] = useState<Skill[]>([]);
+    const [skills, setSkills] = useState<string[]>([]);
+
+    const { data: skillsData, isLoading: loadingSkills, isError: errorSkills } = useGetSkillsQuery();
+
     useEffect(() => {
         if (isJobSeeker(currentUser)) {
-            setSkill(currentUser.skills);
+            setSkills(currentUser.skills);
         }
-    }, [currentUser]);
+        if (!loadingSkills && !errorSkills && skillsData?.data?.data) {
+            setSkills(skillsData?.data?.data);
+        }
+    }, [currentUser, loadingSkills, errorSkills, skillsData?.data?.data]);
 
     const [changeSkill, { isLoading }] = useChangeMeMutation();
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setInputValue(e.target.value);
-    };
-
-    const handleAddSkill = (): void => {
-        if (inputValue.trim() !== '') {
-            setData([...data, inputValue]);
+    const handleInputChange = (e: any): void => {
+        const selectedValue = e.target.value;
+        setInputValue(selectedValue);
+        if (selectedValue.trim() !== '' && !data.includes(selectedValue)) {
+            setData([...data, selectedValue]);
             setInputValue('');
         }
     };
@@ -38,13 +44,7 @@ const Form = ({ toggleOpen }: Form) => {
         const newData = [...data];
         newData.splice(index, 1);
         setData(newData);
-    };
-
-    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            handleAddSkill();
-        }
+        console.log(newData);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -52,7 +52,7 @@ const Form = ({ toggleOpen }: Form) => {
         try {
             if (data) {
                 const skillData: any = {
-                    skills: [...skill, ...data],
+                    skills: [...data],
                 };
                 await changeSkill(skillData);
                 setData([]);
@@ -68,23 +68,21 @@ const Form = ({ toggleOpen }: Form) => {
                     <div className="text-xl p-4">
                         <CgUserList />
                     </div>
-                    <input
-                        className="w-full h-full outline-none"
-                        type="text"
-                        placeholder="Nhập các kỹ năng bạn có..."
-                        name="skill"
-                        value={inputValue}
-                        onChange={handleInputChange}
-                        onKeyDown={handleKeyPress}
-                    />
+                    <div className="w-full h-[48px]">
+                        <Select
+                            value={inputValue}
+                            onChange={handleInputChange}
+                            variant="standard"
+                            className="select w-full h-[48px]  text-content-s-text items-center"
+                        >
+                            {skills.map((skill, index) => (
+                                <MenuItem key={index} value={skill}>
+                                    {skill}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </div>
                 </div>
-                <button
-                    type="button"
-                    onClick={handleAddSkill}
-                    className="border-primary-100 border-2 py-2 px-4 text-primary-100 font-semibold hover:bg-primary-200  duration-200 "
-                >
-                    Thêm
-                </button>
             </div>
 
             <div className="flex flex-wrap gap-5">

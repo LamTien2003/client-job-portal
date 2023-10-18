@@ -16,8 +16,11 @@ const Form = ({ handleOpen, open }: FormIntro) => {
                 const data: any = {
                     introduce: introduce.trim(),
                 };
+                console.log(data);
+
                 await changeIntroduce(data);
                 setIntroduce('');
+                handleOpen();
             }
         } catch (error) {
             console.error(error);

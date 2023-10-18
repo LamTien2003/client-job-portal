@@ -7,7 +7,7 @@ import CustomField from './Field';
 import { CiLocationOn } from 'react-icons/ci';
 import SelectInfo from './Select';
 import BtnBot from '../../components/BtnBot';
-import { useChangeMeMutation } from '@/services/usersApiSlice';
+import { useChangeMeUserMutation } from '@/services/usersApiSlice';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -44,7 +44,7 @@ const validation = Yup.object().shape({
 const FormInfo = ({ handleOpen, open }: FormInfo) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
 
-    const [changeInfo, { isLoading }] = useChangeMeMutation();
+    const [changeInfo, { isLoading }] = useChangeMeUserMutation();
 
     const formik = useFormik({
         initialValues: initialValues,

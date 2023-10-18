@@ -82,11 +82,11 @@ export const apiSlice = createApi({
     tagTypes: [
         'Jobs',
         'Companies',
+        'JobSeeker',
         'Users',
         'JobApplications',
         'Comments',
         'Notifications',
-        'JobSeeker',
         'Category',
         'Skills',
     ],

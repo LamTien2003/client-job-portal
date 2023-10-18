@@ -25,7 +25,7 @@ const Experience = () => {
     return (
         <CardSub
             title="Kinh nghiệm làm việc"
-            sub={experiences.length === 0 ? "Thể hiện những thông tin chi tiết về quá trình làm việc" : ""}
+            sub={experiences.length === 0 ? 'Thể hiện những thông tin chi tiết về quá trình làm việc' : ''}
             toggleOpen={toggleOpen}
             open={isOpen}
             data={experiences}

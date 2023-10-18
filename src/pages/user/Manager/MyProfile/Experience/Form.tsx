@@ -28,7 +28,6 @@ interface Values {
 const FormExp = ({ toggleOpen }: FormExp) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const [experiences, setExp] = useState<Experience[]>([]);
-
     const initialValues: Values = {
         position: '',
         company: '',
@@ -113,11 +112,11 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                 const expData: any = {
                     experiences: data,
                 };
-                console.log(expData);
 
                 await changeExp(expData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
+                toggleOpen();
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
@@ -182,6 +181,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
             <FormControlLabel
                 control={<Checkbox />}
                 name="isWorking"
+                checked={formik.values.isWorking}
                 label="Tôi đang làm việc tại đây"
                 value={formik.values.isWorking}
                 onChange={formik.handleChange}

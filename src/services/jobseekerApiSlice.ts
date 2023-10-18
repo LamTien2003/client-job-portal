@@ -21,7 +21,7 @@ export const jobseekerApiSlice = apiSlice.injectEndpoints({
                 error
                     ? []
                     : [
-                          { type: 'JobSeeker', id: 'LIST' },
+                          { type: 'JobSeeker', id: 'JobSeeker' },
                           { type: 'Users' as const, id: 'CURRENT' },
                       ],
         }),

@@ -188,7 +188,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                 onChange={formik.handleChange}
             />
 
-            <BtnBot toggleOpen={toggleOpen} />
+            <BtnBot toggleOpen={toggleOpen} isLoading={isLoading}/>
         </form>
     );
 };
