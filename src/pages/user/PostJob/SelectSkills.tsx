@@ -2,14 +2,14 @@ import { Select, MenuItem } from '@mui/material';
 interface SelectField {
     title: string;
     fieldName: string;
-    options: string[];
+    options: any[];
     icon?: string;
     error: string | undefined;
     touched: boolean | undefined;
     value?: string;
     onChange: any;
 }
-const SelectField = ({ title, fieldName, options, icon, error, touched, value, onChange }: SelectField) => {
+const SelectSkills = ({ title, fieldName, options, icon, error, touched, value, onChange }: SelectField) => {
     return (
         <div className="flex flex-col gap-2">
             <h5 className="text-[15px] font-medium text-content-text">{title}*</h5>
@@ -41,4 +41,4 @@ const SelectField = ({ title, fieldName, options, icon, error, touched, value, o
     );
 };
 
-export default SelectField;
+export default SelectSkills;

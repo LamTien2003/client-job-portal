@@ -79,7 +79,17 @@ const staggeredBaseQuery = retry(baseQueryWithReauth, {
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    tagTypes: ['Jobs', 'Companies', 'Users', 'JobApplications', 'Comments', 'Notifications', 'JobSeeker', 'Category'],
+    tagTypes: [
+        'Jobs',
+        'Companies',
+        'Users',
+        'JobApplications',
+        'Comments',
+        'Notifications',
+        'JobSeeker',
+        'Category',
+        'Skills',
+    ],
     baseQuery: staggeredBaseQuery,
 
     endpoints: (_builder) => ({}),

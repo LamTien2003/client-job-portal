@@ -4,11 +4,13 @@ import { useFormik } from 'formik';
 import { AiOutlinePhone, AiOutlineUser } from 'react-icons/ai';
 import AvatarSection from './AvatarSection';
 import CustomField from './Field';
-import { MdOutlineEmail } from 'react-icons/md';
 import { CiLocationOn } from 'react-icons/ci';
 import SelectInfo from './Select';
 import BtnBot from '../../components/BtnBot';
-import SelectField from '@/pages/user/PostJob/SelectField';
+import { useChangeMeMutation } from '@/services/usersApiSlice';
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -17,7 +19,6 @@ interface FormInfo {
 interface Values {
     firstName: string;
     lastName: string;
-    email: string;
     phoneNumber: string;
     gender: string;
     location: string;
@@ -26,7 +27,6 @@ interface Values {
 const initialValues: Values = {
     firstName: '',
     lastName: '',
-    email: '',
     phoneNumber: '',
     gender: '',
     location: '',
@@ -37,32 +37,55 @@ const validation = Yup.object().shape({
     lastName: Yup.string().max(30, 'Không được quá 30 kí tự!').required('Tên không được bỏ trống!'),
     location: Yup.string().required('Địa chỉ không được bỏ trống!'),
     gender: Yup.string().required('Giới tính không được bỏ trống!'),
-
-    email: Yup.string().email('Email không đúng định dạng!').required('Email không được bỏ trống!'),
     phoneNumber: Yup.string()
         .matches(/^(0|\+84)[0-9]{9}$/, 'Số điện thoại không hợp lệ')
         .required('Số điện thoại không được bỏ trống!'),
 });
 const FormInfo = ({ handleOpen, open }: FormInfo) => {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+
+    const [changeInfo, { isLoading }] = useChangeMeMutation();
+
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
-                console.log(values);
+                const form = new FormData();
+                form.append('firstName', values.firstName);
+                form.append('lastName', values.lastName);
+                form.append('location', values.location);
+                form.append('gender', values.gender);
+                form.append('phoneNumber', values.phoneNumber);
+                form.append('photo', values.photo);
+                await changeInfo(form);
+                alert('Cập nhật thông tin thành công!');
+                formik.resetForm();
+                handleOpen();
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
         },
     });
-    const options = ['Nam', 'Nữ', 'Khác'];
+    useEffect(() => {
+        if (currentUser) {
+            formik.setValues({
+                ...formik.values,
+                firstName: currentUser.firstName || '',
+                lastName: currentUser.lastName || '',
+                phoneNumber: currentUser.phoneNumber || '',
+                gender: currentUser.gender || '',
+                location: currentUser.location || '',
+            });
+        }
+    }, [currentUser]);
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
             <DialogHeader>Thông tin cá nhân</DialogHeader>
             <DialogBody divider>
                 <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
-                    <AvatarSection />
+                    <AvatarSection formik={formik} />
                     <div className="grid grid-cols-2 w-full gap-6">
                         <CustomField
                             title="Họ"
@@ -84,29 +107,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             value={formik.values.lastName}
                             onChange={formik.handleChange}
                         />
-
-                        <CustomField
-                            type="email"
-                            title="Email"
-                            fieldName="email"
-                            error={formik.errors.email}
-                            touched={formik.touched.email}
-                            icon={<MdOutlineEmail />}
-                            placeholder="Nhập email của bạn"
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                        />
                         <SelectInfo
-                            title="Giới tính"
-                            fieldName="gender"
-                            value={formik.values.gender}
-                            onChange={formik.handleChange}
-                            error={formik.errors.gender}
-                            touched={formik.touched.gender}
-                        />
-
-                        <SelectField
-                            options={options}
                             title="Giới tính"
                             fieldName="gender"
                             value={formik.values.gender}
@@ -136,8 +137,10 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             value={formik.values.phoneNumber}
                             onChange={formik.handleChange}
                         />
+                        <div className="flex items-end justify-end">
+                            <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
+                        </div>
                     </div>
-                    <BtnBot toggleOpen={handleOpen} />
                 </form>
             </DialogBody>
         </Dialog>

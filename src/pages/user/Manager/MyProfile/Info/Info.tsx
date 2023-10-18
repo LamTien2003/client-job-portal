@@ -18,7 +18,7 @@ const Info = () => {
                 <div className="flex items-center gap-4">
                     <img
                         className="w-20  h-20 object-cover rounded-full"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-GDKkHvxjQRbCDwugCcZpfq6qcBtOORwMMA&usqp=CAU"
+                        src={currentUser?.photo}
                         alt="avt"
                     />
                     <div className="flex flex-col gap-2">

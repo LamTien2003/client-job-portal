@@ -1,19 +1,33 @@
-import { Field } from 'formik';
+import { RootState } from '@/store/store';
+import { useState } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { MdDeleteOutline } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
-const AvatarSection = () => {
+const AvatarSection = ({ formik }: { formik: any }) => {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const [previewImage, setPreviewImage] = useState<string>('');
+
+    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const selectedFile = e.target.files[0];
+            formik.setFieldValue('photo', selectedFile);
+            setPreviewImage(URL.createObjectURL(selectedFile));
+        }
+    };
+
+    const handleDelete = () => {
+        setPreviewImage('');
+        formik.setFieldValue('photo', null);
+    };
+
     return (
         <div className="flex flex-col items-center justify-center gap-2">
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-GDKkHvxjQRbCDwugCcZpfq6qcBtOORwMMA&usqp=CAU"
-                alt="avt"
-                className="w-32 h-32 rounded-full"
-            />
+            <img src={previewImage ? previewImage : currentUser?.photo} alt="avt" className="w-32 h-32 rounded-full" />
             <div className="flex gap-6">
                 <div>
                     <label
-                        htmlFor="image"
+                        htmlFor="photo"
                         className="flex gap-2 items-center justify-center font-medium cursor-pointer text-primary-100"
                     >
                         <div className="text-xl">
@@ -21,10 +35,10 @@ const AvatarSection = () => {
                         </div>
                         Sửa
                     </label>
-                    <input name="image" id="image" className="hidden" type="file" />
+                    <input name="photo" id="photo" className="hidden" type="file" onChange={handleFile} />
                 </div>
 
-                <button className="flex items-center hover:text-primary-100">
+                <button type='button' onClick={handleDelete} className="flex items-center hover:text-primary-100">
                     <span className="text-xl">
                         <MdDeleteOutline />
                     </span>

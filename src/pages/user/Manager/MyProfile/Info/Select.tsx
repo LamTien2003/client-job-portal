@@ -8,8 +8,16 @@ interface SelectInfo {
     error: string | undefined;
     touched: boolean | undefined;
 }
+interface Options {
+    value: string;
+    label: string;
+}
 const SelectInfo = ({ title, fieldName, value, onChange, error, touched }: SelectInfo) => {
-    const options = ['ReactJS', 'NodeJS', 'Java', 'Python', 'Golang'];
+    const options: Options[] = [
+        { value: 'male', label: 'Nam' },
+        { value: 'female', label: 'Nữ' },
+        { value: 'other', label: 'Khác' },
+    ];
     return (
         <div className="flex flex-col gap-1 w-full">
             <label className="font-bold text-primary-100" htmlFor={fieldName}>
@@ -28,12 +36,12 @@ const SelectInfo = ({ title, fieldName, value, onChange, error, touched }: Selec
                     onChange={onChange}
                     name={fieldName}
                     variant="standard"
-                    className="select w-full h-[48px]  text-content-s-text items-center"
+                    className="select w-full h-11 text-content-s-text items-center"
                 >
                     {options.map((option, index) => {
                         return (
-                            <MenuItem key={index} value={option}>
-                                {option}
+                            <MenuItem key={index} value={option.value}>
+                                {option.label}
                             </MenuItem>
                         );
                     })}

@@ -35,7 +35,7 @@ const CustomField = ({
                 <span className="w-[1px] h-6 bg-gray-300 mx-2"></span>
                 <input
                     name={fieldName}
-                    className={`text-content-s-text w-full h-[48px] outline-none ${type === 'date' && 'pr-3'}`}
+                    className={`text-content-text w-full h-[48px] outline-none ${type === 'date' && 'pr-3'}`}
                     type={type ? type : 'text'}
                     placeholder={placeholder}
                     value={value !== undefined && value !== null ? value.toString() : ''}

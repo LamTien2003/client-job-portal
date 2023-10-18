@@ -25,56 +25,57 @@ interface Values {
     dateTo: Date | string;
     isWorking: boolean;
 }
-const initialValues: Values = {
-    position: '',
-    company: '',
-    dateFrom: '',
-    dateTo: '',
-    isWorking: false,
-};
-const validation = Yup.object().shape({
-    position: Yup.string().required('Chức vụ không được bỏ trống!'),
-    company: Yup.string().required('Công ty không được bỏ trống!'),
-    dateFrom: Yup.date()
-        .required('Từ ngày không được bỏ trống!')
-        .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
+const FormExp = ({ toggleOpen }: FormExp) => {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const [experiences, setExp] = useState<Experience[]>([]);
+
+    const initialValues: Values = {
+        position: '',
+        company: '',
+        dateFrom: '',
+        dateTo: '',
+        isWorking: false,
+    };
+    const validation = Yup.object().shape({
+        position: Yup.string().required('Chức vụ không được bỏ trống!'),
+        company: Yup.string().required('Công ty không được bỏ trống!'),
+        dateFrom: Yup.date()
+            .required('Từ ngày không được bỏ trống!')
+            .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
+                const { dateTo } = this.parent;
+                if (!dateTo) {
+                    return true;
+                }
+                const dataNow = new Date();
+                const date = new Date(value);
+
+                return date <= dataNow;
+            })
+            .test('date-range', 'Ngày phải nhỏ hơn ngày kết thúc', function (value) {
+                const { dateTo } = this.parent;
+                if (!dateTo) {
+                    return true;
+                }
+                const date = new Date(value);
+
+                return date <= new Date(dateTo);
+            }),
+        dateTo: Yup.date().test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
             const { dateTo } = this.parent;
+            let date;
             if (!dateTo) {
                 return true;
             }
             const dataNow = new Date();
-            const date = new Date(value);
-
-            return date <= dataNow;
-        })
-        .test('date-range', 'Ngày phải nhỏ hơn ngày kết thúc', function (value) {
-            const { dateTo } = this.parent;
-            if (!dateTo) {
-                return true;
+            if (value) {
+                date = new Date(value);
             }
-            const date = new Date(value);
-
-            return date <= new Date(dateTo);
+            if (date) {
+                return date <= dataNow;
+            }
+            return;
         }),
-    dateTo: Yup.date().test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-        const { dateTo } = this.parent;
-        let date;
-        if (!dateTo) {
-            return true;
-        }
-        const dataNow = new Date();
-        if (value) {
-            date = new Date(value);
-        }
-        if (date) {
-            return date <= dataNow;
-        }
-        return;
-    }),
-});
-const FormExp = ({ toggleOpen }: FormExp) => {
-    const currentUser = useSelector((state: RootState) => state.user.user);
-    const [experiences, setExp] = useState<Experience[]>([]);
+    });
     useEffect(() => {
         if (isJobSeeker(currentUser)) {
             setExp(currentUser.experiences);
@@ -112,6 +113,8 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                 const expData: any = {
                     experiences: data,
                 };
+                console.log(expData);
+
                 await changeExp(expData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();

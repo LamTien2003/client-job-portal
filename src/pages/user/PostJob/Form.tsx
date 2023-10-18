@@ -3,11 +3,13 @@ import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 
 import CustomField from './Field';
-import SelectField from './SelectField';
+import SelectSkills from './SelectSkills';
 import images from '@/assets/images';
 import FieldImages from './FieldImages';
-import { useCreateJobMutation } from '@/services/jobsApiSlice';
-import { useState } from 'react';
+import { useCreateJobMutation, useGetCategoriesQuery } from '@/services/jobsApiSlice';
+import { useEffect, useState } from 'react';
+import SelectType from './SelectType';
+import { useGetSkillsQuery } from '@/services/utilsApiSlice';
 
 interface Values {
     title: string;
@@ -32,35 +34,63 @@ const initialValues: Values = {
 const validation = Yup.object().shape({
     title: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Tiêu đề không được bỏ trống!'),
     description: Yup.string().max(500, 'Không được quá 500 kí tự!').required('Mô tả không được bỏ trống!'),
-    jobRequire: Yup.string().max(100, 'Không được quá 500 kí tự!').required('Job Require không được bỏ trống!'),
-    skillsRequire: Yup.string().required('skill không được bỏ trống!'),
+    jobRequire: Yup.string().max(100, 'Không được quá 500 kí tự!').required('Yêu cầu không được bỏ trống!'),
+    skillsRequire: Yup.string().required('Kỹ năng không được bỏ trống!'),
     type: Yup.string().required('type không được bỏ trống!'),
-    salary: Yup.string().required('Lương không được bỏ trống!'),
+    salary: Yup.number()
+        .typeError('Lương phải là số')
+        .min(0, 'Lương phải lớn hơn hoặc bằng 0')
+        .required('Lương không được bỏ trống!'),
     deadline: Yup.date().min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!'),
 });
 const FormPostJob = () => {
     const [createJob, { isLoading }] = useCreateJobMutation();
     const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
+    const [category, setCategory] = useState<any[]>([]);
+    const [skills, setSkills] = useState<string[]>([]);
+
+    const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery();
+
+    const { data: skillsData, isLoading: loadingSkills, isError: errorSkills } = useGetSkillsQuery();
+
+    useEffect(() => {
+        if (!loadingCate && !errorCate && categories?.data?.data) {
+            setCategory(categories?.data?.data);
+        }
+        if (!loadingSkills && !errorSkills && skillsData?.data?.data) {
+            setSkills(skillsData?.data?.data);
+        }
+    }, [loadingCate, errorCate, categories?.data?.data, loadingSkills, errorSkills, skillsData?.data?.data]);
 
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
         onSubmit: async (values) => {
+            console.log(values);
+
             const form = new FormData();
             Object.entries(values).forEach(([key, value]) => {
                 if (key === 'photosJob') {
-                    for (let i = 0; i < value.length; i++) {
-                        form.append('photosJob', value[i]);
+                    if (value) {
+                        for (let i = 0; i < value.length; i++) {
+                            form.append('photosJob', value[i]);
+                        }
                     }
                 } else {
                     form.append(key, value);
                 }
             });
+            if (!values.deadline) {
+                const today = new Date();
+                today.setDate(today.getDate() + 20);
+                values.deadline = today;
+            }
 
             try {
-                await createJob(form);
                 setIsFormSubmitted(true);
+                await createJob(form);
                 alert('Đăng job thành công');
+                setIsFormSubmitted(false);
                 formik.resetForm();
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
@@ -68,10 +98,6 @@ const FormPostJob = () => {
         },
     });
 
-    console.log(formik);
-
-    const type = ['Science', 'IT', 'Medical', 'Copywrite'];
-    const skills = ['ReactJS', 'NodeJS', 'Java', 'Python', 'Golang'];
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className="grid grid-cols-2 w-full gap-6 tb:grid-cols-1">
@@ -86,7 +112,7 @@ const FormPostJob = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-                <SelectField
+                <SelectSkills
                     title="Skills Require"
                     fieldName="skillsRequire"
                     icon={images.logo.category}
@@ -108,11 +134,11 @@ const FormPostJob = () => {
                     onBlur={formik.handleBlur}
                 />
 
-                <SelectField
+                <SelectType
                     title="Job Type"
                     fieldName="type"
                     icon={images.logo.category}
-                    options={type}
+                    options={category}
                     error={formik.errors.type}
                     touched={formik.touched.type}
                     value={formik.values.type}

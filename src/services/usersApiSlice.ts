@@ -30,7 +30,21 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             query: () => `user/getMe/`,
             providesTags: () => [{ type: 'Users' as const, id: 'CURRENT' }],
         }),
+        changeMe: builder.mutation<ResponseApi<MixinUser>, FormData>({
+            query(body) {
+                try {
+                    return {
+                        url: 'user/changeMe',
+                        method: 'PATCH',
+                        body,
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Users' as const, id: 'CURRENT' }]),
+        }),
     }),
 });
 
-export const { useGetUsersQuery, useGetCurrentUserQuery } = usersApiSlice;
+export const { useGetUsersQuery, useGetCurrentUserQuery, useChangeMeMutation } = usersApiSlice;
