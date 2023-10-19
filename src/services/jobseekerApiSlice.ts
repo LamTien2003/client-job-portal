@@ -1,7 +1,7 @@
 import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
-import JobSeeker from '@/types/JobSeeker';
+import JobSeeker, { JobApplicate } from '@/types/JobSeeker';
 
 export const jobseekerApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -25,7 +25,11 @@ export const jobseekerApiSlice = apiSlice.injectEndpoints({
                           { type: 'Users' as const, id: 'CURRENT' },
                       ],
         }),
+        getMyApplication: builder.query<ResponseApi<JobApplicate[]>, void>({
+            query: () => `jobseeker/myApplication`,
+            providesTags: () => [{ type: 'JobSeeker' as const, id: 'LIST' }],
+        }),
     }),
 });
 
-export const { useChangeMeMutation } = jobseekerApiSlice;
+export const { useChangeMeMutation, useGetMyApplicationQuery } = jobseekerApiSlice;

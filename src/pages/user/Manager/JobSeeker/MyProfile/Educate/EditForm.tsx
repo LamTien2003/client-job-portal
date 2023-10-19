@@ -3,46 +3,43 @@ import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import Checkbox from '@mui/material/Checkbox';
 
-import { AiOutlineUser } from 'react-icons/ai';
 import CustomField from './Field';
-import BtnBot from '../../components/BtnBot';
+import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
+import { BiSolidFactory } from 'react-icons/bi';
 import { FormControlLabel } from '@mui/material';
 import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
-import { Project } from '@/types/JobSeeker';
+import { Education } from '@/types/JobSeeker';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
-import { PiBracketsCurlyBold } from 'react-icons/pi';
-import { FaAudioDescription } from 'react-icons/fa';
+import { FaSchool } from 'react-icons/fa';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
-    projectToEdit: any;
+    educateToEdit: any;
 }
 interface Values {
-    name: string;
-    url: string;
-    description: string;
+    school: string;
+    major: string;
     dateFrom: Date | string;
     dateTo: Date | string;
-    isWorking: boolean;
+
+    isLearning: boolean;
 }
 const initialValues: Values = {
-    name: '',
-    url: '',
-    description: '',
+    school: '',
+    major: '',
     dateFrom: '',
     dateTo: '',
-    isWorking: false,
+    isLearning: false,
 };
 const validation = Yup.object().shape({
-    name: Yup.string().required('Tên không được bỏ trống!'),
-    description: Yup.string().required('Mô tả không được bỏ trống!'),
-    url: Yup.string().required('URL không được bỏ trống!'),
+    school: Yup.string().required('Trường học không được bỏ trống!'),
+    major: Yup.string().required('Ngành học không được bỏ trống!'),
     dateFrom: Yup.date()
-        .required('Ngày bắt đầu không được bỏ trống!')
+        .required('Ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
             const { dateTo } = this.parent;
             if (!dateTo) {
@@ -78,75 +75,77 @@ const validation = Yup.object().shape({
         return;
     }),
 });
-const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
+const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
-    const [projects, setProjects] = useState<Project[]>([]);
-    const [changeProjects, { isLoading }] = useChangeMeMutation();
+    const [education, setExp] = useState<Education[]>([]);
+    const [changeEdu, { isLoading }] = useChangeMeMutation();
     useEffect(() => {
         if (jobSeeker) {
-            setProjects(currentUser.projects);
+            setExp(currentUser.educate);
         }
     }, [jobSeeker, currentUser]);
 
     useEffect(() => {
-        if (projectToEdit) {
+        if (educateToEdit) {
             let dateToValue;
             let dateFromValue;
-            if (projectToEdit.date.to) {
-                const parts = projectToEdit.date.to.split('T');
+            if (educateToEdit.date.to) {
+                const parts = educateToEdit.date.to.split('T');
                 dateToValue = parts[0];
             }
 
-            if (projectToEdit.date.from) {
-                const parts = projectToEdit.date.from.split('T');
+            if (educateToEdit.date.from) {
+                const parts = educateToEdit.date.from.split('T');
                 dateFromValue = parts[0];
             }
 
             formik.setValues({
                 ...formik.values,
-                name: projectToEdit.name || '',
-                description: projectToEdit.description || '',
-                url: projectToEdit.url || '',
+                major: educateToEdit.major || '',
+                school: educateToEdit.school || '',
                 dateFrom: dateFromValue || '',
                 dateTo: dateToValue || '',
-                isWorking: projectToEdit.isWorking,
+                isLearning: educateToEdit.isLearning,
             });
         }
-    }, [projectToEdit]);
+    }, [educateToEdit]);
 
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
-                const project: any = {
-                    name: values.name,
-                    description: values.description,
-                    url: values.url,
-                    isWorking: values.isWorking,
+                const edu: any = {
+                    major: values.major,
+                    school: values.school,
+                    date: {
+                        from: values.dateFrom,
+                        to: values.dateTo,
+                    },
+                    isWorking: values.isLearning,
                 };
 
-                if (values.isWorking) {
-                    project.date = {
+                if (values.isLearning) {
+                    edu.date = {
                         from: values.dateFrom,
                     };
                 } else {
-                    project.date = {
+                    edu.date = {
                         from: values.dateFrom,
                         to: values.dateTo,
                     };
                 }
 
-                const updatedProjects = projects.filter((item) => item._id !== projectToEdit._id);
+                const updatedEdu = education.filter((edu) => edu._id !== educateToEdit._id);
 
-                const data = [...updatedProjects, project];
+                const data = [...updatedEdu, edu];
 
-                const projectsData: any = {
-                    projects: data,
+                const eduData: any = {
+                    educate: data,
                 };
 
-                await changeProjects(projectsData);
+                await changeEdu(eduData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
                 handleOpen();
@@ -163,25 +162,27 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                 <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
                     <div className="grid grid-cols-2 w-full gap-6">
                         <CustomField
-                            title="Tên dự án"
-                            fieldName="name"
-                            error={formik.errors.name}
-                            touched={formik.touched.name}
-                            icon={<AiOutlineUser />}
-                            placeholder="Nhập họ của bạn"
-                            value={formik.values.name}
+                            title="Trường"
+                            fieldName="school"
+                            error={formik.errors.school}
+                            touched={formik.touched.school}
+                            icon={<FaSchool />}
+                            placeholder="Nhập trường của bạn"
+                            value={formik.values.school}
                             onChange={formik.handleChange}
                         />
+
                         <CustomField
-                            title="Đường dẫn website"
-                            fieldName="url"
-                            error={formik.errors.url}
-                            touched={formik.touched.url}
-                            icon={<PiBracketsCurlyBold />}
-                            placeholder="Nhập url website của bạn"
-                            value={formik.values.url}
+                            title="Ngành học"
+                            fieldName="major"
+                            error={formik.errors.major}
+                            touched={formik.touched.major}
+                            icon={<BiSolidFactory />}
+                            placeholder="Nhập ngành học của bạn"
+                            value={formik.values.major}
                             onChange={formik.handleChange}
                         />
+
                         <CustomField
                             type="date"
                             title="Từ"
@@ -189,7 +190,6 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                             error={formik.errors.dateFrom}
                             touched={formik.touched.dateFrom}
                             icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
                             value={formik.values.dateFrom}
                             onChange={formik.handleChange}
                         />
@@ -201,27 +201,16 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                             error={formik.errors.dateTo}
                             touched={formik.touched.dateTo}
                             icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
                             value={formik.values.dateTo}
-                            onChange={formik.handleChange}
-                            disabled={formik.values.isWorking}
-                        />
-                        <CustomField
-                            title="Mô tả chi tiết"
-                            fieldName="description"
-                            error={formik.errors.description}
-                            touched={formik.touched.description}
-                            icon={<FaAudioDescription />}
-                            placeholder="Nhập chi tiết dự án của bạn"
-                            value={formik.values.description}
+                            disabled={formik.values.isLearning}
                             onChange={formik.handleChange}
                         />
 
                         <FormControlLabel
                             control={<Checkbox />}
-                            name="isWorking"
-                            label="Tôi đang làm dự án này"
-                            value={formik.values.isWorking}
+                            name="isLearning"
+                            label="Tôi đang học tập tại đây"
+                            value={formik.values.isLearning}
                             onChange={formik.handleChange}
                         />
                         <div className="flex items-end justify-end">

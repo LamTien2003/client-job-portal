@@ -1,40 +1,45 @@
 import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
+import Checkbox from '@mui/material/Checkbox';
 
 import { AiOutlineUser } from 'react-icons/ai';
 import CustomField from './Field';
-import BtnBot from '../../components/BtnBot';
+import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { BiSolidFactory } from 'react-icons/bi';
+import { FormControlLabel } from '@mui/material';
 import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
-import { Certification } from '@/types/JobSeeker';
+import { Experience } from '@/types/JobSeeker';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
-    certificateToEdit: any;
+    experienceToEdit: any;
 }
 interface Values {
-    name: string;
-    organization: string;
+    position: string;
+    company: string;
     dateFrom: Date | string;
     dateTo: Date | string;
+    isWorking: boolean;
 }
+
 const initialValues: Values = {
-    name: '',
-    organization: '',
+    position: '',
+    company: '',
     dateFrom: '',
     dateTo: '',
+    isWorking: false,
 };
 const validation = Yup.object().shape({
-    name: Yup.string().required('Tên giải thưởng không được bỏ trống!'),
-    organization: Yup.string().required('Tổ chức không được bỏ trống!'),
+    position: Yup.string().required('Chức vụ không được bỏ trống!'),
+    company: Yup.string().required('Công ty không được bỏ trống!'),
     dateFrom: Yup.date()
-        .required('Ngày không được bỏ trống!')
+        .required('Từ ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
             const { dateTo } = this.parent;
             if (!dateTo) {
@@ -54,83 +59,95 @@ const validation = Yup.object().shape({
 
             return date <= new Date(dateTo);
         }),
-    dateTo: Yup.date()
-        .required('Ngày không được bỏ trống!')
-        .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent;
-            if (!dateTo) {
-                return true;
-            }
-            const dataNow = new Date();
-            const date = new Date(value);
-
+    dateTo: Yup.date().test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
+        const { dateTo } = this.parent;
+        let date;
+        if (!dateTo) {
+            return true;
+        }
+        const dataNow = new Date();
+        if (value) {
+            date = new Date(value);
+        }
+        if (date) {
             return date <= dataNow;
-        })
-        .test('date-range', 'Ngày phải lớn hơn ngày bắt đầu', function (value) {
-            const { dateFrom } = this.parent;
-            if (!dateFrom) {
-                return true;
-            }
-            return new Date(value) >= new Date(dateFrom);
-        }),
+        }
+        return;
+    }),
 });
-const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
+const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
-    const [certification, setCertification] = useState<Certification[]>([]);
-    const [changeCer, { isLoading }] = useChangeMeMutation();
+    const [experiences, setExp] = useState<Experience[]>([]);
+    const [changeExp, { isLoading }] = useChangeMeMutation();
     useEffect(() => {
         if (jobSeeker) {
-            setCertification(currentUser.certificate);
+            setExp(currentUser.experiences);
         }
     }, [jobSeeker, currentUser]);
 
     useEffect(() => {
-        if (certificateToEdit) {
+        if (experienceToEdit) {
             let dateToValue;
             let dateFromValue;
-            if (certificateToEdit.date.to) {
-                const parts = certificateToEdit.date.to.split('T');
+            if (experienceToEdit.date.to) {
+                const parts = experienceToEdit.date.to.split('T');
                 dateToValue = parts[0];
             }
 
-            if (certificateToEdit.date.from) {
-                const parts = certificateToEdit.date.from.split('T');
+            if (experienceToEdit.date.from) {
+                const parts = experienceToEdit.date.from.split('T');
                 dateFromValue = parts[0];
             }
+
+            console.log(experienceToEdit.isWorking);
+
             formik.setValues({
                 ...formik.values,
-                name: certificateToEdit.name || '',
-                organization: certificateToEdit.organization || '',
+                position: experienceToEdit.position || '',
+                company: experienceToEdit.company || '',
                 dateFrom: dateFromValue || '',
                 dateTo: dateToValue || '',
+                isWorking: experienceToEdit.isWorking,
             });
         }
-    }, [certificateToEdit]);
+    }, [experienceToEdit]);
 
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
-                const certificate: any = {
-                    name: values.name,
-                    organization: values.organization,
+                const exp: any = {
+                    position: values.position,
+                    company: values.company,
                     date: {
                         from: values.dateFrom,
                         to: values.dateTo,
                     },
+                    isWorking: values.isWorking,
                 };
 
-                const updatedcertificate = certification.filter((item) => item._id !== certificateToEdit._id);
+                if (values.isWorking) {
+                    exp.date = {
+                        from: values.dateFrom,
+                    };
+                } else {
+                    exp.date = {
+                        from: values.dateFrom,
+                        to: values.dateTo,
+                    };
+                }
 
-                const data = [...updatedcertificate, certificate];
+                const updatedExperiences = experiences.filter((exp) => exp._id !== experienceToEdit._id);
 
-                const certificationData: any = {
-                    certificate: data,
+                const data = [...updatedExperiences, exp];
+
+                const expData: any = {
+                    experiences: data,
                 };
 
-                await changeCer(certificationData);
+                await changeExp(expData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
                 handleOpen();
@@ -147,24 +164,24 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
                 <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
                     <div className="grid grid-cols-2 w-full gap-6">
                         <CustomField
-                            title="Tên giải thưởng"
-                            fieldName="name"
-                            error={formik.errors.name}
-                            touched={formik.touched.name}
+                            title="Chức vụ"
+                            fieldName="position"
+                            error={formik.errors.position}
+                            touched={formik.touched.position}
                             icon={<AiOutlineUser />}
-                            placeholder="Nhập tên giải thưởng của bạn"
-                            value={formik.values.name}
+                            placeholder="Nhập họ của bạn"
+                            value={formik.values.position}
                             onChange={formik.handleChange}
                         />
 
                         <CustomField
-                            title="Tổ chức"
-                            fieldName="organization"
-                            error={formik.errors.organization}
-                            touched={formik.touched.organization}
+                            title="Công ty"
+                            fieldName="company"
+                            error={formik.errors.company}
+                            touched={formik.touched.company}
                             icon={<BiSolidFactory />}
-                            placeholder="Nhập tổ chức của bạn"
-                            value={formik.values.organization}
+                            placeholder="Nhập họ của bạn"
+                            value={formik.values.company}
                             onChange={formik.handleChange}
                         />
 
@@ -175,6 +192,7 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
                             error={formik.errors.dateFrom}
                             touched={formik.touched.dateFrom}
                             icon={<BsCalendarWeek />}
+                            placeholder="Nhập họ của bạn"
                             value={formik.values.dateFrom}
                             onChange={formik.handleChange}
                         />
@@ -186,12 +204,22 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
                             error={formik.errors.dateTo}
                             touched={formik.touched.dateTo}
                             icon={<BsCalendarWeek />}
+                            placeholder="Nhập họ của bạn"
                             value={formik.values.dateTo}
                             onChange={formik.handleChange}
+                            disabled={formik.values.isWorking}
                         />
-                    </div>
-                    <div className=" w-full flex items-end justify-end">
-                        <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
+
+                        <FormControlLabel
+                            control={<Checkbox />}
+                            name="isWorking"
+                            label="Tôi đang làm việc tại đây"
+                            value={formik.values.isWorking}
+                            onChange={formik.handleChange}
+                        />
+                        <div className="flex items-end justify-end">
+                            <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
+                        </div>
                     </div>
                 </form>
             </DialogBody>

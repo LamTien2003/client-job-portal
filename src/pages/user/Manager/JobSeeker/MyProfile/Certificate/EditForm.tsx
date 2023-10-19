@@ -1,43 +1,38 @@
 import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
-import Checkbox from '@mui/material/Checkbox';
 
+import { AiOutlineUser } from 'react-icons/ai';
 import CustomField from './Field';
-import BtnBot from '../../components/BtnBot';
+import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { BiSolidFactory } from 'react-icons/bi';
-import { FormControlLabel } from '@mui/material';
 import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
-import { Education } from '@/types/JobSeeker';
+import { Certification } from '@/types/JobSeeker';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
-import { FaSchool } from 'react-icons/fa';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
-    educateToEdit: any;
+    certificateToEdit: any;
 }
 interface Values {
-    school: string;
-    major: string;
+    name: string;
+    organization: string;
     dateFrom: Date | string;
     dateTo: Date | string;
-
-    isLearning: boolean;
 }
 const initialValues: Values = {
-    school: '',
-    major: '',
+    name: '',
+    organization: '',
     dateFrom: '',
     dateTo: '',
-    isLearning: false,
 };
 const validation = Yup.object().shape({
-    school: Yup.string().required('Trường học không được bỏ trống!'),
-    major: Yup.string().required('Ngành học không được bỏ trống!'),
+    name: Yup.string().required('Tên giải thưởng không được bỏ trống!'),
+    organization: Yup.string().required('Tổ chức không được bỏ trống!'),
     dateFrom: Yup.date()
         .required('Ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
@@ -59,93 +54,83 @@ const validation = Yup.object().shape({
 
             return date <= new Date(dateTo);
         }),
-    dateTo: Yup.date().test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-        const { dateTo } = this.parent;
-        let date;
-        if (!dateTo) {
-            return true;
-        }
-        const dataNow = new Date();
-        if (value) {
-            date = new Date(value);
-        }
-        if (date) {
+    dateTo: Yup.date()
+        .required('Ngày không được bỏ trống!')
+        .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
+            const { dateTo } = this.parent;
+            if (!dateTo) {
+                return true;
+            }
+            const dataNow = new Date();
+            const date = new Date(value);
+
             return date <= dataNow;
-        }
-        return;
-    }),
+        })
+        .test('date-range', 'Ngày phải lớn hơn ngày bắt đầu', function (value) {
+            const { dateFrom } = this.parent;
+            if (!dateFrom) {
+                return true;
+            }
+            return new Date(value) >= new Date(dateFrom);
+        }),
 });
-const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
+const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
-    const [education, setExp] = useState<Education[]>([]);
-    const [changeEdu, { isLoading }] = useChangeMeMutation();
+    const [certification, setCertification] = useState<Certification[]>([]);
+    const [changeCer, { isLoading }] = useChangeMeMutation();
     useEffect(() => {
         if (jobSeeker) {
-            setExp(currentUser.educate);
+            setCertification(currentUser.certificate);
         }
     }, [jobSeeker, currentUser]);
 
     useEffect(() => {
-        if (educateToEdit) {
+        if (certificateToEdit) {
             let dateToValue;
             let dateFromValue;
-            if (educateToEdit.date.to) {
-                const parts = educateToEdit.date.to.split('T');
+            if (certificateToEdit.date.to) {
+                const parts = certificateToEdit.date.to.split('T');
                 dateToValue = parts[0];
             }
 
-            if (educateToEdit.date.from) {
-                const parts = educateToEdit.date.from.split('T');
+            if (certificateToEdit.date.from) {
+                const parts = certificateToEdit.date.from.split('T');
                 dateFromValue = parts[0];
             }
-
             formik.setValues({
                 ...formik.values,
-                major: educateToEdit.major || '',
-                school: educateToEdit.school || '',
+                name: certificateToEdit.name || '',
+                organization: certificateToEdit.organization || '',
                 dateFrom: dateFromValue || '',
                 dateTo: dateToValue || '',
-                isLearning: educateToEdit.isLearning,
             });
         }
-    }, [educateToEdit]);
+    }, [certificateToEdit]);
 
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
-                const edu: any = {
-                    major: values.major,
-                    school: values.school,
+                const certificate: any = {
+                    name: values.name,
+                    organization: values.organization,
                     date: {
                         from: values.dateFrom,
                         to: values.dateTo,
                     },
-                    isWorking: values.isLearning,
                 };
 
-                if (values.isLearning) {
-                    edu.date = {
-                        from: values.dateFrom,
-                    };
-                } else {
-                    edu.date = {
-                        from: values.dateFrom,
-                        to: values.dateTo,
-                    };
-                }
+                const updatedcertificate = certification.filter((item) => item._id !== certificateToEdit._id);
 
-                const updatedEdu = education.filter((edu) => edu._id !== educateToEdit._id);
+                const data = [...updatedcertificate, certificate];
 
-                const data = [...updatedEdu, edu];
-
-                const eduData: any = {
-                    educate: data,
+                const certificationData: any = {
+                    certificate: data,
                 };
 
-                await changeEdu(eduData);
+                await changeCer(certificationData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
                 handleOpen();
@@ -162,24 +147,24 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
                 <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
                     <div className="grid grid-cols-2 w-full gap-6">
                         <CustomField
-                            title="Trường"
-                            fieldName="school"
-                            error={formik.errors.school}
-                            touched={formik.touched.school}
-                            icon={<FaSchool />}
-                            placeholder="Nhập trường của bạn"
-                            value={formik.values.school}
+                            title="Tên giải thưởng"
+                            fieldName="name"
+                            error={formik.errors.name}
+                            touched={formik.touched.name}
+                            icon={<AiOutlineUser />}
+                            placeholder="Nhập tên giải thưởng của bạn"
+                            value={formik.values.name}
                             onChange={formik.handleChange}
                         />
 
                         <CustomField
-                            title="Ngành học"
-                            fieldName="major"
-                            error={formik.errors.major}
-                            touched={formik.touched.major}
+                            title="Tổ chức"
+                            fieldName="organization"
+                            error={formik.errors.organization}
+                            touched={formik.touched.organization}
                             icon={<BiSolidFactory />}
-                            placeholder="Nhập ngành học của bạn"
-                            value={formik.values.major}
+                            placeholder="Nhập tổ chức của bạn"
+                            value={formik.values.organization}
                             onChange={formik.handleChange}
                         />
 
@@ -202,20 +187,11 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
                             touched={formik.touched.dateTo}
                             icon={<BsCalendarWeek />}
                             value={formik.values.dateTo}
-                            disabled={formik.values.isLearning}
                             onChange={formik.handleChange}
                         />
-
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            name="isLearning"
-                            label="Tôi đang học tập tại đây"
-                            value={formik.values.isLearning}
-                            onChange={formik.handleChange}
-                        />
-                        <div className="flex items-end justify-end">
-                            <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
-                        </div>
+                    </div>
+                    <div className=" w-full flex items-end justify-end">
+                        <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
                     </div>
                 </form>
             </DialogBody>

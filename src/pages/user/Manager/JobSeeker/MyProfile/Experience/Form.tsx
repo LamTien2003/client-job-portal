@@ -5,7 +5,7 @@ import CustomField from './Field';
 import { AiOutlineUser } from 'react-icons/ai';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
-import BtnBot from '../../components/BtnBot';
+import BtnBot from '../../../components/BtnBot';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { Experience } from '@/types/JobSeeker';
 import { useEffect, useState } from 'react';

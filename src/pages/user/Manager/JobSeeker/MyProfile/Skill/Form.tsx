@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { CgUserList } from 'react-icons/cg';
-import BtnBot from '../../components/BtnBot';
+import BtnBot from '../../../components/BtnBot';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
-import { Skill } from '@/types/JobSeeker';
 import { RootState } from '@/store/store';
 import { isJobSeeker } from '@/utils/helper';
 import { useSelector } from 'react-redux';

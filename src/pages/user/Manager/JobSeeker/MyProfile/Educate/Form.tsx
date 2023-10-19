@@ -2,38 +2,41 @@ import * as Yup from 'Yup';
 
 import { useFormik } from 'formik';
 import CustomField from './Field';
-import { AiOutlineUser } from 'react-icons/ai';
+import { FaSchool } from 'react-icons/fa';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
-import BtnBot from '../../components/BtnBot';
-import { RootState } from '@/store/store';
-import { Certification } from '@/types/JobSeeker';
+import BtnBot from '../../../components/BtnBot';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { isJobSeeker } from '@/utils/helper';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { Education } from '@/types/JobSeeker';
 
-interface FormCer {
+interface FormEducation {
     toggleOpen: () => void;
 }
 
 interface Values {
-    name: string;
-    organization: string;
+    school: string;
+    major: string;
     dateFrom: Date | string;
     dateTo: Date | string;
-    isWorking: boolean;
+
+    isLearning: boolean;
 }
 const initialValues: Values = {
-    name: '',
-    organization: '',
+    school: '',
+    major: '',
     dateFrom: '',
     dateTo: '',
-    isWorking: false,
+    isLearning: false,
 };
 const validation = Yup.object().shape({
-    name: Yup.string().required('Tên giải thưởng không được bỏ trống!'),
-    organization: Yup.string().required('Tổ chức không được bỏ trống!'),
+    school: Yup.string().required('Trường học không được bỏ trống!'),
+    major: Yup.string().required('Ngành học không được bỏ trống!'),
     dateFrom: Yup.date()
         .required('Ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
@@ -55,58 +58,68 @@ const validation = Yup.object().shape({
 
             return date <= new Date(dateTo);
         }),
-    dateTo: Yup.date()
-        .required('Ngày không được bỏ trống!')
-        .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent;
-            if (!dateTo) {
-                return true;
-            }
-            const dataNow = new Date();
-            const date = new Date(value);
-
+    dateTo: Yup.date().test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
+        const { dateTo } = this.parent;
+        let date;
+        if (!dateTo) {
+            return true;
+        }
+        const dataNow = new Date();
+        if (value) {
+            date = new Date(value);
+        }
+        if (date) {
             return date <= dataNow;
-        })
-        .test('date-range', 'Ngày phải lớn hơn ngày bắt đầu', function (value) {
-            const { dateFrom } = this.parent;
-            if (!dateFrom) {
-                return true;
-            }
-            return new Date(value) >= new Date(dateFrom);
-        }),
+        }
+        return;
+    }),
 });
-const FormCer = ({ toggleOpen }: FormCer) => {
+const FormEducation = ({ toggleOpen }: FormEducation) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
-    const [certification, setCertification] = useState<Certification[]>([]);
+    const [education, setEducation] = useState<Education[]>([]);
     useEffect(() => {
         if (isJobSeeker(currentUser)) {
-            setCertification(currentUser.certificate);
+            setEducation(currentUser.educate);
         }
     }, [currentUser]);
 
-    const [changeCertification, { isLoading }] = useChangeMeMutation();
+    console.log(education);
+
+    const [changeEducation, { isLoading }] = useChangeMeMutation();
 
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
-                const certificate: any = {
+                const educate: any = {
                     date: {
                         from: values.dateFrom,
                         to: values.dateTo,
                     },
-                    name: values.name,
-                    organization: values.organization,
+                    major: values.major,
+                    school: values.school,
+                    isLearning: values.isLearning,
                 };
 
-                const data = [...certification, certificate];
+                if (values.isLearning) {
+                    educate.date = {
+                        from: values.dateFrom,
+                    };
+                } else {
+                    educate.date = {
+                        from: values.dateFrom,
+                        to: values.dateTo,
+                    };
+                }
 
-                const certificationData: any = {
-                    certificate: data,
+                const data = [...education, educate];
+
+                const eduData: any = {
+                    educate: data,
                 };
 
-                await changeCertification(certificationData);
+                await changeEducation(eduData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
             } catch (error) {
@@ -122,24 +135,24 @@ const FormCer = ({ toggleOpen }: FormCer) => {
 
             <div className="grid grid-cols-2 gap-6">
                 <CustomField
-                    title="Tên giải thưởng"
-                    fieldName="name"
-                    error={formik.errors.name}
-                    touched={formik.touched.name}
-                    icon={<AiOutlineUser />}
-                    placeholder="Nhập tên giải thưởng của bạn"
-                    value={formik.values.name}
+                    title="Trường"
+                    fieldName="school"
+                    error={formik.errors.school}
+                    touched={formik.touched.school}
+                    icon={<FaSchool />}
+                    placeholder="Nhập trường của bạn"
+                    value={formik.values.school}
                     onChange={formik.handleChange}
                 />
 
                 <CustomField
-                    title="Tổ chức"
-                    fieldName="organization"
-                    error={formik.errors.organization}
-                    touched={formik.touched.organization}
+                    title="Ngành học"
+                    fieldName="major"
+                    error={formik.errors.major}
+                    touched={formik.touched.major}
                     icon={<BiSolidFactory />}
-                    placeholder="Nhập tổ chức của bạn"
-                    value={formik.values.organization}
+                    placeholder="Nhập ngành học của bạn"
+                    value={formik.values.major}
                     onChange={formik.handleChange}
                 />
 
@@ -162,13 +175,22 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                     touched={formik.touched.dateTo}
                     icon={<BsCalendarWeek />}
                     value={formik.values.dateTo}
+                    disabled={formik.values.isLearning}
                     onChange={formik.handleChange}
                 />
             </div>
+
+            <FormControlLabel
+                control={<Checkbox />}
+                name="isLearning"
+                label="Tôi đang học tập tại đây"
+                value={formik.values.isLearning}
+                onChange={formik.handleChange}
+            />
 
             <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />
         </form>
     );
 };
 
-export default FormCer;
+export default FormEducation;

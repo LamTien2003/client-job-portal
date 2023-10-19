@@ -6,7 +6,7 @@ import { PiBracketsCurlyBold } from 'react-icons/pi';
 import { BsCalendarWeek } from 'react-icons/bs';
 import { FaAudioDescription } from 'react-icons/fa';
 
-import BtnBot from '../../components/BtnBot';
+import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { Project } from '@/types/JobSeeker';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';

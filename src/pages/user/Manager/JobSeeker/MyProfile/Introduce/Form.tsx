@@ -1,5 +1,5 @@
 import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
-import BtnBot from '../../components/BtnBot';
+import BtnBot from '../../../components/BtnBot';
 import { useState } from 'react';
 import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
 interface FormIntro {
