@@ -140,6 +140,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     placeholder="Nhập họ của bạn"
                     value={formik.values.name}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <div className="flex gap-6">
@@ -153,6 +154,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                         placeholder="Nhập họ của bạn"
                         value={formik.values.dateFrom}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
 
                     <CustomField
@@ -166,6 +168,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                         value={formik.values.dateTo}
                         onChange={formik.handleChange}
                         disabled={formik.values.isWorking}
+                        onBlur={formik.handleBlur}
                     />
                 </div>
                 <CustomField
@@ -177,6 +180,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     placeholder="Nhập chi tiết dự án của bạn"
                     value={formik.values.description}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
                 <CustomField
                     title="Đường dẫn website"
@@ -187,6 +191,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     placeholder="Nhập url website của bạn"
                     value={formik.values.url}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <FormControlLabel

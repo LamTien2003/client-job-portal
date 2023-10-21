@@ -130,6 +130,7 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                     placeholder="Nhập tên giải thưởng của bạn"
                     value={formik.values.name}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -141,6 +142,7 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                     placeholder="Nhập tổ chức của bạn"
                     value={formik.values.organization}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -152,6 +154,7 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                     icon={<BsCalendarWeek />}
                     value={formik.values.dateFrom}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -163,6 +166,7 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                     icon={<BsCalendarWeek />}
                     value={formik.values.dateTo}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </div>
 

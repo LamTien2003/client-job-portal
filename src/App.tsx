@@ -21,8 +21,19 @@ import Setting from './components/Settings/Settings';
 import Admin from './pages/admin/Home/Admin';
 import ManageUser from './pages/admin/ManageUser/ManageUser';
 import AdminLayout from './layouts/admin/AdminLayout/AdminLayout';
+import { RootState } from './store/store';
+import { useSelector } from 'react-redux';
+import { isCompany, isJobSeeker } from './utils/helper';
+import Company from './pages/user/Manager/Company/Company';
+import JobCreated from './pages/user/Manager/Company/JobCreated/JobCreated';
+import JobApplication from './pages/user/Manager/Company/JobApplication/JobApplication';
+import JobDeleted from './pages/user/Manager/Company/JobDeleted/JobDeleted';
 
 function App() {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const jobSeeker = isJobSeeker(currentUser);
+    const company = isCompany(currentUser);
+
     return (
         <Routes>
             {/* Public routes */}
@@ -48,12 +59,21 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoutes />}>
                 <Route element={<DefaultLayout />}>
+                    {jobSeeker && (
+                        <Route path="profile" element={<Manager />}>
+                            <Route index element={<MyProfile />} />
+                            <Route path="applied-jobs" element={<AppliedJobs />} />
+                        </Route>
+                    )}
+
                     <Route path="profile" element={<Manager />}>
-                        <Route index element={<MyProfile />} />
-                        <Route path="applied-jobs" element={<AppliedJobs />} />
+                        <Route index element={<Company />} />
+                        <Route path="job-created" element={<JobCreated />} />
+                        <Route path="jobApplication/:id" element={<JobApplication />} />
+                        <Route path="job-deleted" element={<JobDeleted />} />
                     </Route>
+                    <Route path="post-job" index element={<PostJob />} />
                 </Route>
-                <Route path="post-job" index element={<PostJob />} />
                 <Route element={<AdminLayout />}>
                     <Route path="admin/users" index element={<ManageUser />} />
                     <Route path="admin" index element={<Admin />} />

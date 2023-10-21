@@ -1,3 +1,4 @@
+import Company from '@/types/Company';
 import JobSeeker from '@/types/JobSeeker';
 
 export const isJobSeeker = (user: any): user is JobSeeker => {
@@ -12,7 +13,7 @@ export const isJobSeeker = (user: any): user is JobSeeker => {
     );
 };
 
-export const isCompany = (user: any): user is JobSeeker => {
+export const isCompany = (user: any): user is Company => {
     return user !== null && user?.__t === 'Company' && !!user?.companyName && !!user?.establishDate;
 };
 

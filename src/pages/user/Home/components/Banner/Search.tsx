@@ -1,39 +1,105 @@
 import images from '@/assets/images';
-import { Select, Option } from '@material-tailwind/react';
-import { useState } from 'react';
+import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
+import Category from '@/types/Category';
+import { Select, MenuItem } from '@mui/material';
+import { useState, useEffect } from 'react';
+import * as Yup from 'Yup';
+import { useFormik } from 'formik';
+import { useGetJobsQuery } from '@/services/jobsApiSlice';
+interface Values {
+    title: string;
+
+    category: string;
+}
+const initialValues: Values = {
+    title: '',
+    category: '',
+};
+
+const validation = Yup.object().shape({
+    title: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Tiêu đề không được bỏ trống!'),
+    category: Yup.string().required('Danh mục không được bỏ trống!'),
+});
 const Search = () => {
-    const [labelVisible, setLabelVisible] = useState(true);
-    const handleOptionClick = () => {
-        setLabelVisible(false);
-    };
+    const [category, setCategory] = useState<Category[]>([]);
+    const [query, setQuery] = useState({});
+
+    const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery();
+
+    useEffect(() => {
+        if (!loadingCate && !errorCate && categories?.data?.data) {
+            setCategory(categories?.data?.data);
+        }
+    }, [loadingCate, errorCate, categories?.data?.data]);
+    const { data, isLoading, isError } = useGetJobsQuery(query);
+
+    console.log(data);
+
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: validation,
+        onSubmit: async (values) => {
+            try {
+                await setQuery({
+                    q: values.title,
+                    type: values.category,
+                });
+                console.log(values);
+            } catch (error) {
+                console.error('Lỗi khi gửi form:', error);
+            }
+        },
+    });
     return (
-        <form className="flex lg:w-full w-[65%] justify-between bg-white mt-20 items-center p-4 gap-5 rounded mb:flex-col">
-            <div className="flex lg:w-full w-[50%] p-4 border border-[#e9e9e9] bg-[#eff3f2] rounded">
+        <form
+            onSubmit={formik.handleSubmit}
+            className="flex lg:w-full w-[65%] justify-between bg-white mt-20 items-center p-4 gap-5 rounded mb:flex-col"
+        >
+            <div
+                className={`  lg:w-full w-[50%] flex p-4 border border-[#e9e9e9] bg-[#eff3f2] rounded ${
+                    formik.errors.title && formik.touched.title && 'border-red-800 border-2'
+                }`}
+            >
                 <img src={images.logo.jobMini} alt={images.logo.jobMini} />
                 <span className="w-[2px] h-5 bg-gray-300 mx-2"></span>
-                <input className="w-full outline-none text-black bg-[#eff3f2]" type="text" placeholder="Job Title" />
+                <input
+                    name="title"
+                    className="w-full outline-none text-black bg-[#eff3f2]"
+                    type="text"
+                    placeholder="Nhập tên công việc..."
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                />
             </div>
-            <div className="lg:w-full w-[30%]  p-[1px] flex items-center justify-center  border border-[#e9e9e9] bg-[#eff3f2] rounded">
+            <div
+                className={`lg:w-full w-[30%]  p-[1px] flex items-center justify-center  border border-[#e9e9e9] bg-[#eff3f2] rounded ${
+                    formik.errors.category && formik.touched.category && 'border-red-800 border-2'
+                }`}
+            >
                 <img className="py-5 pl-5" src={images.logo.category} alt={images.logo.category} />
                 <span className="w-[2px] h-5 bg-gray-300 mx-2"></span>
-                <div className="w-full">
+                <div className="w-full ">
                     <Select
-                        className="border-none outline-none"
-                        color="blue"
-                        size="md"
+                        name="category"
                         variant="standard"
-                        label={labelVisible ? 'Category' : ''}
+                        className="select w-full h-[48px]  text-content-s-text items-center"
+                        value={formik.values.category}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     >
-                        <Option onClick={handleOptionClick}>Category 1</Option>
-                        <Option onClick={handleOptionClick}>Category 2</Option>
-                        <Option onClick={handleOptionClick}>Category 3</Option>
-                        <Option onClick={handleOptionClick}>Category 4</Option>
+                        {category.map((cate, index) => (
+                            <MenuItem key={index} value={cate.id}>
+                                {cate.categoryName}
+                            </MenuItem>
+                        ))}
                     </Select>
                 </div>
             </div>
+
             <button
                 type="submit"
-                className="group relative rounded lg:py-2 py-4 px-7 text-lg font-medium  bg-primary-100 hover:bg-black duration-300"
+                className="group relative rounded  lg:py-2 py-4 px-7 text-lg font-medium  bg-primary-100 hover:bg-black duration-300 "
             >
                 <div className="absolute rounded inset-0 w-0 bg-black transition-all duration-300 ease-out group-hover:w-full"></div>
 

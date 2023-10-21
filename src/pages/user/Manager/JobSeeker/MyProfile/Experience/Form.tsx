@@ -139,6 +139,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     placeholder="Nhập họ của bạn"
                     value={formik.values.position}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -150,6 +151,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     placeholder="Nhập họ của bạn"
                     value={formik.values.company}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -162,6 +164,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     placeholder="Nhập họ của bạn"
                     value={formik.values.dateFrom}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -175,6 +178,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     value={formik.values.dateTo}
                     onChange={formik.handleChange}
                     disabled={formik.values.isWorking}
+                    onBlur={formik.handleBlur}
                 />
             </div>
 

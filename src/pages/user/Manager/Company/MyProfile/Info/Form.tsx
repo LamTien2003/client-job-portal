@@ -6,7 +6,7 @@ import AvatarSection from './AvatarSection';
 import CustomField from './Field';
 import { CiLocationOn } from 'react-icons/ci';
 import SelectInfo from './Select';
-import BtnBot from '../../components/BtnBot';
+import BtnBot from '../../../components/BtnBot';
 import { useChangeMeUserMutation } from '@/services/usersApiSlice';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';

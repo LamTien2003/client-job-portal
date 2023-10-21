@@ -1,18 +1,15 @@
-import { FormikErrors } from 'formik';
 import { ReactNode } from 'react';
 
 interface CustomFieldProps {
     fieldName: string;
     title: string;
     placeholder?: string;
-    error: string | undefined | FormikErrors<Date>;
-    touched: boolean | undefined | FormikErrors<Date>;
+    error: string | undefined;
+    touched: boolean | undefined;
     icon: ReactNode;
     type?: string;
-    value?: string | Date | null | boolean;
+    value?: string;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
-    disabled?: boolean;
-    onBlur: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const CustomField = ({
@@ -25,8 +22,6 @@ const CustomField = ({
     icon,
     value,
     onChange,
-    disabled,
-    onBlur,
 }: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-1 w-full">
@@ -41,20 +36,14 @@ const CustomField = ({
                 <div className="text-xl px-3">{icon}</div>
                 <input
                     name={fieldName}
-                    className={`w-full h-11 rounded-md py-2 outline-none bg-input ${type === 'date' && 'pr-3'}`}
+                    className="w-full h-11 rounded-md py-2 outline-none bg-input"
                     type={type ? type : 'text'}
                     placeholder={placeholder}
-                    value={value !== undefined && value !== null ? value.toString() : ''}
+                    value={value}
                     onChange={onChange}
-                    disabled={disabled}
-                    onBlur={onBlur}
                 />
             </div>
-            {error && touched ? (
-                <div className="text-red-700 text-sm font-semibold">
-                    {typeof error === 'string' ? error : Object.values(error).join(', ')}
-                </div>
-            ) : null}
+            {error && touched ? <div className="text-red-700 text-sm font-semibold">{error}</div> : null}
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import { MdEmail } from 'react-icons/md';
-import Card from '../components/Card';
+import Card from '../../../components/Card';
 import FormInfo from './Form';
 import { useState } from 'react';
 import { RootState } from '@/store/store';
@@ -16,11 +16,7 @@ const Info = () => {
         <>
             <Card handleOpen={handleOpen}>
                 <div className="flex items-center gap-4">
-                    <img
-                        className="w-20  h-20 object-cover rounded-full"
-                        src={currentUser?.photo}
-                        alt="avt"
-                    />
+                    <img className="w-20  h-20 object-cover rounded-full" src={currentUser?.photo} alt="avt" />
                     <div className="flex flex-col gap-2">
                         <h6 className="text-2xl font-title text-primary-100 ">
                             {currentUser?.firstName} {currentUser?.lastName}

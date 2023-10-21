@@ -61,6 +61,7 @@ export interface JobApplicate {
         description: string;
         title: string;
         salary: number;
+        createdAt: string;
     };
     status: string;
     updatedAt: string;

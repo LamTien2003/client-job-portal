@@ -67,16 +67,17 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
             query(id) {
                 try {
                     return {
-                        url: 'job/apply/' + id ,
+                        url: 'job/apply/' + id,
                         method: 'POST',
-                    }
-                } catch (error:any) {
-                    throw error.message
+                    };
+                } catch (error: any) {
+                    throw error.message;
                 }
             },
             invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: '' }]),
-        })
+        }),
     }),
 });
 
-export const { useGetJobQuery, useGetJobsQuery, useGetCategoriesQuery, useCreateJobMutation, useApplyJobMutation } = jobsApiSlice;
+export const { useGetJobQuery, useGetJobsQuery, useGetCategoriesQuery, useCreateJobMutation, useApplyJobMutation } =
+    jobsApiSlice;

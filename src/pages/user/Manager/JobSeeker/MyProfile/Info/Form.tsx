@@ -96,6 +96,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             placeholder="Nhập họ của bạn"
                             value={formik.values.firstName}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
                         <CustomField
                             title="Tên"
@@ -106,6 +107,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             placeholder="Nhập tên của bạn"
                             value={formik.values.lastName}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
                         <SelectInfo
                             title="Giới tính"
@@ -125,6 +127,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             placeholder="Nhập số điện thoại của bạn"
                             value={formik.values.location}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
 
                         <CustomField
@@ -136,6 +139,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             placeholder="Nhập số điện thoại của bạn"
                             value={formik.values.phoneNumber}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
                         <div className="flex items-end justify-end">
                             <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
