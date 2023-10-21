@@ -12,7 +12,7 @@ interface CustomFieldProps {
     value?: string | Date | null | boolean;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     disabled?: boolean;
-    onBlur: React.ChangeEventHandler<HTMLInputElement>;
+    onBlur?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const CustomField = ({
