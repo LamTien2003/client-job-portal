@@ -44,6 +44,13 @@ import vnFlag from './vietnamflag.png'
 import japanFlag from './japanflag.png'
 import usaFlag from './usaflag.png'
 
+import jobseeker from './jobseeker.png'
+import company from './company.png'
+import admin from './admin.png'
+import censored from './censored.png'
+import uncensored from './uncensored.png'
+import categorypng from './category.png'
+
 const images = {
     yellowStar,
     elliose,
@@ -96,6 +103,14 @@ const images = {
         vnFlag,
         japanFlag,
         usaFlag,
+    },
+    admin: {
+        jobseeker,
+        company,
+        admin,
+        censored,
+        uncensored,
+        categorypng,
     }
 };
 

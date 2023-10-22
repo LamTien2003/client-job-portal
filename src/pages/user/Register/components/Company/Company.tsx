@@ -1,6 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RegisterCompanyRequest, useRegisterCompanyMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
@@ -46,8 +44,8 @@ function Company() {
             establishDate: new Date,
             photo: '', // chưa làm
             coverPhoto: '', // chưa làm
-            companySizeFrom: 0,
-            companySizeTo: 0,
+            companySizeFrom: null,
+            companySizeTo: null,
         },
         validationSchema: Yup.object({
             firstName: Yup
@@ -167,56 +165,67 @@ function Company() {
                                 value={formik.values.firstName} 
                                 error={formik.errors.firstName}
                                 handleChange={formik.handleChange} 
+                                touched={formik.touched.firstName}
                             />
                             <LastName 
                                 value={formik.values.lastName} 
                                 error={formik.errors.lastName} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.lastName}
                             />
                             <Email 
                                 value={formik.values.email} 
                                 error={formik.errors.email} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.email}
                             />
                             <PhoneNumber 
                                 value={formik.values.phoneNumber} 
                                 error={formik.errors.phoneNumber} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.phoneNumber}
                             />
                             <Password
                                 value={formik.values.password} 
                                 error={formik.errors.password} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.password}
                             />
                             <PasswordConfirm 
                                 value={formik.values.passwordConfirm} 
                                 error={formik.errors.passwordConfirm} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.passwordConfirm}
                             />
                             <CompanyName 
                                 value={formik.values.companyName} 
                                 error={formik.errors.companyName} 
                                 handleChange={formik.handleChange} 
+                                touched={formik.touched.companyName}
                             />
                             <Location 
                                 value={formik.values.location} 
                                 error={formik.errors.location} 
                                 handleChange={formik.handleChange} 
+                                touched={formik.touched.location}
                             />
                             <CompanySizeFrom
                                 value={formik.values.companySizeFrom}    
                                 error={formik.errors.companySizeFrom}    
                                 handleChange={formik.handleChange}    
+                                touched={formik.touched.companySizeFrom}
                             />
                             <CompanySizeTo
                                 value={formik.values.companySizeTo}    
                                 error={formik.errors.companySizeTo}    
                                 handleChange={formik.handleChange}    
+                                touched={formik.touched.companySizeTo}
                             />
                             <EstablishDate 
                                 value={formik.values.establishDate} 
                                 error={formik.errors.establishDate} 
                                 handleChange={formik.handleChange} 
+                                touched={formik.touched.establishDate}
                             />
                         </div>
                         

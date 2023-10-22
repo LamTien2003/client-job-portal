@@ -21,6 +21,8 @@ import Setting from './components/Settings/Settings';
 import Admin from './pages/admin/Home/Admin';
 import ManageUser from './pages/admin/ManageUser/ManageUser';
 import AdminLayout from './layouts/admin/AdminLayout/AdminLayout';
+import ManageJob from './pages/admin/ManageJob/ManageJob';
+import ManageCategory from './pages/admin/ManageCategory/ManageCategory';
 
 function App() {
     return (
@@ -55,8 +57,10 @@ function App() {
                 </Route>
                 <Route path="post-job" index element={<PostJob />} />
                 <Route element={<AdminLayout />}>
-                    <Route path="admin/users" index element={<ManageUser />} />
                     <Route path="admin" index element={<Admin />} />
+                    <Route path="admin/users" index element={<ManageUser />} />
+                    <Route path="admin/jobs" index element={<ManageJob />} />
+                    <Route path="admin/categories" index element={<ManageCategory />} />
                 </Route>
             </Route>
 

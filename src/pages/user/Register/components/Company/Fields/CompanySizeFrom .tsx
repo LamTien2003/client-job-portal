@@ -1,14 +1,16 @@
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ChangeEvent } from "react";
 
 type Props = {
-    value: number
+    value: number | any
     error: string | undefined
-    handleChange: any
+    handleChange: (e:ChangeEvent) => void
+    touched: any
 }
 
 function CompanySizeFrom (props: Props) {
-    const {value, error, handleChange} = props
+    const {value, error, touched, handleChange} = props
     return (
         <div className=" mb-4 mr-4 ml-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="companySizeFrom">
@@ -40,8 +42,9 @@ function CompanySizeFrom (props: Props) {
                     </svg>
                 </span>
                 <input
-                    type="text"
+                    type="number"
                     id="companySizeFrom"
+                    name="companySizeFrom"
                     autoComplete="off"
                     value={value}
                     onChange={handleChange}
@@ -51,8 +54,7 @@ function CompanySizeFrom (props: Props) {
                 />
             </div>
             <p
-                id="uidnote"
-                className={error && value ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
+                className={error && touched ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
             >
                 {error}
             </p>

@@ -1,15 +1,18 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '@/services/authApiSlice';
 import { removeToken, setToken } from '@/utils/storage';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup'
 import { EMAIL_REGEX, PWD_REGEX } from '../Register/components/Candidate/Candidate';
+import { RootState } from '@/store/store';
 
 const Login = () => {
+    const currentUser = useSelector((state: RootState) => state.user.user)
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from.pathname || '/';
@@ -36,7 +39,7 @@ const Login = () => {
             password: '',
             passwordConfirm: '',
         },
-        validationSchema: Yup.object({
+        validationSchema: Yup.object().shape({
             email: Yup
                 .string()
                 .required('Không được để trống')
@@ -75,6 +78,12 @@ const Login = () => {
         setErrMsg('');
     }, [email, password]);
 
+    useEffect(() => {
+        if(currentUser) {
+            console.log(currentUser)
+            navigate('/')
+        }
+    }, [currentUser])
 
     return (
         <>
@@ -117,8 +126,8 @@ const Login = () => {
                                             ref={emailRef}
                                             autoComplete="off"
                                             onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
                                             value={formik.values.email}
-                                            required
                                             placeholder="info@example.com"
                                             className="appearance-none border border-teal-100 rounded w-full py-2 px-3 pl-14 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         />
@@ -138,8 +147,8 @@ const Login = () => {
                                             type="password"
                                             id="password"
                                             onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
                                             value={formik.values.password}
-                                            required
                                             placeholder="******************"
                                             className="appearance-none border border-teal-100 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                         />
@@ -163,7 +172,7 @@ const Login = () => {
                                         </a>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <button className="bg-teal-500 duration-300 hover:bg-teal-900 text-white font-bold py-2 px-4 my-6 w-full rounded focus:outline-none focus:shadow-outline">
+                                        <button type='submit' className="bg-teal-500 duration-300 hover:bg-teal-900 text-white font-bold py-2 px-4 my-6 w-full rounded focus:outline-none focus:shadow-outline">
                                             Login
                                         </button>
                                     </div>

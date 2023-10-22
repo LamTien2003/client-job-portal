@@ -1,14 +1,16 @@
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ChangeEvent } from "react";
 
 type Props = {
     value: string
     error: string | undefined
-    handleChange: any
+    handleChange: (e:ChangeEvent) => void
+    touched: any
 }
 
 function Password(props: Props) {
-    const {value, error, handleChange} = props
+    const {value, error, touched, handleChange} = props
     return (
         <div className=" mb-4  mr-4 ml-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -42,6 +44,7 @@ function Password(props: Props) {
                 <input
                     type="password"
                     id="password"
+                    name="password"
                     autoComplete="off"
                     value={value}
                     onChange={handleChange}
@@ -51,7 +54,7 @@ function Password(props: Props) {
                 />
             </div>
             <p
-                className={error && value ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
+                className={error && touched ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
             >
                 {error}
             </p>

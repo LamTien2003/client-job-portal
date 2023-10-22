@@ -10,13 +10,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@material-tailwind/react';
 import { Provider } from 'react-redux';
 import store from './store/store.ts';
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
             <Provider store={store}>
                 <Router>
                     <ThemeProvider>
-                        <App />
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <App />
+                        </LocalizationProvider>
                     </ThemeProvider>
                 </Router>
             </Provider>

@@ -1,16 +1,17 @@
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef } from "react";
+import { ChangeEvent } from "react";
 
 type Props = {
     value: string
     error: string | undefined
-    handleChange: any
-
+    handleChange: (e:ChangeEvent) => void
+    touched: any
 }
 
 function FirstName(props: Props) {
-    const {value, error, handleChange} = props
+    const {value, error, touched, handleChange} = props
 
     const ref = useRef<HTMLInputElement>(null)
 
@@ -50,6 +51,7 @@ function FirstName(props: Props) {
                 <input
                     type="text"
                     id="firstName"
+                    name="firstName"
                     ref={ref}
                     autoComplete="off"
                     value={value}
@@ -60,8 +62,7 @@ function FirstName(props: Props) {
                 />
             </div>
             <p
-                id="uidnote"
-                className={error && value ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
+                className={error && touched ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
             >
                 {error}
             </p>

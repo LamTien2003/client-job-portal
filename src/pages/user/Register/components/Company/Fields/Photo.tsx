@@ -1,17 +1,19 @@
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ChangeEvent } from "react";
 
 type Props = {
     value: string
     error: string | undefined
-    handleChange: any
+    handleChange: (e:ChangeEvent) => void
+    touched: any
 }
 
 function Photo(props: Props) {
-    const {value, error, handleChange} = props
+    const {value, error, touched, handleChange} = props
     return (
         <div className=" mb-4 mr-4 ml-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="companyName">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="photo">
                 Tên Công Ty
                 <span
                     className={
@@ -41,8 +43,8 @@ function Photo(props: Props) {
                 </span>
                 <input
                     type="text"
-                    id="companyName"
-                    autoComplete="off"
+                    id="photo"
+                    name="photo"
                     value={value}
                     onChange={handleChange}
                     aria-invalid={error ? 'false' : 'true'}
@@ -52,7 +54,7 @@ function Photo(props: Props) {
             </div>
             <p
                 id="uidnote"
-                className={error ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
+                className={error && touched ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
             >
                 {error}
             </p>

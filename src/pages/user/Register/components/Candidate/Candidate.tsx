@@ -83,10 +83,10 @@ export const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}
 // ]
 
 export const locationArray = [
-    'Hồ Chí Minh',
-    'Hà Nội',
-    'Đà Nẵng',
-    'Khác',
+    "Hồ Chí Minh",
+    "Hà Nội",
+    "Đà Nẵng",
+    "Khác",
 ]
 
 function Candidate() {
@@ -97,8 +97,6 @@ function Candidate() {
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
-
-
 
     const formik = useFormik({
         initialValues: {
@@ -112,7 +110,7 @@ function Candidate() {
             passwordConfirm: '',
             introduce: 'Giới thiệu về tôi', 
         },
-        validationSchema: Yup.object({
+        validationSchema: Yup.object().shape({
             firstName: Yup
                 .string()
                 .required('Không được để trống')
@@ -153,15 +151,15 @@ function Candidate() {
         onSubmit: async (values: RegisterJobseekerRequest) => {
             try {
                 console.log(values)
-                const response:any = await registerJobSeeker(values);
-                const user = response.data.data.data;
-                const accessToken = response.data.data.accessToken;
-                if(user && accessToken) {
-                    dispatch(setCurrentUser(user));
-                    dispatch(setcredentialsToken(accessToken));
-                    setToken(accessToken);
-                }
-                navigate('/')
+                // const response:any = await registerJobSeeker(values);
+                // const user = response.data.data.data;
+                // const accessToken = response.data.data.accessToken;
+                // if(user && accessToken) {
+                //     dispatch(setCurrentUser(user));
+                //     dispatch(setcredentialsToken(accessToken));
+                //     setToken(accessToken);
+                // }
+                // navigate('/')
             } catch (error) {
                 error;
                 setErrMsg('Đăng ký không thành công');
@@ -187,37 +185,44 @@ function Candidate() {
                             <FirstName 
                                 value={formik.values.firstName} 
                                 error={formik.errors.firstName}
-                                handleChange={formik.handleChange} 
+                                handleChange={formik.handleChange}
+                                touched={formik.touched.firstName}
                             />
                             <LastName 
                                 value={formik.values.lastName} 
                                 error={formik.errors.lastName} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.lastName}
                             />
                             <Email 
                                 value={formik.values.email} 
                                 error={formik.errors.email} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.email}
                             />
                             <PhoneNumber 
                                 value={formik.values.phoneNumber} 
                                 error={formik.errors.phoneNumber} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.phoneNumber}
                             />
                             <Password 
                                 value={formik.values.password} 
                                 error={formik.errors.password} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.password}
                             />
                             <PasswordConfirm 
                                 value={formik.values.passwordConfirm} 
                                 error={formik.errors.passwordConfirm} 
                                 handleChange={formik.handleChange}
+                                touched={formik.touched.passwordConfirm}
                             />
                             <Location 
                                 value={formik.values.location} 
                                 error={formik.errors.location} 
-                                handleChange={formik.handleChange} 
+                                handleChange={formik.handleChange}
+                                touched={formik.touched.location}
                             />
                         </div>
 

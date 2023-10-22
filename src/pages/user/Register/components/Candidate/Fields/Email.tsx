@@ -1,14 +1,16 @@
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ChangeEvent } from "react";
 
 type Props = {
     value: string
     error: string | undefined
-    handleChange: any
+    handleChange: (e:ChangeEvent) => void
+    touched: any
 }
 
 function Email(props: Props) {
-    const {value, error, handleChange} = props
+    const {value, error, touched, handleChange} = props
     return (
         <div className=" mb-4  mr-4 ml-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -45,14 +47,11 @@ function Email(props: Props) {
                     autoComplete="off"
                     value={value}
                     onChange={handleChange}
-                    aria-invalid={error ? 'false' : 'true'}
-                    aria-describedby="uidnote"
                     className=" placeholder:text-slate-400 block bg-white w-full border  border-teal-100  hover:border-teal-400 rounded-md py-2 pl-9 pr-3 focus:outline-none focus:border-teal-200  focus:shadow-outline"
                 />
             </div>
             <p
-                id="uidnote"
-                className={error && value ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
+                className={error && touched ? ' w-60 text-red-500 text-xs italic' : 'hidden'}
             >
                 {error}
             </p>
