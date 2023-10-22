@@ -10,6 +10,7 @@ interface CustomFieldProps {
     type?: string;
     value?: string;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
+    onBlur: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const CustomField = ({
@@ -22,6 +23,7 @@ const CustomField = ({
     icon,
     value,
     onChange,
+    onBlur,
 }: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-1 w-full">
@@ -41,6 +43,7 @@ const CustomField = ({
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
+                    onBlur={onBlur}
                 />
             </div>
             {error && touched ? <div className="text-red-700 text-sm font-semibold">{error}</div> : null}

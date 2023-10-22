@@ -8,5 +8,5 @@ export default interface Company extends User {
     establishDate: Date;
     website: string;
     jobList: Job[];
-    coverPhoto: string
+    coverPhoto: string;
 }

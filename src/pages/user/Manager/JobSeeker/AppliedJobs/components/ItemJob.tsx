@@ -1,9 +1,26 @@
 import { JobApplicate } from '@/types/JobSeeker';
-import React from 'react';
 import images from '@/assets/images';
 import { formatDate } from '@/utils/date';
 const ItemJob = ({ job }: { job: JobApplicate }) => {
     const createDate = formatDate(job?.createdAt);
+
+    const currentDate: Date = new Date();
+
+    const jobCreateDate: Date = new Date(job?.job.createdAt);
+
+    const isToday = jobCreateDate.toDateString() === currentDate.toDateString();
+
+    let displayDate = '';
+
+    if (isToday) {
+        displayDate = 'Hôm nay';
+    } else {
+        const timeDiff: number = currentDate.getTime() - jobCreateDate.getTime();
+
+        const daysAgo: number = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        displayDate = `${daysAgo} ngày trước`;
+    }
+
     return (
         <tr className="bg-white border-b border-primary-100   hover:bg-gray-50 ">
             <th
@@ -17,7 +34,7 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                             <h5 className="text-content-title font-title">{job?.job.description}</h5>
                             <div className="flex gap-1 items-center text-sm">
                                 <img src={images.logo.calender2} alt={images.logo.calender2} />
-                                <p className="text-content-text">1 days ago</p>
+                                <p className="text-content-text">{displayDate}</p>
                             </div>
                         </div>
                         <div className="flex gap-3">

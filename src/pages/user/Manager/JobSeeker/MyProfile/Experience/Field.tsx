@@ -12,6 +12,7 @@ interface CustomFieldProps {
     value?: string | Date | null | boolean;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     disabled?: boolean;
+    onBlur?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const CustomField = ({
@@ -25,6 +26,7 @@ const CustomField = ({
     value,
     onChange,
     disabled,
+    onBlur,
 }: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-1 w-full">
@@ -45,6 +47,7 @@ const CustomField = ({
                     value={value !== undefined && value !== null ? value.toString() : ''}
                     onChange={onChange}
                     disabled={disabled}
+                    onBlur={onBlur}
                 />
             </div>
             {error && touched ? (

@@ -1,4 +1,3 @@
-import images from '@/assets/images';
 import { useGetMyApplicationQuery } from '@/services/jobseekerApiSlice';
 import { useEffect, useState } from 'react';
 import ItemJob from './components/ItemJob';
@@ -13,8 +12,6 @@ const AplliedJobs = () => {
             setJobApplication(data?.data?.data);
         }
     }, [isLoading, isError, data?.data?.data]);
-
-    console.log(jobApplication);
 
     return (
         <>
@@ -36,8 +33,8 @@ const AplliedJobs = () => {
                     </tr>
                 </thead>
                 <tbody className="">
-                    {jobApplication.map((job) => (
-                        <ItemJob job={job} />
+                    {jobApplication.map((job, index) => (
+                        <ItemJob key={index} job={job} />
                     ))}
                 </tbody>
             </table>

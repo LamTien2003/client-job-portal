@@ -83,8 +83,6 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
         }
     }, [currentUser]);
 
-    console.log(education);
-
     const [changeEducation, { isLoading }] = useChangeMeMutation();
 
     const formik = useFormik({
@@ -143,6 +141,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                     placeholder="Nhập trường của bạn"
                     value={formik.values.school}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -154,6 +153,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                     placeholder="Nhập ngành học của bạn"
                     value={formik.values.major}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -165,6 +165,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                     icon={<BsCalendarWeek />}
                     value={formik.values.dateFrom}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
 
                 <CustomField
@@ -177,6 +178,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                     value={formik.values.dateTo}
                     disabled={formik.values.isLearning}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </div>
 

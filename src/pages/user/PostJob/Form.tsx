@@ -10,6 +10,7 @@ import { useCreateJobMutation, useGetCategoriesQuery } from '@/services/jobsApiS
 import { useEffect, useState } from 'react';
 import SelectType from './SelectType';
 import { useGetSkillsQuery } from '@/services/utilsApiSlice';
+import { formatDateValue } from '@/utils/date';
 
 interface Values {
     title: string;
@@ -66,8 +67,12 @@ const FormPostJob = () => {
         initialValues: initialValues,
         validationSchema: validation,
         onSubmit: async (values) => {
-            console.log(values);
-
+            if (!values.deadline) {
+                const today = new Date();
+                today.setDate(today.getDate() + 20);
+                const deadlineDate = formatDateValue(today);
+                values.deadline = deadlineDate;
+            }
             const form = new FormData();
             Object.entries(values).forEach(([key, value]) => {
                 if (key === 'photosJob') {
@@ -80,11 +85,6 @@ const FormPostJob = () => {
                     form.append(key, value);
                 }
             });
-            if (!values.deadline) {
-                const today = new Date();
-                today.setDate(today.getDate() + 20);
-                values.deadline = today;
-            }
 
             try {
                 setIsFormSubmitted(true);
