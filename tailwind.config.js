@@ -13,7 +13,10 @@ export default withMT({
             backgroundImage: {
                 bannerHome: "url('https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/h1-hero-bg.png')",
             },
-
+            fontFamily: {
+                ['family-title']: `'Exo 2', sans-serif`,
+                ['family-text']: `'Work Sans', sans-serif`,
+            },
             colors: {
                 primary: {
                     ['blur']: 'rgba(0,167,172,.3)',
