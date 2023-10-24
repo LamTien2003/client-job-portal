@@ -33,8 +33,8 @@ function JobGutter(props: Props) {
                                         <div className=" text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start tb:flex-row mb:flex-col mb:items-start mb:text-xs ">
                                             {job.postedBy.companyName}
                                             <div className=" h-3.5 w-px bg-content-title mr-2.5 ml-2.5 xl:hidden"></div>
-                                            <p className=" text-content-title font-semibold flex ml-5 mb:text-xs mb:ml-0 ">
-                                                Deadline <span className=" font-medium">: 05 April, 2023</span>{' '}
+                                            <p className=" text-content-title font-semibold flex mb:text-xs mb:ml-0 ">
+                                                Hạn chót <span className=" font-medium">: 05 April, 2023</span>{' '}
                                             </p>
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@ function JobGutter(props: Props) {
                                 <div className=" list-none border-t border-content-border pt-5">
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
-                                            Salary:{' '}
+                                            Lương: 
                                             <span className=" text-content-title font-semibold ml-1">
                                                 {job.salary.toLocaleString('it')}đ /
                                             </span>{' '}
@@ -51,7 +51,7 @@ function JobGutter(props: Props) {
                                     </div>
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
-                                            Experience:{' '}
+                                            Kĩ năng yêu cầu: 
                                             <span className=" text-content-title font-semibold ml-1">
                                                 {job.skillsRequire}
                                             </span>
@@ -59,7 +59,7 @@ function JobGutter(props: Props) {
                                     </div>
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
-                                            Location:{' '}
+                                            Nơi làm việc: 
                                             <span className=" text-content-title font-semibold ml-1">
                                                 {job.postedBy.location}
                                             </span>
@@ -90,13 +90,10 @@ function JobGutter(props: Props) {
                     );
                 })}
             </div>
-            {jobList.length === 0 || (
-                    <div className=' flex justify-center'>
-                        <div className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() => props.changePage(1)}>1</div>
-                        <div className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() => props.changePage(2)}>2</div>
-                    </div>
-                )
-            }
+            <div className=' flex justify-center'>
+                <div className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() => props.changePage(1)}>1</div>
+                <div className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() => props.changePage(2)}>2</div>
+            </div>
         </>
     );
 }

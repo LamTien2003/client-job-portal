@@ -19,6 +19,7 @@ export default interface Job {
     };
     available: boolean;
     isDelete: boolean;
+    isAccepted: boolean;
     applications?: JobApplication[];
     countApplication: number;
     comments: Comment[];

@@ -35,8 +35,8 @@ export interface RegisterCompanyRequest {
     photo: string;
     coverPhoto: string;
     companySize: {
-        from: number;
-        to: number;
+        from: number | any;
+        to: number | any;
     }
 }
 

@@ -4,18 +4,36 @@ import { RootState } from "@/store/store";
 import { Setting } from "@/components/Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import path from "path";
 
 function Sidebar() {
     const currentUser = useSelector((state: RootState) => state.user.user)
     
     const navigate = useNavigate()
 
+    const myURL = window.location.href
+    const page = new URL(myURL)
+    console.log(page.pathname)
+
     const [active, setActive] = useState<string>('text-primary-100 italic bg-white rounded-lg border border-[#EFEEEB] fill-primary-100 ')
-    const [statistics, setStatistics] = useState(true)
-    const [manageUser, setManageUser] = useState(false)
-    const [manageJob, setManageJob] = useState(false)
-    const [manageCategory, setManageCategory] = useState(false)
+    const [statistics, setStatistics] = useState(() => {
+        if(page.pathname === '/admin')  return true
+        return false
+    })
+    const [manageUser, setManageUser] = useState(() => {
+        if(page.pathname === '/admin/users') return true
+        return false
+    })
+    const [manageJob, setManageJob] = useState(() => {
+        if(page.pathname === '/admin/jobs') return true
+        return false
+    })
+    const [manageCategory, setManageCategory] = useState(() => {
+        if(page.pathname === '/admin/categories') return true
+        return false
+    })
+
     const handleActive = (arg: string) => {
         if(arg === 'statistics') {
             setStatistics(true)
@@ -36,12 +54,14 @@ function Sidebar() {
             setManageUser(false)
             setManageJob(true)
             setManageCategory(false)
+            navigate('/admin/jobs')
         }
         if(arg === 'manageCategory') {
             setStatistics(false)
             setManageUser(false)
             setManageJob(false)
             setManageCategory(true)
+            navigate('/admin/categories')
         }
     }
     return (
@@ -86,7 +106,7 @@ function Sidebar() {
                     Settings
                 </div>
             </div>
-            <div className=" flex items-center justify-between absolute top-3/4 left-16 right-28">
+            <div className=" flex items-center justify-between absolute bottom-36 left-16 right-28">
                 <img className=" w-9 h-9 rounded-full" src={'https://res.cloudinary.com/dcv1op3hs/image/upload/v1691749443/users/c2hdowxqvcy4vw2iewgy.jpg'} />
                 <p className=" text-content-title font-medium mr-6">{currentUser?.lastName + ' ' + currentUser?.firstName}</p>
                 <div className=" flex items-center justify-center p-1 bg-[#EBEBEB] rounded-md">
