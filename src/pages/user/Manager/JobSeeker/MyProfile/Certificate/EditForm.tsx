@@ -12,7 +12,7 @@ import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Certification } from '@/types/JobSeeker';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
@@ -78,7 +78,7 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
     const [certification, setCertification] = useState<Certification[]>([]);
-    const [changeCer, { isLoading }] = useChangeMeMutation();
+    const [changeCer, { isLoading }] = useJobseekerChangeMeMutation();
     useEffect(() => {
         if (jobSeeker) {
             setCertification(currentUser.certificate);

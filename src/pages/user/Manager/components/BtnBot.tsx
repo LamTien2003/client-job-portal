@@ -5,17 +5,17 @@ interface BtnBot {
 
 const BtnBot = ({ toggleOpen, isLoading }: BtnBot) => {
     return (
-        <div className="flex gap-2 justify-end">
+        <div className="flex gap-5 justify-end">
             <button
                 type="button"
                 onClick={toggleOpen}
-                className="hover:bg-blue-gray-100 py-2 px-6 rounded-md font-medium text-content-text"
+                className="hover:bg-blue-gray-100 py-2 px-6 rounded-sm  font-semibold bg-blue-gray-50 text-black"
             >
                 Huỷ
             </button>
             <button
                 type="submit"
-                className="bg-primary-100 py-2 px-6 text-white  font-semibold rounded-md"
+                className="bg-primary-100  py-2 px-6 text-white  font-semibold rounded-sm hover:bg-black duration-300"
                 disabled={isLoading}
             >
                 {isLoading ? 'Đang lưu...' : 'Lưu'}

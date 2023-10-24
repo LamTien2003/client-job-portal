@@ -13,7 +13,7 @@ import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Education } from '@/types/JobSeeker';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { FaSchool } from 'react-icons/fa';
 interface EditForm {
     handleOpen: () => void;
@@ -79,7 +79,7 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
     const [education, setExp] = useState<Education[]>([]);
-    const [changeEdu, { isLoading }] = useChangeMeMutation();
+    const [changeEdu, { isLoading }] = useJobseekerChangeMeMutation();
     useEffect(() => {
         if (jobSeeker) {
             setExp(currentUser.educate);

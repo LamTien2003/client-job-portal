@@ -1,4 +1,4 @@
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { RootState } from '@/store/store';
 import { Project } from '@/types/JobSeeker';
 import { formatDate } from '@/utils/date';
@@ -22,7 +22,7 @@ const ProjectItem = ({ data }: { data: Project[] }) => {
         }
     }, [currentUser]);
 
-    const [changeEdu] = useChangeMeMutation();
+    const [changeEdu] = useJobseekerChangeMeMutation();
 
     const deleteItem = (dataId: string) => {
         const itemToDelete = projects.find((item) => item._id === dataId);

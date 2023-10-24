@@ -13,7 +13,7 @@ import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Project } from '@/types/JobSeeker';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { PiBracketsCurlyBold } from 'react-icons/pi';
 import { FaAudioDescription } from 'react-icons/fa';
 interface EditForm {
@@ -82,7 +82,7 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
     const [projects, setProjects] = useState<Project[]>([]);
-    const [changeProjects, { isLoading }] = useChangeMeMutation();
+    const [changeProjects, { isLoading }] = useJobseekerChangeMeMutation();
     useEffect(() => {
         if (jobSeeker) {
             setProjects(currentUser.projects);

@@ -6,7 +6,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
 import BtnBot from '../../../components/BtnBot';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { Experience } from '@/types/JobSeeker';
 import { useEffect, useState } from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -81,7 +81,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
         }
     }, [currentUser]);
 
-    const [changeExp, { isLoading }] = useChangeMeMutation();
+    const [changeExp, { isLoading }] = useJobseekerChangeMeMutation();
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
@@ -125,7 +125,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
 
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
-            <p className="text-content-text text-sm font-semibold">
+            <p className="text-content-text text-sm font-medium italic">
                 Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
             </p>
 
@@ -188,7 +188,13 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                 checked={formik.values.isWorking}
                 label="Tôi đang làm việc tại đây"
                 value={formik.values.isWorking}
-                onChange={formik.handleChange}
+                onChange={(e: any) => {
+                    const isWorking = e.target.checked;
+                    if (isWorking) {
+                        formik.setFieldValue('dateTo', '');
+                    }
+                    formik.setFieldValue('isWorking', isWorking);
+                }}
             />
 
             <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />

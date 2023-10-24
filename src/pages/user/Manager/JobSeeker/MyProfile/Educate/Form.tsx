@@ -6,7 +6,7 @@ import { FaSchool } from 'react-icons/fa';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
 import BtnBot from '../../../components/BtnBot';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { isJobSeeker } from '@/utils/helper';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -83,7 +83,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
         }
     }, [currentUser]);
 
-    const [changeEducation, { isLoading }] = useChangeMeMutation();
+    const [changeEducation, { isLoading }] = useJobseekerChangeMeMutation();
 
     const formik = useFormik({
         initialValues: initialValues,
