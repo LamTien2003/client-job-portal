@@ -59,7 +59,7 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
                             <input
                                 name="interviewDate"
                                 className="w-full h-11 rounded-md py-2 outline-none bg-input pr-3"
-                                type="date"
+                                type="datetime-local"
                                 value={formik.values.interviewDate.toString()}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}

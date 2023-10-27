@@ -1,4 +1,4 @@
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { RootState } from '@/store/store';
 import { Experience } from '@/types/JobSeeker';
 import { formatDate } from '@/utils/date';
@@ -21,7 +21,7 @@ const ExpItem = ({ data }: { data: Experience[] }) => {
         }
     }, [currentUser]);
 
-    const [changeExp] = useChangeMeMutation();
+    const [changeExp] = useJobseekerChangeMeMutation();
 
     const deleteExp = (dataId: string) => {
         const experienceToDelete = experiences.find((exp) => exp._id === dataId);

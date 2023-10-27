@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { CgUserList } from 'react-icons/cg';
 import BtnBot from '../../../components/BtnBot';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { RootState } from '@/store/store';
 import { isJobSeeker } from '@/utils/helper';
 import { useSelector } from 'react-redux';
@@ -29,7 +29,7 @@ const Form = ({ toggleOpen }: Form) => {
         }
     }, [currentUser, loadingSkills, errorSkills, skillsData?.data?.data]);
 
-    const [changeSkill, { isLoading }] = useChangeMeMutation();
+    const [changeSkill, { isLoading }] = useJobseekerChangeMeMutation();
     const handleInputChange = (e: any): void => {
         const selectedValue = e.target.value;
         setInputValue(selectedValue);

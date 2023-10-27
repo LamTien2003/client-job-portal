@@ -1,4 +1,4 @@
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { RootState } from '@/store/store';
 import { Certification } from '@/types/JobSeeker';
 import { formatDate } from '@/utils/date';
@@ -21,7 +21,7 @@ const CerItem = ({ data }: { data: Certification[] }) => {
         }
     }, [currentUser]);
 
-    const [changeCertification] = useChangeMeMutation();
+    const [changeCertification] = useJobseekerChangeMeMutation();
 
     const deleteItem = (dataId: string) => {
         const itemToDelete = certification.find((item) => item._id === dataId);

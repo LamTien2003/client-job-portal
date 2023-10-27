@@ -8,7 +8,7 @@ import { BsCalendarWeek } from 'react-icons/bs';
 import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { Certification } from '@/types/JobSeeker';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { isJobSeeker } from '@/utils/helper';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -84,7 +84,7 @@ const FormCer = ({ toggleOpen }: FormCer) => {
         }
     }, [currentUser]);
 
-    const [changeCertification, { isLoading }] = useChangeMeMutation();
+    const [changeCertification, { isLoading }] = useJobseekerChangeMeMutation();
 
     const formik = useFormik({
         initialValues: initialValues,

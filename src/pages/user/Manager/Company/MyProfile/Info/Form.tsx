@@ -1,4 +1,4 @@
-import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import { AiOutlinePhone, AiOutlineUser } from 'react-icons/ai';
@@ -82,9 +82,9 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader>Thông tin cá nhân</DialogHeader>
-            <DialogBody divider>
-                <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Thông tin cá nhân</DialogHeader>
+            <form onSubmit={formik.handleSubmit}>
+                <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
                     <AvatarSection formik={formik} />
                     <div className="grid grid-cols-2 w-full gap-6">
                         <CustomField
@@ -137,12 +137,12 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             value={formik.values.phoneNumber}
                             onChange={formik.handleChange}
                         />
-                        <div className="flex items-end justify-end">
-                            <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
-                        </div>
                     </div>
-                </form>
-            </DialogBody>
+                </DialogBody>
+                <DialogFooter className="px-8">
+                    <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />
+                </DialogFooter>
+            </form>
         </Dialog>
     );
 };

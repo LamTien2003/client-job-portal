@@ -34,7 +34,7 @@ const CardSub = ({ title, sub, children, toggleOpen, open, data, type }: Card) =
         }
     };
     return (
-        <div className="flex flex-col gap-8 bg-white shadow-md rounded-md p-5 ">
+        <div className="flex flex-col gap-8 bg-white shadow-md rounded-md p-5 border-t-2 border-primary-100">
             <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-2">
                     <h6 className="text-xl font-title text-primary-100">{title}</h6>

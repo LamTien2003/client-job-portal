@@ -1,4 +1,4 @@
-import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 
@@ -12,7 +12,7 @@ import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Certification } from '@/types/JobSeeker';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
@@ -78,7 +78,7 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
     const [certification, setCertification] = useState<Certification[]>([]);
-    const [changeCer, { isLoading }] = useChangeMeMutation();
+    const [changeCer, { isLoading }] = useJobseekerChangeMeMutation();
     useEffect(() => {
         if (jobSeeker) {
             setCertification(currentUser.certificate);
@@ -142,9 +142,9 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader>Cập nhật kinh nghiệm</DialogHeader>
-            <DialogBody divider>
-                <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật chứng chỉ</DialogHeader>
+            <form onSubmit={formik.handleSubmit}>
+                <DialogBody divider className="flex flex-col items-center justify-center px-8">
                     <div className="grid grid-cols-2 w-full gap-6">
                         <CustomField
                             title="Tên giải thưởng"
@@ -190,11 +190,11 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
                             onChange={formik.handleChange}
                         />
                     </div>
-                    <div className=" w-full flex items-end justify-end">
-                        <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
-                    </div>
-                </form>
-            </DialogBody>
+                </DialogBody>
+                <DialogFooter className="px-8">
+                    <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />
+                </DialogFooter>
+            </form>
         </Dialog>
     );
 };
