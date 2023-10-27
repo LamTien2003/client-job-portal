@@ -15,7 +15,7 @@ const Item = ({ job }: { job: any }) => {
             <p>{job.deadline}</p>
             <p>{job.jobRequire[0]}</p>
             <p>{job.numberRecruitment}</p>
-            <Link className="bg-blue-200" to={`/profile/jobApplication/${job.id}`}>
+            <Link className="bg-blue-200" to={`/company/jobApplication/${job.id}`}>
                 Xem danh sách ứng tuyển
             </Link>
 

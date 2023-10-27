@@ -50,6 +50,8 @@ const Search = () => {
             }
         },
     });
+    console.log(query);
+
     return (
         <form
             onSubmit={formik.handleSubmit}

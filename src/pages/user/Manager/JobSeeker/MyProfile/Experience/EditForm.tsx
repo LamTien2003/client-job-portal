@@ -159,7 +159,7 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader className="px-8 bg-primary-200 text-2xl">Cập nhật kinh nghiệm</DialogHeader>
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật kinh nghiệm</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
                     <div className="grid grid-cols-2 w-full gap-6">
@@ -211,11 +211,17 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
                         />
 
                         <FormControlLabel
-                            control={<Checkbox />}
+                            control={<Checkbox checked={formik.values.isWorking} />}
                             name="isWorking"
                             label="Tôi đang làm việc tại đây"
                             value={formik.values.isWorking}
-                            onChange={formik.handleChange}
+                            onChange={(e: any) => {
+                                const isWorking = e.target.checked;
+                                if (isWorking) {
+                                    formik.setFieldValue('dateTo', '');
+                                }
+                                formik.setFieldValue('isWorking', isWorking);
+                            }}
                         />
                     </div>
                 </DialogBody>

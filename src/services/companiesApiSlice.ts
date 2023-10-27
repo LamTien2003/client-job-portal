@@ -140,6 +140,20 @@ export const companyApiSlice = apiSlice.injectEndpoints({
                           { type: 'Companies' as const, id: 'LIST-JOB-DELETED' },
                       ],
         }),
+        cancelJob: builder.mutation<ResponseApi<any>, string>({
+            query(id) {
+                try {
+                    return {
+                        url: `job/cancel/${id}`,
+                        method: 'POST',
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) =>
+                error ? [] : [{ type: 'Companies' as const, id: 'LIST-JOB-CREATED' }],
+        }),
     }),
 });
 
@@ -154,4 +168,5 @@ export const {
     useGetJobDeletedQuery,
     useRestoreJobMutation,
     useAcceptJobMutation,
+    useCancelJobMutation,
 } = companyApiSlice;

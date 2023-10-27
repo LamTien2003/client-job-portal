@@ -10,34 +10,34 @@ import { removeToken } from '@/utils/storage';
 import User from '@/types/User';
 
 const Header = () => {
-    const {data, isLoading, isError} = useGetCurrentUserQuery()
-    const [menu, setMenu] = useState<boolean>(false)
-    const [user, setUser] = useState<User | null>(null)
+    const { data, isLoading, isError } = useGetCurrentUserQuery();
+    const [menu, setMenu] = useState<boolean>(false);
+    const [user, setUser] = useState<User | null>(null);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const menuRef = useRef<HTMLUListElement>(null)
+    const menuRef = useRef<HTMLUListElement>(null);
     const handleLogout = () => {
-        setUser(null)
-        removeToken()
-        navigate('/login')
-    }
+        setUser(null);
+        removeToken();
+        navigate('/login');
+    };
 
     useEffect(() => {
-        let handler = (e:any) => {
-            if(!menuRef.current?.contains(e.target)) {
-                setMenu(false)
+        let handler = (e: any) => {
+            if (!menuRef.current?.contains(e.target)) {
+                setMenu(false);
             }
-        }
+        };
 
-        document.addEventListener('mousedown', handler)
-    })
+        document.addEventListener('mousedown', handler);
+    });
 
     useEffect(() => {
-        if(data?.data?.data && !isLoading && !isError) {
-            setUser(data?.data?.data)
+        if (data?.data?.data && !isLoading && !isError) {
+            setUser(data?.data?.data);
         }
-    }, [data?.data?.data, !isLoading, !isError])
+    }, [data?.data?.data, !isLoading, !isError]);
 
     return (
         <header className="w-[90%] h-[86px] m-auto grid grid-cols-12 gap-4 text-[15px]">
@@ -118,32 +118,50 @@ const Header = () => {
                                 </div>
                             </div>
                         </li>
-                        <li className=" z-50 relative translate-x-20 translate-y-1 cursor-pointer" onClick={() => setMenu(!menu)}>
-                            <img className=' w-9 h-9 rounded-full' src={'https://res.cloudinary.com/dcv1op3hs/image/upload/v1691749443/users/c2hdowxqvcy4vw2iewgy.jpg'} />
+                        <li
+                            className=" z-50 relative translate-x-20 translate-y-1 cursor-pointer"
+                            onClick={() => setMenu(!menu)}
+                        >
+                            <img
+                                className=" w-9 h-9 rounded-full"
+                                src={
+                                    'https://res.cloudinary.com/dcv1op3hs/image/upload/v1691749443/users/c2hdowxqvcy4vw2iewgy.jpg'
+                                }
+                            />
                             {/* <img src={data?.data?.data?.photo} /> */}
                             {menu ? (
-                                <div className=' flex flex-col absolute top-[60px] right-1'>
-                                    <Link to={'profile'} className=' w-60 flex items-center text-content-title font-semibold rounded-sm bg-white pl-5 pt-3 pb-3 mb-0.5 '>
-                                        <div className=' primary-icon pr-2'>
+                                <div className=" flex flex-col absolute top-[60px] right-1">
+                                    <Link
+                                        to={'profile'}
+                                        className=" w-60 flex items-center text-content-title font-semibold rounded-sm bg-white pl-5 pt-3 pb-3 mb-0.5 "
+                                    >
+                                        <div className=" primary-icon pr-2">
                                             <Profile />
                                         </div>
                                         My Profile
                                     </Link>
-                                    <Link to={'/setting'} className=' w-60 flex items-center text-content-title font-semibold rounded-sm bg-white pl-5 pt-3 pb-3 mb-0.5 '>
-                                        <div className=' primary-icon pr-2'>
+                                    <Link
+                                        to={'/setting'}
+                                        className=" w-60 flex items-center text-content-title font-semibold rounded-sm bg-white pl-5 pt-3 pb-3 mb-0.5 "
+                                    >
+                                        <div className=" primary-icon pr-2">
                                             <Setting />
                                         </div>
                                         Settings
                                     </Link>
-                                    <div className=' w-60 flex items-center text-content-title font-semibold rounded-sm bg-white pl-5 pt-3 pb-3 mb-0.5 ' onClick={handleLogout}>
-                                        <div className=' primary-icon pr-2'>
+                                    <div
+                                        className=" w-60 flex items-center text-content-title font-semibold rounded-sm bg-white pl-5 pt-3 pb-3 mb-0.5 "
+                                        onClick={handleLogout}
+                                    >
+                                        <div className=" primary-icon pr-2">
                                             <Logout />
                                         </div>
                                         Logout
                                     </div>
-                                    
                                 </div>
-                            ) : ''}
+                            ) : (
+                                ''
+                            )}
                         </li>
                     </ul>
                 ) : (
@@ -175,7 +193,6 @@ const Header = () => {
                         </li>
                     </ul>
                 )}
-                
             </div>
         </header>
     );

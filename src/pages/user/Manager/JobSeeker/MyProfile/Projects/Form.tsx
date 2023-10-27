@@ -199,7 +199,13 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     name="isWorking"
                     label="Tôi đang làm dự án này"
                     value={formik.values.isWorking}
-                    onChange={formik.handleChange}
+                    onChange={(e: any) => {
+                        const isWorking = e.target.checked;
+                        if (isWorking) {
+                            formik.setFieldValue('dateTo', '');
+                        }
+                        formik.setFieldValue('isWorking', isWorking);
+                    }}
                 />
             </div>
 

@@ -29,7 +29,9 @@ const Form = ({ handleOpen, open }: FormIntro) => {
     return (
         <>
             <Dialog className="rounded-sm" size="lg" open={open} handler={handleOpen}>
-                <DialogHeader className="px-8 bg-primary-200 text-2xl">Giới thiệu bản thân</DialogHeader>
+                <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">
+                    Giới thiệu bản thân
+                </DialogHeader>
                 <form onSubmit={handleSubmit}>
                     <DialogBody divider className="p-8">
                         <div className="flex gap-2 mb-5 text-lg">

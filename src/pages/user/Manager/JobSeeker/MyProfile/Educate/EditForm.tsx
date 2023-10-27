@@ -1,4 +1,4 @@
-import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import Checkbox from '@mui/material/Checkbox';
@@ -157,9 +157,9 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader>Cập nhật kinh nghiệm</DialogHeader>
-            <DialogBody divider>
-                <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật học vấn</DialogHeader>
+            <form onSubmit={formik.handleSubmit}>
+                <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
                     <div className="grid grid-cols-2 w-full gap-6">
                         <CustomField
                             title="Trường"
@@ -207,18 +207,24 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
                         />
 
                         <FormControlLabel
-                            control={<Checkbox />}
+                            control={<Checkbox checked={formik.values.isLearning} />}
                             name="isLearning"
                             label="Tôi đang học tập tại đây"
                             value={formik.values.isLearning}
-                            onChange={formik.handleChange}
+                            onChange={(e: any) => {
+                                const isLearning = e.target.checked;
+                                if (isLearning) {
+                                    formik.setFieldValue('dateTo', '');
+                                }
+                                formik.setFieldValue('isLearning', isLearning);
+                            }}
                         />
-                        <div className="flex items-end justify-end">
-                            <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
-                        </div>
                     </div>
-                </form>
-            </DialogBody>
+                </DialogBody>
+                <DialogFooter className="px-8">
+                    <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />
+                </DialogFooter>
+            </form>
         </Dialog>
     );
 };

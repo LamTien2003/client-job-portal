@@ -187,7 +187,13 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                 name="isLearning"
                 label="Tôi đang học tập tại đây"
                 value={formik.values.isLearning}
-                onChange={formik.handleChange}
+                onChange={(e: any) => {
+                    const isLearning = e.target.checked;
+                    if (isLearning) {
+                        formik.setFieldValue('dateTo', '');
+                    }
+                    formik.setFieldValue('isLearning', isLearning);
+                }}
             />
 
             <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />
