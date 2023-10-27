@@ -125,17 +125,10 @@ export default withMT({
             },
         },
         screens: {
-            xl: { max: '1279px' },
-            // => @media (max-width: 1279px) { ... }
-
-            lg: { max: '1024px' },
-            // => @media (max-width: 1023px) { ... }
-
-            tb: { max: '768px' },
-            // => @media (max-width: 767px) { ... }
-
+            xl: { min: '1024px', max: '1279px' },
+            lg: { min: '768px', max: '1023px' },
+            tb: { min: '640px', max: '767px' },
             mb: { max: '639px' },
-            // => @media (max-width: 639px) { ... }
         },
     },
     plugins: ['tailwind-scrollbar'],
