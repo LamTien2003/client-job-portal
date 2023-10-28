@@ -40,14 +40,13 @@ function CompanyListing() {
             <div className="selection:bg-primary-100 selection:text-white">
                 <Banner page="Company Listing" />
 
-                <div className=" max-w-7xl ml-auto mr-auto pt-28 flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:max-w-3xl mb:max-w-2xl">
+                <div className=" max-w-7xl ml-auto mr-auto pt-28 flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:flex-col tb:max-w-3xl mb:flex-col mb:max-w-2xl">
                     {/* job sidebar */}
-                    <div className=" w-1/4 pr-3 mr-auto ml-auto mb-8 lg:w-3/4 lg:pr-0 mb:w-11/12">
+                    
                         <Sidebar filterJob={filterJob} />
-                    </div>
 
                     {/* list */}
-                    <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 tb:w-11/12">
+                    <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 lg:mx-auto tb:w-11/12 mb:w-11/12 mb:mx-auto">
                         <div className=" mb-6 pl-3 pr-3 flex justify-between lg:flex-col">
                             <p className="text-content-text font-medium pt-2 pb-2">Hiện có <span className=' text-primary-100 font-semibold'>{countCompanies}</span> công ty</p>
                             <div>

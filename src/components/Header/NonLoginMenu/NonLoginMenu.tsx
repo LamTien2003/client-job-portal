@@ -66,19 +66,19 @@ function NonLoginMenu() {
                     </div>
                 )}
             </div>
-            <Link to={'/login'} className=" group flex items-center justify-center border border-[#dfe9e5] rounded-[5px] py-[9px] px-[28px] duration-500 cursor-pointer hover:bg-primary-100 hover:text-white xl:text-sm xl:px-[20px] lg:px-[30px] tb:hidden">
+            <Link to={'/login'} className=" group flex items-center justify-center border border-[#dfe9e5] rounded-[5px] py-[9px] px-[28px] duration-500 cursor-pointer hover:bg-primary-100 hover:text-white xl:text-sm xl:px-[20px] lg:px-[30px] tb:hidden mb:hidden">
                 <div className=" mr-2 duration-500 group-hover:fill-white">
                     <User />
                 </div>
                 <p>Sign In</p>
             </Link>
-            <Link to={'/post-job'} className=" group flex items-center justify-center text-white bg-primary-100 rounded-[5px] py-[9px] px-[26px] duration-500 cursor-pointer hover:bg-black hover:text-white xl:text-sm xl:px-[20px] lg:px-[30px] tb:hidden">
+            <Link to={'/post-job'} className=" group flex items-center justify-center text-white bg-primary-100 rounded-[5px] py-[9px] px-[26px] duration-500 cursor-pointer hover:bg-black hover:text-white xl:text-sm xl:px-[20px] lg:px-[30px] tb:hidden mb:hidden">
                 <p>Post Job</p>
                 <div className=" ml-2 duration-500 fill-white xl:ml-2 xl:mr-0">
                     <Vali />
                 </div>
             </Link>
-            <div className=" hidden lg:block" onClick={() => setSideMenu(!sideMenu)}>
+            <div className=" hidden lg:block tb:block mb:block" onClick={() => setSideMenu(!sideMenu)}>
                 <FontAwesomeIcon icon={faBars} />
             </div>
 

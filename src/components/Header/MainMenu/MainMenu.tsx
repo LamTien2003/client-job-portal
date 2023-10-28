@@ -20,7 +20,7 @@ function MainMenu() {
     }
     
     return (
-        <div className=' flex items-center xl:text-sm lg:hidden '>
+        <div className=' flex items-center xl:text-sm lg:hidden tb:hidden mb:hidden '>
             <div className=' flex items-center p-[30px] xl:p-[18px] duration-300 cursor-pointer hover:text-primary-100'>
                 <Link to={'/'}>Home</Link>
             </div>

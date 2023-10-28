@@ -5,16 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function BotFooter() {
     return (
-        <div className=" mt-[90px] relative">
-            <img className=" top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 absolute lg:hidden" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/footer-logo.svg" />
+        <div className=" mt-[90px] px-5 relative">
+            <img className=" top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 absolute lg:hidden tb:hidden mb:hidden" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/footer-logo.svg" />
 
-            <div className=" flex items-center justify-between lg:flex-col">
-                <div className=" w-5/12 flex items-center justify-start border-b border-gray-800 pb-[55px] xl:pb-[50px] lg:border-none lg:pb-0 lg:w-full lg:justify-center ">
+            <div className=" flex items-center justify-between lg:flex-col tb:flex-col mb:flex-col">
+                <div className=" flex items-center justify-start border-b border-gray-800 pb-[55px] xl:pb-[50px] lg:border-none lg:pb-0 lg:w-full lg:justify-center tb:border-none tb:pb-[30px] mb:border-none mb:pb-[25px] ">
                     <img className=" pl-3 lg:w-[35px]" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/footer-support-icon.svg" />
                     <h3 className=" text-xl font-semibold before:w-px before:h-5 before:border-l before:border-primary-100 before:mx-2 xl:text-lg mb:text-base">Support Line:</h3>
                     <p className=" text-[#00A7AC] text-xl font-medium underline pl-[25px] duration-300 cursor-pointer hover:text-[#b3b3b3] xl:text-lg mb:text-base">+099-035 7398 3465</p>
                 </div>
-                <div className=" w-5/12 flex items-center justify-end border-b border-gray-800 pb-10 pr-3 gap-[50px] xl:gap-[25px] lg:w-full lg:justify-center lg:-mt-[25px] tb:gap-[20px]">
+                <div className=" flex items-center justify-end border-b border-gray-800 pb-10 pr-3 gap-[50px] xl:gap-[25px] lg:w-full lg:justify-center lg:-mt-[25px] tb:gap-[20px]">
                     <p className="text-[#b3b3b3] font-medium tracking-wide duration-300 hover:text-primary-100 cursor-pointer xl:text-[15px] tb:text-sm">Privacy Policy</p>
                     <p className="text-[#b3b3b3] font-medium tracking-wide duration-300 hover:text-primary-100 cursor-pointer xl:text-[15px] tb:text-sm">Terms of Services</p>
                     <p className="text-[#b3b3b3] font-medium tracking-wide duration-300 hover:text-primary-100 cursor-pointer xl:text-[15px] tb:text-sm">Our Sitemap</p>

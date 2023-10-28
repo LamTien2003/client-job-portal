@@ -5,7 +5,7 @@ import ItemCol from "./ItemCol/ItemCol";
 
 function TopFooter() {
     return (
-        <div className=" flex items-start justify-between mx-auto lg:flex-wrap lg:w-10/12 mb:flex-col mb:items-center ">
+        <div className=" flex items-start justify-between mx-auto lg:flex-wrap lg:w-10/12 tb:flex-wrap tb:w-8/12 mb:flex-col mb:items-center ">
             <ItemCol
                 title='About Company'
                 list={['Contact Us', 'Terms & Condition', 'Privacy & Policy', 'Candidate Listing']}
@@ -18,7 +18,7 @@ function TopFooter() {
                 title="For Employer's"
                 list={['Post A Job', 'Browse Candidates', 'Job Packages', 'Jobs Featured', 'Employer Dashboard']}
             />
-            <div className=" flex flex-col lg:items-center lg:w-full ">
+            <div className=" flex flex-col  ">
                 <h3 className=" text-xl font-semibold mb-[25px] ">Download App</h3>
                 <div className=" border border-gray-800 py-3 px-[14px] mb-[30px] cursor-pointer">
                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/apple-app.svg" />

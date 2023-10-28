@@ -31,7 +31,7 @@ function Sidebar(props: Props) {
     }
 
     return (
-        <div>
+        <div className=" w-1/4 pr-3 mr-auto ml-auto mb-8 lg:w-3/4 lg:pr-0 tb:w-11/12 mb:w-11/12">
             
             <Category data={category} handleFilter={myFilter} />
             
