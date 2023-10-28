@@ -63,6 +63,7 @@ export interface JobApplicate {
         salary: number;
         createdAt: string;
     };
+    interviewDate?: string;
     status: string;
     updatedAt: string;
     createdAt: string;

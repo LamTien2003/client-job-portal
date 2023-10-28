@@ -12,6 +12,7 @@ interface ParamsGetAllJob {
     ['salary[lte]']?: number;
     ['skillsRequire[in]']?: string[];
     sort?: string;
+    type?: string;
 }
 
 export type CategoryType = {

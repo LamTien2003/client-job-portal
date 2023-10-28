@@ -13,22 +13,27 @@ const AplliedJobs = () => {
         }
     }, [isLoading, isError, data?.data?.data]);
 
+    console.log(jobApplication);
+
     return (
         <>
-            <table className="border border-primary-100 w-full text-sm text-left ">
-                <thead className="w-full  bg-primary-100  justify-between items-center p-4  text-white uppercase">
+            <table className="border border-primary-100 w-full text-sm text-center">
+                <thead className="w-full bg-primary-100  justify-between items-center p-4  text-white font-family-title text-base">
                     <tr>
                         <th scope="col" className="px-6 py-3">
-                            Title
+                            Tiêu đề
                         </th>
-                        <th scope="col" className="px-6 py-3">
-                            Apply Date
+                        <th scope="col" className="w-[15%] px-6 py-3">
+                            Ngày nộp đơn
                         </th>
-                        <th scope="col" className="px-6 py-3">
-                            Company
+                        <th scope="col" className="w-[17%] px-6 py-3">
+                            Ngày phỏng vấn
                         </th>
-                        <th scope="col" className="px-6 py-3">
-                            Status
+                        <th scope="col" className=" w-[15%] px-6 py-3">
+                            Công ty
+                        </th>
+                        <th scope="col" className="w-[16%] px-6 py-3">
+                            Trạng thái
                         </th>
                     </tr>
                 </thead>

@@ -1,4 +1,4 @@
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { RootState } from '@/store/store';
 import { Skill } from '@/types/JobSeeker';
 import { isJobSeeker } from '@/utils/helper';
@@ -15,7 +15,7 @@ const SkillItem = ({ data }: { data: Skill[] }) => {
         }
     }, [currentUser]);
 
-    const [changeSkill] = useChangeMeMutation();
+    const [changeSkill] = useJobseekerChangeMeMutation();
 
     const deleteItem = (name: string) => {
         const itemToDelete = skills.find((item) => item === name);

@@ -9,7 +9,7 @@ import { FaAudioDescription } from 'react-icons/fa';
 import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { Project } from '@/types/JobSeeker';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { isJobSeeker } from '@/utils/helper';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -85,7 +85,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
         }
     }, [currentUser]);
 
-    const [changeProjects, { isLoading }] = useChangeMeMutation();
+    const [changeProjects, { isLoading }] = useJobseekerChangeMeMutation();
 
     const formik = useFormik({
         initialValues: initialValues,
@@ -199,7 +199,13 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     name="isWorking"
                     label="Tôi đang làm dự án này"
                     value={formik.values.isWorking}
-                    onChange={formik.handleChange}
+                    onChange={(e: any) => {
+                        const isWorking = e.target.checked;
+                        if (isWorking) {
+                            formik.setFieldValue('dateTo', '');
+                        }
+                        formik.setFieldValue('isWorking', isWorking);
+                    }}
                 />
             </div>
 

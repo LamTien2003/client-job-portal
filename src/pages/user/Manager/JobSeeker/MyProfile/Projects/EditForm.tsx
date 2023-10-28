@@ -1,4 +1,4 @@
-import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import Checkbox from '@mui/material/Checkbox';
@@ -13,7 +13,7 @@ import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Project } from '@/types/JobSeeker';
-import { useChangeMeMutation } from '@/services/jobseekerApiSlice';
+import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { PiBracketsCurlyBold } from 'react-icons/pi';
 import { FaAudioDescription } from 'react-icons/fa';
 interface EditForm {
@@ -82,7 +82,7 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
     const [projects, setProjects] = useState<Project[]>([]);
-    const [changeProjects, { isLoading }] = useChangeMeMutation();
+    const [changeProjects, { isLoading }] = useJobseekerChangeMeMutation();
     useEffect(() => {
         if (jobSeeker) {
             setProjects(currentUser.projects);
@@ -158,9 +158,9 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader>Cập nhật kinh nghiệm</DialogHeader>
-            <DialogBody divider>
-                <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật dự án</DialogHeader>
+            <form onSubmit={formik.handleSubmit}>
+                <DialogBody className="flex flex-col items-center justify-center gap-4 px-8" divider>
                     <div className="grid grid-cols-2 w-full gap-6">
                         <CustomField
                             title="Tên dự án"
@@ -218,18 +218,24 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                         />
 
                         <FormControlLabel
-                            control={<Checkbox />}
+                            control={<Checkbox checked={formik.values.isWorking} />}
                             name="isWorking"
                             label="Tôi đang làm dự án này"
                             value={formik.values.isWorking}
-                            onChange={formik.handleChange}
+                            onChange={(e: any) => {
+                                const isWorking = e.target.checked;
+                                if (isWorking) {
+                                    formik.setFieldValue('dateTo', '');
+                                }
+                                formik.setFieldValue('isWorking', isWorking);
+                            }}
                         />
-                        <div className="flex items-end justify-end">
-                            <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
-                        </div>
                     </div>
-                </form>
-            </DialogBody>
+                </DialogBody>
+                <DialogFooter className="px-8">
+                    <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />
+                </DialogFooter>
+            </form>
         </Dialog>
     );
 };

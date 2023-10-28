@@ -5,7 +5,7 @@ import JobSeeker, { JobApplicate } from '@/types/JobSeeker';
 
 export const jobseekerApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        changeMe: builder.mutation<ResponseApi<JobSeeker>, JobSeeker>({
+        JobseekerChangeMe: builder.mutation<ResponseApi<JobSeeker>, JobSeeker>({
             query(body) {
                 try {
                     return {
@@ -29,7 +29,21 @@ export const jobseekerApiSlice = apiSlice.injectEndpoints({
             query: () => `jobseeker/myApplication`,
             providesTags: () => [{ type: 'JobSeeker' as const, id: 'LIST' }],
         }),
+
+        removeJobApply: builder.mutation<ResponseApi<JobApplicate>, string>({
+            query(id) {
+                try {
+                    return {
+                        url: `job/remove/${id}`,
+                        method: 'POST',
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'JobSeeker' as const, id: 'LIST' }]),
+        }),
     }),
 });
 
-export const { useChangeMeMutation, useGetMyApplicationQuery } = jobseekerApiSlice;
+export const { useJobseekerChangeMeMutation, useGetMyApplicationQuery, useRemoveJobApplyMutation } = jobseekerApiSlice;
