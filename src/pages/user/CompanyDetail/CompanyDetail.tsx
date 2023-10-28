@@ -9,6 +9,7 @@ import Company from "@/types/Company";
 import CompanyInfo from "./components/CompanyInfo/CompanyInfo";
 import CompanyOverview from "./components/CompanyOverview/CompanyOverview";
 import AboutCompany from "./components/AboutCompany/AboutCompany";
+import Loader from "@/components/Loader/Loader";
 
 function CompanyDetail() {
     const [company, setCompany] = useState<Company>()
@@ -25,24 +26,21 @@ function CompanyDetail() {
     
     return (
         <>
-            {isLoading ? (
-                'Loading...'
-            ) : (
-                <div className="selection:bg-primary-100 selection:text-white">
-                    <Banner page="Company Detail" />
+            {isLoading && <Loader isLoading={isLoading} />}
+            <div className="selection:bg-primary-100 selection:text-white">
+                <Banner page="Company Detail" />
 
-                    <div className=" w-10/12 mt-28 mb-28 text-content-text mr-auto ml-auto">
-                        {!isLoading && !isError && company && <CompanyInfo data={company}/>}
+                <div className=" w-10/12 mt-28 mb-28 text-content-text mr-auto ml-auto">
+                    {!isLoading && !isError && company && <CompanyInfo data={company}/>}
 
-                        <div className=" flex lg:flex-col ">
-                            {!isLoading && !isError && company && <AboutCompany data={company}/>}
-                            {!isLoading && !isError && company && <CompanyOverview data={company}/>}
-                        </div>
-
-                        {!isLoading && !isError && company && <Job data={company}/>}
+                    <div className=" flex lg:flex-col ">
+                        {!isLoading && !isError && company && <AboutCompany data={company}/>}
+                        {!isLoading && !isError && company && <CompanyOverview data={company}/>}
                     </div>
+
+                    {!isLoading && !isError && company && <Job data={company}/>}
                 </div>
-            )}
+            </div>
         </>
     );
 }

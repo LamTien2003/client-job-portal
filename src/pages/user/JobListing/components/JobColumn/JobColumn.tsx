@@ -23,6 +23,8 @@ function JobColumn(props: Props) {
         <>
             {jobList.length === 0 && 'Hiện danh mục này chưa có công việc nào'}
             {jobList?.map((job) => {
+                const date = new Date(job.deadline)
+                const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                 if(job.isAccepted === true) {
                     return (
                         <div key={job.id} className=" mb-7 flex flex-col">
@@ -61,12 +63,12 @@ function JobColumn(props: Props) {
                                                 </div>
                                                 <div className=" flex mr-4">
                                                     <div className=" text-content-title text-sm font-semibold bg-gray-300 rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs mb:pb-1 mb:pt-1 mb:pl-4 mb:pr-3 mb:font-medium">
-                                                        Full Time
+                                                        Part Time
                                                     </div>
                                                 </div>
                                                 <div className=" flex mr-4">
                                                     <div className=" text-content-title text-sm font-semibold bg-gray-300 rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs mb:pb-1 mb:pt-1 mb:pl-4 mb:pr-3 mb:font-medium">
-                                                        Full Time
+                                                        Remote
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,7 +87,7 @@ function JobColumn(props: Props) {
                                             <div className=" flex items-center pb-1 before:w-2 before:h-2 before:bg-primary-100 before:rounded-full before:mr-1.5 mt-1">
                                                 <p className=" text-content-text text-cb font-medium lg:text-sm">
                                                     Hạn chót:{' '}
-                                                    <span className=" text-content-title font-medium">05 April, 2023</span>
+                                                    <span className=" text-content-title font-medium">{mydeadline}</span>
                                                 </p>
                                             </div>
                                             <div className=" flex items-center pb-1 before:w-2 before:h-2 before:bg-primary-100 before:rounded-full before:mr-1.5 mt-1">

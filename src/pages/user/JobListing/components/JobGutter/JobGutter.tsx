@@ -14,12 +14,14 @@ function JobGutter(props: Props) {
             {jobList.length === 0 && 'Hiện danh mục này chưa có công việc nào'}
             <div className=" flex flex-wrap tb:flex-col ">
                 {jobList?.map((job) => {
+                    const date = new Date(job.deadline)
+                    const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                     return (
                         <div key={job.id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full ">
                             <div className=" border-content-border border rounded p-4 relative">
                                 <img
                                     className=" rounded tb:w-full"
-                                    src={job.postedBy.coverPhoto ? job.postedBy.coverPhoto : "https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-1.png"}
+                                    src={job.postedBy.coverPhoto}
                                 />
                                 <div className=" mt-5 mb-5 flex items-center">
                                     <img
@@ -34,7 +36,7 @@ function JobGutter(props: Props) {
                                             {job.postedBy.companyName}
                                             <div className=" h-3.5 w-px bg-content-title mr-2.5 ml-2.5 xl:hidden"></div>
                                             <p className=" text-content-title font-semibold flex mb:text-xs mb:ml-0 ">
-                                                Hạn chót <span className=" font-medium">: 05 April, 2023</span>{' '}
+                                                Hạn chót <span className=" font-medium">: {mydeadline}</span>{' '}
                                             </p>
                                         </div>
                                     </div>

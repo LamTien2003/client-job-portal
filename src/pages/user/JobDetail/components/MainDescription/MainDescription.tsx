@@ -24,8 +24,10 @@ function MainDescription(props: Props) {
                 <div>
                     {job.skillsRequire?.map(skill => {
                         return (
-                            <p 
-                                className=" text-content-text text-cb font-medium flex items-center mb-2.5 ml-3 relative before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:-ml-3 before:pr-2 before:top-2 before:absolute">
+                            <p
+                                key={skill}
+                                className=" text-content-text text-cb font-medium flex items-center mb-2.5 ml-3 relative before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:-ml-3 before:pr-2 before:top-2 before:absolute"
+                            >
                                 {skill}
                             </p>
                         )
