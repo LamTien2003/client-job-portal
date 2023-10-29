@@ -55,6 +55,8 @@ const Form = ({ handleOpen, open }: FormIntro) => {
                             cols={30}
                             rows={5}
                         ></textarea>
+
+                        <div className="text-content-text font-semibold">0/2500 Kí tự</div>
                     </DialogBody>
                     <DialogFooter className="px-8">
                         <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />

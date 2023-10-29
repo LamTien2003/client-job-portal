@@ -14,6 +14,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { isJobSeeker } from '@/utils/helper';
+import { DatePicker } from '@mui/x-date-pickers';
 interface FormExp {
     toggleOpen: () => void;
 }
@@ -113,10 +114,10 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     experiences: data,
                 };
 
-                await changeExp(expData);
-                alert('Cập nhật thông tin thành công!');
-                formik.resetForm();
-                toggleOpen();
+                // await changeExp(expData);
+                // alert('Cập nhật thông tin thành công!');
+                // formik.resetForm();
+                // toggleOpen();
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
@@ -124,78 +125,125 @@ const FormExp = ({ toggleOpen }: FormExp) => {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
+        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-2  pt-5">
             <p className="text-content-text text-sm font-medium italic">
                 Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
             </p>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col gap-6 border-b-2 pb-5">
                 <CustomField
-                    title="Chức vụ"
+                    title="Chức vụ *"
                     fieldName="position"
                     error={formik.errors.position}
                     touched={formik.touched.position}
                     icon={<AiOutlineUser />}
-                    placeholder="Nhập họ của bạn"
+                    placeholder="Nhập chức vụ"
                     value={formik.values.position}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
 
                 <CustomField
-                    title="Công ty"
+                    title="Công ty *"
                     fieldName="company"
                     error={formik.errors.company}
                     touched={formik.touched.company}
                     icon={<BiSolidFactory />}
-                    placeholder="Nhập họ của bạn"
+                    placeholder="Nhập công ty"
                     value={formik.values.company}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
 
-                <CustomField
-                    type="date"
-                    title="Từ"
-                    fieldName="dateFrom"
-                    error={formik.errors.dateFrom}
-                    touched={formik.touched.dateFrom}
-                    icon={<BsCalendarWeek />}
-                    placeholder="Nhập họ của bạn"
-                    value={formik.values.dateFrom}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                <FormControlLabel
+                    control={<Checkbox />}
+                    name="isWorking"
+                    checked={formik.values.isWorking}
+                    label="Tôi đang làm việc tại đây"
+                    value={formik.values.isWorking}
+                    onChange={(e: any) => {
+                        const isWorking = e.target.checked;
+                        if (isWorking) {
+                            formik.setFieldValue('dateTo', '');
+                        }
+                        formik.setFieldValue('isWorking', isWorking);
+                    }}
                 />
+                <div className="flex gap-8 justify-between">
+                    <div className="flex gap-6 justify-between">
+                        <DatePicker
+                            className="w-full"
+                            label={'Tháng'}
+                            views={['month']}
+                            value={formik.values.dateFrom}
+                            onChange={(date) => {
+                                formik.setFieldValue('dateFrom', date);
+                            }}
+                        />
 
-                <CustomField
-                    type="date"
-                    title="Đến"
-                    fieldName="dateTo"
-                    error={formik.errors.dateTo}
-                    touched={formik.touched.dateTo}
-                    icon={<BsCalendarWeek />}
-                    placeholder="Nhập họ của bạn"
-                    value={formik.values.dateTo}
-                    onChange={formik.handleChange}
-                    disabled={formik.values.isWorking}
-                    onBlur={formik.handleBlur}
-                />
+                        <DatePicker
+                            className="w-full"
+                            label={'Năm'}
+                            views={['year']}
+                            value={formik.values.dateFrom}
+                            onChange={(date) => {
+                                formik.setFieldValue('dateFrom', date);
+                            }}
+                        />
+                    </div>
+
+                    <div className="flex gap-6 justify-between">
+                        <DatePicker
+                            className="w-full"
+                            label={'Tháng'}
+                            views={['month']}
+                            value={formik.values.dateTo}
+                            onChange={(date) => {
+                                formik.setFieldValue('dateTo', date);
+                            }}
+                        />
+
+                        <DatePicker
+                            className="w-full"
+                            label={'Năm'}
+                            views={['year']}
+                            value={formik.values.dateTo}
+                            onChange={(date) => {
+                                formik.setFieldValue('dateTo', date);
+                            }}
+                        />
+                    </div>
+                </div>
+
+                {/* <div className="flex gap-8 justify-between">
+                    <CustomField
+                        type="date"
+                        title="Ngày bắt đầu *"
+                        fieldName="dateFrom"
+                        error={formik.errors.dateFrom}
+                        touched={formik.touched.dateFrom}
+                        icon={<BsCalendarWeek />}
+                        placeholder="Nhập họ của bạn"
+                        value={formik.values.dateFrom}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+
+                    <CustomField
+                        type="date"
+                        title="Ngày kết thúc *"
+                        fieldName="dateTo"
+                        error={formik.errors.dateTo}
+                        touched={formik.touched.dateTo}
+                        icon={<BsCalendarWeek />}
+                        placeholder="Nhập họ của bạn"
+                        value={formik.values.dateTo}
+                        onChange={formik.handleChange}
+                        disabled={formik.values.isWorking}
+                        onBlur={formik.handleBlur}
+                    />
+                </div> */}
             </div>
-
-            <FormControlLabel
-                control={<Checkbox />}
-                name="isWorking"
-                checked={formik.values.isWorking}
-                label="Tôi đang làm việc tại đây"
-                value={formik.values.isWorking}
-                onChange={(e: any) => {
-                    const isWorking = e.target.checked;
-                    if (isWorking) {
-                        formik.setFieldValue('dateTo', '');
-                    }
-                    formik.setFieldValue('isWorking', isWorking);
-                }}
-            />
 
             <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />
         </form>

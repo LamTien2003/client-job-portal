@@ -29,6 +29,9 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
         onSubmit: async (values) => {
             try {
                 const body: any = values;
+                console.log(body);
+                console.log(values);
+
                 await acceptJob({ id, body });
                 alert('Đã chấp thuận đơn ứng tuyển!');
                 formik.resetForm();
@@ -56,6 +59,7 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
                             <div className="text-xl px-3">
                                 <BsCalendarWeek />
                             </div>
+
                             <input
                                 name="interviewDate"
                                 className="w-full h-11 rounded-md py-2 outline-none bg-input pr-3"

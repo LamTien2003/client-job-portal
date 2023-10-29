@@ -152,7 +152,13 @@ export const companyApiSlice = apiSlice.injectEndpoints({
                 }
             },
             invalidatesTags: (_result, error, _body) =>
-                error ? [] : [{ type: 'Companies' as const, id: 'LIST-JOB-CREATED' }],
+                error
+                    ? []
+                    : [
+                          { type: 'Companies' as const, id: 'LIST-JOB-CREATED' },
+                          { type: 'Companies' as const, id: 'LIST-JOB-APPLICATION' },
+                          { type: 'Companies' as const, id: 'LIST-JOB-DELETED' },
+                      ],
         }),
     }),
 });

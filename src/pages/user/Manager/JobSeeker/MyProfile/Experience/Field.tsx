@@ -41,7 +41,7 @@ const CustomField = ({
                 <div className="text-xl px-3">{icon}</div>
                 <input
                     name={fieldName}
-                    className={`w-full h-11 rounded-md py-2 outline-none bg-input ${type === 'date' && 'pr-3'}`}
+                    className={`w-full h-12 rounded-md py-2 outline-none bg-input ${type === 'date' && 'pr-3'}`}
                     type={type ? type : 'text'}
                     placeholder={placeholder}
                     value={value !== undefined && value !== null ? value.toString() : ''}
