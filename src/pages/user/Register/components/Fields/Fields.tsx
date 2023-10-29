@@ -1,27 +1,22 @@
-
 type FieldPropsType = {
-    type: string
-    label: string
-    id: string
-    name: string
-    value: string
-    onChange: any   
-    onBlur: any
-    error: string | undefined
-    touched: boolean | undefined
-    placeholder: string
-}
-function Fields({type, label, id, name, value, onChange, onBlur, error, touched, placeholder}: FieldPropsType) {
-    console.log(error)
+    type: string;
+    label: string;
+    id: string;
+    name: string;
+    value: string;
+    onChange: any;
+    onBlur: any;
+    error: string | undefined;
+    touched: boolean | undefined;
+    placeholder: string;
+};
+function Fields({ type, label, id, name, value, onChange, onBlur, error, touched, placeholder }: FieldPropsType) {
     return (
-        <div className=" flex flex-col mb-4">
-            <label 
-                htmlFor={id}
-                className=" text-white text-base font-semibold"
-            >
+        <div className="w-1/2 flex flex-col p-2">
+            <label htmlFor={id} className=" text-white text-base font-semibold">
                 {label}
             </label>
-            
+
             <input
                 type={type}
                 id={id}
@@ -30,10 +25,12 @@ function Fields({type, label, id, name, value, onChange, onBlur, error, touched,
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                className={"h-12 rounded-lg outline-none px-5 py-[5px] "}
+                className={'h-12 rounded-lg outline-none px-5 py-[5px] '}
             />
 
-            {(error && touched) || (error && value) ? <p className=" w-[234.4px] mt-2 p-1 text-red-900 italic select-none">{error}</p> : null }
+            {(error && touched) || (error && value) ? (
+                <p className=" w-full mt-2 text-red-900 italic select-none">{error}</p>
+            ) : null}
         </div>
     );
 }

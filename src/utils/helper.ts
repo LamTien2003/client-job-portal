@@ -20,7 +20,10 @@ export const isCompany = (user: any): user is Company => {
 export const buildQueryString = (queryStringObj: any) => {
     return Object.entries(queryStringObj)
         .map(([key, value]) => {
-            return `${key}=${JSON.stringify(value)}`;
+            if (Array.isArray(value)) {
+                return `${key}=${JSON.stringify(value)}`;
+            }
+            return `${key}=${value}`;
         })
         .join('&');
 };
