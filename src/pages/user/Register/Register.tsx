@@ -1,41 +1,46 @@
 import { useState } from 'react';
-import Candidate from './components/Candidate/Candidate';
-import Company from './components/Company/Company';
-const Register = () => {
+import Title from './components/Title/Title';
+import JobseekerForm from './components/JobseekerForm/JobseekerForm';
+import CompanyForm from './components/CompanyForm/CompanyForm';
 
-    const [tab, setTab] = useState<string>('candidate')
+export const locationArray = ['Hồ Chí Minh', 'Hà Nội', 'Đà Nẵng', 'Khác'];
+export const PHONEREGEX =
+    /^(0|84)(2(0[3-9]|1[0-6|8|9]|2[0-2|5-9]|3[2-9]|4[0-9]|5[1|2|4-9]|6[0-3|9]|7[0-7]|8[0-9]|9[0-4|6|7|9])|3[2-9]|5[5|6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])([0-9]{7})$/;
+export const EMAILREGEX = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
+export const PWDREGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}$/;
+const Register = () => {
+    const [tab, setTab] = useState<'jobseeker' | 'company'>('jobseeker');
 
     return (
-        <div className=" m-auto my-10">
-            <div className="container mr-auto ml-auto">
-                <div className="border-black text-center ">
-                    <h3 className="sn-h3 text-center text-primary-100 m-120 text-3xl font-bold">Register Account</h3>
-                    <div className=' flex items-center justify-center'>
-                        <div className=' w-32 h-0.5 bg-content-underline'></div>
-                        <div className=' w-2 h-2 bg-content-underline rounded-full mr-2 ml-2'></div>
-                        <div className=' w-32 h-0.5 bg-content-underline'></div>
-                    </div>
-                </div>
-                <div className="button text-center mt-8 mb-8">
-                    <button onClick={() => setTab('candidate')} className="bg-white hover:bg-teal-400 hover:text-white text-black font-bold py-2 px-4 mx-3 w-44 focus:outline-none focus:shadow-outline rounded-full border-teal-100 border" type="button">
-                        Candidate
-                    </button>
-                    <button onClick={() => setTab('company')} className="bg-white hover:bg-teal-400 hover:text-white text-black font-bold py-2 px-4 mx-3 w-44 focus:outline-none focus:shadow-outline rounded-full border-teal-100 border" type="button">
-                        Company
-                    </button>
-                </div>
-                <div className="w-6/12 h-2/3 m-auto">
-
-                    {tab === 'candidate' && <Candidate/>}
-                    {tab === 'company' && <Company/>}
-
-                    <p className="text-center text-gray-500 text-xs">
-                        &copy;2020 Acme Corp. All rights reserved.
-                    </p>
-                </div>
+        <div className=" max-w-[960px] h-auto bg-primary-100 rounded my-10 mx-auto p-9">
+            <Title />
+            <div className="flex items-center justify-center">
+                <button
+                    onClick={() => setTab('jobseeker')}
+                    className={
+                        tab === 'jobseeker'
+                            ? ' w-32 text-primary-100 font-semibold bg-white rounded-xl p-4 mx-2'
+                            : 'text-white rounded-xl p-4 mx-2'
+                    }
+                >
+                    Job Seeker
+                </button>
+                <button
+                    onClick={() => setTab('company')}
+                    className={
+                        tab === 'company'
+                            ? 'w-32 text-primary-100 font-semibold bg-white rounded-xl p-4 mx-2'
+                            : 'text-white rounded-xl p-4 mx-2'
+                    }
+                >
+                    Company
+                </button>
             </div>
+
+            {tab === 'jobseeker' && <JobseekerForm />}
+            {tab === 'company' && <CompanyForm />}
         </div>
-    )
+    );
 };
 
 export default Register;

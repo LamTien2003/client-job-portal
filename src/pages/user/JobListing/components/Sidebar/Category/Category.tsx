@@ -1,22 +1,39 @@
-import { CategoryType } from '@/services/jobsApiSlice';
+import { CategoryType, useGetJobsQuery } from '@/services/jobsApiSlice';
+import Job from '@/types/Job';
 import { useState } from 'react';
 
 type Props = {
     data: CategoryType[];
-    handleFilter: (id: string) => void;
+    filter: (newJobs: Job[]) => void
+    value: number[] | undefined
+    isFilterRangeSalary: boolean
 };
 function Category(props: Props) {
     const { data: category } = props;
-
+    
+    const {data, isLoading, isError} = useGetJobsQuery(props.value ? {
+        page: 1, 
+        limit: 5,
+        "salary[gte]": props.value[0],
+        "salary[lte]": props.value[1]
+    } : {
+        page: 1,
+        limit: 5
+    })
+    
     const [check, setCheck] = useState<boolean>(false);
     const [isId, setIsId] = useState<string>('');
 
-    const handleCheck = (id: string) => {
-        setIsId(id);
-        if (isId && isId === id) {
+    const handleCheck = (cat: CategoryType) => {
+        setIsId(cat.id);
+        if (isId && isId === cat.id) {
             setCheck(!check);
         }
-        props.handleFilter(id);
+        // props.handleFilter(cat.id);
+        if(data?.data?.data && !isLoading && !isError) {
+            const jobFiltered = data?.data?.data?.filter(job => job.type.categoryName === cat.categoryName)
+            props.filter(jobFiltered)
+        }
     };
 
     return (
@@ -33,7 +50,7 @@ function Category(props: Props) {
                                     checked={check === true || isId === cat.id}
                                     type="radio"
                                     className=" mr-1.5"
-                                    onChange={() => handleCheck(cat.id)}
+                                    onChange={() => handleCheck(cat)}
                                 />
                                 <label
                                     htmlFor={cat.categoryName}

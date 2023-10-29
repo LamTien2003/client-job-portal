@@ -33,6 +33,9 @@ function App() {
     return (
         <Routes>
             {/* Public routes */}
+            <Route path="login" index element={<Login />} />
+            <Route path="register" index element={<Register />} />
+            
             <Route element={<DefaultLayout />}>
                 <Route index element={<Home />} />
                 <Route path="job-listing" index element={<JobListing />} />
@@ -40,11 +43,9 @@ function App() {
                 <Route path="company-listing" index element={<CompanyListing />} />
                 <Route path="company-detail/:id" index element={<CompanyDetail />} />
 
-                <Route path="login" index element={<Login />} />
-                <Route path="register" index element={<Register />} />
                 <Route path="error" index element={<Error />} />
                 <Route path="unauthorized" index element={<>unauthorized</>} />
-                <Route path="blogGird" index element={<BlogGrid />} />
+                <Route path="blogs" index element={<BlogGrid />} />
                 <Route path="blogDetail" index element={<BlogDetail />} />
                 <Route path="contact" index element={<Contact />} />
                 <Route path="login" index element={<Login />} />

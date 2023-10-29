@@ -1,10 +1,9 @@
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import MoreInfo from '../MoreInfo/MoreInfo';
 import Job from '@/types/Job';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { useApplyJobMutation } from '@/services/jobsApiSlice';
@@ -18,7 +17,6 @@ function JobSummary(props: Props) {
     const { data: job } = props;
     
     const [applyJob] = useApplyJobMutation()
-    console.log(applyJob)
     const currentUser = useSelector((state: RootState) => state.user.user);
     const navigate = useNavigate()
 
@@ -34,7 +32,6 @@ function JobSummary(props: Props) {
     // if(gender === 2) sex = 'Woman'
 
     const handleApply = () => {
-        console.log(!currentUser)
         if(!currentUser) {
             navigate('/login')
         }
@@ -104,7 +101,6 @@ function JobSummary(props: Props) {
                     </p>
                 </div>
             </div>
-            <MoreInfo />
         </div>
     );
 }
