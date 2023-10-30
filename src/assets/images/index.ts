@@ -1,4 +1,5 @@
-import website from './logo.png';
+import logoBlack from './logo-black.png';
+import logoWhite from './logo-white.png';
 
 import candidates from './candidates.svg';
 import companies from './companies.svg';
@@ -40,18 +41,12 @@ import user2 from './user-2.svg';
 import salary from './salary-2.svg';
 import calender2 from './calender2.svg';
 
-import vnFlag from './vietnamflag.png'
-import japanFlag from './japanflag.png'
-import usaFlag from './usaflag.png'
-
-import jobseeker from './jobseeker.png'
-import company from './company.png'
-import admin from './admin.png'
-import censored from './censored.png'
-import uncensored from './uncensored.png'
-import categorypng from './category.png'
+import find from './find.png'
+import messageAdmin from './message-admin.svg'
+import notificationAdmin from './notification-admin.svg'
 
 const images = {
+    find,
     yellowStar,
     elliose,
     arrow,
@@ -82,8 +77,9 @@ const images = {
         transportation,
     },
     logo: {
+        logoBlack,
+        logoWhite,
         calender2,
-        website,
         salary,
         user,
         user2,
@@ -99,18 +95,9 @@ const images = {
         candidates,
         companies,
     },
-    flag: {
-        vnFlag,
-        japanFlag,
-        usaFlag,
-    },
     admin: {
-        jobseeker,
-        company,
-        admin,
-        censored,
-        uncensored,
-        categorypng,
+        messageAdmin,
+        notificationAdmin
     }
 };
 

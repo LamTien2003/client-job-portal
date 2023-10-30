@@ -23,7 +23,7 @@ function NonLoginMenu() {
     }, [dropDownNot])
 
     return (
-        <div className=" w-[367.14px] flex items-center justify-between xl:w-[330px] tb:w-[70px] ">
+        <div className=" w-[367.14px] flex items-center justify-between xl:w-[330px] tb:w-[70px] mb:w-[60px] ">
             <div ref={notificationRef} className=" flex items-center justify-center w-[34px] h-[34px] bg-[#eff1f0] rounded-full cursor-pointer relative" onClick={() => setDropDownNot(!dropDownNot)}>
                 <div className=" fill-primary-100">
                     <BellIcon />

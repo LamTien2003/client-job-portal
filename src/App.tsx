@@ -18,16 +18,16 @@ import Manager from './pages/user/Manager/Manager';
 import MyProfile from './pages/user/Manager/JobSeeker/MyProfile/MyProfile';
 import AppliedJobs from './pages/user/Manager/JobSeeker/AppliedJobs/AppliedJobs';
 import Setting from './components/Settings/Settings';
-import Admin from './pages/admin/Home/Admin';
-import ManageUser from './pages/admin/ManageUser/ManageUser';
 import AdminLayout from './layouts/admin/AdminLayout/AdminLayout';
 
 import Company from './pages/user/Manager/Company/Company';
 import JobCreated from './pages/user/Manager/Company/JobCreated/JobCreated';
 import JobApplication from './pages/user/Manager/Company/JobApplication/JobApplication';
 import JobDeleted from './pages/user/Manager/Company/JobDeleted/JobDeleted';
-import ManageJob from './pages/admin/ManageJob/ManageJob';
-import ManageCategory from './pages/admin/ManageCategory/ManageCategory';
+import Users from './pages/admin/Users/Users';
+import Jobs from './pages/admin/Jobs/Jobs';
+import Categories from './pages/admin/Categories/Categories';
+import Statistics from './pages/admin/Statistics/Statistics';
 
 function App() {
     return (
@@ -70,10 +70,10 @@ function App() {
                     <Route path="post-job" index element={<PostJob />} />
                 </Route>
                 <Route element={<AdminLayout />}>
-                    <Route path="admin" index element={<Admin />} />
-                    <Route path="admin/users" index element={<ManageUser />} />
-                    <Route path="admin/jobs" index element={<ManageJob />} />
-                    <Route path="admin/categories" index element={<ManageCategory />} />
+                    <Route path="admin" index element={<Statistics />} />
+                    <Route path="admin/users" index element={<Users />} />
+                    <Route path="admin/jobs" index element={<Jobs />} />
+                    <Route path="admin/categories" index element={<Categories />} />
                 </Route>
             </Route>
 
