@@ -4,18 +4,22 @@ import { useFormik } from 'formik';
 import Checkbox from '@mui/material/Checkbox';
 
 import { AiOutlineUser } from 'react-icons/ai';
-import CustomField from './Field';
+import CustomField from '../components/Field';
+
 import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { FormControlLabel } from '@mui/material';
-import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Project } from '@/types/JobSeeker';
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { PiBracketsCurlyBold } from 'react-icons/pi';
 import { FaAudioDescription } from 'react-icons/fa';
+
+import DateField from '../components/DateField';
+
+import dayjs from 'dayjs';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
@@ -25,8 +29,8 @@ interface Values {
     name: string;
     url: string;
     description: string;
-    dateFrom: Date | string;
-    dateTo: Date | string;
+    dateFrom: any;
+    dateTo: any;
     isWorking: boolean;
 }
 const initialValues: Values = {
@@ -120,6 +124,21 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
+                let dateFromValue;
+
+                if (values.dateFrom.$y && values.dateFrom.$M) {
+                    dateFromValue = `${values.dateFrom.$y}-${values.dateFrom.$M + 1}`;
+                } else {
+                    dateFromValue = values.dateFrom;
+                }
+
+                let dateToValue;
+
+                if (values.dateTo.$y && values.dateTo.$M) {
+                    dateToValue = `${values.dateTo.$y}-${values.dateTo.$M + 1}`;
+                } else {
+                    dateToValue = values.dateTo;
+                }
                 const project: any = {
                     name: values.name,
                     description: values.description,
@@ -129,12 +148,12 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
 
                 if (values.isWorking) {
                     project.date = {
-                        from: values.dateFrom,
+                        from: dateFromValue,
                     };
                 } else {
                     project.date = {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFromValue,
+                        to: dateToValue,
                     };
                 }
 
@@ -155,13 +174,14 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
             }
         },
     });
-
+    const dateFromValue: any = dayjs(formik.values.dateFrom);
+    const dateToValue: any = dayjs(formik.values.dateTo);
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
             <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật dự án</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody className="flex flex-col items-center justify-center gap-4 px-8" divider>
-                    <div className="grid grid-cols-2 w-full gap-6">
+                    <div className="flex flex-col pb-4 gap-6">
                         <CustomField
                             title="Tên dự án"
                             fieldName="name"
@@ -182,41 +202,6 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                             value={formik.values.url}
                             onChange={formik.handleChange}
                         />
-                        <CustomField
-                            type="date"
-                            title="Từ"
-                            fieldName="dateFrom"
-                            error={formik.errors.dateFrom}
-                            touched={formik.touched.dateFrom}
-                            icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
-                            value={formik.values.dateFrom}
-                            onChange={formik.handleChange}
-                        />
-
-                        <CustomField
-                            type="date"
-                            title="Đến"
-                            fieldName="dateTo"
-                            error={formik.errors.dateTo}
-                            touched={formik.touched.dateTo}
-                            icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
-                            value={formik.values.dateTo}
-                            onChange={formik.handleChange}
-                            disabled={formik.values.isWorking}
-                        />
-                        <CustomField
-                            title="Mô tả chi tiết"
-                            fieldName="description"
-                            error={formik.errors.description}
-                            touched={formik.touched.description}
-                            icon={<FaAudioDescription />}
-                            placeholder="Nhập chi tiết dự án của bạn"
-                            value={formik.values.description}
-                            onChange={formik.handleChange}
-                        />
-
                         <FormControlLabel
                             control={<Checkbox checked={formik.values.isWorking} />}
                             name="isWorking"
@@ -229,6 +214,40 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                                 }
                                 formik.setFieldValue('isWorking', isWorking);
                             }}
+                        />
+
+                        <div className="flex gap-8 justify-between">
+                            <DateField
+                                title="Ngày bắt đầu *"
+                                error={formik.errors.dateFrom}
+                                touched={formik.touched.dateFrom}
+                                value={dateFromValue}
+                                onChange={(date: any) => {
+                                    formik.setFieldValue('dateFrom', date);
+                                }}
+                            />
+
+                            <DateField
+                                title="Ngày kết thúc"
+                                error={formik.errors.dateTo}
+                                touched={formik.touched.dateTo}
+                                value={dateToValue}
+                                onChange={(date: any) => {
+                                    formik.setFieldValue('dateTo', date);
+                                }}
+                                disabled={formik.values.isWorking}
+                            />
+                        </div>
+
+                        <CustomField
+                            title="Mô tả chi tiết"
+                            fieldName="description"
+                            error={formik.errors.description}
+                            touched={formik.touched.description}
+                            icon={<FaAudioDescription />}
+                            placeholder="Nhập chi tiết dự án của bạn"
+                            value={formik.values.description}
+                            onChange={formik.handleChange}
                         />
                     </div>
                 </DialogBody>

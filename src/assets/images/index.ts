@@ -22,7 +22,7 @@ import profit from './non-profit-org.svg';
 import receotionist from './receotionist.svg';
 import next from './slick-next.svg';
 import prev from './slick-prev.svg';
-import yellowStar from './yellowstar.png'
+import yellowStar from './yellowstar.png';
 
 import accoutCreate from './account-create.svg';
 import findJob from './job-find.svg';
@@ -40,16 +40,16 @@ import user2 from './user-2.svg';
 import salary from './salary-2.svg';
 import calender2 from './calender2.svg';
 
-import vnFlag from './vietnamflag.png'
-import japanFlag from './japanflag.png'
-import usaFlag from './usaflag.png'
+import vnFlag from './vietnamflag.png';
+import japanFlag from './japanflag.png';
+import usaFlag from './usaflag.png';
 
-import jobseeker from './jobseeker.png'
-import company from './company.png'
-import admin from './admin.png'
-import censored from './censored.png'
-import uncensored from './uncensored.png'
-import categorypng from './category.png'
+import jobseeker from './jobseeker.png';
+import company from './company.png';
+import admin from './admin.png';
+import censored from './censored.png';
+import uncensored from './uncensored.png';
+import categorypng from './category.png';
 
 const images = {
     yellowStar,
@@ -111,7 +111,7 @@ const images = {
         censored,
         uncensored,
         categorypng,
-    }
+    },
 };
 
 export default images;

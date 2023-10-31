@@ -3,7 +3,7 @@ import CategoryItem from './CategoryItem';
 import images from '@/assets/images';
 import Category from '@/types/Category';
 import { useEffect, useState } from 'react';
-import Skeleton from '@/components/Loading/Skeleton';
+
 const Category = () => {
     const { data, isLoading, isError } = useGetCategoriesQuery();
     const [categories, setCategories] = useState<Category[]>([]);

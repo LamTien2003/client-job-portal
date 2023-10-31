@@ -35,13 +35,13 @@ const Form = ({ handleOpen, open }: FormIntro) => {
                 <form onSubmit={handleSubmit}>
                     <DialogBody divider className="p-8">
                         <div className="flex gap-2 mb-5 text-lg">
-                            <div className="flex items-center gap-2 text-primary-100 font-title">
+                            <div className="flex items-center gap-2 text-primary-100 font-title font-family-text">
                                 <div className="text-2xl">
                                     <MdTipsAndUpdates />
                                 </div>
                                 Mẹo:
                             </div>
-                            <p className="text-content-text font-normal">
+                            <p className="text-content-text font-normal font-family-text">
                                 Tóm tắt kinh nghiệm chuyên môn, chú ý làm nổi bật các kỹ năng và điểm mạnh.
                             </p>
                         </div>
@@ -56,7 +56,7 @@ const Form = ({ handleOpen, open }: FormIntro) => {
                             rows={5}
                         ></textarea>
 
-                        <div className="text-content-text font-semibold">0/2500 Kí tự</div>
+                        <div className="text-content-text font-semibold font-family-text">0/2500 Kí tự</div>
                     </DialogBody>
                     <DialogFooter className="px-8">
                         <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />

@@ -30,7 +30,7 @@ const CustomField = ({
 }: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-1 w-full">
-            <label className="font-bold text-primary-100" htmlFor={fieldName}>
+            <label className="font-family-title font-bold text-primary-100" htmlFor={fieldName}>
                 {title}
             </label>
             <div

@@ -1,7 +1,7 @@
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { RootState } from '@/store/store';
 import { Experience } from '@/types/JobSeeker';
-import { formatDate } from '@/utils/date';
+import { formatDate, formatDateWithMonthAndYear } from '@/utils/date';
 import { isJobSeeker } from '@/utils/helper';
 import { useState, useEffect } from 'react';
 import { BiEdit } from 'react-icons/bi';
@@ -48,16 +48,19 @@ const ExpItem = ({ data }: { data: Experience[] }) => {
     return (
         <div className="grid grid-cols-2 gap-8">
             {data.map((exp, index) => {
-                const dateFrom = exp.date.from ? formatDate(new Date(exp.date.from).toISOString()) : '';
-                const dateTo = exp.date.to ? formatDate(new Date(exp.date.to).toISOString()) : 'Đang làm';
+                const dateFrom = exp.date.from ? formatDateWithMonthAndYear(new Date(exp.date.from).toISOString()) : '';
+                const dateTo = exp.date.to
+                    ? formatDateWithMonthAndYear(new Date(exp.date.to).toISOString())
+                    : 'Đang làm';
+
+                const date = `${dateFrom} - ${dateTo}`;
+
                 return (
                     <div key={index} className="p-5 shadow-lg  flex justify-between">
                         <div className="flex flex-col gap-2">
                             <h5 className="text-lg text-primary-100 font-title">{exp.position}</h5>
                             <h5 className="font-semibold">{exp.company}</h5>
-                            <p className="text-sm text-content-text ">
-                                {dateFrom} - {dateTo}
-                            </p>
+                            <p className="text-sm text-content-text ">{date}</p>
                         </div>
                         <div className="flex gap-4 items-start text-xl font-medium">
                             <button

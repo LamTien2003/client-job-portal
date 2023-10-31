@@ -9,6 +9,16 @@ export const formatDate = (dateString: string) => {
     return formattedDate;
 };
 
+export const formatDateWithMonthAndYear = (dateString: string) => {
+    const date = new Date(dateString);
+
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+
+    const formattedDate = `${month}/${year}`;
+    return formattedDate;
+};
+
 export const formatDateValue = (dateString: string | Date) => {
     const date = new Date(dateString);
 

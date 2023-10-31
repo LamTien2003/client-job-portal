@@ -3,16 +3,20 @@ import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 
 import { AiOutlineUser } from 'react-icons/ai';
-import CustomField from './Field';
+import CustomField from '../components/Field';
+
 import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { BiSolidFactory } from 'react-icons/bi';
-import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Certification } from '@/types/JobSeeker';
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
+
+import DateField from '../components/DateField';
+
+import dayjs from 'dayjs';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
@@ -21,8 +25,8 @@ interface EditForm {
 interface Values {
     name: string;
     organization: string;
-    dateFrom: Date | string;
-    dateTo: Date | string;
+    dateFrom: any;
+    dateTo: any;
 }
 const initialValues: Values = {
     name: '',
@@ -74,6 +78,7 @@ const validation = Yup.object().shape({
             return new Date(value) >= new Date(dateFrom);
         }),
 });
+
 const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);
@@ -113,12 +118,27 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
+                let dateFromValue;
+
+                if (values.dateFrom.$y && values.dateFrom.$M) {
+                    dateFromValue = `${values.dateFrom.$y}-${values.dateFrom.$M + 1}`;
+                } else {
+                    dateFromValue = values.dateFrom;
+                }
+
+                let dateToValue;
+
+                if (values.dateTo.$y && values.dateTo.$M) {
+                    dateToValue = `${values.dateTo.$y}-${values.dateTo.$M + 1}`;
+                } else {
+                    dateToValue = values.dateTo;
+                }
                 const certificate: any = {
                     name: values.name,
                     organization: values.organization,
                     date: {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFromValue,
+                        to: dateToValue,
                     },
                 };
 
@@ -140,12 +160,15 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
         },
     });
 
+    const dateFromValue: any = dayjs(formik.values.dateFrom);
+    const dateToValue: any = dayjs(formik.values.dateTo);
+
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
             <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật chứng chỉ</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center px-8">
-                    <div className="grid grid-cols-2 w-full gap-6">
+                    <div className="flex flex-col gap-6 pb-4">
                         <CustomField
                             title="Tên giải thưởng"
                             fieldName="name"
@@ -168,27 +191,27 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
                             onChange={formik.handleChange}
                         />
 
-                        <CustomField
-                            type="date"
-                            title="Từ"
-                            fieldName="dateFrom"
-                            error={formik.errors.dateFrom}
-                            touched={formik.touched.dateFrom}
-                            icon={<BsCalendarWeek />}
-                            value={formik.values.dateFrom}
-                            onChange={formik.handleChange}
-                        />
+                        <div className="flex gap-8 justify-between">
+                            <DateField
+                                title="Ngày bắt đầu *"
+                                error={formik.errors.dateFrom}
+                                touched={formik.touched.dateFrom}
+                                value={dateFromValue}
+                                onChange={(date: any) => {
+                                    formik.setFieldValue('dateFrom', date);
+                                }}
+                            />
 
-                        <CustomField
-                            type="date"
-                            title="Đến"
-                            fieldName="dateTo"
-                            error={formik.errors.dateTo}
-                            touched={formik.touched.dateTo}
-                            icon={<BsCalendarWeek />}
-                            value={formik.values.dateTo}
-                            onChange={formik.handleChange}
-                        />
+                            <DateField
+                                title="Ngày kết thúc"
+                                error={formik.errors.dateTo}
+                                touched={formik.touched.dateTo}
+                                value={dateToValue}
+                                onChange={(date: any) => {
+                                    formik.setFieldValue('dateTo', date);
+                                }}
+                            />
+                        </div>
                     </div>
                 </DialogBody>
                 <DialogFooter className="px-8">

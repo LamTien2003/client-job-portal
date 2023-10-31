@@ -10,11 +10,7 @@ const Sidebar = () => {
     const company = isCompany(currentUser);
     return (
         <div className="bg-white flex flex-col rounded-md border-[1px] border-primary-40 h-fit w-[304px]  text-lg ">
-            <TitleProfile
-                title="My profile"
-                path={`${jobSeeker ? '/jobseeker/profile' : '/company/profile'}`}
-                logo={<MdOutlineDashboard />}
-            />
+            <TitleProfile title="My profile" path="/profile" logo={<MdOutlineDashboard />} />
             {jobSeeker && <TitleProfile title="Applied Jobs" path="applied-jobs" logo={<MdWork />} />}
             {company && <TitleProfile title="Job Created" path="job-created" logo={<MdOutlineDashboard />} />}
 

@@ -17,12 +17,13 @@ const Form = ({ toggleOpen }: Form) => {
 
     const currentUser = useSelector((state: RootState) => state.user.user);
     const [skills, setSkills] = useState<string[]>([]);
+    const [skillsUser, setSkillsUser] = useState<string[]>([]);
 
     const { data: skillsData, isLoading: loadingSkills, isError: errorSkills } = useGetSkillsQuery();
 
     useEffect(() => {
         if (isJobSeeker(currentUser)) {
-            setSkills(currentUser.skills);
+            setSkillsUser(currentUser.skills);
         }
         if (!loadingSkills && !errorSkills && skillsData?.data?.data) {
             setSkills(skillsData?.data?.data);
@@ -43,16 +44,19 @@ const Form = ({ toggleOpen }: Form) => {
         const newData = [...data];
         newData.splice(index, 1);
         setData(newData);
-        console.log(newData);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             if (data) {
+                const dataArray = [...skillsUser, ...data];
+                const skills = new Set(dataArray);
+
                 const skillData: any = {
-                    skills: [...data],
+                    skills: [...skills],
                 };
+
                 await changeSkill(skillData);
                 setData([]);
             }
@@ -60,6 +64,7 @@ const Form = ({ toggleOpen }: Form) => {
             console.error(error);
         }
     };
+
     return (
         <form onSubmit={handleSubmit} className=" flex flex-col gap-8 border-t-[1px] border-gray-600 pt-5">
             <div className="flex justify-between gap-2 h-12">

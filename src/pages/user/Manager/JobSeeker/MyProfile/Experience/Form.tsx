@@ -1,10 +1,9 @@
 import * as Yup from 'Yup';
 
 import { useFormik } from 'formik';
-import CustomField from './Field';
+import CustomField from '../components/Field';
 import { AiOutlineUser } from 'react-icons/ai';
 import { BiSolidFactory } from 'react-icons/bi';
-import { BsCalendarWeek } from 'react-icons/bs';
 import BtnBot from '../../../components/BtnBot';
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { Experience } from '@/types/JobSeeker';
@@ -14,7 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { isJobSeeker } from '@/utils/helper';
-import { DatePicker } from '@mui/x-date-pickers';
+import DateField from '../components/DateField';
 interface FormExp {
     toggleOpen: () => void;
 }
@@ -22,8 +21,8 @@ interface FormExp {
 interface Values {
     position: string;
     company: string;
-    dateFrom: Date | string;
-    dateTo: Date | string;
+    dateFrom: Date | string | any;
+    dateTo: Date | string | any;
     isWorking: boolean;
 }
 const FormExp = ({ toggleOpen }: FormExp) => {
@@ -40,7 +39,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
         position: Yup.string().required('Chức vụ không được bỏ trống!'),
         company: Yup.string().required('Công ty không được bỏ trống!'),
         dateFrom: Yup.date()
-            .required('Từ ngày không được bỏ trống!')
+            .required('Ngày bắt đầu không được bỏ trống!')
             .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
                 const { dateTo } = this.parent;
                 if (!dateTo) {
@@ -51,7 +50,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
 
                 return date <= dataNow;
             })
-            .test('date-range', 'Ngày phải nhỏ hơn ngày kết thúc', function (value) {
+            .test('date-range', 'Ngày bắt đầu phải nhỏ hơn ngày kết thúc', function (value) {
                 const { dateTo } = this.parent;
                 if (!dateTo) {
                     return true;
@@ -88,24 +87,32 @@ const FormExp = ({ toggleOpen }: FormExp) => {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
+                const dateFrom = `${values.dateFrom.$y}-${values.dateFrom.$M + 1}`;
+
+                let dateTo;
+
+                if (values.dateTo) {
+                    dateTo = `${values.dateTo.$y}-${values.dateTo.$M + 1}`;
+                }
+
                 const exp: any = {
                     position: values.position,
                     company: values.company,
                     date: {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFrom,
+                        to: dateTo,
                     },
                     isWorking: values.isWorking,
                 };
 
                 if (values.isWorking) {
                     exp.date = {
-                        from: values.dateFrom,
+                        from: dateFrom,
                     };
                 } else {
                     exp.date = {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFrom,
+                        to: dateTo,
                     };
                 }
                 const data = [...experiences, exp];
@@ -114,10 +121,10 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     experiences: data,
                 };
 
-                // await changeExp(expData);
-                // alert('Cập nhật thông tin thành công!');
-                // formik.resetForm();
-                // toggleOpen();
+                await changeExp(expData);
+                alert('Cập nhật thông tin thành công!');
+                formik.resetForm();
+                toggleOpen();
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
@@ -126,7 +133,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
 
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-2  pt-5">
-            <p className="text-content-text text-sm font-medium italic">
+            <p className="font-family-text text-content-text text-sm font-medium italic">
                 Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
             </p>
 
@@ -170,79 +177,27 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     }}
                 />
                 <div className="flex gap-8 justify-between">
-                    <div className="flex gap-6 justify-between">
-                        <DatePicker
-                            className="w-full"
-                            label={'Tháng'}
-                            views={['month']}
-                            value={formik.values.dateFrom}
-                            onChange={(date) => {
-                                formik.setFieldValue('dateFrom', date);
-                            }}
-                        />
-
-                        <DatePicker
-                            className="w-full"
-                            label={'Năm'}
-                            views={['year']}
-                            value={formik.values.dateFrom}
-                            onChange={(date) => {
-                                formik.setFieldValue('dateFrom', date);
-                            }}
-                        />
-                    </div>
-
-                    <div className="flex gap-6 justify-between">
-                        <DatePicker
-                            className="w-full"
-                            label={'Tháng'}
-                            views={['month']}
-                            value={formik.values.dateTo}
-                            onChange={(date) => {
-                                formik.setFieldValue('dateTo', date);
-                            }}
-                        />
-
-                        <DatePicker
-                            className="w-full"
-                            label={'Năm'}
-                            views={['year']}
-                            value={formik.values.dateTo}
-                            onChange={(date) => {
-                                formik.setFieldValue('dateTo', date);
-                            }}
-                        />
-                    </div>
-                </div>
-
-                {/* <div className="flex gap-8 justify-between">
-                    <CustomField
-                        type="date"
+                    <DateField
                         title="Ngày bắt đầu *"
-                        fieldName="dateFrom"
                         error={formik.errors.dateFrom}
                         touched={formik.touched.dateFrom}
-                        icon={<BsCalendarWeek />}
-                        placeholder="Nhập họ của bạn"
                         value={formik.values.dateFrom}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('dateFrom', date);
+                        }}
                     />
 
-                    <CustomField
-                        type="date"
-                        title="Ngày kết thúc *"
-                        fieldName="dateTo"
+                    <DateField
+                        title="Ngày kết thúc"
                         error={formik.errors.dateTo}
                         touched={formik.touched.dateTo}
-                        icon={<BsCalendarWeek />}
-                        placeholder="Nhập họ của bạn"
                         value={formik.values.dateTo}
-                        onChange={formik.handleChange}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('dateTo', date);
+                        }}
                         disabled={formik.values.isWorking}
-                        onBlur={formik.handleBlur}
                     />
-                </div> */}
+                </div>
             </div>
 
             <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />

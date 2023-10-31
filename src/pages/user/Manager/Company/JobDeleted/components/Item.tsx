@@ -15,7 +15,7 @@ const Item = ({ job }: { job: any }) => {
     const handleRestoreJob = async (id: string) => {
         await restoreJob(id);
         alert('Khôi phục Job Thành Công!');
-        navigate('/company/job-created');
+        navigate('/profile/job-created');
     };
     const deadline = formatDate(job.deadline);
     return (
@@ -43,7 +43,7 @@ const Item = ({ job }: { job: any }) => {
             <td className="px-6 py-4 border-primary-100 border-[1px]">
                 <Link
                     className="text-primary-100 hover:text-primary-200 duration-300"
-                    to={`/company/jobApplication/${job.id}`}
+                    to={`/profile/jobApplication/${job.id}`}
                 >
                     Xen danh sách
                 </Link>
