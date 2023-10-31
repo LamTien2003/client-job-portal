@@ -67,20 +67,26 @@ const Item = ({ candicate }: { candicate: any }) => {
 
                 <td className="px-6 py-4 border-primary-100 border-[1px]">
                     <div className="flex flex-col gap-3 ">
-                        <button
-                            onClick={handleOpen}
-                            className="bg-blue-400 p-2 rounded-md text-white font-semibold hover:bg-black duration-200"
-                            type="button"
-                        >
-                            Accept Job
-                        </button>
-                        {candicate.status === 'pending' && (
-                            <button
-                                onClick={() => cancelJobHandle(candicate.id)}
-                                className="bg-red-400 p-2 rounded-md text-white font-semibold hover:bg-black duration-200"
-                                type="button"
-                            >
-                                {isLoading ? 'Đang huỷ' : 'Huỷ Ứng Viên'}
+                        {candicate.status === 'pending' ? (
+                            <>
+                                <button
+                                    onClick={handleOpen}
+                                    className="bg-blue-400 p-2 rounded-md text-white font-semibold hover:bg-black duration-200"
+                                    type="button"
+                                >
+                                    Accept Job
+                                </button>
+                                <button
+                                    onClick={() => cancelJobHandle(candicate.id)}
+                                    className="bg-red-400 p-2 rounded-md text-white font-semibold hover:bg-black duration-200"
+                                    type="button"
+                                >
+                                    {isLoading ? 'Đang huỷ' : 'Huỷ Ứng Viên'}
+                                </button>
+                            </>
+                        ) : (
+                            <button className="bg-green-400 p-2 rounded-md text-white font-semibold " type="button">
+                                Đã thực hiện
                             </button>
                         )}
                     </div>

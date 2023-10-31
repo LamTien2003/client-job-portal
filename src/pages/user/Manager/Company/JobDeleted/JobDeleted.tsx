@@ -12,8 +12,6 @@ const JobDeleted = () => {
         }
     }, [isLoading, isError, data?.data?.data]);
 
-    console.log(jobDeleted);
-
     return (
         <div>
             {/* {jobDeleted.length === 0 && (

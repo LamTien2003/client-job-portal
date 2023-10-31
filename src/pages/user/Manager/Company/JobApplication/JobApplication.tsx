@@ -16,8 +16,6 @@ const JobApplication = () => {
         }
     }, [data?.data?.data, isLoading, isError]);
 
-    console.log(jobApplycation);
-
     return (
         <table className="border border-primary-100 w-full text-sm text-center">
             <thead className="w-full bg-primary-100  justify-between items-center p-4  text-white font-family-title text-base">

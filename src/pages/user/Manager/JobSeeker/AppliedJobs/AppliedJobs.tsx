@@ -13,8 +13,6 @@ const AplliedJobs = () => {
         }
     }, [isLoading, isError, data?.data?.data]);
 
-    console.log(jobApplication);
-
     return (
         <>
             <table className="border border-primary-100 w-full text-sm text-center">

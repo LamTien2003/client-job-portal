@@ -24,8 +24,14 @@ import Company from './pages/user/Manager/Company/Company';
 import JobCreated from './pages/user/Manager/Company/JobCreated/JobCreated';
 import JobApplication from './pages/user/Manager/Company/JobApplication/JobApplication';
 import JobDeleted from './pages/user/Manager/Company/JobDeleted/JobDeleted';
-import ManageJob from './pages/admin/ManageJob/ManageJob';
-import ManageCategory from './pages/admin/ManageCategory/ManageCategory';
+
+import Statistics from './pages/admin/Statistics/Statistics';
+import Jobs from './pages/admin/Jobs/Jobs';
+import Users from './pages/admin/Users/Users';
+import Categories from './pages/admin/Categories/Categories';
+import { RootState } from './store/store';
+import { useSelector } from 'react-redux';
+import { isCompany } from './utils/helper';
 
 function App() {
     const currentUser = useSelector((state: RootState) => state.user.user);

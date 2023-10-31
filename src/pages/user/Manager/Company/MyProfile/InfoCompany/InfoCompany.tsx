@@ -25,7 +25,7 @@ const InfoCompany = () => {
     return (
         <>
             <Card handleOpen={handleOpen}>
-                <div className="flex flex-col gap-4 text-content-title">
+                <div className="flex flex-col gap-4 text-content-title font-family-title">
                     <div className="flex gap-2 items-center">
                         <span className="font-title text-content-title">Tên công ty:</span>
                         <h5 className="font-title text-primary-100 text-xl">{company?.companyName}</h5>

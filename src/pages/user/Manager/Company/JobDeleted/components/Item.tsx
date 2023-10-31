@@ -1,9 +1,8 @@
 import { useDeleteJobCreatedMutation, useRestoreJobMutation } from '@/services/companiesApiSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { formatDate } from '@/utils/date';
 
 const Item = ({ job }: { job: any }) => {
-    const navigate = useNavigate();
     const [deleteJob, { isLoading }] = useDeleteJobCreatedMutation();
     const [restoreJob, { isLoading: loadingRestoreJob }] = useRestoreJobMutation();
 
@@ -15,7 +14,6 @@ const Item = ({ job }: { job: any }) => {
     const handleRestoreJob = async (id: string) => {
         await restoreJob(id);
         alert('Khôi phục Job Thành Công!');
-        navigate('/profile/job-created');
     };
     const deadline = formatDate(job.deadline);
     return (
