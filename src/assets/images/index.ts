@@ -1,4 +1,5 @@
-import website from './logo.png';
+import logoBlack from './logo-black.png';
+import logoWhite from './logo-white.png';
 
 import candidates from './candidates.svg';
 import companies from './companies.svg';
@@ -50,8 +51,12 @@ import admin from './admin.png';
 import censored from './censored.png';
 import uncensored from './uncensored.png';
 import categorypng from './category.png';
+import find from './find.png';
+import messageAdmin from './message-admin.svg';
+import notificationAdmin from './notification-admin.svg';
 
 const images = {
+    find,
     yellowStar,
     elliose,
     arrow,
@@ -82,8 +87,9 @@ const images = {
         transportation,
     },
     logo: {
+        logoBlack,
+        logoWhite,
         calender2,
-        website,
         salary,
         user,
         user2,
@@ -98,11 +104,6 @@ const images = {
         jobMini,
         candidates,
         companies,
-    },
-    flag: {
-        vnFlag,
-        japanFlag,
-        usaFlag,
     },
     admin: {
         jobseeker,

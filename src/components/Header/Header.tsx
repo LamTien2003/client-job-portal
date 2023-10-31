@@ -9,6 +9,7 @@ import MainMenu from './MainMenu/MainMenu';
 import UserMenu from './UserMenu/UserMenu';
 import NonLoginMenu from './NonLoginMenu/NonLoginMenu';
 import Loader from '../Loader/Loader';
+import images from '@/assets/images';
 
 const Header = () => {
     const currentUser = useSelector((state: RootState) => state.user.user)
@@ -28,10 +29,10 @@ const Header = () => {
         <>
             <div className=' flex w-full items-center text-content-title bg-white px-[50px] xl:px-[30px] fixed z-20'>
                 <div className=' border-r border-[#f1f1f1] '>
-                    <img className='w-[140px] mr-[95px] xl:w-[100px] xl:mr-[65px] lg:py-2.5' src='/src/assets/images/logo.png' alt='/src/assets/images/logo.png' />
+                    <img className='w-[140px] mr-[95px] xl:w-[100px] xl:mr-[65px] lg:py-2.5' src={images.logo.logoBlack} />
                 </div>
 
-                <div className=' w-full flex items-center justify-between z-20 lg:justify-end tb:justify-end mb:end'>
+                <div className=' w-full flex items-center justify-between z-20 lg:justify-end tb:justify-end mb:justify-end'>
                     <MainMenu />
                     {currentUser && token ? <UserMenu user={currentUser} logout={handleLogout} /> : <NonLoginMenu />}
                 </div>

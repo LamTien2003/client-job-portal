@@ -1,119 +1,140 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { Setting } from "@/components/Icons";
+import { ArrowAdmin, BellIcon, CategoryAdmin, JobAdmin, ProfileAdmin, Setting, SettingAdmin, StatisticsAdmin, UserAdmin } from "@/components/Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import path from "path";
-
-function Sidebar() {
-    const currentUser = useSelector((state: RootState) => state.user.user)
+import images from "@/assets/images";
+import Statistics from "@/pages/admin/Statistics/Statistics";
+type SidebarProps = {
+    isActiveSidebar: boolean
+}
+function Sidebar(props: SidebarProps) {
+    // const currentUser = useSelector((state: RootState) => state.user.user)
     
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const myURL = window.location.href
     const page = new URL(myURL)
-    console.log(page.pathname)
 
-    const [active, setActive] = useState<string>('text-primary-100 italic bg-white rounded-lg border border-[#EFEEEB] fill-primary-100 ')
-    const [statistics, setStatistics] = useState(() => {
-        if(page.pathname === '/admin')  return true
-        return false
-    })
-    const [manageUser, setManageUser] = useState(() => {
-        if(page.pathname === '/admin/users') return true
-        return false
-    })
-    const [manageJob, setManageJob] = useState(() => {
-        if(page.pathname === '/admin/jobs') return true
-        return false
-    })
-    const [manageCategory, setManageCategory] = useState(() => {
-        if(page.pathname === '/admin/categories') return true
-        return false
+    const [active, setActive] = useState<any>(() => {
+        if(page.pathname === '/admin') {
+            return 'statistics'
+        } else if(page.pathname === '/admin/users') {
+            return 'user'
+        } else if(page.pathname === '/admin/jobs') {
+            return 'job'
+        } else if(page.pathname === '/admin/categories') {
+            return 'category'
+        } else if(page.pathname === '/admin/profile') {
+            return 'profile'
+        } else if(page.pathname === '/admin/setting') {
+            return 'setting'
+        } else {
+            return
+        }
     })
 
-    const handleActive = (arg: string) => {
-        if(arg === 'statistics') {
-            setStatistics(true)
-            setManageUser(false)
-            setManageJob(false)
-            setManageCategory(false)
-            navigate('/admin')
-        }
-        if(arg === 'manageUser') {
-            setStatistics(false)
-            setManageUser(true)
-            setManageJob(false)
-            setManageCategory(false)
-            navigate('/admin/users')
-        }
-        if(arg === 'manageJob') {
-            setStatistics(false)
-            setManageUser(false)
-            setManageJob(true)
-            setManageCategory(false)
-            navigate('/admin/jobs')
-        }
-        if(arg === 'manageCategory') {
-            setStatistics(false)
-            setManageUser(false)
-            setManageJob(false)
-            setManageCategory(true)
-            navigate('/admin/categories')
+    const toggleActiveStyle = (id: string) => {
+        if(id === active) {
+            return 'flex items-center text-black fill-[#40189D] bg-[#EEE] rounded-l-[50px] py-4 pl-5 relative'
+        }   else {
+            return 'flex items-center text-white fill-white py-4 pl-5 relative'
         }
     }
+
     return (
-        <div className=" w-3/12 h-[100%] flex flex-col pt-4 pr-6 pl-10 fixed bg-[#f0f3f6]">
-            <div className=" flex flex-col items-start after:w-full after:border-t after:border-[#E0E0E0]">
-                <div className={"flex items-center pr-5 pl-5 pt-2 pb-2 mb-6 font-medium cursor-pointer " + (statistics && active)} onClick={() => handleActive('statistics')}>
-                    <div className=" mr-3">
-                        <Setting />
-                    </div>
-                    Thống kê
-                </div>
-                <div className={"flex items-center pr-5 pl-5 pt-2 pb-2 mb-6 font-medium cursor-pointer " + (manageUser && active)} onClick={() => handleActive('manageUser')}>
-                    <div className=" mr-3">
-                        <Setting />
-                    </div>
-                    Quản Lí Người Dùng
-                </div>
-                <div className={"flex items-center pr-5 pl-5 pt-2 pb-2 mb-6 font-medium cursor-pointer " + (manageJob && active)} onClick={() => handleActive('manageJob')}>
-                    <div className=" mr-3">
-                        <Setting />
-                    </div>
-                    Quản Lí Công Việc
-                </div>
-                <div className={"flex items-center pr-5 pl-5 pt-2 pb-2 mb-6 font-medium cursor-pointer " + (manageCategory && active)} onClick={() => handleActive('manageCategory')}>
-                    <div className=" mr-3">
-                        <Setting />
-                    </div>
-                    Quản Lí Danh Mục
+        props.isActiveSidebar ? (
+            <div className=" w-[300px] h-[100vh] text-white bg-[#40189D] rounded-r-[10px] mr-[30px] duration-300 left-0 fixed">
+                <img className=" w-[150px] h-[120px] py-5 mx-auto" src={images.logo.logoWhite} />
+                <div className=" pl-4">
+                    <Link to={'/admin'} className={toggleActiveStyle('statistics')} onClick={() => setActive('statistics')}>
+                        <div className=" w-5 h-5">
+                            <StatisticsAdmin />
+                        </div>
+                        <p className=" pl-3">Thống kê</p>
+                        <div className=" right-2 absolute">
+                            <ArrowAdmin />
+                        </div>
+                    </Link>
+                    <Link to={'/admin/users'} className={toggleActiveStyle('user')} onClick={() => setActive('user')}>
+                        <div className=" w-5 h-5 ">
+                            <UserAdmin />
+                        </div>
+                        <p className=" pl-3">Người dùng</p>
+                        <div className=" right-2 absolute">
+                            <ArrowAdmin />
+                        </div>
+                    </Link>
+                    <Link to={'/admin/jobs'} className={toggleActiveStyle('job')} onClick={() => setActive('job')}>
+                        <div className=" w-5 h-5 ">
+                            <JobAdmin />
+                        </div>
+                        <p className=" pl-3">Công việc</p>
+                        <div className="  right-2 absolute">
+                            <ArrowAdmin />
+                        </div>
+                    </Link>
+                    <Link to={'/admin/categories'} className={toggleActiveStyle('category')} onClick={() => setActive('category')}>
+                        <div className=" w-5 h-5 ">
+                            <CategoryAdmin />
+                        </div>
+                        <p className=" pl-3">Danh mục</p>
+                        <div className="  right-2 absolute">
+                            <ArrowAdmin />
+                        </div>
+                    </Link>
+                    <Link to={'/admin/profile'} className={toggleActiveStyle('profile')} onClick={() => setActive('profile')}>
+                        <div className=" w-5 h-5">
+                            <ProfileAdmin />
+                        </div>
+                        <p className=" pl-3">Profile</p>
+                    </Link>
+                    <Link to={'/admin/setting'} className={toggleActiveStyle('setting')} onClick={() => setActive('setting')}>
+                        <div className=" w-5 h-5">
+                            <SettingAdmin />
+                        </div>
+                        <p className=" pl-3">Cài đặt</p>
+                    </Link>
                 </div>
             </div>
-            <div className=" flex flex-col mt-6">
-                <div className=" flex items-center pr-5 pl-5 pt-2 pb-2 mb-6 font-medium cursor-pointer  ">
-                    <div className=" mr-3">
-                        <Setting />
+        ) : (
+            <div className=" w-[60px] h-[100vh] text-white bg-[#40189D] rounded-r-[10px] mr-[30px] duration-300 left-0 fixed">
+                <Link to={'/admin'} className={toggleActiveStyle('statistics')} onClick={() => setActive('statistics')}>
+                    <div className=" w-5 h-5">
+                        <StatisticsAdmin />
                     </div>
-                    Profile
-                </div>
-                <div className=" flex items-center pr-5 pl-5 pt-2 pb-2 mb-6 font-medium cursor-pointer  ">
-                    <div className=" mr-3">
-                        <Setting />
+                </Link>
+                <Link to={'/admin/users'} className={toggleActiveStyle('user')} onClick={() => setActive('user')}>
+                    <div className=" w-5 h-5 ">
+                        <UserAdmin />
                     </div>
-                    Settings
-                </div>
+                </Link>
+                <Link to={'/admin/jobs'} className={toggleActiveStyle('job')} onClick={() => setActive('job')}>
+                    <div className=" w-5 h-5 ">
+                        <JobAdmin />
+                    </div>
+                </Link>
+                <Link to={'/admin/categories'} className={toggleActiveStyle('category')} onClick={() => setActive('category')}>
+                    <div className=" w-5 h-5 ">
+                        <CategoryAdmin />
+                    </div>
+                </Link>
+                <Link to={'/admin/profile'} className={toggleActiveStyle('profile')} onClick={() => setActive('profile')}>
+                    <div className=" w-5 h-5">
+                        <ProfileAdmin />
+                    </div>
+                </Link>
+                <Link to={'/admin/setting'} className={toggleActiveStyle('setting')} onClick={() => setActive('setting')}>
+                    <div className=" w-5 h-5">
+                        <SettingAdmin />
+                    </div>
+                </Link>
             </div>
-            <div className=" flex items-center justify-between absolute bottom-36 left-16 right-28">
-                <img className=" w-9 h-9 rounded-full" src={'https://res.cloudinary.com/dcv1op3hs/image/upload/v1691749443/users/c2hdowxqvcy4vw2iewgy.jpg'} />
-                <p className=" text-content-title font-medium mr-6">{currentUser?.lastName + ' ' + currentUser?.firstName}</p>
-                <div className=" flex items-center justify-center p-1 bg-[#EBEBEB] rounded-md">
-                    <FontAwesomeIcon icon={faEllipsis} />
-                </div>
-            </div>
-        </div>
+        )
+        
     );
 }
 

@@ -18,8 +18,6 @@ import Manager from './pages/user/Manager/Manager';
 import MyProfile from './pages/user/Manager/JobSeeker/MyProfile/MyProfile';
 import AppliedJobs from './pages/user/Manager/JobSeeker/AppliedJobs/AppliedJobs';
 import Setting from './components/Settings/Settings';
-import Admin from './pages/admin/Home/Admin';
-import ManageUser from './pages/admin/ManageUser/ManageUser';
 import AdminLayout from './layouts/admin/AdminLayout/AdminLayout';
 
 import Company from './pages/user/Manager/Company/Company';
@@ -28,9 +26,6 @@ import JobApplication from './pages/user/Manager/Company/JobApplication/JobAppli
 import JobDeleted from './pages/user/Manager/Company/JobDeleted/JobDeleted';
 import ManageJob from './pages/admin/ManageJob/ManageJob';
 import ManageCategory from './pages/admin/ManageCategory/ManageCategory';
-import { RootState } from './store/store';
-import { useSelector } from 'react-redux';
-import { isCompany } from './utils/helper';
 
 function App() {
     const currentUser = useSelector((state: RootState) => state.user.user);
@@ -75,10 +70,10 @@ function App() {
                     <Route path="post-job" index element={<PostJob />} />
                 </Route>
                 <Route element={<AdminLayout />}>
-                    <Route path="admin" index element={<Admin />} />
-                    <Route path="admin/users" index element={<ManageUser />} />
-                    <Route path="admin/jobs" index element={<ManageJob />} />
-                    <Route path="admin/categories" index element={<ManageCategory />} />
+                    <Route path="admin" index element={<Statistics />} />
+                    <Route path="admin/users" index element={<Users />} />
+                    <Route path="admin/jobs" index element={<Jobs />} />
+                    <Route path="admin/categories" index element={<Categories />} />
                 </Route>
             </Route>
 
