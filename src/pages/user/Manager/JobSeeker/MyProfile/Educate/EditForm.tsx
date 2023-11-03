@@ -3,18 +3,22 @@ import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import Checkbox from '@mui/material/Checkbox';
 
-import CustomField from './Field';
+import CustomField from '../components/Field';
+
 import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { BiSolidFactory } from 'react-icons/bi';
 import { FormControlLabel } from '@mui/material';
-import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Education } from '@/types/JobSeeker';
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { FaSchool } from 'react-icons/fa';
+import DateField from '../components/DateField';
+
+import dayjs from 'dayjs';
+
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
@@ -23,8 +27,8 @@ interface EditForm {
 interface Values {
     school: string;
     major: string;
-    dateFrom: Date | string;
-    dateTo: Date | string;
+    dateFrom: any;
+    dateTo: any;
 
     isLearning: boolean;
 }
@@ -116,24 +120,35 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
+                let dateFromValue;
+
+                if (values.dateFrom.$y && values.dateFrom.$M) {
+                    dateFromValue = `${values.dateFrom.$y}-${values.dateFrom.$M + 1}`;
+                } else {
+                    dateFromValue = values.dateFrom;
+                }
+
+                let dateToValue;
+
+                if (values.dateTo.$y && values.dateTo.$M) {
+                    dateToValue = `${values.dateTo.$y}-${values.dateTo.$M + 1}`;
+                } else {
+                    dateToValue = values.dateTo;
+                }
                 const edu: any = {
                     major: values.major,
                     school: values.school,
-                    date: {
-                        from: values.dateFrom,
-                        to: values.dateTo,
-                    },
                     isWorking: values.isLearning,
                 };
 
                 if (values.isLearning) {
                     edu.date = {
-                        from: values.dateFrom,
+                        from: dateFromValue,
                     };
                 } else {
                     edu.date = {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFromValue,
+                        to: dateToValue,
                     };
                 }
 
@@ -155,14 +170,17 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
         },
     });
 
+    const dateFromValue: any = dayjs(formik.values.dateFrom);
+    const dateToValue: any = dayjs(formik.values.dateTo);
+
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
             <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật học vấn</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
-                    <div className="grid grid-cols-2 w-full gap-6">
+                    <div className="flex flex-col gap-6 pb-4">
                         <CustomField
-                            title="Trường"
+                            title="Trường *"
                             fieldName="school"
                             error={formik.errors.school}
                             touched={formik.touched.school}
@@ -173,36 +191,13 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
                         />
 
                         <CustomField
-                            title="Ngành học"
+                            title="Ngành học *"
                             fieldName="major"
                             error={formik.errors.major}
                             touched={formik.touched.major}
                             icon={<BiSolidFactory />}
                             placeholder="Nhập ngành học của bạn"
                             value={formik.values.major}
-                            onChange={formik.handleChange}
-                        />
-
-                        <CustomField
-                            type="date"
-                            title="Từ"
-                            fieldName="dateFrom"
-                            error={formik.errors.dateFrom}
-                            touched={formik.touched.dateFrom}
-                            icon={<BsCalendarWeek />}
-                            value={formik.values.dateFrom}
-                            onChange={formik.handleChange}
-                        />
-
-                        <CustomField
-                            type="date"
-                            title="Đến"
-                            fieldName="dateTo"
-                            error={formik.errors.dateTo}
-                            touched={formik.touched.dateTo}
-                            icon={<BsCalendarWeek />}
-                            value={formik.values.dateTo}
-                            disabled={formik.values.isLearning}
                             onChange={formik.handleChange}
                         />
 
@@ -219,6 +214,29 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
                                 formik.setFieldValue('isLearning', isLearning);
                             }}
                         />
+
+                        <div className="flex gap-8 justify-between">
+                            <DateField
+                                title="Ngày bắt đầu *"
+                                error={formik.errors.dateFrom}
+                                touched={formik.touched.dateFrom}
+                                value={dateFromValue}
+                                onChange={(date: any) => {
+                                    formik.setFieldValue('dateFrom', date);
+                                }}
+                            />
+
+                            <DateField
+                                title="Ngày kết thúc"
+                                error={formik.errors.dateTo}
+                                touched={formik.touched.dateTo}
+                                value={dateToValue}
+                                onChange={(date: any) => {
+                                    formik.setFieldValue('dateTo', date);
+                                }}
+                                disabled={formik.values.isLearning}
+                            />
+                        </div>
                     </div>
                 </DialogBody>
                 <DialogFooter className="px-8">

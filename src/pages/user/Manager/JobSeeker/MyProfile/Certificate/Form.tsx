@@ -1,10 +1,9 @@
 import * as Yup from 'Yup';
 
 import { useFormik } from 'formik';
-import CustomField from './Field';
+import CustomField from '../components/Field';
 import { AiOutlineUser } from 'react-icons/ai';
 import { BiSolidFactory } from 'react-icons/bi';
-import { BsCalendarWeek } from 'react-icons/bs';
 import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { Certification } from '@/types/JobSeeker';
@@ -12,6 +11,8 @@ import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { isJobSeeker } from '@/utils/helper';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import TipForm from '../components/TipForm';
+import DateField from '../components/DateField';
 
 interface FormCer {
     toggleOpen: () => void;
@@ -20,8 +21,8 @@ interface FormCer {
 interface Values {
     name: string;
     organization: string;
-    dateFrom: Date | string;
-    dateTo: Date | string;
+    dateFrom: any;
+    dateTo: any;
     isWorking: boolean;
 }
 const initialValues: Values = {
@@ -91,10 +92,13 @@ const FormCer = ({ toggleOpen }: FormCer) => {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
+                const dateFrom = `${values.dateFrom.$y}-${values.dateFrom.$M + 1}`;
+
+                const dateTo = `${values.dateTo.$y}-${values.dateTo.$M + 1}`;
                 const certificate: any = {
                     date: {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFrom,
+                        to: dateTo,
                     },
                     name: values.name,
                     organization: values.organization,
@@ -109,6 +113,7 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                 await changeCertification(certificationData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
+                toggleOpen();
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
@@ -116,11 +121,9 @@ const FormCer = ({ toggleOpen }: FormCer) => {
     });
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
-            <p className="text-content-text text-sm font-semibold">
-                Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
-            </p>
+            <TipForm title="Mô tả thành tựu cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng" />
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col gap-6 border-b-2 pb-5">
                 <CustomField
                     title="Tên giải thưởng"
                     fieldName="name"
@@ -144,30 +147,27 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
+                <div className="flex gap-8 justify-between">
+                    <DateField
+                        title="Ngày bắt đầu *"
+                        error={formik.errors.dateFrom}
+                        touched={formik.touched.dateFrom}
+                        value={formik.values.dateFrom}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('dateFrom', date);
+                        }}
+                    />
 
-                <CustomField
-                    type="date"
-                    title="Từ"
-                    fieldName="dateFrom"
-                    error={formik.errors.dateFrom}
-                    touched={formik.touched.dateFrom}
-                    icon={<BsCalendarWeek />}
-                    value={formik.values.dateFrom}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
-
-                <CustomField
-                    type="date"
-                    title="Đến"
-                    fieldName="dateTo"
-                    error={formik.errors.dateTo}
-                    touched={formik.touched.dateTo}
-                    icon={<BsCalendarWeek />}
-                    value={formik.values.dateTo}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
+                    <DateField
+                        title="Ngày kết thúc *"
+                        error={formik.errors.dateTo}
+                        touched={formik.touched.dateTo}
+                        value={formik.values.dateTo}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('dateTo', date);
+                        }}
+                    />
+                </div>
             </div>
 
             <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />

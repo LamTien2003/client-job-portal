@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import CardSub from '../components/CardSub';
 import FormCer from './Form';
-import { Certification, Education } from '@/types/JobSeeker';
+import { Certification } from '@/types/JobSeeker';
 import { isJobSeeker } from '@/utils/helper';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';

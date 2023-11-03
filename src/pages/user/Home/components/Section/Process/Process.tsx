@@ -11,23 +11,23 @@ const Process = () => {
             />
 
             <ProcessItem
-                title="Account Create"
+                title="Create Resume"
                 paragraph="To create your account be confident & safely."
-                image={images.process.accoutCreate}
+                image={images.process.resume}
                 arrow="down"
             />
 
             <ProcessItem
-                title="Account Create"
+                title="Find Jobs"
                 paragraph="To create your account be confident & safely."
-                image={images.process.accoutCreate}
+                image={images.process.findJob}
                 arrow="up"
             />
 
             <ProcessItem
-                title="Account Create"
+                title="Apply Jobs"
                 paragraph="To create your account be confident & safely."
-                image={images.process.accoutCreate}
+                image={images.process.jobApply}
                 arrow="down"
             />
         </div>

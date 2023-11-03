@@ -23,7 +23,7 @@ import profit from './non-profit-org.svg';
 import receotionist from './receotionist.svg';
 import next from './slick-next.svg';
 import prev from './slick-prev.svg';
-import yellowStar from './yellowstar.png'
+import yellowStar from './yellowstar.png';
 
 import accoutCreate from './account-create.svg';
 import findJob from './job-find.svg';
@@ -120,7 +120,7 @@ const images = {
         save,
         locationAdmin,
         spin,
-    }
+    },
 };
 
 export default images;

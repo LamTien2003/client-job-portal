@@ -1,22 +1,31 @@
 import { useGetJobsQuery } from '@/services/jobsApiSlice';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Grid } from 'swiper/modules';
+
 import Job from '@/types/Job';
 import { useState, useEffect } from 'react';
 import FeaturesItem from './FeaturesItem';
 import Skeleton from '@/components/Loading/Skeleton';
-import { Swiper as SwiperType } from 'swiper';
-const Features = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
+import { BsArrowRight } from 'react-icons/bs';
+const Features = () => {
     const [jobs, setJobs] = useState<Job[]>([]);
-
-    const { data, isLoading, isError } = useGetJobsQuery({});
+    const [query, setQuery] = useState({ limit: 3 });
+    const [isLoadingMore, setIsLoadingMore] = useState(false);
+    const { data, isLoading, isError } = useGetJobsQuery(query);
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
             setJobs(data?.data?.data);
         }
-    }, [data?.data?.data, isError, isLoading]);
+        if (isLoadingMore) {
+            setIsLoadingMore(false);
+        }
+    }, [data?.data?.data, isError, isLoading, isLoadingMore]);
 
+    const seeMoreDataHandler = () => {
+        if (isLoading) return;
+        setIsLoadingMore(true);
+        const dataLength = jobs.length;
+        setQuery({ limit: dataLength + 3 });
+    };
     return (
         <div className="w-full">
             {isLoading && (
@@ -27,41 +36,23 @@ const Features = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType 
                 </>
             )}
 
-            <Swiper
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                }}
-                onBeforeInit={(swiper) => {
-                    swiperRef.current = swiper;
-                }}
-                spaceBetween={25}
-                slidesPerView={1}
-                breakpoints={{
-                    767: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-
-                    1279: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                    },
-                }}
-                grid={{
-                    rows: 2,
-                    fill: 'row',
-                }}
-                modules={[Grid, Autoplay]}
-                className="w-full"
-            >
+            <div className="grid grid-cols-3 gap-6">
                 {jobs.map((job, index) => (
-                    <SwiperSlide key={index}>
-                        <FeaturesItem path={`job/${job.id}`} job={job} />
-                    </SwiperSlide>
+                    <FeaturesItem key={index} path={`job/${job.id}`} job={job} />
                 ))}
-            </Swiper>
+            </div>
+
+            <div className="flex items-center justify-center mt-10">
+                <button
+                    onClick={() => seeMoreDataHandler()}
+                    className="flex items-center rounded-lg gap-2 px-5 py-2 text-white font-semibold bg-primary-100 hover:bg-black duration-300"
+                >
+                    {isLoadingMore ? 'Đang tải...' : 'Xem thêm'}
+                    <div className="text-xl text-white">
+                        <BsArrowRight />
+                    </div>
+                </button>
+            </div>
         </div>
     );
 };

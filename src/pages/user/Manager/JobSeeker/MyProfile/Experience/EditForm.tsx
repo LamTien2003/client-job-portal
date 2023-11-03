@@ -4,17 +4,18 @@ import { useFormik } from 'formik';
 import Checkbox from '@mui/material/Checkbox';
 
 import { AiOutlineUser } from 'react-icons/ai';
-import CustomField from './Field';
+import CustomField from '../components/Field';
 import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { BiSolidFactory } from 'react-icons/bi';
 import { FormControlLabel } from '@mui/material';
-import { BsCalendarWeek } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { isJobSeeker } from '@/utils/helper';
 import { Experience } from '@/types/JobSeeker';
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
+import DateField from '../components/DateField';
+import dayjs from 'dayjs';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
@@ -23,8 +24,8 @@ interface EditForm {
 interface Values {
     position: string;
     company: string;
-    dateFrom: Date | string;
-    dateTo: Date | string;
+    dateFrom: any;
+    dateTo: any;
     isWorking: boolean;
 }
 
@@ -100,8 +101,6 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
                 dateFromValue = parts[0];
             }
 
-            console.log(experienceToEdit.isWorking);
-
             formik.setValues({
                 ...formik.values,
                 position: experienceToEdit.position || '',
@@ -118,24 +117,35 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
+                let dateFromValue;
+
+                if (values.dateFrom.$y && values.dateFrom.$M) {
+                    dateFromValue = `${values.dateFrom.$y}-${values.dateFrom.$M + 1}`;
+                } else {
+                    dateFromValue = values.dateFrom;
+                }
+
+                let dateToValue;
+
+                if (values.dateTo.$y && values.dateTo.$M) {
+                    dateToValue = `${values.dateTo.$y}-${values.dateTo.$M + 1}`;
+                } else {
+                    dateToValue = values.dateTo;
+                }
                 const exp: any = {
                     position: values.position,
                     company: values.company,
-                    date: {
-                        from: values.dateFrom,
-                        to: values.dateTo,
-                    },
                     isWorking: values.isWorking,
                 };
 
                 if (values.isWorking) {
                     exp.date = {
-                        from: values.dateFrom,
+                        from: dateFromValue,
                     };
                 } else {
                     exp.date = {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFromValue,
+                        to: dateToValue,
                     };
                 }
 
@@ -157,14 +167,17 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
         },
     });
 
+    const dateFromValue: any = dayjs(formik.values.dateFrom);
+    const dateToValue: any = dayjs(formik.values.dateTo);
+
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
             <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật kinh nghiệm</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
-                    <div className="grid grid-cols-2 w-full gap-6">
+                    <div className="flex flex-col gap-6 border-b-2 pb-5">
                         <CustomField
-                            title="Chức vụ"
+                            title="Chức vụ *"
                             fieldName="position"
                             error={formik.errors.position}
                             touched={formik.touched.position}
@@ -173,9 +186,8 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
                             value={formik.values.position}
                             onChange={formik.handleChange}
                         />
-
                         <CustomField
-                            title="Công ty"
+                            title="Công ty *"
                             fieldName="company"
                             error={formik.errors.company}
                             touched={formik.touched.company}
@@ -183,31 +195,6 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
                             placeholder="Nhập họ của bạn"
                             value={formik.values.company}
                             onChange={formik.handleChange}
-                        />
-
-                        <CustomField
-                            type="date"
-                            title="Từ"
-                            fieldName="dateFrom"
-                            error={formik.errors.dateFrom}
-                            touched={formik.touched.dateFrom}
-                            icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
-                            value={formik.values.dateFrom}
-                            onChange={formik.handleChange}
-                        />
-
-                        <CustomField
-                            type="date"
-                            title="Đến"
-                            fieldName="dateTo"
-                            error={formik.errors.dateTo}
-                            touched={formik.touched.dateTo}
-                            icon={<BsCalendarWeek />}
-                            placeholder="Nhập họ của bạn"
-                            value={formik.values.dateTo}
-                            onChange={formik.handleChange}
-                            disabled={formik.values.isWorking}
                         />
 
                         <FormControlLabel
@@ -223,6 +210,28 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
                                 formik.setFieldValue('isWorking', isWorking);
                             }}
                         />
+                        <div className="flex gap-8 justify-between">
+                            <DateField
+                                title="Ngày bắt đầu *"
+                                error={formik.errors.dateFrom}
+                                touched={formik.touched.dateFrom}
+                                value={dateFromValue}
+                                onChange={(date: any) => {
+                                    formik.setFieldValue('dateFrom', date);
+                                }}
+                            />
+
+                            <DateField
+                                title="Ngày kết thúc"
+                                error={formik.errors.dateTo}
+                                touched={formik.touched.dateTo}
+                                value={dateToValue}
+                                onChange={(date: any) => {
+                                    formik.setFieldValue('dateTo', date);
+                                }}
+                                disabled={formik.values.isWorking}
+                            />
+                        </div>
                     </div>
                 </DialogBody>
                 <DialogFooter className="px-8">

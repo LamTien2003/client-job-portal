@@ -24,18 +24,24 @@ import Company from './pages/user/Manager/Company/Company';
 import JobCreated from './pages/user/Manager/Company/JobCreated/JobCreated';
 import JobApplication from './pages/user/Manager/Company/JobApplication/JobApplication';
 import JobDeleted from './pages/user/Manager/Company/JobDeleted/JobDeleted';
+
 import Statistics from './pages/admin/Statistics/Statistics';
 import Jobs from './pages/admin/Jobs/Jobs';
-import Categories from './pages/admin/Categories/Categories';
 import Users from './pages/admin/Users/Users';
+import Categories from './pages/admin/Categories/Categories';
+import { RootState } from './store/store';
+import { useSelector } from 'react-redux';
+import { isCompany } from './utils/helper';
 
 function App() {
+    const currentUser = useSelector((state: RootState) => state.user.user);
+    const company = isCompany(currentUser);
     return (
         <Routes>
             {/* Public routes */}
             <Route path="login" index element={<Login />} />
             <Route path="register" index element={<Register />} />
-            
+
             <Route element={<DefaultLayout />}>
                 <Route index element={<Home />} />
                 <Route path="job-listing" index element={<JobListing />} />
@@ -56,14 +62,14 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoutes />}>
                 <Route element={<DefaultLayout />}>
-                    <Route path="company" element={<Manager />}>
-                        <Route path="profile" element={<Company />} />
+                    <Route path="profile" element={<Manager />}>
+                        <Route index element={company ? <Company /> : <MyProfile />} />
+                        {/* Company */}
                         <Route path="job-created" element={<JobCreated />} />
                         <Route path="jobApplication/:id" element={<JobApplication />} />
                         <Route path="job-deleted" element={<JobDeleted />} />
-                    </Route>
-                    <Route path="jobseeker" element={<Manager />}>
-                        <Route path="profile" element={<MyProfile />} />
+                        {/* Jobseeker */}
+
                         <Route path="applied-jobs" element={<AppliedJobs />} />
                     </Route>
 

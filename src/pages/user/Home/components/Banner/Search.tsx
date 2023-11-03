@@ -18,7 +18,6 @@ const initialValues: Values = {
 
 const validation = Yup.object().shape({
     title: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Tiêu đề không được bỏ trống!'),
-    category: Yup.string().required('Danh mục không được bỏ trống!'),
 });
 const Search = () => {
     const [category, setCategory] = useState<Category[]>([]);
@@ -33,29 +32,34 @@ const Search = () => {
     }, [loadingCate, errorCate, categories?.data?.data]);
     const { data, isLoading, isError } = useGetJobsQuery(query);
 
-    console.log(data);
-
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
-                await setQuery({
-                    q: values.title,
-                    type: values.category,
-                });
+                let queryData;
+                if (values.category) {
+                    queryData = {
+                        q: values.title,
+                        type: values.category,
+                    };
+                } else {
+                    queryData = {
+                        q: values.title,
+                    };
+                }
+                await setQuery(queryData);
                 console.log(values);
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
         },
     });
-    console.log(query);
 
     return (
         <form
             onSubmit={formik.handleSubmit}
-            className="flex lg:w-full w-[65%] justify-between bg-white mt-20 items-center p-4 gap-5 rounded mb:flex-col"
+            className="flex lg:w-full w-[65%] justify-between bg-white mt-10 items-center p-4 gap-5 rounded mb:flex-col"
         >
             <div
                 className={`  lg:w-full w-[50%] flex p-4 border border-[#e9e9e9] bg-[#eff3f2] rounded ${

@@ -1,7 +1,7 @@
 import * as Yup from 'Yup';
 
 import { useFormik } from 'formik';
-import CustomField from './Field';
+import CustomField from '../components/Field';
 import { FaSchool } from 'react-icons/fa';
 import { BiSolidFactory } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
@@ -14,7 +14,8 @@ import { RootState } from '@/store/store';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Education } from '@/types/JobSeeker';
-
+import DateField from '../components/DateField';
+import TipForm from '../components/TipForm';
 interface FormEducation {
     toggleOpen: () => void;
 }
@@ -22,8 +23,8 @@ interface FormEducation {
 interface Values {
     school: string;
     major: string;
-    dateFrom: Date | string;
-    dateTo: Date | string;
+    dateFrom: any;
+    dateTo: any;
 
     isLearning: boolean;
 }
@@ -90,10 +91,18 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
+                const dateFrom = `${values.dateFrom.$y}-${values.dateFrom.$M + 1}`;
+
+                let dateTo;
+
+                if (values.dateTo) {
+                    dateTo = `${values.dateTo.$y}-${values.dateTo.$M + 1}`;
+                }
+
                 const educate: any = {
                     date: {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFrom,
+                        to: dateTo,
                     },
                     major: values.major,
                     school: values.school,
@@ -102,12 +111,12 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
 
                 if (values.isLearning) {
                     educate.date = {
-                        from: values.dateFrom,
+                        from: dateFrom,
                     };
                 } else {
                     educate.date = {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFrom,
+                        to: dateTo,
                     };
                 }
 
@@ -120,18 +129,17 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                 await changeEducation(eduData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
+                toggleOpen();
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
         },
     });
     return (
-        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
-            <p className="text-content-text text-sm font-semibold">
-                Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
-            </p>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-2 pt-5">
+            <TipForm title="Cập nhật thông tin của bạn một cách chính xác!" />
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col gap-6 border-b-2 pb-5">
                 <CustomField
                     title="Trường"
                     fieldName="school"
@@ -155,46 +163,43 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-
-                <CustomField
-                    type="date"
-                    title="Từ"
-                    fieldName="dateFrom"
-                    error={formik.errors.dateFrom}
-                    touched={formik.touched.dateFrom}
-                    icon={<BsCalendarWeek />}
-                    value={formik.values.dateFrom}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                <FormControlLabel
+                    control={<Checkbox />}
+                    name="isLearning"
+                    label="Tôi đang học tập tại đây"
+                    value={formik.values.isLearning}
+                    onChange={(e: any) => {
+                        const isLearning = e.target.checked;
+                        if (isLearning) {
+                            formik.setFieldValue('dateTo', '');
+                        }
+                        formik.setFieldValue('isLearning', isLearning);
+                    }}
                 />
 
-                <CustomField
-                    type="date"
-                    title="Đến"
-                    fieldName="dateTo"
-                    error={formik.errors.dateTo}
-                    touched={formik.touched.dateTo}
-                    icon={<BsCalendarWeek />}
-                    value={formik.values.dateTo}
-                    disabled={formik.values.isLearning}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
+                <div className="flex gap-8 justify-between">
+                    <DateField
+                        title="Ngày bắt đầu *"
+                        error={formik.errors.dateFrom}
+                        touched={formik.touched.dateFrom}
+                        value={formik.values.dateFrom}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('dateFrom', date);
+                        }}
+                    />
+
+                    <DateField
+                        title="Ngày kết thúc"
+                        error={formik.errors.dateTo}
+                        touched={formik.touched.dateTo}
+                        value={formik.values.dateTo}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('dateTo', date);
+                        }}
+                        disabled={formik.values.isLearning}
+                    />
+                </div>
             </div>
-
-            <FormControlLabel
-                control={<Checkbox />}
-                name="isLearning"
-                label="Tôi đang học tập tại đây"
-                value={formik.values.isLearning}
-                onChange={(e: any) => {
-                    const isLearning = e.target.checked;
-                    if (isLearning) {
-                        formik.setFieldValue('dateTo', '');
-                    }
-                    formik.setFieldValue('isLearning', isLearning);
-                }}
-            />
 
             <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />
         </form>

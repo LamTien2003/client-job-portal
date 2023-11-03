@@ -6,7 +6,7 @@ import Category from './components/Section/Category/Category';
 import Features from './components/Section/Features/Features';
 import Process from './components/Section/Process/Process';
 import Location from './components/Section/Location/Location';
-import Review from './components/Section/Review/Review';
+// import Review from './components/Section/Review/Review';
 import Company from './components/Section/Company/Company';
 import Recruiters from './components/Section/Recruiters/Recruiters';
 import Article from './components/Section/Article/Article';
@@ -18,7 +18,7 @@ const Home = () => {
     // }, []);
 
     const swiperRefLocation = useRef<SwiperType>();
-    const swiperRefReview = useRef<SwiperType>();
+    // const swiperRefReview = useRef<SwiperType>();
     const swiperRefRecruiters = useRef<SwiperType>();
     const swiperRefFeatures = useRef<SwiperType>();
 
@@ -45,11 +45,11 @@ const Home = () => {
         </span>
     );
 
-    const titleReviews = (
-        <span>
-            Trusted User <span className="text-primary-100">Reviews</span>
-        </span>
-    );
+    // const titleReviews = (
+    //     <span>
+    //         Trusted User <span className="text-primary-100">Reviews</span>
+    //     </span>
+    // );
 
     const titleRecruiters = (
         <span>
@@ -79,12 +79,10 @@ const Home = () => {
                 title={titleFeatured}
                 subTitle="To choose your trending job dream & to make future bright."
                 bg="bg-content-bg"
-                right={true}
                 path="job-listing"
                 slick={true}
-                swiperRef={swiperRefFeatures}
             >
-                <Features swiperRef={swiperRefFeatures} />
+                <Features />
             </Section>
 
             <Section
@@ -107,7 +105,7 @@ const Home = () => {
             >
                 <Location swiperRef={swiperRefLocation} />
             </Section>
-
+            {/* 
             <Section
                 title={titleReviews}
                 subTitle="To choose your trending job dream & to make future bright."
@@ -118,9 +116,7 @@ const Home = () => {
                 swiperRef={swiperRefReview}
             >
                 <Review swiperRef={swiperRefReview} />
-            </Section>
-
-            <Company />
+            </Section> */}
 
             <Section
                 title={titleRecruiters}
@@ -142,6 +138,7 @@ const Home = () => {
             >
                 <Article />
             </Section>
+            <Company />
         </div>
     );
 };

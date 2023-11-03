@@ -1,5 +1,3 @@
-.MuiInputBase-root {
-}
 .MuiInput-underline::before {
     border: none !important;
 }
@@ -9,4 +7,12 @@
 }
 .MuiModal-root {
     z-index: 99999999999999 !important;
+}
+
+.MuiPickersPopper-root {
+    z-index: 2000000 !important;
+}
+
+.MuiInputBase-root {
+    max-height: 50.5px !important;
 }

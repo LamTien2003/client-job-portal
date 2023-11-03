@@ -17,19 +17,37 @@ const JobCreated = () => {
     console.log(jobCreated);
 
     return (
-        <div>
+        <table className="border border-primary-100 w-full text-sm text-center">
+            <thead className="w-full bg-primary-100  justify-between items-center p-4  text-white font-family-title text-base">
+                <tr>
+                    <th scope="col" className="px-6 py-3">
+                        Tiêu đề
+                    </th>
+                    <th scope="col" className="w-[25%] px-6 py-3">
+                        Danh sách ứng tuyển
+                    </th>
+
+                    <th scope="col" className=" w-[15%] px-6 py-3">
+                        Trạng thái
+                    </th>
+
+                    <th scope="col" className="w-[16%] px-6 py-3">
+                        Hành động
+                    </th>
+                </tr>
+            </thead>
             {jobCreated.length === 0 && (
-                <div>
+                <div className="flex w-fulljustify-center items-center">
                     <p>Bạn chưa tạo công việc nào hãy tạo job</p>
                     <Link to="post-job">Tạo công việc ngay!</Link>
                 </div>
             )}
-            <div className="flex flex-col gap-5">
+            <tbody className="">
                 {jobCreated.map((job, index) => (
                     <Item key={index} job={job} />
                 ))}
-            </div>
-        </div>
+            </tbody>
+        </table>
     );
 };
 

@@ -25,16 +25,32 @@ const InfoCompany = () => {
     return (
         <>
             <Card handleOpen={handleOpen}>
-                <div className="flex flex-col gap-4 text-content-title">
-                    <h5>Tên công ty: {company?.companyName}</h5>
-                    <p>Mô tả: {company?.description}</p>
-                    <p>Ngày thành lập: {date}</p>
-                    <p>
-                        Website:{' '}
-                        <a className="text-primary-100 font-medium" href={company?.website}>
+                <div className="flex flex-col gap-4 text-content-title font-family-title">
+                    <div className="flex gap-2 items-center">
+                        <span className="font-title text-content-title">Tên công ty:</span>
+                        <h5 className="font-title text-primary-100 text-xl">{company?.companyName}</h5>
+                    </div>
+
+                    <div className="flex gap-2 items-center">
+                        <span className="font-title text-content-title">Mô tả:</span>
+                        <h5 className="font-title text-primary-100 text-xl">{company?.description}</h5>
+                    </div>
+
+                    <div className="flex gap-2 items-center">
+                        <span className="font-title text-content-title">Ngày thành lập:</span>
+                        <h5 className="font-title text-primary-100 text-xl">{date}</h5>
+                    </div>
+
+                    <div className="flex gap-2 items-center">
+                        <span className="font-title text-content-title">Website:</span>
+                        <a
+                            className="text-primary-100 font-medium underline text-lg"
+                            href={company?.website}
+                            target="_blank"
+                        >
                             {company?.website ? 'Xem chi tiết' : 'Công ty chưa có website'}
                         </a>
-                    </p>
+                    </div>
                 </div>
             </Card>
 

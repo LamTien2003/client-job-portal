@@ -1,9 +1,8 @@
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
-import CustomField from './Field';
+import CustomField from '../components/Field';
 import { AiOutlineUser } from 'react-icons/ai';
 import { PiBracketsCurlyBold } from 'react-icons/pi';
-import { BsCalendarWeek } from 'react-icons/bs';
 import { FaAudioDescription } from 'react-icons/fa';
 
 import BtnBot from '../../../components/BtnBot';
@@ -14,7 +13,8 @@ import { isJobSeeker } from '@/utils/helper';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Checkbox, FormControlLabel } from '@mui/material';
-
+import DateField from '../components/DateField';
+import TipForm from '../components/TipForm';
 interface FormProject {
     toggleOpen: () => void;
 }
@@ -23,8 +23,8 @@ interface Values {
     name: string;
     url: string;
     description: string;
-    dateFrom: Date | string;
-    dateTo: Date | string;
+    dateFrom: any;
+    dateTo: any;
     isWorking: boolean;
 }
 const initialValues: Values = {
@@ -92,6 +92,13 @@ const FormProject = ({ toggleOpen }: FormProject) => {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
+                const dateFrom = `${values.dateFrom.$y}-${values.dateFrom.$M + 1}`;
+
+                let dateTo;
+
+                if (values.dateTo) {
+                    dateTo = `${values.dateTo.$y}-${values.dateTo.$M + 1}`;
+                }
                 const project: any = {
                     name: values.name,
                     description: values.description,
@@ -101,12 +108,12 @@ const FormProject = ({ toggleOpen }: FormProject) => {
 
                 if (values.isWorking) {
                     project.date = {
-                        from: values.dateFrom,
+                        from: dateFrom,
                     };
                 } else {
                     project.date = {
-                        from: values.dateFrom,
-                        to: values.dateTo,
+                        from: dateFrom,
+                        to: dateTo,
                     };
                 }
 
@@ -119,6 +126,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                 await changeProjects(projectData);
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
+                toggleOpen();
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
@@ -126,11 +134,9 @@ const FormProject = ({ toggleOpen }: FormProject) => {
     });
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
-            <p className="text-content-text text-sm font-semibold">
-                Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
-            </p>
+            <TipForm title="Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng" />
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 border-b-2 pb-5">
                 <CustomField
                     title="Tên dự án"
                     fieldName="name"
@@ -142,33 +148,39 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-
-                <div className="flex gap-6">
-                    <CustomField
-                        type="date"
-                        title="Từ"
-                        fieldName="dateFrom"
+                <FormControlLabel
+                    control={<Checkbox />}
+                    name="isWorking"
+                    label="Tôi đang làm dự án này"
+                    value={formik.values.isWorking}
+                    onChange={(e: any) => {
+                        const isWorking = e.target.checked;
+                        if (isWorking) {
+                            formik.setFieldValue('dateTo', '');
+                        }
+                        formik.setFieldValue('isWorking', isWorking);
+                    }}
+                />
+                <div className="flex gap-8 justify-between">
+                    <DateField
+                        title="Ngày bắt đầu *"
                         error={formik.errors.dateFrom}
                         touched={formik.touched.dateFrom}
-                        icon={<BsCalendarWeek />}
-                        placeholder="Nhập họ của bạn"
                         value={formik.values.dateFrom}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('dateFrom', date);
+                        }}
                     />
 
-                    <CustomField
-                        type="date"
-                        title="Đến"
-                        fieldName="dateTo"
+                    <DateField
+                        title="Ngày kết thúc"
                         error={formik.errors.dateTo}
                         touched={formik.touched.dateTo}
-                        icon={<BsCalendarWeek />}
-                        placeholder="Nhập họ của bạn"
                         value={formik.values.dateTo}
-                        onChange={formik.handleChange}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('dateTo', date);
+                        }}
                         disabled={formik.values.isWorking}
-                        onBlur={formik.handleBlur}
                     />
                 </div>
                 <CustomField
@@ -192,20 +204,6 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     value={formik.values.url}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                />
-
-                <FormControlLabel
-                    control={<Checkbox />}
-                    name="isWorking"
-                    label="Tôi đang làm dự án này"
-                    value={formik.values.isWorking}
-                    onChange={(e: any) => {
-                        const isWorking = e.target.checked;
-                        if (isWorking) {
-                            formik.setFieldValue('dateTo', '');
-                        }
-                        formik.setFieldValue('isWorking', isWorking);
-                    }}
                 />
             </div>
 

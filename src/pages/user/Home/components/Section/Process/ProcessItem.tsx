@@ -19,10 +19,10 @@ const ProcessItem: React.FC<Process> = ({ title, paragraph, image, arrow }) => {
 
             <div className="flex flex-col border-2 border-primary-40  text-center justify-center items-center w-[250px] h-[250px] rounded-full bg-primary-10 group-hover:border-primary-100 duration-300">
                 <img src={image} alt={image} />
-                <h5 className="text-content-title my-2 text-lg font-semibold group-hover:text-primary-100 duration-300">
+                <h5 className="font-family-title text-content-title my-2 text-lg font-semibold group-hover:text-primary-100 duration-300">
                     <a href="#">{title}</a>
                 </h5>
-                <p className="text-content-text font-normal">{paragraph}</p>
+                <p className="font-family-text text-content-text font-normal">{paragraph}</p>
             </div>
 
             {arrow === 'down' && (
