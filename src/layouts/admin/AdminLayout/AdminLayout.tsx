@@ -13,7 +13,7 @@ function AdminLayout() {
 
     const [activeSidebar, setActiveSidebar] = useState<boolean>(true)
 
-    if(currentUser && currentUser?.role !== 'user') {
+    if(currentUser && currentUser?.role !== 'admin') {
         removeToken()
         navigate('/login')
     }

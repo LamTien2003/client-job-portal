@@ -2,9 +2,38 @@ import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
 import JobSeeker, { JobApplicate } from '@/types/JobSeeker';
+import { buildQueryString } from '@/utils/helper';
+
+interface ParamsGetAllJob {
+    q?: string;
+    page?: number;
+    limit?: number;
+    ['salary[gte]']?: number;
+    ['salary[lte]']?: number;
+    ['skillsRequire[in]']?: string[];
+    sort?: string;
+}
 
 export const jobseekerApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
+        getJobseekers: builder.query<ResponseApi<JobSeeker[]>, ParamsGetAllJob>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `jobseeker?${query && query}`,
+                };
+            },
+            providesTags(result) {
+                if (result?.data?.data) {
+                    const final = [
+                        ...result.data.data.map(({ id }) => ({ type: 'JobSeeker' as const, id })),
+                        { type: 'JobSeeker' as const, id: 'LIST' },
+                    ];
+                    return final;
+                }
+                return [{ type: 'JobSeeker' as const, id: 'LIST' }];
+            },
+        }),
         JobseekerChangeMe: builder.mutation<ResponseApi<JobSeeker>, JobSeeker>({
             query(body) {
                 try {
@@ -46,4 +75,4 @@ export const jobseekerApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useJobseekerChangeMeMutation, useGetMyApplicationQuery, useRemoveJobApplyMutation } = jobseekerApiSlice;
+export const { useGetJobseekersQuery, useJobseekerChangeMeMutation, useGetMyApplicationQuery, useRemoveJobApplyMutation } = jobseekerApiSlice;

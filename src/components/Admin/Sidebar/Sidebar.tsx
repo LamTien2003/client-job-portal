@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { ArrowAdmin, BellIcon, CategoryAdmin, JobAdmin, ProfileAdmin, Setting, SettingAdmin, StatisticsAdmin, UserAdmin } from "@/components/Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import path from "path";
 import images from "@/assets/images";
@@ -39,9 +39,9 @@ function Sidebar(props: SidebarProps) {
 
     const toggleActiveStyle = (id: string) => {
         if(id === active) {
-            return 'flex items-center text-black fill-[#40189D] bg-[#EEE] rounded-l-[50px] py-4 pl-5 relative'
+            return 'flex items-center text-content-title fill-[#40189D] bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative'
         }   else {
-            return 'flex items-center text-white fill-white py-4 pl-5 relative'
+            return 'flex items-center text-white fill-white py-[18px] pl-5 relative'
         }
     }
 
@@ -102,6 +102,9 @@ function Sidebar(props: SidebarProps) {
             </div>
         ) : (
             <div className=" w-[60px] h-[100vh] text-white bg-[#40189D] rounded-r-[10px] mr-[30px] duration-300 left-0 fixed">
+                <div className=" flex items-center justify-center w-full h-5 py-[60px]">
+                    <FontAwesomeIcon icon={faHouse} />
+                </div>
                 <Link to={'/admin'} className={toggleActiveStyle('statistics')} onClick={() => setActive('statistics')}>
                     <div className=" w-5 h-5">
                         <StatisticsAdmin />

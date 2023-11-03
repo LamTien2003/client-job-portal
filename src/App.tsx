@@ -24,10 +24,10 @@ import Company from './pages/user/Manager/Company/Company';
 import JobCreated from './pages/user/Manager/Company/JobCreated/JobCreated';
 import JobApplication from './pages/user/Manager/Company/JobApplication/JobApplication';
 import JobDeleted from './pages/user/Manager/Company/JobDeleted/JobDeleted';
-import Users from './pages/admin/Users/Users';
+import Statistics from './pages/admin/Statistics/Statistics';
 import Jobs from './pages/admin/Jobs/Jobs';
 import Categories from './pages/admin/Categories/Categories';
-import Statistics from './pages/admin/Statistics/Statistics';
+import Users from './pages/admin/Users/Users';
 
 function App() {
     return (

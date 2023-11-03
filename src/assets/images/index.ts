@@ -42,11 +42,24 @@ import salary from './salary-2.svg';
 import calender2 from './calender2.svg';
 
 import find from './find.png'
+import findWhite from './find-white.png'
 import messageAdmin from './message-admin.svg'
 import notificationAdmin from './notification-admin.svg'
+import jobseekerAdmin from './jobseeker-admin.svg'
+import companyAdmin from './company-admin.svg'
+import userAdminAdmin from './user-admin-admin.svg'
+import banIconAdmin from './ban-icon-admin.png'
+import unbanIconAdmin from './unban-icon-admin.png'
+import filter from './filter.svg'
+import userAvt from './user-avt.png'
+import save from './save-admin.png'
+import locationAdmin from './location.png'
+import spin from './spin.svg'
 
 const images = {
     find,
+    findWhite,
+    filter,
     yellowStar,
     elliose,
     arrow,
@@ -97,7 +110,16 @@ const images = {
     },
     admin: {
         messageAdmin,
-        notificationAdmin
+        notificationAdmin,
+        jobseekerAdmin,
+        companyAdmin,
+        userAdminAdmin,
+        banIconAdmin,
+        unbanIconAdmin,
+        userAvt,
+        save,
+        locationAdmin,
+        spin,
     }
 };
 
