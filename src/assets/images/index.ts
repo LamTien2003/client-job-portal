@@ -54,6 +54,8 @@ import categorypng from './category.png';
 import find from './find.png';
 import messageAdmin from './message-admin.svg';
 import notificationAdmin from './notification-admin.svg';
+import money from './money.png';
+import locationAdmin from './location.png';
 
 const images = {
     find,
@@ -87,6 +89,8 @@ const images = {
         transportation,
     },
     logo: {
+        locationAdmin,
+        money,
         logoBlack,
         logoWhite,
         calender2,
