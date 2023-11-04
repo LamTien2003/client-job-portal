@@ -32,9 +32,14 @@ import Categories from './pages/admin/Categories/Categories';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import Loader from '@/components/Loader/Loader';
+import { useGetCurrentUserQuery } from '@/services/usersApiSlice';
+import ProxyManager from '@/pages/user/Manager/ProxyManager';
+import JobSeekerManager from './pages/user/Manager/JobSeeker/JobSeekerManager';
+import CompanyManager from './pages/user/Manager/Company/CompanyManager';
 
 function App() {
     const uiState = useSelector((state: RootState) => state.ui);
+    useGetCurrentUserQuery(undefined);
 
     return (
         <>
@@ -58,32 +63,33 @@ function App() {
                     <Route path="login" index element={<Login />} />
                     <Route path="register" index element={<Register />} />
                     <Route path="setting" index element={<Setting />} />
-                </Route>
 
-                {/* Protected Routes */}
-                <Route element={<ProtectedRoutes />}>
-                    <Route element={<DefaultLayout />}>
+                    <Route element={<ProtectedRoutes />}>
                         <Route path="profile" element={<Manager />}>
-                            <Route path="jobseeker">
+                            <Route index element={<ProxyManager />} />
+
+                            <Route path="jobseeker" element={<JobSeekerManager />}>
                                 <Route index element={<JobseekerProfile />} />
                                 <Route path="applied-jobs" element={<AppliedJobs />} />
                             </Route>
-                            <Route path="company">
+
+                            <Route path="company" element={<CompanyManager />}>
                                 <Route index element={<CompanyProfile />} />
                                 <Route path="job-created" element={<JobCreated />} />
                                 <Route path="jobApplication/:id" element={<JobApplication />} />
                                 <Route path="job-deleted" element={<JobDeleted />} />
+                                <Route path="post-job" element={<PostJob />} />
                             </Route>
                         </Route>
-                        <Route index />
-
-                        <Route path="post-job" index element={<PostJob />} />
                     </Route>
+                </Route>
+
+                <Route path="admin" element={<ProtectedRoutes />}>
                     <Route element={<AdminLayout />}>
-                        <Route path="admin" index element={<Statistics />} />
-                        <Route path="admin/users" index element={<Users />} />
-                        <Route path="admin/jobs" index element={<Jobs />} />
-                        <Route path="admin/categories" index element={<Categories />} />
+                        <Route index element={<Statistics />} />
+                        <Route path="users" element={<Users />} />
+                        <Route path="jobs" element={<Jobs />} />
+                        <Route path="categories" element={<Categories />} />
                     </Route>
                 </Route>
 

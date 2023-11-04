@@ -1,39 +1,34 @@
-import { useLayoutEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { useGetCurrentUserQuery } from '@/services/usersApiSlice';
-import { setCurrentUser } from '@/store/userSlice';
-import { RootState } from '@/store/store';
 import { removeToken } from '@/utils/storage';
-import { hideLoading } from '@/store/uiSlice';
+import { hideLoading, showLoading } from '@/store/uiSlice';
 
 const ProtectedRoutes = () => {
-    const currentUser = useSelector((state: RootState) => state.user.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { data, isLoading, isFetching, isError, error } = useGetCurrentUserQuery(undefined, {
         refetchOnMountOrArgChange: 500,
     });
-    const dispatch = useDispatch();
-    const location = useLocation();
 
-    useLayoutEffect(() => {
-        if (data?.data?.data) {
-            const user = data.data.data;
-            dispatch(setCurrentUser(user));
+    useEffect(() => {
+        if (isLoading) {
+            dispatch(showLoading());
+            return;
         }
-
-        if (isError && !isFetching && !isLoading) {
+        if (isError && !isFetching) {
             alert((error as any)?.data?.msg);
             removeToken();
             dispatch(hideLoading());
+            navigate('/login');
+            return;
         }
-    }, [data, dispatch, isLoading, isFetching, currentUser, isError, error]);
+        dispatch(hideLoading());
+    }, [data, dispatch, navigate, isLoading, isFetching, isError, error]);
 
-    return !currentUser && !data && !isFetching && !isLoading ? (
-        <Navigate to="/login" state={{ from: location }} replace />
-    ) : (
-        <Outlet />
-    );
+    return data && !isFetching && !isLoading && <Outlet />;
 };
 
 export default ProtectedRoutes;

@@ -13,7 +13,7 @@ import store from './store/store.ts';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
+    <>
         <Provider store={store}>
             <Router>
                 <ThemeProvider>
@@ -35,5 +35,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             pauseOnHover
             theme="light"
         />
-    </React.StrictMode>,
+    </>,
 );
