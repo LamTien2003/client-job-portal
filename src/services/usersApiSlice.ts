@@ -26,6 +26,24 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 return [{ type: 'Users' as const, id: 'LIST' }];
             },
         }),
+        getBannedUsers: builder.query<ResponseApi<MixinUser[]>, { q?: string; page?: number; limit?: number }>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `user/banned?${query && query}`,
+                };
+            },
+            providesTags(result) {
+                if (result?.data?.data) {
+                    const final = [
+                        ...result.data.data.map(({ id }) => ({ type: 'Users' as const, id })),
+                        { type: 'Users' as const, id: 'LIST' },
+                    ];
+                    return final;
+                }
+                return [{ type: 'Users' as const, id: 'LIST' }];
+            },
+        }),
         getCurrentUser: builder.query<ResponseApi<MixinUser>, void>({
             query: () => `user/getMe/`,
             providesTags: () => [{ type: 'Users' as const, id: 'CURRENT' }],
@@ -44,7 +62,58 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             },
             invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Users' as const, id: 'CURRENT' }]),
         }),
+        banUser: builder.mutation<ResponseApi<MixinUser>, string>({
+            query: (id) => {
+                try {
+                    return {
+                        url: `user/ban/${id}`,
+                        method: 'PATCH'
+                    }
+                } catch (error) {
+                    throw(error)
+                }
+            },
+            invalidatesTags: (_result, error) => {
+                if (!error) {
+                    return [
+                        { type: 'Users', id: 'LIST' },
+                        { type: 'Companies', id: 'LIST' },
+                        { type: 'JobSeeker', id: 'LIST' },
+                    ];
+                }
+                return [];
+            },
+        }),
+        unbanUser: builder.mutation<ResponseApi<MixinUser>, string>({
+            query: (id) => {
+                try {
+                    return {
+                        url: `user/unban/${id}`,
+                        method: 'PATCH'
+                    }
+                } catch (error) {
+                    throw(error)
+                }
+            },
+            invalidatesTags: (_result, error) => {
+                if (!error) {
+                    return [
+                        { type: 'Users', id: 'LIST' },
+                        { type: 'Companies', id: 'LIST' },
+                        { type: 'JobSeeker', id: 'LIST' },
+                    ];
+                }
+                return [];
+            },
+        }),
     }),
 });
 
-export const { useGetUsersQuery, useGetCurrentUserQuery, useChangeMeUserMutation } = usersApiSlice;
+export const { 
+    useGetUsersQuery, 
+    useGetBannedUsersQuery, 
+    useGetCurrentUserQuery, 
+    useChangeMeUserMutation, 
+    useBanUserMutation,
+    useUnbanUserMutation,
+} = usersApiSlice;

@@ -1,28 +1,110 @@
 import { BiSearch } from 'react-icons/bi';
 import { BsColumnsGap } from 'react-icons/bs';
 import { FaList } from 'react-icons/fa';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControlLabel, Pagination } from '@mui/material';
 import JobItem from './components/JobItem';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useGetAllJobsQuery, useGetJobsNotAcceptQuery, useGetJobsQuery } from '@/services/jobsApiSlice';
+import Job from '@/types/Job';
 function Jobs() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Job[]>([]);
+    const [page, setPage] = useState<number>(1);
 
+    const [total, setTotal] = useState<number>(0);
+
+    const [query, setQuery] = useState({ page: page, limit: 4 });
+
+    const searchRef = useRef<HTMLInputElement | null>(null);
+
+    const [selectedTab, setSelectedTab] = useState<string>('all');
+
+    const { data: jobsAll, isLoading: jobAllLoading, isError: jobAllError } = useGetAllJobsQuery(query);
+
+    const {
+        data: jobsNotAccept,
+        isLoading: jobNotAcceptLoading,
+        isError: jobNotAcceptError,
+    } = useGetJobsNotAcceptQuery(query);
+
+    const { data: jobsAccept, isLoading: jobAcceptLoading, isError: jobAcceptError } = useGetJobsQuery(query);
+
+    useEffect(() => {
+        if (!jobAllLoading && !jobAllError && jobsAll?.data?.data) {
+            setData(jobsAll?.data?.data);
+        }
+    }, [jobsAll?.data?.data, jobAllLoading, jobAllError]);
+
+    const handleTabClick = (tab: string) => {
+        setSelectedTab(tab);
+        if (tab === 'all') {
+            setData(jobsAll?.data?.data || []);
+            setTotal(jobsAll?.data?.totalItems || 0);
+        } else if (tab === 'accepted') {
+            setData(jobsAccept?.data?.data || []);
+            setTotal(jobsAccept?.data?.totalItems || 0);
+        } else if (tab === 'notAccepted') {
+            setData(jobsNotAccept?.data?.data || []);
+            setTotal(jobsNotAccept?.data?.totalItems || 0);
+        }
+    };
+
+    const searchSubmit = () => {
+        setQuery((prevQuery) => ({
+            ...prevQuery,
+            q: searchRef?.current?.value,
+        }));
+    };
+
+    const handlePageChange = (event: React.ChangeEvent<unknown>, newPage: number) => {
+        console.log(newPage);
+
+        // setPage(newPage);
+        // setQuery((prevQuery) => ({
+        //     ...prevQuery,
+        //     page: newPage,
+        // }));
+    };
     return (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 pb-10">
             <div className="flex justify-between items-center">
                 <div className="flex gap-5 font-family-title text-[#40189D] font-medium">
-                    <button className="py-2 px-4 border-2 border-secondary-100 rounded-3xl">Tất cả</button>
-                    <button className="p-2 px-4 border-2 rounded-3xl border-secondary-100">Đã duyệt (2000)</button>
-                    <button className="p-2 px-4 border-2 rounded-3xl border-secondary-100">Chưa duyệt (2000)</button>
+                    <button
+                        className={`py-2 px-4 border-2 border-secondary-100 rounded-3xl ${
+                            selectedTab === 'all' ? 'bg-[#40189D] text-white' : ''
+                        }`}
+                        onClick={() => handleTabClick('all')}
+                    >
+                        Tất cả
+                    </button>
+                    <button
+                        className={`p-2 px-4 border-2 rounded-3xl border-secondary-100 ${
+                            selectedTab === 'accepted' ? 'bg-[#40189D] text-white' : ''
+                        }`}
+                        onClick={() => handleTabClick('accepted')}
+                    >
+                        Đã duyệt
+                    </button>
+                    <button
+                        className={`p-2 px-4 border-2 rounded-3xl border-secondary-100 ${
+                            selectedTab === 'notAccepted' ? 'bg-[#40189D] text-white' : ''
+                        }`}
+                        onClick={() => handleTabClick('notAccepted')}
+                    >
+                        Chưa duyệt
+                    </button>
                 </div>
 
                 <div className="flex items-center border-2 rounded-full border-[#40189D]">
                     <input
+                        ref={searchRef}
                         type="text"
                         className="h-12 w-80 rounded-l-3xl outline-none border-none px-5 font-family-text text-content-text bg-transparent"
                         placeholder="Tìm kiếm công việc ..."
                     />
-                    <button className="flex items-center px-4 text-white font-extrabold rounded-r-3xl text-xl bg-[#40189D] h-12 hover:bg-black duration-300">
+                    <button
+                        onClick={searchSubmit}
+                        className="flex items-center px-4 text-white font-extrabold rounded-r-3xl text-xl bg-[#40189D] h-12 hover:bg-black duration-300"
+                    >
                         <BiSearch />
                     </button>
                 </div>
@@ -30,18 +112,14 @@ function Jobs() {
 
             <div className="flex justify-between items-center">
                 <div className="flex flex-col gap-3 font-family-text ">
-                    <h5 className="text-content-title font-title text-lg">Hiển thị 246 kết quả việc làm.</h5>
+                    <h5 className="text-content-title font-title text-lg">Hiển thị {data.length} kết quả việc làm.</h5>
                     <h6 className="text-content-text">Dựa trên sở thích của bạn.</h6>
                 </div>
 
                 <div className="flex gap-5">
                     <div className="flex gap-4">
                         <FormControlLabel control={<Checkbox color="secondary" />} name="fulltime" label="Fulltime" />
-                        <FormControlLabel
-                            control={<Checkbox color="secondary" />}
-                            name="partime"
-                            label="Partime"
-                        />{' '}
+                        <FormControlLabel control={<Checkbox color="secondary" />} name="partime" label="Partime" />
                         <FormControlLabel control={<Checkbox color="secondary" />} name="remote" label="Remote" />
                     </div>
 
@@ -58,11 +136,16 @@ function Jobs() {
             </div>
 
             <div className="grid grid-cols-1 gap-6">
-                <JobItem />
-                <JobItem />
-                <JobItem />
-                <JobItem />
+                {jobAllLoading ||
+                    jobNotAcceptLoading ||
+                    (jobAcceptLoading && <div className="bg-white text-center p-5">Loading...</div>)}
+                {data.length === 0 && <div className="bg-white text-center p-5">Công việc trống!</div>}
+                {data.map((job, index) => (
+                    <JobItem key={index} job={job} />
+                ))}
             </div>
+
+            <Pagination count={Math.ceil(total / query.limit)} page={page} onChange={handlePageChange} />
         </div>
     );
 }

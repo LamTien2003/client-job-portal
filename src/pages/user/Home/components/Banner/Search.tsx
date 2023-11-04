@@ -49,7 +49,6 @@ const Search = () => {
                     };
                 }
                 await setQuery(queryData);
-                console.log(values);
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }

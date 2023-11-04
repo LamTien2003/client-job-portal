@@ -41,6 +41,19 @@ import user2 from './user-2.svg';
 import salary from './salary-2.svg';
 import calender2 from './calender2.svg';
 
+import find from './find.png';
+import findWhite from './find-white.png';
+import messageAdmin from './message-admin.svg';
+import notificationAdmin from './notification-admin.svg';
+import jobseekerAdmin from './jobseeker-admin.svg';
+import companyAdmin from './company-admin.svg';
+import userAdminAdmin from './user-admin-admin.svg';
+import banIconAdmin from './ban-icon-admin.png';
+import unbanIconAdmin from './unban-icon-admin.png';
+import filter from './filter.svg';
+import userAvt from './user-avt.png';
+import save from './save-admin.png';
+import spin from './spin.svg';
 import vnFlag from './vietnamflag.png';
 import japanFlag from './japanflag.png';
 import usaFlag from './usaflag.png';
@@ -51,14 +64,13 @@ import admin from './admin.png';
 import censored from './censored.png';
 import uncensored from './uncensored.png';
 import categorypng from './category.png';
-import find from './find.png';
-import messageAdmin from './message-admin.svg';
-import notificationAdmin from './notification-admin.svg';
 import money from './money.png';
 import locationAdmin from './location.png';
 
 const images = {
     find,
+    findWhite,
+    filter,
     yellowStar,
     elliose,
     arrow,
@@ -110,12 +122,17 @@ const images = {
         companies,
     },
     admin: {
-        jobseeker,
-        company,
-        admin,
-        censored,
-        uncensored,
-        categorypng,
+        messageAdmin,
+        notificationAdmin,
+        jobseekerAdmin,
+        companyAdmin,
+        userAdminAdmin,
+        banIconAdmin,
+        unbanIconAdmin,
+        userAvt,
+        save,
+        locationAdmin,
+        spin,
     },
 };
 
