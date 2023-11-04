@@ -67,10 +67,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 try {
                     return {
                         url: `user/ban/${id}`,
-                        method: 'PATCH'
-                    }
+                        method: 'PATCH',
+                    };
                 } catch (error) {
-                    throw(error)
+                    throw error;
                 }
             },
             invalidatesTags: (_result, error) => {
@@ -89,10 +89,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 try {
                     return {
                         url: `user/unban/${id}`,
-                        method: 'PATCH'
-                    }
+                        method: 'PATCH',
+                    };
                 } catch (error) {
-                    throw(error)
+                    throw error;
                 }
             },
             invalidatesTags: (_result, error) => {
@@ -109,11 +109,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { 
-    useGetUsersQuery, 
-    useGetBannedUsersQuery, 
-    useGetCurrentUserQuery, 
-    useChangeMeUserMutation, 
+export const {
+    useGetUsersQuery,
+    useGetBannedUsersQuery,
+    useGetCurrentUserQuery,
+    useChangeMeUserMutation,
     useBanUserMutation,
     useUnbanUserMutation,
 } = usersApiSlice;

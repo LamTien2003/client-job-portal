@@ -15,12 +15,12 @@ import BlogDetail from './pages/user/BlogDetail/BlogDetail';
 import Contact from './pages/user/Contact/Contact';
 import PostJob from './pages/user/PostJob/PostJob';
 import Manager from './pages/user/Manager/Manager';
-import MyProfile from './pages/user/Manager/JobSeeker/MyProfile/MyProfile';
+import { default as JobseekerProfile } from './pages/user/Manager/JobSeeker/MyProfile/MyProfile';
 import AppliedJobs from './pages/user/Manager/JobSeeker/AppliedJobs/AppliedJobs';
 import Setting from './components/Settings/Settings';
 import AdminLayout from './layouts/admin/AdminLayout/AdminLayout';
 
-import Company from './pages/user/Manager/Company/Company';
+import { default as CompanyProfile } from './pages/user/Manager/Company/MyProfile/MyProfile';
 import JobCreated from './pages/user/Manager/Company/JobCreated/JobCreated';
 import JobApplication from './pages/user/Manager/Company/JobApplication/JobApplication';
 import JobDeleted from './pages/user/Manager/Company/JobDeleted/JobDeleted';
@@ -29,62 +29,75 @@ import Statistics from './pages/admin/Statistics/Statistics';
 import Jobs from './pages/admin/Jobs/Jobs';
 import Users from './pages/admin/Users/Users';
 import Categories from './pages/admin/Categories/Categories';
-import { RootState } from './store/store';
 import { useSelector } from 'react-redux';
-import { isCompany } from './utils/helper';
+import { RootState } from '@/store/store';
+import Loader from '@/components/Loader/Loader';
+import { useGetCurrentUserQuery } from '@/services/usersApiSlice';
+import ProxyManager from '@/pages/user/Manager/ProxyManager';
+import JobSeekerManager from './pages/user/Manager/JobSeeker/JobSeekerManager';
+import CompanyManager from './pages/user/Manager/Company/CompanyManager';
 
 function App() {
-    const currentUser = useSelector((state: RootState) => state.user.user);
-    const company = isCompany(currentUser);
+    const uiState = useSelector((state: RootState) => state.ui);
+    useGetCurrentUserQuery(undefined);
+
     return (
-        <Routes>
-            {/* Public routes */}
-            <Route path="login" index element={<Login />} />
-            <Route path="register" index element={<Register />} />
-
-            <Route element={<DefaultLayout />}>
-                <Route index element={<Home />} />
-                <Route path="job-listing" index element={<JobListing />} />
-                <Route path="job-detail/:id" index element={<JobDetail />} />
-                <Route path="company-listing" index element={<CompanyListing />} />
-                <Route path="company-detail/:id" index element={<CompanyDetail />} />
-
-                <Route path="error" index element={<Error />} />
-                <Route path="unauthorized" index element={<>unauthorized</>} />
-                <Route path="blogs" index element={<BlogGrid />} />
-                <Route path="blogDetail" index element={<BlogDetail />} />
-                <Route path="contact" index element={<Contact />} />
+        <>
+            <Routes>
+                {/* Public routes */}
                 <Route path="login" index element={<Login />} />
                 <Route path="register" index element={<Register />} />
-                <Route path="setting" index element={<Setting />} />
-            </Route>
 
-            {/* Protected Routes */}
-            <Route element={<ProtectedRoutes />}>
                 <Route element={<DefaultLayout />}>
-                    <Route path="profile" element={<Manager />}>
-                        <Route index element={company ? <Company /> : <MyProfile />} />
-                        {/* Company */}
-                        <Route path="job-created" element={<JobCreated />} />
-                        <Route path="jobApplication/:id" element={<JobApplication />} />
-                        <Route path="job-deleted" element={<JobDeleted />} />
-                        {/* Jobseeker */}
+                    <Route index element={<Home />} />
+                    <Route path="job-listing" index element={<JobListing />} />
+                    <Route path="job-detail/:id" index element={<JobDetail />} />
+                    <Route path="company-listing" index element={<CompanyListing />} />
+                    <Route path="company-detail/:id" index element={<CompanyDetail />} />
 
-                        <Route path="applied-jobs" element={<AppliedJobs />} />
+                    <Route path="error" index element={<Error />} />
+                    <Route path="unauthorized" index element={<>unauthorized</>} />
+                    <Route path="blogs" index element={<BlogGrid />} />
+                    <Route path="blogDetail" index element={<BlogDetail />} />
+                    <Route path="contact" index element={<Contact />} />
+                    <Route path="login" index element={<Login />} />
+                    <Route path="register" index element={<Register />} />
+                    <Route path="setting" index element={<Setting />} />
+
+                    <Route element={<ProtectedRoutes />}>
+                        <Route path="profile" element={<Manager />}>
+                            <Route index element={<ProxyManager />} />
+
+                            <Route path="jobseeker" element={<JobSeekerManager />}>
+                                <Route index element={<JobseekerProfile />} />
+                                <Route path="applied-jobs" element={<AppliedJobs />} />
+                            </Route>
+
+                            <Route path="company" element={<CompanyManager />}>
+                                <Route index element={<CompanyProfile />} />
+                                <Route path="job-created" element={<JobCreated />} />
+                                <Route path="jobApplication/:id" element={<JobApplication />} />
+                                <Route path="job-deleted" element={<JobDeleted />} />
+                                <Route path="post-job" element={<PostJob />} />
+                            </Route>
+                        </Route>
                     </Route>
-
-                    <Route path="post-job" index element={<PostJob />} />
                 </Route>
-                <Route element={<AdminLayout />}>
-                    <Route path="admin" index element={<Statistics />} />
-                    <Route path="admin/users" index element={<Users />} />
-                    <Route path="admin/jobs" index element={<Jobs />} />
-                    <Route path="admin/categories" index element={<Categories />} />
-                </Route>
-            </Route>
 
-            <Route path="*" element={<Error />} />
-        </Routes>
+                <Route path="admin" element={<ProtectedRoutes />}>
+                    <Route element={<AdminLayout />}>
+                        <Route index element={<Statistics />} />
+                        <Route path="users" element={<Users />} />
+                        <Route path="jobs" element={<Jobs />} />
+                        <Route path="categories" element={<Categories />} />
+                    </Route>
+                </Route>
+
+                <Route path="*" element={<Error />} />
+            </Routes>
+
+            {uiState.loading && <Loader />}
+        </>
     );
 }
 

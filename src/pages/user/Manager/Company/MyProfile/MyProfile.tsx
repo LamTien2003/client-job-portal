@@ -1,4 +1,3 @@
-import React from 'react';
 import Info from './Info/Info';
 import InfoCompany from './InfoCompany/InfoCompany';
 

@@ -6,19 +6,18 @@ import { useLoginMutation } from '@/services/authApiSlice';
 import { setToken } from '@/utils/storage';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { useFormik } from 'formik';
-import * as Yup from 'Yup'
+import * as Yup from 'Yup';
 import Title from './components/Title/Title';
 import Others from './components/Others/Others';
 import Fields from './components/Fields/Fields';
 import Loader from '@/components/Loader/Loader';
 
-export const EMAILREGEX = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm
-export const PWDREGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}$/
+export const EMAILREGEX = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
+export const PWDREGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}$/;
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from.pathname || '/';
 
     const [login, { isLoading }] = useLoginMutation();
     const dispatch = useDispatch();
@@ -31,17 +30,13 @@ const Login = () => {
             password: '',
         },
         validationSchema: Yup.object({
-            email: Yup
-                .string()
-                .required('Không được để trống')
-                .matches(EMAILREGEX, 'Email phải đúng định dạng'),
-            password: Yup
-                .string()
+            email: Yup.string().required('Không được để trống').matches(EMAILREGEX, 'Email phải đúng định dạng'),
+            password: Yup.string()
                 .required('Không được để trống')
                 .matches(
                     PWDREGEX,
                     'Mật khẩu phải từ 8 đến 24 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, số và 1 kí tự đặc biệt',
-                )
+                ),
         }),
         onSubmit: async (values) => {
             try {
@@ -53,7 +48,7 @@ const Login = () => {
                     dispatch(setcredentialsToken(accessToken));
                     setToken(accessToken);
                 }
-                navigate(from, { replace: true });
+                navigate(-1);
             } catch (error) {
                 setErrMsg('Đăng ký không thành công');
             }
@@ -63,15 +58,15 @@ const Login = () => {
     return (
         <>
             {isLoading && <Loader isLoading={isLoading} />}
-            <div className=' max-w-[540px] h-auto bg-primary-100 rounded mt-16 mx-auto p-[50px] '>
+            <div className=" max-w-[540px] h-auto bg-primary-100 rounded mt-16 mx-auto p-[50px] ">
                 <Title />
 
                 <form onSubmit={formik.handleSubmit}>
                     <Fields
-                        type='text'
-                        label='Email'
-                        id='email'
-                        name='email'
+                        type="text"
+                        label="Email"
+                        id="email"
+                        name="email"
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -80,10 +75,10 @@ const Login = () => {
                         placeholder="info@example.com"
                     />
                     <Fields
-                        type='password'
-                        label='Password'
-                        id='password'
-                        name='password'
+                        type="password"
+                        label="Password"
+                        id="password"
+                        name="password"
                         value={formik.values.password}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

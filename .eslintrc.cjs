@@ -3,7 +3,7 @@ module.exports = {
     extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react-hooks/recommended'],
     parser: '@typescript-eslint/parser',
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-    plugins: ['react-refresh'],
+    plugins: ['react-refresh', 'react-hooks'],
     rules: {
         '@typescript-eslint/no-unused-vars': [
             'warn',
@@ -11,5 +11,6 @@ module.exports = {
         ],
         '@typescript-eslint/no-explicit-any': 'off',
         'react-refresh/only-export-components': 'warn',
+        'react-hooks/exhaustive-deps': 0,
     },
 };
