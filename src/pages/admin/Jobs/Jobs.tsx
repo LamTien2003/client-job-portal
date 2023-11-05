@@ -3,9 +3,10 @@ import { BsColumnsGap } from 'react-icons/bs';
 import { FaList } from 'react-icons/fa';
 import { Checkbox, FormControlLabel, Pagination } from '@mui/material';
 import JobItem from './components/JobItem';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetAllJobsQuery, useGetJobsNotAcceptQuery, useGetJobsQuery } from '@/services/jobsApiSlice';
 import Job from '@/types/Job';
+import useDebounce from '@/hooks/useDebounce';
 function Jobs() {
     const [data, setData] = useState<Job[]>([]);
     const [page, setPage] = useState<number>(1);
@@ -14,19 +15,16 @@ function Jobs() {
 
     const [query, setQuery] = useState({ page: page, limit: 4 });
 
-    const searchRef = useRef<HTMLInputElement | null>(null);
-
+    const [searchValue, setSearchValue] = useState<string>('');
     const [selectedTab, setSelectedTab] = useState<string>('all');
 
     const { data: jobsAll, isLoading: jobAllLoading, isError: jobAllError } = useGetAllJobsQuery(query);
 
-    const {
-        data: jobsNotAccept,
-        isLoading: jobNotAcceptLoading,
-        isError: jobNotAcceptError,
-    } = useGetJobsNotAcceptQuery(query);
+    const debouncedSearchValue = useDebounce(searchValue || '', 300);
 
-    const { data: jobsAccept, isLoading: jobAcceptLoading, isError: jobAcceptError } = useGetJobsQuery(query);
+    const { data: jobsNotAccept, isLoading: jobNotAcceptLoading } = useGetJobsNotAcceptQuery(query);
+
+    const { data: jobsAccept, isLoading: jobAcceptLoading } = useGetJobsQuery(query);
 
     useEffect(() => {
         if (!jobAllLoading && !jobAllError && jobsAll?.data?.data) {
@@ -34,8 +32,20 @@ function Jobs() {
         }
     }, [jobsAll?.data?.data, jobAllLoading, jobAllError]);
 
+    useEffect(() => {
+        setQuery((prevQuery) => ({
+            ...prevQuery,
+            q: debouncedSearchValue,
+        }));
+    }, [debouncedSearchValue]);
     const handleTabClick = (tab: string) => {
         setSelectedTab(tab);
+
+        setQuery((prevQuery) => ({
+            ...prevQuery,
+            page: 1,
+        }));
+
         if (tab === 'all') {
             setData(jobsAll?.data?.data || []);
             setTotal(jobsAll?.data?.totalItems || 0);
@@ -47,22 +57,16 @@ function Jobs() {
             setTotal(jobsNotAccept?.data?.totalItems || 0);
         }
     };
-
-    const searchSubmit = () => {
-        setQuery((prevQuery) => ({
-            ...prevQuery,
-            q: searchRef?.current?.value,
-        }));
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(event.target.value);
     };
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, newPage: number) => {
-        console.log(newPage);
-
-        // setPage(newPage);
-        // setQuery((prevQuery) => ({
-        //     ...prevQuery,
-        //     page: newPage,
-        // }));
+        setPage(newPage);
+        setQuery((prevQuery) => ({
+            ...prevQuery,
+            page: newPage,
+        }));
     };
     return (
         <div className="flex flex-col gap-10 pb-10">
@@ -96,17 +100,15 @@ function Jobs() {
 
                 <div className="flex items-center border-2 rounded-full border-[#40189D]">
                     <input
-                        ref={searchRef}
+                        value={searchValue}
                         type="text"
                         className="h-12 w-80 rounded-l-3xl outline-none border-none px-5 font-family-text text-content-text bg-transparent"
                         placeholder="Tìm kiếm công việc ..."
+                        onChange={handleInputChange}
                     />
-                    <button
-                        onClick={searchSubmit}
-                        className="flex items-center px-4 text-white font-extrabold rounded-r-3xl text-xl bg-[#40189D] h-12 hover:bg-black duration-300"
-                    >
+                    <div className="flex items-center px-4 text-white font-extrabold rounded-r-3xl text-xl bg-[#40189D] h-12 ">
                         <BiSearch />
-                    </button>
+                    </div>
                 </div>
             </div>
 
@@ -136,16 +138,24 @@ function Jobs() {
             </div>
 
             <div className="grid grid-cols-1 gap-6">
-                {jobAllLoading ||
-                    jobNotAcceptLoading ||
-                    (jobAcceptLoading && <div className="bg-white text-center p-5">Loading...</div>)}
-                {data.length === 0 && <div className="bg-white text-center p-5">Công việc trống!</div>}
-                {data.map((job, index) => (
-                    <JobItem key={index} job={job} />
-                ))}
+                {jobAllLoading || jobNotAcceptLoading || jobAcceptLoading ? (
+                    <div className="bg-white text-center p-5">Loading...</div>
+                ) : (
+                    <>
+                        {data.map((job, index) => (
+                            <JobItem key={index} job={job} />
+                        ))}
+                        {data.length === 0 && <div className="bg-white text-center p-5">Công việc trống!</div>}
+                        {data.length > 0 && (
+                            <Pagination
+                                count={Math.ceil(total / query.limit)}
+                                page={page}
+                                onChange={handlePageChange}
+                            />
+                        )}
+                    </>
+                )}
             </div>
-
-            <Pagination count={Math.ceil(total / query.limit)} page={page} onChange={handlePageChange} />
         </div>
     );
 }

@@ -128,6 +128,20 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
             },
             invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }]),
         }),
+
+        approveJob: builder.mutation<ResponseApi<Job>, string>({
+            query(id) {
+                try {
+                    return {
+                        url: `job/approve/${id}`,
+                        method: 'POST',
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }]),
+        }),
     }),
 });
 
@@ -140,4 +154,5 @@ export const {
     useGetAllJobsQuery,
     useGetJobsNotAcceptQuery,
     useDeleteJobMutation,
+    useApproveJobMutation,
 } = jobsApiSlice;
