@@ -1,5 +1,5 @@
 // import { url } from 'inspector';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 // import { toast } from 'react-toastify';
 // import { urlToHttpOptions } from 'url';
 // import Slider from 'rc-slider';
@@ -18,6 +18,7 @@ import { ListColumn, ListGutter } from '@/components/Icons';
 import Loader from '@/components/Loader/Loader';
 import Skeleton from '@/components/Loading/Skeleton';
 import { useDispatch } from 'react-redux';
+import { showLoading } from '@/store/uiSlice';
 
 type filterObject = {
     idCat: string | null,
@@ -48,34 +49,33 @@ const JobListing = () => {
         }
     }, [data?.data?.data, isError, isLoading, page]);
 
-    const dispatch = useDispatch()
+    useLayoutEffect(() => {
+        scrollTo(0,0)
+    })
 
     return (
         <>
-            {isLoading && <Loader isLoading={isLoading} />}
-            <div>
-                <Banner page="Job Listing" />
-                <div className=" max-w-7xl ml-auto mr-auto pt-16 flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:max-w-3xl mb:max-w-2xl">
-                    <Sidebar filter={setFilter} />
-                    <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 tb:w-11/12">
-                        <div className=" mb-6 pl-3 pr-3 flex justify-between lg:flex-col">
-                            <p className="text-content-text font-medium pt-2 pb-2">
-                                Hiện có <span className=" text-primary-100 font-semibold">{jobList.length}</span> công việc
-                            </p>
-                            <div>
-                                <button className=" mr-5 ml-7" onClick={() => setListStyle('gutter')}>
-                                    <ListGutter color={listStyle} />
-                                </button>
-                                <button onClick={() => setListStyle('column')}>
-                                    <ListColumn color={listStyle} />
-                                </button>
-                            </div>
+            <Banner page="Job Listing" />
+            <div className=" max-w-7xl ml-auto mr-auto pt-16 flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:max-w-3xl mb:max-w-2xl">
+                <Sidebar filter={setFilter} />
+                <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 tb:w-11/12">
+                    <div className=" mb-6 pl-3 pr-3 flex justify-between lg:flex-col">
+                        <p className="text-content-text font-medium pt-2 pb-2">
+                            Hiện có <span className=" text-primary-100 font-semibold">{jobList.length}</span> công việc
+                        </p>
+                        <div>
+                            <button className=" mr-5 ml-7" onClick={() => setListStyle('gutter')}>
+                                <ListGutter color={listStyle} />
+                            </button>
+                            <button onClick={() => setListStyle('column')}>
+                                <ListColumn color={listStyle} />
+                            </button>
                         </div>
-                        <div className=' mb-10'>
-                            {isLoading && 'isLoading...'}
-                            {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} changePage={setPage} />}
-                            {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} changePage={setPage} />}
-                        </div>
+                    </div>
+                    <div className=' mb-10'>
+                        {isLoading && [...Array(5)].map(() => <div className=' mb-7'><Skeleton /></div>)}
+                        {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} changePage={setPage} />}
+                        {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} changePage={setPage} />}
                     </div>
                 </div>
             </div>

@@ -5,5 +5,6 @@ export interface ResponseApi<T = any> extends Response {
         msg?: string;
         accessToken?: string;
         data?: T;
+        totalItems?: number;
     };
 }

@@ -4,6 +4,7 @@ import TitleProfile from './TitleProfile';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { isJobSeeker, isCompany } from '@/utils/helper';
+
 const Sidebar = () => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const jobSeeker = isJobSeeker(currentUser);

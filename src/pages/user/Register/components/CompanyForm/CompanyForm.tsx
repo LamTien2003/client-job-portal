@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { RegisterCompanyRequest, useRegisterCompanyMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
@@ -11,6 +10,7 @@ import Fields from '../Fields/Fields';
 import SelectLocation from '../SelectLocation/SelectLocation';
 import SelectDate from '../SelectDate/SelectDate';
 import Loader from '@/components/Loader/Loader';
+import { toast } from 'react-toastify';
 
 const initialValues = {
     type: 'company',
@@ -33,9 +33,6 @@ function CompanyForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: Yup.object({
@@ -57,10 +54,7 @@ function CompanyForm() {
                 .min(2, 'Tên công ty phải tối thiểu 2 kí tự')
                 .max(100, 'Tên công ty chỉ tối đa 100 kí tự'),
             description: Yup.string().max(500, 'Mô tả chỉ tối đa 500 kí tự'),
-            EstablishDate: Yup.date().min(
-                Yup.ref('originalEndDate'),
-                ({ min }) => `Thời gian thành lập phải là quá khứ ${formatDate(min)}!!`,
-            ),
+            EstablishDate: Yup.date().typeError('Hãy chọn ngày thành lập'),
             // EstablishDate: Yup.date().min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!'),
             companySizeFrom: Yup.number()
                 .typeError('Chỉ được nhập số')
@@ -99,18 +93,22 @@ function CompanyForm() {
                         to: values.companySizeTo,
                     },
                 } as RegisterCompanyRequest;
-                const response: any = await RegisterCompany(myValues);
-                const user = response.data.data.data;
-                const accessToken = response.data.data.accessToken;
-                if (user && accessToken) {
-                    dispatch(setCurrentUser(user));
-                    dispatch(setcredentialsToken(accessToken));
-                    setToken(accessToken);
+                const response = await RegisterCompany(myValues).unwrap();
+                if(response.status === 201) {
+                    toast.success(response.data.msg)
+                    const user = response.data.data;
+                    const accessToken = response.data.accessToken;
+                    if (user && accessToken) {
+                        dispatch(setCurrentUser(user));
+                        dispatch(setcredentialsToken(accessToken));
+                        setToken(accessToken);
+                    }
+                    navigate('/');
                 }
-                navigate('/');
-            } catch (error) {
-                error;
-                setErrMsg('Đăng ký không thành công');
+            } catch (error:any) {
+                if(error?.status === 400) {
+                    toast.error('Email này đã được sử dụng. Vui lòng sử dụng email khác!')
+                }
             }
         },
     });
@@ -121,7 +119,7 @@ function CompanyForm() {
 
     return (
         <>
-            {isLoading && <Loader isLoading={isLoading} />}
+            {isLoading && <Loader/>}
             <form onSubmit={formik.handleSubmit}>
                 <div className="flex flex-wrap mt-4">
                     <Fields
@@ -259,7 +257,7 @@ function CompanyForm() {
                         label="EstablistDate"
                         id="establishDate"
                         value={formik.values.establishDate}
-                        onChange={formik.handleChange}
+                        onChange={formik.setFieldValue}
                         error={formik.errors.establishDate}
                         touched={formik.touched.establishDate}
                     />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useGetJobQuery } from '@/services/jobsApiSlice';
@@ -29,9 +29,13 @@ function JobDetail() {
         }
     }, [isLoading, isError, data?.data?.data]);
 
+    useLayoutEffect(() => {
+        scrollTo(0,0)
+    })
+
     return (
         <>
-            {isLoading && <Loader isLoading={isLoading} />}
+            {isLoading && <Loader/>}
             <div className="selection:bg-primary-100 selection:text-white">
                 <div className=" mb-28 ">
                     <Banner page="Job Detail" />

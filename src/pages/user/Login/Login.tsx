@@ -6,7 +6,7 @@ import { useLoginMutation } from '@/services/authApiSlice';
 import { setToken } from '@/utils/storage';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { useFormik } from 'formik';
-import * as Yup from 'Yup'
+import * as Yup from 'Yup';
 import Title from './components/Title/Title';
 import Others from './components/Others/Others';
 import Fields from './components/Fields/Fields';
@@ -25,17 +25,13 @@ const Login = () => {
             password: '',
         },
         validationSchema: Yup.object({
-            email: Yup
-                .string()
-                .required('Không được để trống')
-                .matches(EMAILREGEX, 'Email phải đúng định dạng'),
-            password: Yup
-                .string()
+            email: Yup.string().required('Không được để trống').matches(EMAILREGEX, 'Email phải đúng định dạng'),
+            password: Yup.string()
                 .required('Không được để trống')
                 .matches(
                     PWDREGEX,
                     'Mật khẩu phải từ 8 đến 24 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, số và 1 kí tự đặc biệt',
-                )
+                ),
         }),
         onSubmit: async (values) => {
             const response: any = await login(values);
@@ -61,16 +57,16 @@ const Login = () => {
 
     return (
         <>
-            {isLoading && <Loader isLoading={isLoading} />}
-            <div className=' max-w-[540px] h-auto bg-primary-100 rounded mt-16 mx-auto p-[50px] '>
+            {isLoading && <Loader/>}
+            <div className=" max-w-[540px] h-auto bg-primary-100 rounded mt-16 mx-auto p-[50px] ">
                 <Title />
 
                 <form onSubmit={formik.handleSubmit}>
                     <Fields
-                        type='text'
-                        label='Email'
-                        id='email'
-                        name='email'
+                        type="text"
+                        label="Email"
+                        id="email"
+                        name="email"
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -79,10 +75,10 @@ const Login = () => {
                         placeholder="info@example.com"
                     />
                     <Fields
-                        type='password'
-                        label='Password'
-                        id='password'
-                        name='password'
+                        type="password"
+                        label="Password"
+                        id="password"
+                        name="password"
                         value={formik.values.password}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

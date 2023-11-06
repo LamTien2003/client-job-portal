@@ -42,6 +42,43 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
                 return [{ type: 'Jobs' as const, id: 'LIST' }];
             },
         }),
+
+        getAllJobs: builder.query<ResponseApi<Job[]>, ParamsGetAllJob>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `job/all?${query && query}`,
+                };
+            },
+            providesTags(result) {
+                if (result?.data?.data) {
+                    const final = [
+                        ...result.data.data.map(({ id }) => ({ type: 'Jobs' as const, id })),
+                        { type: 'Jobs' as const, id: 'LIST' },
+                    ];
+                    return final;
+                }
+                return [{ type: 'Jobs' as const, id: 'LIST' }];
+            },
+        }),
+        getJobsNotAccept: builder.query<ResponseApi<Job[]>, ParamsGetAllJob>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `job/notAccept?${query && query}`,
+                };
+            },
+            providesTags(result) {
+                if (result?.data?.data) {
+                    const final = [
+                        ...result.data.data.map(({ id }) => ({ type: 'Jobs' as const, id })),
+                        { type: 'Jobs' as const, id: 'LIST' },
+                    ];
+                    return final;
+                }
+                return [{ type: 'Jobs' as const, id: 'LIST' }];
+            },
+        }),
         getJob: builder.query<ResponseApi<Job>, string>({
             query: (id) => `job/${id}`,
             providesTags: () => [{ type: 'Jobs' as const, id: 'LIST' }],
@@ -73,6 +110,32 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
             },
             invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: '' }]),
         }),
+        deleteJob: builder.mutation<ResponseApi<Job>, string>({
+            query(id) {
+                try {
+                    return {
+                        url: `job/${id}`,
+                        method: 'DELETE',
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }]),
+        }),
+        approveJob: builder.mutation<ResponseApi<Job>, string>({
+            query(id) {
+                try {
+                    return {
+                        url: `job/approve/${id}`,
+                        method: 'POST',
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }]),
+        }),
         postComment: builder.mutation<ResponseApi<Job>, {content: string, id: string}>({
             query: (body) => {
                 return {
@@ -82,9 +145,19 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
                 }
             },
             invalidatesTags: (result, error) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }])
-        })
+        }),
     }),
 });
 
-export const { useGetJobQuery, useGetJobsQuery, useGetCategoriesQuery, useCreateJobMutation, useApplyJobMutation, usePostCommentMutation } =
-    jobsApiSlice;
+export const {
+    useGetJobQuery,
+    useGetJobsQuery,
+    useGetCategoriesQuery,
+    useCreateJobMutation,
+    useApplyJobMutation,
+    useGetAllJobsQuery,
+    useGetJobsNotAcceptQuery,
+    useDeleteJobMutation,
+    useApproveJobMutation,
+    usePostCommentMutation,
+} = jobsApiSlice;

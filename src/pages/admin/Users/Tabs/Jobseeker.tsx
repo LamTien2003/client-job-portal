@@ -1,6 +1,5 @@
 
 import images from "@/assets/images";
-import Loader from "@/components/Admin/Loader/Loader";
 import { ListColumn, ListGutter } from "@/components/Icons";
 import { useGetJobseekersQuery } from "@/services/jobseekerApiSlice";
 import { useBanUserMutation } from "@/services/usersApiSlice";

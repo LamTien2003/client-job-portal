@@ -101,11 +101,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { 
-    useGetUsersQuery, 
-    useGetBannedUsersQuery, 
-    useGetCurrentUserQuery, 
-    useChangeMeUserMutation, 
+export const {
+    useGetUsersQuery,
+    useGetBannedUsersQuery,
+    useGetCurrentUserQuery,
+    useChangeMeUserMutation,
     useBanUserMutation,
     useUnbanUserMutation,
 } = usersApiSlice;

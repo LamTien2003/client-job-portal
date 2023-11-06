@@ -2,29 +2,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import Job from '@/types/Job';
-import { useState } from 'react';
-import { isCompany } from '@/utils/helper';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import Skeleton from '@/components/Loading/Skeleton';
 
 interface Props {
     data: Job[];
     changePage: (page:number) => void
 }
-
 function JobColumn(props: Props) {
-    const { data: jobList } = props;
-
-    const currentUser = useSelector((state: RootState) => state.user.user);
-
-    const [page, setPage] = useState(1)
-
-    const isCompanyy = isCompany(currentUser)
 
     return (
         <>
-            {jobList.length === 0 && 'Hiện danh mục này chưa có công việc nào'}
-            {jobList?.map((job) => {
+            {props.data.length === 0 && 'Hiện danh mục này chưa có công việc nào'}
+            {props.data?.map((job) => {
                 const date = new Date(job.deadline)
                 const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                 if(job.isAccepted === true) {

@@ -30,8 +30,6 @@ function SalaryRange({salaryChange}: Props) {
             </p>
             <Slider range min={500000} max={10000000} onChange={handleChange} />
             <div className=" max-h-64 overflow-scroll"></div>
-            {rangeMax},
-            {deBounceValueMax}
         </div>
     );
 }

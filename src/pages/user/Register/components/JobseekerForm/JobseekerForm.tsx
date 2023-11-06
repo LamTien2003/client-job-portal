@@ -1,15 +1,15 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { RegisterJobseekerRequest, useRegisterJobseekerMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
 import { EMAILREGEX, PHONEREGEX, PWDREGEX } from '@/components/Constant/Constant';
 import { useDispatch } from 'react-redux';
-import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
-import { setToken } from '@/utils/storage';
 import Fields from '../Fields/Fields';
 import SelectLocation from '../SelectLocation/SelectLocation';
 import Loader from '@/components/Loader/Loader';
+import { toast } from 'react-toastify';
+import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
+import { setToken } from '@/utils/storage';
 
 const initialValues: RegisterJobseekerRequest = {
     type: 'jobseeker',
@@ -28,8 +28,6 @@ function JobseekerForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
-    const [errMsg, setErrMsg] = useState('');
-
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: Yup.object({
@@ -44,29 +42,29 @@ function JobseekerForm() {
         }),
         onSubmit: async (values: RegisterJobseekerRequest) => {
             try {
-                const response:any = await registerJobseeker(values);
-                const user = response.data.data.data;
-                const accessToken = response.data.data.accessToken;
-                if(user && accessToken) {
-                    dispatch(setCurrentUser(user));
-                    dispatch(setcredentialsToken(accessToken));
-                    setToken(accessToken);
+                const response = await registerJobseeker(values).unwrap();
+                if(response.status === 201) {
+                    toast.success(response.data.msg)
+                    const user = response.data.data;
+                    const accessToken = response.data.accessToken;
+                    if(user && accessToken) {
+                        dispatch(setCurrentUser(user));
+                        dispatch(setcredentialsToken(accessToken));
+                        setToken(accessToken);
+                    }
+                    navigate('/')
                 }
-                navigate('/')
-            } catch (error) {
-                error;
-                setErrMsg('Đăng ký không thành công');
+            } catch (error:any) {
+                if(error?.status === 400) {
+                    toast.error('Email này đã được sử dụng. Vui lòng sử dụng email khác!')
+                }
             }
         },
     })
 
-    function formatDate(date:Date | string) {
-        return new Date(date).toLocaleDateString()
-    }
-
     return (
         <>
-            {isLoading && <Loader isLoading={isLoading} />}
+            {isLoading && <Loader />}
             <form onSubmit={formik.handleSubmit}>
                 <div className=' flex flex-wrap justify-between mt-4'>
                     <Fields
