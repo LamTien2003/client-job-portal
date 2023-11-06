@@ -1,4 +1,3 @@
-import images from "@/assets/images";
 
 function Title() {
     return (

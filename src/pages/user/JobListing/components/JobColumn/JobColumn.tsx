@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import Job from '@/types/Job';
 import { useState } from 'react';
+import { isCompany } from '@/utils/helper';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 interface Props {
     data: Job[];
@@ -12,12 +15,11 @@ interface Props {
 function JobColumn(props: Props) {
     const { data: jobList } = props;
 
+    const currentUser = useSelector((state: RootState) => state.user.user);
+
     const [page, setPage] = useState(1)
 
-    const handleChangePage = (number:number):void => {
-        setPage(prev => prev + number)
-        props.changePage(page)
-    }
+    const isCompanyy = isCompany(currentUser)
 
     return (
         <>
@@ -111,7 +113,7 @@ function JobColumn(props: Props) {
                                             to={'/job-detail/' + job.id}
                                             className=" text-primary-100 flex items-center duration-300 group-hover:text-white group-hover:cursor-pointer "
                                         >
-                                            <span className=" text-sm font-medium mb:text-xs ">Apply Now</span>
+                                            <span className=" text-sm font-medium mb:text-xs ">Xem thêm</span>
                                         </Link>
                                     </div>
                                 </div>

@@ -1,5 +1,3 @@
-import images from "@/assets/images";
-
 function Loader() {
     return (
         <div className=" flex items-center justify-center animate-spin my-10">

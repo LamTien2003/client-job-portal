@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from 'react';
 
-import Slider from 'rc-slider'
 import Category from "./Category/Category";
 import { CategoryType, useGetCategoriesQuery } from '@/services/jobsApiSlice';
 
@@ -9,11 +8,6 @@ type Props = {
     filterJob: Function
 }
 function Sidebar(props: Props) {
-
-    const [salaryRange, setSalaryRange] = useState({
-        minValue: 1,
-        maxValue: 1500,
-    })
     const [category, setCategory] = useState<CategoryType[]>([])
 
     const {data, isLoading, isError} = useGetCategoriesQuery()
@@ -21,10 +15,6 @@ function Sidebar(props: Props) {
     useEffect(() => {
         if(data?.data?.data && !isLoading && !isError) setCategory(data?.data?.data)
     }, [data?.data?.data, isLoading, isError])
-
-    // useEffect(() => {
-    //     toast.success('Test thông bao');
-    // }, []);
 
     function myFilter(id:string) {
         props.filterJob(id)

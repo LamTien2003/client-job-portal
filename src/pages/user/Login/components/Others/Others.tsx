@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Others() {
     return (
@@ -22,9 +22,9 @@ function Others() {
             </div>
             <div className=" flex items-center justify-start mb-4">
                 <p>Dont't have an account?</p>
-                <NavLink to="/register" className=" ml-1.5 cursor-pointer">
+                <Link to="/register" className=" ml-1.5 cursor-pointer">
                     Sign up
-                </NavLink>
+                </Link>
             </div>
         </div>
     );

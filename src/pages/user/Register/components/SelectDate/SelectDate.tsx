@@ -7,7 +7,7 @@ type SelectFieldPropsType = {
     value: string | Date;
     onChange: any;
     error: any;
-    touched: boolean | undefined | FormikTouched<Date> | any;
+    touched: boolean | undefined | FormikTouched<Date>;
 };
 function SelectDate({ label, id, value, onChange, error, touched }: SelectFieldPropsType) {
     return (

@@ -1,7 +1,10 @@
 import { BellIcon, Logout, MesNot, Profile, Setting } from "@/components/Icons";
 import User from "@/types/User";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import SideMenu from "../SideMenu/SideMenu";
 
 type Props = {
     user: User
@@ -12,6 +15,7 @@ function UserMenu(props: Props) {
 
     const [dropDownMenu, setDropDownMenu] = useState<boolean>(false)
     const [dropDownNot, setDropDownNot] = useState<boolean>(false)
+    const [sideMenu, setSideMenu] = useState<boolean>(false)
 
     const menuRef = useRef<HTMLDivElement>(null)
     const notificationRef = useRef<HTMLDivElement>(null)
@@ -35,7 +39,7 @@ function UserMenu(props: Props) {
     }, [dropDownNot])
     
     return (
-        <div className=' w-[158px] flex items-center justify-between'>
+        <div className=' w-[158px] flex items-center justify-between lg:w-[200px] tb:w-[200px] mb:w-[200px]'>
             <div className=" flex items-center justify-center w-[34px] h-[34px] bg-[#eff1f0] border border-gray-400 rounded-full cursor-pointer relative">
                 <div className=" fill-primary-100">
                     <MesNot />
@@ -111,6 +115,14 @@ function UserMenu(props: Props) {
                     </div>
                 )}
             </div>
+            
+            <div className=" hidden lg:block tb:block mb:block" onClick={() => setSideMenu(!sideMenu)}>
+                <FontAwesomeIcon icon={faBars} />
+            </div>
+            <SideMenu
+                sideMenu={sideMenu} 
+                setSideMenu={setSideMenu} 
+            />
             
         </div>
     );

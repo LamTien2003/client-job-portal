@@ -55,25 +55,8 @@ function Users() {
 
     return (
         <div className="flex flex-col">
-            {/* <div className=" flex items-center w-full bg-white rounded-[10px] py-[12px] pl-[16px] mb-[30px] gap-1">
-                <p className=" text-[#40189D]">Tìm kiếm công việc  </p>
-                <span className=" text-content-text">/</span>
-                <span className=" text-content-text">Công ty</span>
-            </div> */}
             <div className=" flex justify-between gap-[30px]">
                 <div className=" w-full flex flex-col gap-[20px]">
-                    {/* <div className=" flex items-center justify-start w-full bg-white rounded-[10px] p-[15px] gap-[20px]">
-                        <div className=" flex items-center h-[44px] border border-[#40189D] rounded-3xl">
-                            <div className=" px-[20px]">
-                                <input className=" outline-none bg-transparent" placeholder="Tìm tên danh mục" />
-                            </div>
-                            <img className=" h-[44px] bg-[#40189D] rounded-r-3xl py-[10px] px-[15px]" src={images.findWhite} />
-                        </div>
-                        <div className=" flex items-center h-[44px] text-[#40189D] bg-[#BABBBF] rounded-3xl py-[10px] px-[20px]">
-                            <img className=" mr-2" src={images.filter} />
-                            Lọc
-                        </div>
-                    </div> */}
                     <div className=" flex flex-wrap items-center gap-[12px]">
                         <div className={toggleActiveTab('jobseeker')} onClick={() => setActiveTab('jobseeker')}>Người tìm việc</div>
                         <div className={toggleActiveTab('company')} onClick={() => setActiveTab('company')}>Công ty</div>
@@ -92,26 +75,7 @@ function Users() {
                             </div>
                             <h2 className=" text-content-title text-xl font-semibold">{user?.firstName && user?.lastName ? user.firstName + ' ' + user.lastName : 'Đang cập nhật...'}</h2>
                             <p className=" text-content-text">{user ? user.educate.length !== 0 ? user.educate.map(edu => edu.major) : 'Chưa cập nhật ngành' : 'Đang cập nhật...'}</p>
-                            {/* <button className=" w-full text-[#40189D] text-lg border border-[#40189D] rounded-3xl py-[8px]">Đánh dấu</button> */}
                             <div className=" w-full flex flex-wrap items-center justify-between my-2 gap-[16px]">
-                                {/* <div className=" flex items-center">
-                                    <div className=" flex items-center justify-center w-[36px] h-[36px] text-white bg-[#40189D] rounded-full mr-2">
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </div>
-                                    <div className=" flex flex-col items-center text-sm">
-                                        <h3 className=" text-content-title font-semibold">80 - 100</h3>
-                                        <p className=" text-content-text">Nhân viên</p>
-                                    </div>
-                                </div>
-                                <div className=" flex items-center">
-                                    <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-[#40189D] rounded-full mr-2">
-                                        <img src={images.yellowStar} />
-                                    </div>
-                                    <div className=" flex flex-col items-center text-sm">
-                                        <h3 className=" text-content-title font-semibold">4.9</h3>
-                                        <p className=" text-content-text">Đánh giá</p>
-                                    </div>
-                                </div> */}
                                 <div className=" flex items-center">
                                     <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-[#40189D] rounded-full mr-3">
                                         <img className=" w-[18px] h-[18px]" src={images.admin.locationAdmin} />
@@ -130,8 +94,11 @@ function Users() {
                             </p>
                             
                             <div className=" flex items-center gap-[10px] ">
-                                <button className=" text-content-title border-2 border-red-400 rounded-2xl py-1 px-5" onClick={() => handleUnbanUser(user && user.id)}>Unban</button>
-                                <button className=" text-white border bg-red-400 rounded-2xl py-2 px-5" onClick={() => handleBanUser(user && user.id)}>Ban</button>
+                                {user.ban === false ? (
+                                    <button className=" text-white border bg-red-400 rounded-2xl py-2 px-5" onClick={() => handleBanUser(user && user.id)}>Ban</button>
+                                    ) : (
+                                    <button className=" text-content-title border-2 border-red-400 rounded-2xl py-1 px-5" onClick={() => handleUnbanUser(user && user.id)}>Unban</button>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -143,26 +110,7 @@ function Users() {
                             </div>
                             <h2 className=" text-content-title text-xl font-semibold">{user ? user.companyName : 'Đang cập nhật...'}</h2>
                             <p className=" text-content-text">{user ? user.location : 'Đang cập nhật...'}</p>
-                            {/* <button className=" w-full text-[#40189D] text-lg border border-[#40189D] rounded-3xl py-[8px]">Đánh dấu</button> */}
                             <div className=" w-full flex flex-wrap items-center justify-between my-2 gap-[16px]">
-                                {/* <div className=" flex items-center">
-                                    <div className=" flex items-center justify-center w-[36px] h-[36px] text-white bg-[#40189D] rounded-full mr-2">
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </div>
-                                    <div className=" flex flex-col items-center text-sm">
-                                        <h3 className=" text-content-title font-semibold">80 - 100</h3>
-                                        <p className=" text-content-text">Nhân viên</p>
-                                    </div>
-                                </div>
-                                <div className=" flex items-center">
-                                    <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-[#40189D] rounded-full mr-2">
-                                        <img src={images.yellowStar} />
-                                    </div>
-                                    <div className=" flex flex-col items-center text-sm">
-                                        <h3 className=" text-content-title font-semibold">4.9</h3>
-                                        <p className=" text-content-text">Đánh giá</p>
-                                    </div>
-                                </div> */}
                                 <div className=" flex items-center">
                                     <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-[#40189D] rounded-full mr-3">
                                         <img className=" w-[18px] h-[18px]" src={images.admin.locationAdmin} />
@@ -181,8 +129,11 @@ function Users() {
                             </p>
                             
                             <div className=" flex items-center gap-[10px] ">
-                                <button className=" text-content-title border-2 border-red-400 rounded-2xl py-1 px-5" onClick={() => handleUnbanUser(user ? user.id : '')}>Unban</button>
-                                <button className=" text-white border bg-red-400 rounded-2xl py-2 px-5" onClick={() => handleBanUser(user ? user.id : '')}>Ban</button>
+                                {user?.ban === false ? (
+                                    <button className=" text-white border bg-red-400 rounded-2xl py-2 px-5" onClick={() => handleBanUser(user && user.id)}>Ban</button>
+                                    ) : (
+                                    <button className=" text-content-title border-2 border-red-400 rounded-2xl py-1 px-5" onClick={() => handleUnbanUser(user ? user.id : '')}>Unban</button>
+                                )}
                             </div>
                         </div>
                     </div>

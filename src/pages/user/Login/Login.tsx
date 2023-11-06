@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLayoutEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/services/authApiSlice';
@@ -11,19 +11,13 @@ import Title from './components/Title/Title';
 import Others from './components/Others/Others';
 import Fields from './components/Fields/Fields';
 import Loader from '@/components/Loader/Loader';
-
-export const EMAILREGEX = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm
-export const PWDREGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}$/
+import { EMAILREGEX, PWDREGEX } from '@/components/Constant/Constant';
 
 const Login = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from.pathname || '/';
-
     const [login, { isLoading }] = useLoginMutation();
+    
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const [errMsg, setErrMsg] = useState('');
 
     const formik = useFormik({
         initialValues: {
@@ -44,8 +38,8 @@ const Login = () => {
                 )
         }),
         onSubmit: async (values) => {
-            try {
-                const response: any = await login(values);
+            const response: any = await login(values);
+            if(response?.data?.status === 200) {
                 const user = response.data.data.data;
                 const accessToken = response.data.data.accessToken;
                 if (user && accessToken) {
@@ -53,12 +47,17 @@ const Login = () => {
                     dispatch(setcredentialsToken(accessToken));
                     setToken(accessToken);
                 }
-                navigate(from, { replace: true });
-            } catch (error) {
-                setErrMsg('Đăng ký không thành công');
+                navigate(-1);
+            } else {
+
             }
+            
         },
     });
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    })
 
     return (
         <>

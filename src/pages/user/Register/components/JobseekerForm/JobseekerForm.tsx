@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RegisterJobseekerRequest, useRegisterJobseekerMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
-import { EMAILREGEX, PHONEREGEX, PWDREGEX } from '../../Register';
+import { EMAILREGEX, PHONEREGEX, PWDREGEX } from '@/components/Constant/Constant';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { setToken } from '@/utils/storage';
@@ -166,6 +166,13 @@ function JobseekerForm() {
                 </div>
                 <div className=" text-center">
                     <button type="submit" className=" w-full h-[50px] text-primary-100 font-semibold bg-white rounded-[0.625rem] mt-6 mb-4">Sign Me Up</button>
+                </div>
+                
+                <div className=" flex items-center justify-start text-white text-lg mb-4">
+                    <p>Already have an account?</p>
+                    <Link to="/login" className=" ml-1.5 cursor-pointer">
+                        Log In
+                    </Link>
                 </div>
             </form>
         </>

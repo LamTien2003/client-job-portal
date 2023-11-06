@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPen, faRemove } from "@fortawesome/free-solid-svg-icons";
 import { useAddCategoryMutation, useChangeCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery } from "@/services/categoriesApiSlice";
@@ -52,12 +52,10 @@ function Categories() {
                 return
             }
         } else {
-            console.log(categoryName)
             const isConfirm = confirm('Bạn có chắc muốn thêm danh mục này ?')
             if(isConfirm) {
                 const response = await addCategory({categoryName: categoryName})
                 if(response) {
-                    console.log(response)
                     setIsUpdateForm(false)
                     toast.success('Thêm danh mục thành công');
                 }

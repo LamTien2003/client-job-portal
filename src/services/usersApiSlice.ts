@@ -64,14 +64,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         banUser: builder.mutation<ResponseApi<MixinUser>, string>({
             query: (id) => {
-                try {
-                    return {
-                        url: `user/ban/${id}`,
-                        method: 'PATCH'
-                    }
-                } catch (error) {
-                    throw(error)
-                }
+                return {
+                    url: `user/ban/${id}`,
+                    method: 'PATCH',
+                } 
             },
             invalidatesTags: (_result, error) => {
                 if (!error) {
@@ -86,13 +82,9 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         unbanUser: builder.mutation<ResponseApi<MixinUser>, string>({
             query: (id) => {
-                try {
-                    return {
-                        url: `user/unban/${id}`,
-                        method: 'PATCH'
-                    }
-                } catch (error) {
-                    throw(error)
+                return {
+                    url: `user/unban/${id}`,
+                    method: 'PATCH'
                 }
             },
             invalidatesTags: (_result, error) => {

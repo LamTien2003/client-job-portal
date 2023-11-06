@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,11 +10,11 @@ import 'swiper/css/pagination';
 
 import Banner from '@/components/Banner/Banner';
 import RelatedJob from './components/RelatedJob/RelatedJob';
-import MainDescription from './components/MainDescription/MainDescription';
 import JobInfo from './components/JobInfo/JobInfo';
 import Job from '@/types/Job';
 import JobSummary from './components/JobSummary/JobSummary';
 import Loader from '@/components/Loader/Loader';
+import Comments from './components/Comments/Comments';
 
 function JobDetail() {
     const [job, setJob] = useState<Job>();
@@ -23,6 +22,7 @@ function JobDetail() {
     const { id } = useParams();
 
     const { data, isLoading, isError } = useGetJobQuery(id!);
+    
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
             setJob(data?.data?.data);
@@ -36,23 +36,14 @@ function JobDetail() {
                 <div className=" mb-28 ">
                     <Banner page="Job Detail" />
 
-                    <div className=" w-10/12 mr-auto ml-auto pt-16 flex lg:flex-col marker:">
-                        {/* job detail */}
-                        <div className=" w-2/3 pl-3 pr-3 lg:w-full ">
-                            {!isLoading && !isError && job && (
-                                <div>
-                                    <JobInfo data={job} />
-
-                                    <MainDescription data={job}/>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* more info */}
+                    <div className=" w-10/12 mx-auto pt-16 flex lg:flex-col marker:">
+                        {!isLoading && !isError && job && <JobInfo data={job} />}
                         {!isLoading && !isError && job && <JobSummary data={job} />}
                     </div>
 
-                    <div className=" w-10/12 mr-auto ml-auto">
+                    {!isLoading && !isError && job && <Comments data={job} />}
+
+                    <div className=" w-10/12 mx-auto">
                         <h1 className=" text-content-title text-2xl font-semibold mb-10">Related Jobs:</h1>
                         <Swiper
                             breakpoints={{

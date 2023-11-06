@@ -5,7 +5,7 @@ import { useGetBannedUsersQuery, useUnbanUserMutation } from "@/services/usersAp
 import Company from "@/types/Company";
 import JobSeeker from "@/types/JobSeeker";
 import User from "@/types/User";
-import { isCompany, isJobSeeker } from "@/utils/helper";
+import { isCompany } from "@/utils/helper";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -17,8 +17,6 @@ function Ban({selectingUser}: {selectingUser: (user: Company | JobSeeker) => voi
 
     const [users, setUsers] = useState<User[]>([])
     const [select, setSelect] = useState<string | undefined>('')
-
-    console.log(data)
     
     useEffect(() => {
         if(data?.data?.data && !isLoading && !isError) {
@@ -42,9 +40,9 @@ function Ban({selectingUser}: {selectingUser: (user: Company | JobSeeker) => voi
     const toggleIsSelect = (user:Company | JobSeeker) => {
         if(user.id === select) {
             selectingUser(user)
-            return 'flex flex-col items-center w-[31.4%] bg-white border-2 border-[#40189D] rounded-[10px] shadow-lg px-[20px] pt-[50px] pb-[20px] relative cursor-pointer'
+            return 'flex flex-col items-center w-[31.4%] bg-white border-2 border-[#40189D] rounded-[10px] shadow-lg px-[20px] pt-[30px] pb-[20px] relative cursor-pointer'
         } else {
-            return 'flex flex-col items-center w-[31.4%] bg-white rounded-[10px] px-[20px] pt-[50px] pb-[20px] relative cursor-pointer'
+            return 'flex flex-col items-center w-[31.4%] bg-white rounded-[10px] px-[20px] pt-[30px] pb-[20px] relative cursor-pointer'
         }
     }
 
@@ -68,8 +66,7 @@ function Ban({selectingUser}: {selectingUser: (user: Company | JobSeeker) => voi
                 {users?.map((user: any, index) => {
                     return (
                         <div key={index} onClick={() => setSelect(user.id)} className={toggleIsSelect(user)}>
-                            <img className=" top-[15px] left-[15px] absolute" src={images.admin.save} />
-                            <div className=" w-[80px] h-[80px] flex items-center justify-center bg-[#5FA76F] rounded-[10px] p-[10px]">
+                            <div className=" w-[80px] h-[80px] flex items-center justify-center rounded-[10px] p-[10px]">
                                 <img className=" w-[60px] h-[60px] rounded-full" src={user.photo} />
                             </div>
                             <h2 className=" text-content-title text-lg font-semibold mt-3">{isCompany(user) ? user.companyName : (user.firstName + ' ' + user.lastName)}</h2>

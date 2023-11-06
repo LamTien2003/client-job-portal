@@ -42,9 +42,9 @@ function Jobseeker({selectingUser}: {selectingUser: (user: JobSeeker | Company) 
     const toggleIsSelect = (user:JobSeeker) => {
         if(user.id === select) {
             selectingUser(user)
-            return 'flex flex-col items-center w-[31.4%] bg-white border-2 border-[#40189D] rounded-[10px] shadow-lg px-[20px] pt-[50px] pb-[20px] relative cursor-pointer'
+            return 'flex flex-col items-center w-[31.4%] bg-white border-2 border-[#40189D] rounded-[10px] shadow-lg px-[20px] pt-[30px] pb-[20px] relative cursor-pointer'
         } else {
-            return 'flex flex-col items-center w-[31.4%] bg-white rounded-[10px] px-[20px] pt-[50px] pb-[20px] relative cursor-pointer'
+            return 'flex flex-col items-center w-[31.4%] bg-white rounded-[10px] px-[20px] pt-[30px] pb-[20px] relative cursor-pointer'
         }
     }
 
@@ -68,7 +68,7 @@ function Jobseeker({selectingUser}: {selectingUser: (user: JobSeeker | Company) 
                 {jobseekers?.map((jobseeker, index) => {
                     return (
                         <div key={index} onClick={() => setSelect(jobseeker.id)} className={toggleIsSelect(jobseeker)}>
-                            <div className=" w-[80px] h-[80px] flex items-center justify-center bg-[#5FA76F] rounded-[10px] p-[10px]">
+                            <div className=" w-[80px] h-[80px] flex items-center justify-center rounded-[10px] p-[10px]">
                                 <img className=" w-[60px] h-[60px] rounded-full" src={jobseeker.photo} />
                             </div>
                             <h2 className=" text-content-title text-lg font-semibold mt-3">{jobseeker.firstName + ' ' + jobseeker.lastName}</h2>
@@ -81,7 +81,6 @@ function Jobseeker({selectingUser}: {selectingUser: (user: JobSeeker | Company) 
                 })}
             </div>
             {/* {isLoading && <Loader />} */}
-            <Loader />
             <button className=" w-[100px] text-center text-white bg-[#40189D] rounded-md py-[8px] mx-auto mb-[20px]" onClick={() => setLimit(prev => prev + 6)}>Xem thêm</button>
         </>
     );

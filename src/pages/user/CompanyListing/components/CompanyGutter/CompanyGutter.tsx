@@ -98,7 +98,7 @@ function CompanyGutter(props: Props) {
                                                 to={'/company-detail/' + company.id}
                                                 className=" text-primary-100 flex items-center duration-300 group-hover:text-white group-hover:cursor-pointer "
                                             >
-                                                <span className=" text-sm font-medium mb:text-xs ">View Detail</span>
+                                                <span className=" text-sm font-medium mb:text-xs ">Xem thêm</span>
                                             </Link>
                                         </div>
                                     </div>

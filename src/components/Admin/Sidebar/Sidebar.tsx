@@ -1,20 +1,13 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { ArrowAdmin, BellIcon, CategoryAdmin, JobAdmin, ProfileAdmin, Setting, SettingAdmin, StatisticsAdmin, UserAdmin } from "@/components/Icons";
+import { ArrowAdmin, CategoryAdmin, JobAdmin, ProfileAdmin, SettingAdmin, StatisticsAdmin, UserAdmin } from "@/components/Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis, faHouse } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import path from "path";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import images from "@/assets/images";
-import Statistics from "@/pages/admin/Statistics/Statistics";
 type SidebarProps = {
     isActiveSidebar: boolean
 }
 function Sidebar(props: SidebarProps) {
-    // const currentUser = useSelector((state: RootState) => state.user.user)
-    
-    // const navigate = useNavigate()
 
     const myURL = window.location.href
     const page = new URL(myURL)
@@ -48,7 +41,7 @@ function Sidebar(props: SidebarProps) {
     return (
         props.isActiveSidebar ? (
             <div className=" w-[300px] h-[100vh] text-white bg-[#40189D] rounded-r-[10px] mr-[30px] duration-300 left-0 fixed">
-                <img className=" w-[150px] h-[120px] py-5 mx-auto" src={images.logo.logoWhite} />
+                <Link className=" flex items-center justify-center w-[150px] h-[120px] mx-auto" to={'/'}><img src={images.logo.logoWhite} /></Link>
                 <div className=" pl-4">
                     <Link to={'/admin'} className={toggleActiveStyle('statistics')} onClick={() => setActive('statistics')}>
                         <div className=" w-5 h-5">
@@ -102,9 +95,9 @@ function Sidebar(props: SidebarProps) {
             </div>
         ) : (
             <div className=" w-[60px] h-[100vh] text-white bg-[#40189D] rounded-r-[10px] mr-[30px] duration-300 left-0 fixed">
-                <div className=" flex items-center justify-center w-full h-5 py-[60px]">
+                <Link to={'/'} className=" flex items-center justify-center w-full h-5 my-[55px]">
                     <FontAwesomeIcon icon={faHouse} />
-                </div>
+                </Link>
                 <Link to={'/admin'} className={toggleActiveStyle('statistics')} onClick={() => setActive('statistics')}>
                     <div className=" w-5 h-5">
                         <StatisticsAdmin />

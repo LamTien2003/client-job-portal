@@ -4,41 +4,49 @@ import { CategoryType, useGetCategoriesQuery } from '@/services/jobsApiSlice';
 import Job from '@/types/Job';
 import SalaryRange from './SalaryRange/SalaryRange';
 
+type filterObject = {
+    idCat: string | null,
+    salary: {min: number, max: number}
+}
 type Props = {
-    filter: (newJobs: Job[]) => void
+    filter: (filter: filterObject) => void
 };
 function Sidebar(props: Props) {
-    const { data, isLoading, isError } = useGetCategoriesQuery();
 
-    const [category, setCategory] = useState<CategoryType[]>([]);
-    const [newJobs, setNewJobs] = useState<Job[] | undefined>()
-    const [isFilterCategory, setIsFilterCategory] = useState<boolean>(false)
-    const [value, setValue] = useState<number[]>()
-    const [isFilterRangeSalary, setIsFilterRangeSalary] = useState<boolean>(false)
-
-    const handleFilterCategory = (jobFiltered: Job[]) => {
-        setNewJobs(jobFiltered)
-        setIsFilterCategory(true)
-        props.filter(jobFiltered)
+    const [filterObj, setFilterObj] = useState<filterObject>({idCat: null, salary: {min: 500000, max: 10000000}})
+   
+    const handleFilterCategory = (id: string) => {
+        setFilterObj(prev => {
+            return {
+                ...prev,
+                idCat: id
+            }
+        })
     }
-
-    const handleFilterRangeSalary = (jobFiltered: Job[], value: number[]) => {
-        setValue(value)
-        setIsFilterRangeSalary(true)
-        props.filter(jobFiltered)
+    
+    const handleFilterSalary = ({min, max}: {min: number, max: number}) => {
+        setFilterObj(prev => {
+            return {
+                ...prev,
+                salary: {
+                    min: min,
+                    max: max,
+                }
+            }
+        })
     }
 
     useEffect(() => {
-        if (data?.data?.data && !isLoading && !isError) setCategory(data?.data?.data);
-    }, [data?.data?.data, isLoading, isError]);
+        props.filter(filterObj)
+    }, [filterObj])
 
     return (
         <div className=" w-1/4 pr-3 mr-auto ml-auto mb-8 xl:w-5/12 lg:pr-0 lg:w-10/12 mb:w-11/12">
             <div className=" w-full bg-content-bg rounded-xl pl-5 pr-5 pt-5 pb-1">
                 <div>
-                    <Category data={category} filter={handleFilterCategory} value={value} isFilterRangeSalary={isFilterRangeSalary} />
+                    <Category categoryChange={handleFilterCategory} />
 
-                    <SalaryRange filter={handleFilterRangeSalary} newJobs={newJobs} isFilterCategory={isFilterCategory} />
+                    <SalaryRange salaryChange={handleFilterSalary} />
 
                     <div className=" bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">
                         <h3 className=" text-content-title font-semibold text-lg mb-2 lg:text-lg">Date of Post</h3>

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { RegisterCompanyRequest, useRegisterCompanyMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
-import { EMAILREGEX, PHONEREGEX, PWDREGEX } from '../../Register';
+import { EMAILREGEX, PHONEREGEX, PWDREGEX } from '@/components/Constant/Constant';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { setToken } from '@/utils/storage';
@@ -271,6 +271,13 @@ function CompanyForm() {
                     >
                         Sign Me Up
                     </button>
+                </div>
+                
+                <div className=" flex items-center justify-start text-white text-lg mb-4">
+                    <p>Already have an account?</p>
+                    <Link to="/login" className=" ml-1.5 cursor-pointer">
+                        Log In
+                    </Link>
                 </div>
             </form>
         </>

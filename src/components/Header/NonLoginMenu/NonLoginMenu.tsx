@@ -4,11 +4,10 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import SideMenu from "./SideMenu/SideMenu";
+import SideMenu from "../SideMenu/SideMenu";
 
 function NonLoginMenu() {
     const [sideMenu, setSideMenu] = useState<boolean>(false)
-    const [dropDownMenu, setDropDownMenu] = useState<boolean>(false)
     const [dropDownNot, setDropDownNot] = useState<boolean>(false)
 
     const notificationRef = useRef<HTMLDivElement>(null)
@@ -84,9 +83,7 @@ function NonLoginMenu() {
 
             <SideMenu 
                 sideMenu={sideMenu} 
-                dropDownMenu={dropDownMenu} 
                 setSideMenu={setSideMenu} 
-                setDropDownMenu={setDropDownMenu} 
             />
             
         </div>
