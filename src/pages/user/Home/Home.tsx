@@ -86,6 +86,18 @@ const Home = () => {
             </Section>
 
             <Section
+                title={titleRecruiters}
+                subTitle="To choose your trending job dream & to make future bright."
+                bg=""
+                right={true}
+                path=""
+                slick={true}
+                swiperRef={swiperRefRecruiters}
+            >
+                <Recruiters swiperRef={swiperRefRecruiters} />
+            </Section>
+
+            <Section
                 title={titleProcess}
                 subTitle="To choose your trending job dream & to make future bright."
                 path=""
@@ -117,18 +129,6 @@ const Home = () => {
             >
                 <Review swiperRef={swiperRefReview} />
             </Section> */}
-
-            <Section
-                title={titleRecruiters}
-                subTitle="To choose your trending job dream & to make future bright."
-                bg=""
-                right={true}
-                path=""
-                slick={true}
-                swiperRef={swiperRefRecruiters}
-            >
-                <Recruiters swiperRef={swiperRefRecruiters} />
-            </Section>
 
             <Section
                 path="article"

@@ -38,7 +38,7 @@ const Features = () => {
 
             <div className="grid grid-cols-3 gap-6">
                 {jobs.map((job, index) => (
-                    <FeaturesItem key={index} path={`job/${job.id}`} job={job} />
+                    <FeaturesItem key={index} path={`job-detail/${job.id}`} job={job} />
                 ))}
             </div>
 
