@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 import Banner from '@/components/Banner/Banner';
 import CompanyColumn from './components/CompanyColumn/CompanyColumn';
@@ -34,9 +34,13 @@ function CompanyListing() {
         }
     }, [data?.data?.data, isLoading, isError])
 
+    useLayoutEffect(() => {
+        scrollTo(0,0)
+    }, [])
+
     return (
         <>
-            {isLoading && <Loader isLoading={isLoading} />}
+            {isLoading && <Loader/>}
             <div className="selection:bg-primary-100 selection:text-white">
                 <Banner page="Company Listing" />
 

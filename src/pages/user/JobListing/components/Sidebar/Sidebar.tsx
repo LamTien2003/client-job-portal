@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import Category from './Category/Category';
-import { CategoryType, useGetCategoriesQuery } from '@/services/jobsApiSlice';
-import Job from '@/types/Job';
 import SalaryRange from './SalaryRange/SalaryRange';
 
 type filterObject = {

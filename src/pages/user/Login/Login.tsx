@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
@@ -11,7 +11,8 @@ import Title from './components/Title/Title';
 import Others from './components/Others/Others';
 import Fields from './components/Fields/Fields';
 import Loader from '@/components/Loader/Loader';
-import { EMAILREGEX, PWDREGEX } from '@/components/Constant/Constant';
+import { EMAILREGEX, PWDREGEX } from '@/constants/regex';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [login, { isLoading }] = useLoginMutation();
@@ -34,18 +35,21 @@ const Login = () => {
                 ),
         }),
         onSubmit: async (values) => {
-            const response: any = await login(values);
-            if(response?.data?.status === 200) {
-                const user = response.data.data.data;
-                const accessToken = response.data.data.accessToken;
-                if (user && accessToken) {
-                    dispatch(setCurrentUser(user));
-                    dispatch(setcredentialsToken(accessToken));
-                    setToken(accessToken);
+            try {
+                const response = await login(values).unwrap();
+                if(response?.status === 200) {
+                    toast.success(response.data.msg)
+                    const user = response.data.data;
+                    const accessToken = response.data.accessToken;
+                    if (user && accessToken) {
+                        dispatch(setCurrentUser(user));
+                        dispatch(setcredentialsToken(accessToken));
+                        setToken(accessToken);
+                    }
+                    navigate(-1);
                 }
-                navigate(-1);
-            } else {
-
+            } catch(error:any) {
+                toast.error(error.data.msg)
             }
             
         },
@@ -53,7 +57,7 @@ const Login = () => {
 
     useLayoutEffect(() => {
         window.scrollTo(0, 0)
-    })
+    }, [])
 
     return (
         <>

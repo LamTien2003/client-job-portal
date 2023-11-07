@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import Job from '@/types/Job';
-import Skeleton from '@/components/Loading/Skeleton';
 
 interface Props {
     data: Job[];

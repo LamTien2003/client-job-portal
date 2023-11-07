@@ -5,7 +5,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHearted } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -19,11 +19,9 @@ function Comments({data: job}: {data: Job}) {
     const [currentJob, setCurrentJob] = useState<Job>()
     const [comment, setComment] = useState<string>('')
     const [isFocus, setIsFocus] = useState<boolean>(false)
-    const [isLike, setIsLike] = useState<boolean>(false)
-    const [isReply, setIsReply] = useState<boolean>(false)
+    // const [isReply, setIsReply] = useState<boolean>(false)
     const [limit, setLimit] = useState<number>(5)
 
-    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handlePostComment = async () => {
@@ -34,7 +32,6 @@ function Comments({data: job}: {data: Job}) {
                     toast.success(response.data.msg)
                 }
             } catch(error: any) {
-                // console.log(error?.status)
                 if(error.status === 401) {
                     alert(error.data.msg)
                     navigate('/login')
@@ -43,11 +40,29 @@ function Comments({data: job}: {data: Job}) {
                 } else {
                     return
                 }
-            }
-            
-                
+            } 
         }
     }
+
+    // const toggleLikeComment = (id: string) => {
+    //     if((id === likeCmt.id) && (likeCmt.isLike === true)) {
+    //         // console.log((id === likeCmt.id) && (likeCmt.isLike === true))
+    //         return true
+    //     }   else {
+    //         // console.log((id === likeCmt.id) && (likeCmt.isLike === true))
+    //         return false
+    //     }
+    // }
+
+    // const handleLikeComment = (id:string) => {
+    //     if(likeCmt.id === '') {
+    //         setLikeCmt({id,isLike: !likeCmt.isLike })
+    //     } else {
+    //         setLikeCmt({id,isLike: true})
+    //     }
+    // }
+
+    // console.log(likeCmt)
 
     useEffect(() => {
         if(data?.data?.data && !isLoading && !isError) {
@@ -74,21 +89,17 @@ function Comments({data: job}: {data: Job}) {
                                 {cmt.content}
                             </p>
                             <div className=" flex items-center mt-2">
-                                {isLike ? (
-                                    <div onClick={() => setIsLike(false)} className=" text-red-400 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300">
-                                        <FontAwesomeIcon icon={faHearted} />
-                                    </div>
-                                ) : (
-                                    <div onClick={() => setIsLike(true)} className=" text-gray-800 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300">
-                                        <FontAwesomeIcon icon={faHeart} />
-                                    </div>
-                                )}
+                                {/* <div onClick={() => handleLikeComment(cmt.id)} className={toggleLikeComment(cmt.id) === false ? "text-red-400 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300" : "text-gray-800 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300"}>
+                                    <FontAwesomeIcon icon={toggleLikeComment(cmt.id) === true ? faHearted : faHeart} />
+                                </div> */}
+                                <div className="text-red-400 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300">
+                                    <FontAwesomeIcon icon={faHearted} />
+                                </div>
                                 <p className=" text-sm text-content-text">465</p>
-                                
-                                <div className=" text-sm bg-transparent rounded-2xl py-1 px-2.5 duration-300 cursor-pointer ml-3 hover:bg-gray-300" onClick={() => setIsReply(true)}>Trả lời</div>
-                                
+                                {/* <div className=" text-sm bg-transparent rounded-2xl py-1 px-2.5 duration-300 cursor-pointer ml-3 hover:bg-gray-300" onClick={() => setIsReply(true)}>Trả lời</div> */}
+                                <div className=" text-sm bg-transparent rounded-2xl py-1 px-2.5 duration-300 cursor-pointer ml-3 hover:bg-gray-300">Trả lời</div>
                             </div>
-                            {/* {isReply && <div className=" flex items-start ">
+                            {/* {isReply && <div className=" flex items-start mt-2 ">
                                 <img className=" w-8 h-8 rounded-full mr-2" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/user-img.png" />
                                 <div className=" flex flex-col w-full">
                                     <input 

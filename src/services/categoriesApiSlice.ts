@@ -37,7 +37,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
                 return {
                     url: `categoryJob/${body.id}`,
                     method: 'PATCH',
-                    body 
+                    body: {categoryName: body.categoryName, isHotCategory: body.isHotCategory}
                 }
             },
             invalidatesTags: (result, error) => (error ? [] : [{type: 'Category', id: 'LIST'}])

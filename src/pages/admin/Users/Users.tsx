@@ -9,13 +9,12 @@ import JobSeeker from "@/types/JobSeeker";
 import Company from "@/types/Company";
 import images from "@/assets/images";
 
-
 function Users() {
     const [activeTab, setActiveTab] = useState<'jobseeker' | 'company' | 'ban'>('jobseeker')
     const [user, setUser] = useState<JobSeeker | Company>()
 
-    const [banUser, {isLoading: isBanning}] = useBanUserMutation()
-    const [unbanUser, {isLoading: isUnbanning}] = useUnbanUserMutation()
+    const [banUser] = useBanUserMutation()
+    const [unbanUser] = useUnbanUserMutation()
 
     const toggleActiveTab = (tab: 'jobseeker' | 'company' | 'ban') => {
         if(activeTab === tab) {
@@ -56,7 +55,7 @@ function Users() {
     return (
         <div className="flex flex-col">
             <div className=" flex justify-between gap-[30px]">
-                <div className=" w-full flex flex-col gap-[20px]">
+                <div className=" w-full flex flex-col gap-[20px] mb-5">
                     <div className=" flex flex-wrap items-center gap-[12px]">
                         <div className={toggleActiveTab('jobseeker')} onClick={() => setActiveTab('jobseeker')}>Người tìm việc</div>
                         <div className={toggleActiveTab('company')} onClick={() => setActiveTab('company')}>Công ty</div>

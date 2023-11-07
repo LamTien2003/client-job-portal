@@ -19,7 +19,7 @@ function SelectDate({ label, id, value = new Date(Date.now()), onChange, error, 
 
             <DatePicker
                 value={dayjs(value)}
-                onChange={(sth: any) => onChange('establishDate', sth.$d)}
+                onChange={(sth: any) => onChange('establishDate', dayjs(sth).toISOString())}
                 className=" w-full h-12 bg-white rounded-lg border-none outline-none px-10"
             />
 
@@ -27,5 +27,5 @@ function SelectDate({ label, id, value = new Date(Date.now()), onChange, error, 
         </div>
     );
 }
-
+//
 export default SelectDate;

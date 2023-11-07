@@ -12,17 +12,19 @@ import { toast } from "react-toastify";
 
 function Jobseeker({selectingUser}: {selectingUser: (user: JobSeeker | Company) => void}) {
 
-    const [limit, setLimit] = useState<number>(6)
     const [jobseekers, setJobseekers] = useState<JobSeeker[]>([])
     const [select, setSelect] = useState<string | undefined>('')
+    const [limit, setLimit] = useState<number>(6)
+    const [totalItem, setTotalItem] = useState<number>()
 
-    const {data, isLoading, isError} = useGetJobseekersQuery({page: 1, limit: limit})
-    const [banUser, {isLoading: isBanning}] = useBanUserMutation()
+    const {data, isLoading, isError} = useGetJobseekersQuery({page: 1, limit})
+    const [banUser] = useBanUserMutation()
 
     useEffect(() => {
         if(data?.data?.data && !isLoading && !isError) {
             setJobseekers(data?.data?.data)
             setSelect(data?.data?.data[0].id)
+            setTotalItem(data?.data?.totalItems)
         }
     }, [data?.data?.data, !isLoading, !isError])
     
@@ -79,8 +81,7 @@ function Jobseeker({selectingUser}: {selectingUser: (user: JobSeeker | Company) 
                     )
                 })}
             </div>
-            {/* {isLoading && <Loader />} */}
-            <button className=" w-[100px] text-center text-white bg-[#40189D] rounded-md py-[8px] mx-auto mb-[20px]" onClick={() => setLimit(prev => prev + 6)}>Xem thêm</button>
+            {totalItem && totalItem >= limit && <button className=" w-[100px] text-center text-white bg-[#40189D] rounded-md py-[8px] mx-auto" onClick={() => setLimit(prev => prev + 6)}>Xem thêm</button>}
         </>
     );
 }
