@@ -66,6 +66,11 @@ import uncensored from './uncensored.png';
 import categorypng from './category.png';
 import money from './money.png';
 import locationAdmin from './location.png';
+import benthanh from './Ben_Thanh_market_2.jpg';
+import hoguom from './ho-hoan-kiem-2.jpg';
+import hue from './hue.jpg';
+import nhatrang from './nhatrang.jpeg';
+import hoabinh from './hoabinh.jpg';
 
 const images = {
     find,
@@ -101,6 +106,11 @@ const images = {
         transportation,
     },
     logo: {
+        nhatrang,
+        hoabinh,
+        hue,
+        hoguom,
+        benthanh,
         locationAdmin,
         money,
         logoBlack,

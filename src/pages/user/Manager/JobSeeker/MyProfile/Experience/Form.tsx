@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { isJobSeeker } from '@/utils/helper';
 import DateField from '../components/DateField';
+import { toast } from 'react-toastify';
 interface FormExp {
     toggleOpen: () => void;
 }
@@ -121,12 +122,16 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                     experiences: data,
                 };
 
-                await changeExp(expData);
-                alert('Cập nhật thông tin thành công!');
+                const res = await changeExp(expData).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 formik.resetForm();
                 toggleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
             }
         },
     });

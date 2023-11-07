@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import DateField from '../components/DateField';
 import TipForm from '../components/TipForm';
+import { toast } from 'react-toastify';
 interface FormProject {
     toggleOpen: () => void;
 }
@@ -123,12 +124,16 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     projects: data,
                 };
 
-                await changeProjects(projectData);
-                alert('Cập nhật thông tin thành công!');
+                const res = await changeProjects(projectData).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 formik.resetForm();
                 toggleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
             }
         },
     });

@@ -29,6 +29,9 @@ function Jobs() {
     useEffect(() => {
         if (!jobAllLoading && !jobAllError && jobsAll?.data?.data) {
             setData(jobsAll?.data?.data);
+            if (total === 0) {
+                setTotal(jobsAll?.data?.totalItems || 0);
+            }
         }
     }, [jobsAll?.data?.data, jobAllLoading, jobAllError]);
 
@@ -38,6 +41,7 @@ function Jobs() {
             q: debouncedSearchValue,
         }));
     }, [debouncedSearchValue]);
+
     const handleTabClick = (tab: string) => {
         setSelectedTab(tab);
 
@@ -68,6 +72,9 @@ function Jobs() {
             page: newPage,
         }));
     };
+    console.log('dataEnd', data);
+    console.log('page', page);
+
     return (
         <div className="flex flex-col gap-10 pb-10">
             <div className="flex justify-between items-center">
@@ -114,7 +121,7 @@ function Jobs() {
 
             <div className="flex justify-between items-center">
                 <div className="flex flex-col gap-3 font-family-text ">
-                    <h5 className="text-content-title font-title text-lg">Hiển thị {data.length} kết quả việc làm.</h5>
+                    <h5 className="text-content-title font-title text-lg">Hiển thị {total} kết quả việc làm.</h5>
                     <h6 className="text-content-text">Dựa trên sở thích của bạn.</h6>
                 </div>
 
@@ -145,7 +152,9 @@ function Jobs() {
                         {data.map((job, index) => (
                             <JobItem key={index} job={job} />
                         ))}
-                        {data.length === 0 && <div className="bg-white text-center p-5">Công việc trống!</div>}
+                        {data.length === 0 && (
+                            <div className="bg-white text-center p-5 font-family-text text-xl">Công việc trống!</div>
+                        )}
                         {data.length > 0 && (
                             <Pagination
                                 count={Math.ceil(total / query.limit)}

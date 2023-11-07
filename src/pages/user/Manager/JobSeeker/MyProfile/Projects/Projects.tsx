@@ -21,7 +21,6 @@ const Projects = () => {
             setProjects(currentUser.projects);
         }
     }, [jobSeeker, currentUser]);
-    console.log();
 
     return (
         <CardSub

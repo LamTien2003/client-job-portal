@@ -20,6 +20,7 @@ import { FaAudioDescription } from 'react-icons/fa';
 import DateField from '../components/DateField';
 
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
@@ -165,12 +166,16 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                     projects: data,
                 };
 
-                await changeProjects(projectsData);
-                alert('Cập nhật thông tin thành công!');
+                const res = await changeProjects(projectsData).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 formik.resetForm();
                 handleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
             }
         },
     });

@@ -12,12 +12,13 @@ const Sidebar = () => {
     return (
         <div className="bg-white flex flex-col rounded-md border-[1px] border-primary-40 h-fit w-[304px]  text-lg font-family-title">
             <TitleProfile title="My profile" path="/profile" logo={<MdOutlineDashboard />} />
-            {jobSeeker && <TitleProfile title="Applied Jobs" path="applied-jobs" logo={<MdWork />} />}
-            {company && <TitleProfile title="Job Created" path="job-created" logo={<MdOutlineDashboard />} />}
+            {jobSeeker && <TitleProfile title="Applied Jobs" path="jobseeker/applied-jobs" logo={<MdWork />} />}
+            {company && (
+                <TitleProfile title="Công việc đã tạo" path="company/job-created" logo={<MdOutlineDashboard />} />
+            )}
 
-            {company && <TitleProfile title="Thùng rác" path="job-deleted" logo={<MdOutlineDashboard />} />}
-
-            <TitleProfile title="Log Out" path="logout" logo={<RiLogoutCircleRLine />} />
+            {company && <TitleProfile title="Thùng rác" path="company/job-deleted" logo={<MdOutlineDashboard />} />}
+            {company && <TitleProfile title="Thêm công việc" path="company/post-job" logo={<MdOutlineDashboard />} />}
         </div>
     );
 };

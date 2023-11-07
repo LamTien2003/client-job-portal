@@ -73,8 +73,6 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                     dateValue = values.establishDate;
                 }
 
-                console.log(dateValue);
-
                 const data: any = {
                     companyName: values.companyName,
                     description: values.description,

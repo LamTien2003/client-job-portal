@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import FormAcceptJob from './Form';
 import { useCancelJobMutation } from '@/services/companiesApiSlice';
+import { toast } from 'react-toastify';
 
 const Item = ({ candicate }: { candicate: any }) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -8,8 +9,16 @@ const Item = ({ candicate }: { candicate: any }) => {
     const [cancelJob, { isLoading }] = useCancelJobMutation();
 
     const cancelJobHandle = async (idCan: string) => {
-        await cancelJob(idCan);
-        alert('Cancel Job Success!');
+        try {
+            const res = await cancelJob(idCan).unwrap();
+            if (res.status === 200) {
+                toast.success(res.data.msg);
+            }
+        } catch (error: any) {
+            if (error.status === 400) {
+                toast.error(error.data.msg);
+            }
+        }
     };
     return (
         <>

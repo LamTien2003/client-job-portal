@@ -4,7 +4,6 @@ import { useFormik } from 'formik';
 import CustomField from '../components/Field';
 import { FaSchool } from 'react-icons/fa';
 import { BiSolidFactory } from 'react-icons/bi';
-import { BsCalendarWeek } from 'react-icons/bs';
 import BtnBot from '../../../components/BtnBot';
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { isJobSeeker } from '@/utils/helper';
@@ -16,6 +15,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { Education } from '@/types/JobSeeker';
 import DateField from '../components/DateField';
 import TipForm from '../components/TipForm';
+import { toast } from 'react-toastify';
 interface FormEducation {
     toggleOpen: () => void;
 }
@@ -126,12 +126,16 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                     educate: data,
                 };
 
-                await changeEducation(eduData);
-                alert('Cập nhật thông tin thành công!');
+                const res = await changeEducation(eduData).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 formik.resetForm();
                 toggleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
             }
         },
     });

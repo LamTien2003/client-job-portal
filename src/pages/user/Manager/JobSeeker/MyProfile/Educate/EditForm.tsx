@@ -18,6 +18,7 @@ import { FaSchool } from 'react-icons/fa';
 import DateField from '../components/DateField';
 
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 
 interface EditForm {
     handleOpen: () => void;
@@ -160,12 +161,16 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
                     educate: data,
                 };
 
-                await changeEdu(eduData);
-                alert('Cập nhật thông tin thành công!');
+                const res = await changeEdu(eduData).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 formik.resetForm();
                 handleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
             }
         },
     });

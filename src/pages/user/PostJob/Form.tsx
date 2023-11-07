@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import SelectType from './SelectType';
 import { useGetSkillsQuery } from '@/services/utilsApiSlice';
 import { formatDateValue } from '@/utils/date';
+import { toast } from 'react-toastify';
 
 interface Values {
     title: string;
@@ -88,12 +89,16 @@ const FormPostJob = () => {
 
             try {
                 setIsFormSubmitted(true);
-                await createJob(form);
-                alert('Đăng job thành công');
+                const res = await createJob(form).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 setIsFormSubmitted(false);
                 formik.resetForm();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
             }
         },
     });

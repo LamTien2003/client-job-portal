@@ -1,19 +1,36 @@
 import { useDeleteJobCreatedMutation, useRestoreJobMutation } from '@/services/companiesApiSlice';
 import { Link } from 'react-router-dom';
 import { formatDate } from '@/utils/date';
+import { toast } from 'react-toastify';
 
 const Item = ({ job }: { job: any }) => {
     const [deleteJob, { isLoading }] = useDeleteJobCreatedMutation();
     const [restoreJob, { isLoading: loadingRestoreJob }] = useRestoreJobMutation();
 
     const handleRemoveJob = async (id: string) => {
-        await deleteJob(id);
-        alert('Xoá Job Thành Công!');
+        try {
+            const res = await deleteJob(id).unwrap();
+            if (res.status === 200) {
+                toast.success(res.data.msg);
+            }
+        } catch (error: any) {
+            if (error.status === 400) {
+                toast.error(error.data.msg);
+            }
+        }
     };
 
     const handleRestoreJob = async (id: string) => {
-        await restoreJob(id);
-        alert('Khôi phục Job Thành Công!');
+        try {
+            const res = await restoreJob(id).unwrap();
+            if (res.status === 200) {
+                toast.success(res.data.msg);
+            }
+        } catch (error: any) {
+            if (error.status === 400) {
+                toast.error(error.data.msg);
+            }
+        }
     };
     const deadline = formatDate(job.deadline);
     return (

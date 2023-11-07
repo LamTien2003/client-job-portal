@@ -20,7 +20,7 @@ const Home = () => {
     const swiperRefLocation = useRef<SwiperType>();
     // const swiperRefReview = useRef<SwiperType>();
     const swiperRefRecruiters = useRef<SwiperType>();
-    const swiperRefFeatures = useRef<SwiperType>();
+    // const swiperRefFeatures = useRef<SwiperType>();
 
     const titleCategory = (
         <span>

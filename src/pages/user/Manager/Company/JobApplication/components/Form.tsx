@@ -5,6 +5,7 @@ import BtnBot from '../../../components/BtnBot';
 import { DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { useAcceptJobMutation } from '@/services/companiesApiSlice';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 
 interface FormAcceptJob {
     handleOpen: () => void;
@@ -50,12 +51,16 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
                     interviewDate: formattedDate,
                 };
 
-                await acceptJob({ id, body });
-                alert('Đã chấp thuận đơn ứng tuyển!');
+                const res = await acceptJob({ id, body }).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 formik.resetForm();
                 handleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
             }
         },
     });

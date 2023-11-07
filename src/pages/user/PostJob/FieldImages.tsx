@@ -55,7 +55,7 @@ const FieldImages = ({ formik, isFormSubmitted }: { formik: any; isFormSubmitted
                                         key={index}
                                         src={image}
                                         alt={`Selected Image ${index}`}
-                                        className="h-36 w-36  object-cover rounded-md"
+                                        className="h-32 w-32 border-2 object-cover rounded-md"
                                     />
                                     <div
                                         className="absolute right-1 top-1 text-red-600 font-bold cursor-pointer text-2xl hover:text-red-800"

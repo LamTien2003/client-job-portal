@@ -11,6 +11,7 @@ import { useChangeMeUserMutation } from '@/services/usersApiSlice';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -58,12 +59,16 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                 form.append('gender', values.gender);
                 form.append('phoneNumber', values.phoneNumber);
                 form.append('photo', values.photo);
-                await changeInfo(form);
-                alert('Cập nhật thông tin thành công!');
+                const res = await changeInfo(form).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 formik.resetForm();
                 handleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
             }
         },
     });

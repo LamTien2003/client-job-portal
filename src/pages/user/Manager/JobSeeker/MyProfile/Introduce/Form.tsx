@@ -3,6 +3,7 @@ import BtnBot from '../../../components/BtnBot';
 import { useState } from 'react';
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { MdTipsAndUpdates } from 'react-icons/md';
+import { toast } from 'react-toastify';
 interface FormIntro {
     handleOpen: () => void;
     open: boolean;
@@ -18,12 +19,17 @@ const Form = ({ handleOpen, open }: FormIntro) => {
                     introduce: introduce.trim(),
                 };
 
-                await changeIntroduce(data);
+                const res = await changeIntroduce(data).unwrap();
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                }
                 setIntroduce('');
                 handleOpen();
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: any) {
+            if (error.status === 400) {
+                toast.error(error.data.msg);
+            }
         }
     };
     return (

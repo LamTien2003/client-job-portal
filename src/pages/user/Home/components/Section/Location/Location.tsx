@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import LocationItem from './LocationItem';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper as SwiperType } from 'swiper';
+import images from '@/assets/images';
 
 const Location = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
     return (
@@ -35,54 +36,20 @@ const Location = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType 
                 className="w-full"
             >
                 <SwiperSlide>
-                    <LocationItem
-                        imgLocation="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/sylhet.png"
-                        location="Sylhet Bangladesh"
-                        amount="1234"
-                    />
+                    <LocationItem imgLocation={images.logo.benthanh} location="Hồ Chí Minh" amount="1234" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <LocationItem
-                        imgLocation="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/dhaka1.png"
-                        location="Dhaka Bangladesh"
-                        amount="2943"
-                    />
+                    <LocationItem imgLocation={images.logo.hoguom} location="Hà Nội" amount="20" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <LocationItem
-                        imgLocation="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/newyork1.png"
-                        location="NewYork, USA"
-                        amount="2186"
-                    />
+                    <LocationItem imgLocation={images.logo.hue} location="Huế" amount="20" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <LocationItem
-                        imgLocation="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/chicago.png"
-                        location="Chicago, Australia"
-                        amount="5678"
-                    />
+                    <LocationItem imgLocation={images.logo.nhatrang} location="Nha Trang" amount="20" />
                 </SwiperSlide>
 
                 <SwiperSlide>
-                    <LocationItem
-                        imgLocation="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/sylhet.png"
-                        location="Sylhet Bangladesh"
-                        amount="1234"
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <LocationItem
-                        imgLocation="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/dhaka1.png"
-                        location="Dhaka Bangladesh"
-                        amount="2943"
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <LocationItem
-                        imgLocation="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/newyork1.png"
-                        location="NewYork, USA"
-                        amount="2186"
-                    />
+                    <LocationItem imgLocation={images.logo.hoabinh} location="Hoà Bình" amount="123" />
                 </SwiperSlide>
             </Swiper>
         </div>

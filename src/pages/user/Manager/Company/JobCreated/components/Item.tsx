@@ -1,13 +1,22 @@
 import { useRemoveJobCreatedMutation } from '@/services/companiesApiSlice';
 import { formatDate } from '@/utils/date';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Item = ({ job }: { job: any }) => {
     const [removeJob, { isLoading }] = useRemoveJobCreatedMutation();
 
     const handleRemoveJob = async (id: string) => {
-        await removeJob(id);
-        alert('Xoá Job Thành Công!');
+        try {
+            const res = await removeJob(id).unwrap();
+            if (res.status === 200) {
+                toast.success(res.data.msg);
+            }
+        } catch (error: any) {
+            if (error.status === 400) {
+                toast.error(error.data.msg);
+            }
+        }
     };
 
     const deadline = formatDate(job.deadline);
@@ -36,7 +45,7 @@ const Item = ({ job }: { job: any }) => {
             <td className="px-6 py-4 border-primary-100 border-[1px]">
                 <Link
                     className="text-primary-100 hover:text-primary-200 duration-300"
-                    to={`/profile/jobApplication/${job.id}`}
+                    to={`/profile/company/jobApplication/${job.id}`}
                 >
                     Xen danh sách
                 </Link>
