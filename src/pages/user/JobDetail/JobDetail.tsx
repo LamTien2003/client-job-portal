@@ -31,7 +31,7 @@ function JobDetail() {
 
     useLayoutEffect(() => {
         scrollTo(0,0)
-    })
+    }, [])
 
     return (
         <>

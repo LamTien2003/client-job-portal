@@ -10,18 +10,20 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 function CompanyTab({selectingUser}: {selectingUser: (user: Company) => void}) {
-
+    
     const [limit, setLimit] = useState<number>(6)
     const [companies, setCompanies] = useState<Company[]>([])
     const [select, setSelect] = useState<string | undefined>('')
+    const [totalItem, setTotalItem] = useState<number>()
 
-    const {data, isLoading, isError} = useGetCompaniesQuery({page: 1, limit: limit})
-    const [banUser, {isLoading: isBanning}] = useBanUserMutation()
+    const {data, isLoading, isError} = useGetCompaniesQuery({page: 1, limit})
+    const [banUser] = useBanUserMutation()
 
     useEffect(() => {
         if(data?.data?.data && !isLoading && !isError) {
             setCompanies(data?.data?.data)
             setSelect(data?.data?.data[0].id)
+            setTotalItem(data?.data?.totalItems)
         }
     }, [data?.data?.data, !isLoading, !isError])
     
@@ -78,8 +80,7 @@ function CompanyTab({selectingUser}: {selectingUser: (user: Company) => void}) {
                     )
                 })}
             </div>
-            <button className=" w-[100px] text-center text-white bg-[#40189D] rounded-md py-[8px] mx-auto mb-[20px]" onClick={() => setLimit(prev => prev + 6)}>Xem thêm</button>
-
+            {totalItem && totalItem >= limit && <button className=" w-[100px] text-center text-white bg-[#40189D] rounded-md py-[8px] mx-auto" onClick={() => setLimit(prev => prev + 6)}>Xem thêm</button>}
         </>
     );
 }

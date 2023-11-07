@@ -12,16 +12,20 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 function Ban({selectingUser}: {selectingUser: (user: Company | JobSeeker) => void}) {
-    const {data, isLoading, isError} = useGetBannedUsersQuery({page: 1, limit: 10})
-    const [unbanUser, {isLoading: isUnbanning}] = useUnbanUserMutation()
-
+    
+    const [limit, setLimit] = useState<number>(6)
     const [users, setUsers] = useState<User[]>([])
     const [select, setSelect] = useState<string | undefined>('')
+    const [totalItem, setTotalItem] = useState<number>()
+
+    const {data, isLoading, isError} = useGetBannedUsersQuery({page: 1, limit})
+    const [unbanUser] = useUnbanUserMutation()
     
     useEffect(() => {
         if(data?.data?.data && !isLoading && !isError) {
             setUsers(data?.data?.data)
             setSelect(data?.data?.data[0].id)
+            setTotalItem(data?.data?.totalItems)
         }
     }, [data?.data?.data, !isLoading, !isError])
     
@@ -78,6 +82,7 @@ function Ban({selectingUser}: {selectingUser: (user: Company | JobSeeker) => voi
                     )
                 })}
             </div>
+            {totalItem && totalItem >= limit && <button className=" w-[100px] text-center text-white bg-[#40189D] rounded-md py-[8px] mx-auto" onClick={() => setLimit(prev => prev + 6)}>Xem thêm</button>}
         </>
     );
 }

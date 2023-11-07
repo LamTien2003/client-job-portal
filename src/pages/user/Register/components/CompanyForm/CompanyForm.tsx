@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RegisterCompanyRequest, useRegisterCompanyMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
-import { EMAILREGEX, PHONEREGEX, PWDREGEX } from '@/components/Constant/Constant';
+import { EMAILREGEX, PWDREGEX, PHONEREGEX } from '@/constants/regex';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { setToken } from '@/utils/storage';
@@ -108,6 +108,8 @@ function CompanyForm() {
             } catch (error:any) {
                 if(error?.status === 400) {
                     toast.error('Email này đã được sử dụng. Vui lòng sử dụng email khác!')
+                } else {
+                    toast.error('Lỗi đăng ký.')
                 }
             }
         },

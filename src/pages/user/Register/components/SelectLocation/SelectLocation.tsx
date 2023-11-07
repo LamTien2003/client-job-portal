@@ -1,5 +1,5 @@
 import { MenuItem, Select } from '@mui/material';
-import { locationArray } from '@/components/Constant/Constant';
+import { locationArray } from '@/constants/regex';
 import { FormikTouched } from 'formik';
 
 type SelectFieldPropsType = {

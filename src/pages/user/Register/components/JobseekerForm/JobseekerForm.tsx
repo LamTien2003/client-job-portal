@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RegisterJobseekerRequest, useRegisterJobseekerMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
-import { EMAILREGEX, PHONEREGEX, PWDREGEX } from '@/components/Constant/Constant';
+import { EMAILREGEX, PWDREGEX, PHONEREGEX } from '@/constants/regex';
 import { useDispatch } from 'react-redux';
 import Fields from '../Fields/Fields';
 import SelectLocation from '../SelectLocation/SelectLocation';
@@ -57,6 +57,8 @@ function JobseekerForm() {
             } catch (error:any) {
                 if(error?.status === 400) {
                     toast.error('Email này đã được sử dụng. Vui lòng sử dụng email khác!')
+                } else {
+                    toast.error('Lỗi đăng ký.')
                 }
             }
         },

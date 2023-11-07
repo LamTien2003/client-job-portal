@@ -1,24 +1,13 @@
-// import { url } from 'inspector';
 import { useEffect, useLayoutEffect, useState } from 'react';
-// import { toast } from 'react-toastify';
-// import { urlToHttpOptions } from 'url';
-// import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import ClipLoader from "react-spinners/ClipLoader";
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader"
-
 import Banner from '@/components/Banner/Banner';
-
 import Sidebar from './components/Sidebar/Sidebar';
 import { useGetJobsQuery } from '@/services/jobsApiSlice';
 import Job from '@/types/Job';
 import JobColumn from './components/JobColumn/JobColumn';
 import JobGutter from './components/JobGutter/JobGutter';
-import { ListColumn, ListGutter } from '@/components/Icons';
-import Loader from '@/components/Loader/Loader';
+import { ListColumn, ListGutter } from '@/components/Icons'
 import Skeleton from '@/components/Loading/Skeleton';
-import { useDispatch } from 'react-redux';
-import { showLoading } from '@/store/uiSlice';
 
 type filterObject = {
     idCat: string | null,
@@ -51,7 +40,7 @@ const JobListing = () => {
 
     useLayoutEffect(() => {
         scrollTo(0,0)
-    })
+    }, [])
 
     return (
         <>
