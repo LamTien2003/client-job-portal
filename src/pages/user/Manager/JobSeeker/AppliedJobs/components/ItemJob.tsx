@@ -2,6 +2,7 @@ import { JobApplicate } from '@/types/JobSeeker';
 import images from '@/assets/images';
 import { formatDate } from '@/utils/date';
 import { useRemoveJobApplyMutation } from '@/services/jobseekerApiSlice';
+import { toast } from 'react-toastify';
 const ItemJob = ({ job }: { job: JobApplicate }) => {
     const createDate = formatDate(job?.createdAt);
 
@@ -25,8 +26,16 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
     }
 
     const removeJobHandle = async (idJob: string) => {
-        await removeJob(idJob);
-        alert('Xoá job thành công!');
+        try {
+            const res = await removeJob(idJob).unwrap();
+            if (res.status === 200) {
+                toast.success(res.data.msg);
+            }
+        } catch (error: any) {
+            if (error.status === 400) {
+                toast.error(error.data.msg);
+            }
+        }
     };
     let interviewDate;
     if (job.interviewDate) {

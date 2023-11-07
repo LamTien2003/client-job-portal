@@ -18,7 +18,7 @@ const AplliedJobs = () => {
             <table className="border border-primary-100 w-full text-sm text-center">
                 <thead className="w-full bg-primary-100  justify-between items-center p-4  text-white font-family-title text-base">
                     <tr>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="px-6 py-3 w-[40%]">
                             Tiêu đề
                         </th>
                         <th scope="col" className="w-[15%] px-6 py-3">
@@ -35,12 +35,17 @@ const AplliedJobs = () => {
                         </th>
                     </tr>
                 </thead>
-                <tbody className="">
+                <tbody className="font-family-text">
                     {jobApplication.map((job, index) => (
                         <ItemJob key={index} job={job} />
                     ))}
                 </tbody>
             </table>
+            {jobApplication.length === 0 && (
+                <div className="font-family-text text-center border border-primary-100 p-5 text-xl">
+                    Danh sách ứng tuyển trống.
+                </div>
+            )}
         </>
     );
 };
