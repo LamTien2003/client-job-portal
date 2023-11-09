@@ -25,7 +25,10 @@ const CustomField = ({
 }: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-2">
-            <div className="text-[15px] font-medium text-content-text">{title}*</div>
+            <div className="font-medium text-content-text">
+                {title}
+                <span className="ml-2 font-title text-primary-100">*</span>
+            </div>
             <div
                 className={`flex items-center  border-2 border-primary-40 pl-3  rounded  ${
                     error && touched && 'border-red-800'

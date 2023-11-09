@@ -3,8 +3,12 @@ import CategoryItem from './CategoryItem';
 import images from '@/assets/images';
 import Category from '@/types/Category';
 import { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperType } from 'swiper';
 
-const Category = () => {
+import { Autoplay } from 'swiper/modules';
+import { Box, LinearProgress } from '@mui/material';
+const Category = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
     const { data, isLoading, isError } = useGetCategoriesQuery();
     const [categories, setCategories] = useState<Category[]>([]);
 
@@ -15,12 +19,52 @@ const Category = () => {
     }, [data?.data?.data, isError, isLoading]);
 
     return (
-        <div className="w-full grid grid-cols-5 grid-row-2 gap-3 mb:grid-cols-1 tb:grid-cols-2 lg:grid-cols-3 ">
-            {isLoading && <p>...isLoading</p>}
-            {categories.map((cate, index) => (
-                <CategoryItem key={index} index={index} category={cate} images={images.categories.finance} />
-            ))}
-        </div>
+        <>
+            {isLoading && (
+                <Box sx={{ width: '100%' }}>
+                    <LinearProgress />
+                </Box>
+            )}
+
+            <Swiper
+                modules={[Autoplay]}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: true,
+                }}
+                onBeforeInit={(swiper) => {
+                    swiperRef.current = swiper;
+                }}
+                spaceBetween={15}
+                slidesPerView={1}
+                breakpoints={{
+                    639: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    767: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    },
+                    1023: {
+                        slidesPerView: 4,
+                        spaceBetween: 15,
+                    },
+                    1279: {
+                        slidesPerView: 5,
+                        spaceBetween: 15,
+                    },
+                }}
+                className="w-full mb:px-3 tb:px-3"
+            >
+                {categories.map((cate, index) => (
+                    <SwiperSlide key={index}>
+                        <CategoryItem key={index} category={cate} images={images.categories.finance} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </>
     );
 };
 

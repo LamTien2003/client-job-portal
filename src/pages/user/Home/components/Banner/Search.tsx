@@ -5,7 +5,7 @@ import { Select, MenuItem } from '@mui/material';
 import { useState, useEffect } from 'react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
-import { useGetJobsQuery } from '@/services/jobsApiSlice';
+import { useNavigate } from 'react-router-dom';
 interface Values {
     title: string;
 
@@ -16,12 +16,21 @@ const initialValues: Values = {
     category: '',
 };
 
-const validation = Yup.object().shape({
-    title: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Tiêu đề không được bỏ trống!'),
-});
+const validation = Yup.object()
+    .shape({
+        title: Yup.string().max(100, 'Không được quá 100 kí tự!'),
+        category: Yup.string(),
+    })
+    .test('hasTitleOrCategory', 'Chọn 1 trong 2 để tìm kiếm', function (value) {
+        if (!value.title && !value.category) {
+            return this.createError({ path: 'title', message: 'Chọn 1 trong 2 để tìm kiếm' });
+        }
+
+        return true;
+    });
 const Search = () => {
+    const navigate = useNavigate();
     const [category, setCategory] = useState<Category[]>([]);
-    const [query, setQuery] = useState({});
 
     const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery();
 
@@ -30,7 +39,6 @@ const Search = () => {
             setCategory(categories?.data?.data);
         }
     }, [loadingCate, errorCate, categories?.data?.data]);
-    const { data, isLoading, isError } = useGetJobsQuery(query);
 
     const formik = useFormik({
         initialValues: initialValues,
@@ -38,17 +46,15 @@ const Search = () => {
         onSubmit: async (values) => {
             try {
                 let queryData;
-                if (values.category) {
-                    queryData = {
-                        q: values.title,
-                        type: values.category,
-                    };
+                if (values.category && values.title) {
+                    queryData = `?q=${values.title}&type=${values.category}`;
+                } else if (values.title) {
+                    queryData = `?q=${values.title}`;
                 } else {
-                    queryData = {
-                        q: values.title,
-                    };
+                    queryData = `?type=${values.category}`;
                 }
-                await setQuery(queryData);
+
+                navigate(`/job-listing${queryData}`);
             } catch (error) {
                 console.error('Lỗi khi gửi form:', error);
             }
@@ -58,10 +64,10 @@ const Search = () => {
     return (
         <form
             onSubmit={formik.handleSubmit}
-            className="flex lg:w-full w-[65%] justify-between bg-white mt-10 items-center p-4 gap-5 rounded mb:flex-col"
+            className="flex w-[65%] justify-between bg-white mt-10 items-center p-4 gap-5 rounded xl:w-[80%] lg:w-full tb:w-full mb:flex-col mb:w-full"
         >
             <div
-                className={`  lg:w-full w-[50%] flex p-4 border border-[#e9e9e9] bg-[#eff3f2] rounded ${
+                className={`mb:w-full lg:w-full w-[50%] flex p-4 border border-[#e9e9e9] bg-[#eff3f2] rounded ${
                     formik.errors.title && formik.touched.title && 'border-red-800 border-2'
                 }`}
             >
@@ -71,15 +77,15 @@ const Search = () => {
                     name="title"
                     className="w-full outline-none text-black bg-[#eff3f2]"
                     type="text"
-                    placeholder="Nhập tên công việc..."
+                    placeholder="Nhập tên công việc"
                     value={formik.values.title}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
             </div>
             <div
-                className={`lg:w-full w-[30%]  p-[1px] flex items-center justify-center  border border-[#e9e9e9] bg-[#eff3f2] rounded ${
-                    formik.errors.category && formik.touched.category && 'border-red-800 border-2'
+                className={`mb:w-full tb:w-[40%] lg:w-full w-[30%]  p-[1px] flex items-center justify-center  border border-[#e9e9e9] bg-[#eff3f2] rounded ${
+                    formik.errors.title && formik.touched.title && 'border-red-800 border-2'
                 }`}
             >
                 <img className="py-5 pl-5" src={images.logo.category} alt={images.logo.category} />
@@ -104,11 +110,11 @@ const Search = () => {
 
             <button
                 type="submit"
-                className="group relative rounded  lg:py-2 py-4 px-7 text-lg font-medium  bg-primary-100 hover:bg-black duration-300 "
+                className="group relative rounded   py-4 px-7 text-lg font-medium  bg-primary-100 hover:bg-black duration-300 mb:py-3"
             >
                 <div className="absolute rounded inset-0 w-0 bg-black transition-all duration-300 ease-out group-hover:w-full"></div>
 
-                <div className="relative flex justify-between items-center  ">
+                <div className="relative flex justify-between items-center">
                     <img className="mr-2" src={images.logo.search} alt={images.logo.search} /> Search
                 </div>
             </button>

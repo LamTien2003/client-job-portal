@@ -13,7 +13,10 @@ interface SelectField {
 const SelectType = ({ title, fieldName, options, icon, error, touched, value, onChange }: SelectField) => {
     return (
         <div className="flex flex-col gap-2">
-            <h5 className="text-[15px] font-medium text-content-text">{title}*</h5>
+            <h5 className="font-medium text-content-text">
+                {title}
+                <span className="ml-2 font-title text-primary-100">*</span>
+            </h5>
             <div
                 className={`flex items-center  border-2 border-primary-40 pl-3  rounded ${
                     error && touched && 'border-red-800'

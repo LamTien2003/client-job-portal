@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 import Title from './Title';
 import images from '@/assets/images';
 import { Swiper as SwiperType } from 'swiper';
-import { Link } from 'react-router-dom';
 
 type SectionHome = {
     children: ReactNode;
@@ -15,7 +14,7 @@ type SectionHome = {
     swiperRef?: React.MutableRefObject<SwiperType | undefined>;
 };
 
-const Section: React.FC<SectionHome> = ({ title, subTitle, children, bg, right, slick, swiperRef, path }) => {
+const Section: React.FC<SectionHome> = ({ title, subTitle, children, bg, right, slick, swiperRef }) => {
     const handleNext = () => {
         swiperRef?.current?.slideNext();
     };
@@ -24,8 +23,8 @@ const Section: React.FC<SectionHome> = ({ title, subTitle, children, bg, right, 
         swiperRef?.current?.slidePrev();
     };
     return (
-        <div className={`py-20 ${bg ? bg : ' '}`}>
-            <div className="flex flex-col max-w-7xl mx-auto  lg:px-5 tb:px-3">
+        <div className={`py-6 ${bg ? bg : ''}`}>
+            <div className="flex flex-col max-w-7xl mx-auto  lg:px-5 tb:px-3 xl:px-3">
                 {right ? (
                     <Title title={title} subTitle={subTitle}>
                         {slick && (

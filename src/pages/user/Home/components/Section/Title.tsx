@@ -5,7 +5,7 @@ const Title: React.FC<{ title: ReactNode; subTitle: string; children: ReactNode 
     children,
 }) => {
     return (
-        <div className="flex justify-between gap-6 items-center lg:items-start mb-[60px] mb:flex-col">
+        <div className="flex justify-between gap-6 items-center lg:items-start mb-[50px] mb:flex-col tb:px-3 mb:px-3">
             <div className="">
                 <h2 className="font-family-title text-[2.5rem]  font-bold mb-3 lg:text-3xl">{title}</h2>
                 <p className="font-family-text text-lg text-content-text lg:text-base">{subTitle}</p>

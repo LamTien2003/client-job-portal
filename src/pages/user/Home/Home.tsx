@@ -1,26 +1,18 @@
-// import { useEffect } from 'react';
-// import { toast } from 'react-toastify';
 import Banner from './components/Banner/Banner';
 import Section from './components/Section/Section';
 import Category from './components/Section/Category/Category';
 import Features from './components/Section/Features/Features';
 import Process from './components/Section/Process/Process';
 import Location from './components/Section/Location/Location';
-// import Review from './components/Section/Review/Review';
 import Company from './components/Section/Company/Company';
 import Recruiters from './components/Section/Recruiters/Recruiters';
 import Article from './components/Section/Article/Article';
 import { Swiper as SwiperType } from 'swiper';
 import { useRef } from 'react';
 const Home = () => {
-    // useEffect(() => {
-    //     toast.success('Test thông bao');
-    // }, []);
-
     const swiperRefLocation = useRef<SwiperType>();
-    // const swiperRefReview = useRef<SwiperType>();
     const swiperRefRecruiters = useRef<SwiperType>();
-    // const swiperRefFeatures = useRef<SwiperType>();
+    const swiperRefCategories = useRef<SwiperType>();
 
     const titleCategory = (
         <span>
@@ -45,12 +37,6 @@ const Home = () => {
         </span>
     );
 
-    // const titleReviews = (
-    //     <span>
-    //         Trusted User <span className="text-primary-100">Reviews</span>
-    //     </span>
-    // );
-
     const titleRecruiters = (
         <span>
             Our Top <span className="text-primary-100">Recruiters</span>
@@ -64,23 +50,25 @@ const Home = () => {
     );
 
     return (
-        <div>
+        <div className="flex flex-col gap-10">
             <Banner />
             <Section
                 title={titleCategory}
                 path="category"
                 subTitle="To choose your trending job dream & to make future bright."
                 bg=""
+                slick={true}
                 right={true}
+                swiperRef={swiperRefCategories}
             >
-                <Category />
+                <Category swiperRef={swiperRefCategories} />
             </Section>
             <Section
                 title={titleFeatured}
                 subTitle="To choose your trending job dream & to make future bright."
                 bg="bg-content-bg"
                 path="job-listing"
-                slick={true}
+                right={true}
             >
                 <Features />
             </Section>
@@ -107,30 +95,6 @@ const Home = () => {
             </Section>
 
             <Section
-                title={titleLocation}
-                subTitle="To choose your trending job dream & to make future bright."
-                bg="bg-content-bg"
-                right={true}
-                path=""
-                slick={true}
-                swiperRef={swiperRefLocation}
-            >
-                <Location swiperRef={swiperRefLocation} />
-            </Section>
-            {/* 
-            <Section
-                title={titleReviews}
-                subTitle="To choose your trending job dream & to make future bright."
-                bg=""
-                right={true}
-                path=""
-                slick={true}
-                swiperRef={swiperRefReview}
-            >
-                <Review swiperRef={swiperRefReview} />
-            </Section> */}
-
-            <Section
                 path="article"
                 title={titleArticle}
                 subTitle="To choose your trending job dream & to make future bright."
@@ -139,6 +103,18 @@ const Home = () => {
                 <Article />
             </Section>
             <Company />
+
+            <Section
+                title={titleLocation}
+                subTitle="To choose your trending job dream & to make future bright."
+                bg=""
+                right={true}
+                path=""
+                slick={true}
+                swiperRef={swiperRefLocation}
+            >
+                <Location swiperRef={swiperRefLocation} />
+            </Section>
         </div>
     );
 };

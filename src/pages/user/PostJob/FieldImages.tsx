@@ -29,7 +29,7 @@ const FieldImages = ({ formik, isFormSubmitted }: { formik: any; isFormSubmitted
 
     return (
         <div className="mt-7 flex flex-col gap-2">
-            <h5 className="text-[15px] font-medium text-content-text">Photos Job*</h5>
+            <h5 className="font-medium text-content-text">Hình ảnh công việc</h5>
 
             <div className="flex flex-col gap-10 justify-center items-center w-full">
                 <label

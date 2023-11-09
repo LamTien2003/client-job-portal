@@ -10,7 +10,7 @@ type Article = {
 };
 const ArticleItem: React.FC<Article> = ({ month, date, comment, name, title, imgArticle }) => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col font-family-text">
             <div className="relative ">
                 <img className="object-cover rounded-md" src={imgArticle} />
                 <div className="absolute rounded-xl -bottom-8 left-4 p-2 bg-primary-100 flex flex-col items-center lg:bottom-0 lg:left-0 lg:rounded-none">

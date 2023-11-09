@@ -43,7 +43,9 @@ const validation = Yup.object().shape({
         .typeError('Lương phải là số')
         .min(0, 'Lương phải lớn hơn hoặc bằng 0')
         .required('Lương không được bỏ trống!'),
-    deadline: Yup.date().min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!'),
+    deadline: Yup.date()
+        .min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!')
+        .required('Thời hạn không được bỏ trống!'),
 });
 const FormPostJob = () => {
     const [createJob, { isLoading }] = useCreateJobMutation();
@@ -140,7 +142,7 @@ const FormPostJob = () => {
                 />
 
                 <SelectType
-                    title="Job Type"
+                    title="Danh mục"
                     fieldName="type"
                     icon={images.logo.category}
                     options={category}

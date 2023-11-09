@@ -36,20 +36,20 @@ const Location = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType 
                 className="w-full"
             >
                 <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.benthanh} location="Hồ Chí Minh" amount="1234" />
+                    <LocationItem imgLocation={images.logo.benthanh} location="Hồ Chí Minh" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.hoguom} location="Hà Nội" amount="20" />
+                    <LocationItem imgLocation={images.logo.hoguom} location="Hà Nội" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.hue} location="Huế" amount="20" />
+                    <LocationItem imgLocation={images.logo.hue} location="Huế" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.nhatrang} location="Nha Trang" amount="20" />
+                    <LocationItem imgLocation={images.logo.nhatrang} location="Nha Trang" />
                 </SwiperSlide>
 
                 <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.hoabinh} location="Hoà Bình" amount="123" />
+                    <LocationItem imgLocation={images.logo.hoabinh} location="Hoà Bình" />
                 </SwiperSlide>
             </Swiper>
         </div>

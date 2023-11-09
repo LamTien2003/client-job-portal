@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark as faBookmarkRegular } from '@fortawesome/free-regular-svg-icons';
 import Job from '@/types/Job';
 import { formatDate } from '@/utils/date';
+import { formatNumberToVND } from '@/utils/number';
 
 const FeaturesItem = ({ job, path }: { job: Job; path: string }) => {
-    const date = formatDate(job.deadline);
+    const date: string = formatDate(job.deadline);
+    const salary: string = formatNumberToVND(job.salary);
     return (
         <NavLink to={path} className="group">
-            <div className="bg-white rounded-r pt-9 pb-9 pr-6 pl-6 border-l-4 border-primary-blur group-hover:border-primary-100 ">
+            <div className="bg-white h-[350px] rounded-r pt-9 pb-9 pr-6 pl-6 border-l-4 border-primary-blur group-hover:border-primary-100 font-family-text">
                 <div className=" flex items-start mb-5 relative">
                     <img className="w-13 h-13 object-cover rounded-full mr-5" src={job.postedBy.photo} />
                     <div className=" w-full flex flex-col border-b border-content-border pb-3">
@@ -32,8 +34,8 @@ const FeaturesItem = ({ job, path }: { job: Job; path: string }) => {
                             src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg"
                         />
                         <p className=" text-content-text text-cb font-medium ml-1.5">
-                            Lương:{' '}
-                            <span className=" text-content-title font-semibold ml-1 mr-1.5">{job.salary}đ /</span>Tháng
+                            Lương: <span className=" text-content-title font-semibold ml-1 mr-1.5">{salary} /</span>
+                            Tháng
                         </p>
                     </div>
                     <div className=" flex items-start mb-2">
