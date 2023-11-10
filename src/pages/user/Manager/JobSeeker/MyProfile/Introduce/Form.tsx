@@ -40,20 +40,20 @@ const Form = ({ handleOpen, open }: FormIntro) => {
                 </DialogHeader>
                 <form onSubmit={handleSubmit}>
                     <DialogBody divider className="p-8">
-                        <div className="flex gap-2 mb-5 text-lg">
-                            <div className="flex items-center gap-2 text-primary-100 font-title font-family-text">
+                        <div className="flex gap-2 mb-5 text-lg mb:flex-col">
+                            <div className="flex items-center gap-2 text-primary-100 font-title font-family-text tb:items-start lg:items-start">
                                 <div className="text-2xl">
                                     <MdTipsAndUpdates />
                                 </div>
                                 Mẹo:
                             </div>
-                            <p className="text-content-text font-normal font-family-text">
+                            <p className="text-content-text font-normal font-family-text mb:text-base">
                                 Tóm tắt kinh nghiệm chuyên môn, chú ý làm nổi bật các kỹ năng và điểm mạnh.
                             </p>
                         </div>
                         <textarea
                             disabled={isLoading}
-                            className="border-primary-100 border-2 outline-none w-full p-3 rounded-md"
+                            className="font-family-text font-medium border-primary-100 border-2 outline-none w-full p-3 rounded-md"
                             name="introduce"
                             id="introduce"
                             value={introduce}
@@ -62,7 +62,9 @@ const Form = ({ handleOpen, open }: FormIntro) => {
                             rows={5}
                         ></textarea>
 
-                        <div className="text-content-text font-semibold font-family-text">0/2500 Kí tự</div>
+                        <div className="mt-1 text-content-text font-semibold font-family-text mb:text-sm">
+                            0/2500 Kí tự
+                        </div>
                     </DialogBody>
                     <DialogFooter className="px-8">
                         <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />

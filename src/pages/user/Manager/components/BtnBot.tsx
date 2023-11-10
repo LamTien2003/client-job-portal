@@ -5,7 +5,7 @@ interface BtnBot {
 
 const BtnBot = ({ toggleOpen, isLoading }: BtnBot) => {
     return (
-        <div className="flex gap-5 justify-end">
+        <div className="w-full flex gap-5 justify-end font-family-text mb:justify-center">
             <button
                 type="button"
                 onClick={toggleOpen}

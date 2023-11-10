@@ -11,7 +11,7 @@ const Card = ({ children, handleOpen }: Card) => {
                 {children}
                 <button
                     onClick={handleOpen}
-                    className="text-xl font-semibold text-primary-100 hover:text-black duration-200"
+                    className="text-xl font-semibold text-primary-100 hover:text-black duration-200 mb:text-2xl mb:mb-20"
                 >
                     <FiEdit />
                 </button>

@@ -25,7 +25,7 @@ const CustomField = ({
 }: CustomFieldProps) => {
     return (
         <div className="flex flex-col gap-2">
-            <div className="font-medium text-content-text">
+            <div className="font-medium text-content-text ">
                 {title}
                 <span className="ml-2 font-title text-primary-100">*</span>
             </div>

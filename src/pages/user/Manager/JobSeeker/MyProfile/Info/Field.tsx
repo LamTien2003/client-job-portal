@@ -26,8 +26,8 @@ const CustomField = ({
     onBlur,
 }: CustomFieldProps) => {
     return (
-        <div className="flex flex-col gap-1 w-full">
-            <label className="font-bold text-primary-100" htmlFor={fieldName}>
+        <div className="flex flex-col gap-1 w-full font-family-text">
+            <label className="text-lg font-semibold text-primary-100" htmlFor={fieldName}>
                 {title}
             </label>
             <div
@@ -38,7 +38,7 @@ const CustomField = ({
                 <div className="text-xl px-3">{icon}</div>
                 <input
                     name={fieldName}
-                    className="w-full h-11 rounded-md py-2 outline-none bg-input"
+                    className="font-medium w-full h-11 rounded-md py-2 outline-none bg-input"
                     type={type ? type : 'text'}
                     placeholder={placeholder}
                     value={value}

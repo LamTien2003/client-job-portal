@@ -46,7 +46,7 @@ const ExpItem = ({ data }: { data: Experience[] }) => {
     };
 
     return (
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-8 mb:grid-cols-1 tb:grid-cols-1">
             {data.map((exp, index) => {
                 const dateFrom = exp.date.from ? formatDateWithMonthAndYear(new Date(exp.date.from).toISOString()) : '';
                 const dateTo = exp.date.to

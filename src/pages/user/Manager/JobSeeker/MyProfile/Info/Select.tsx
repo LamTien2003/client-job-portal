@@ -19,7 +19,7 @@ const SelectInfo = ({ title, fieldName, value, onChange, error, touched }: Selec
         { value: 'others', label: 'Khác' },
     ];
     return (
-        <div className="flex flex-col gap-1 w-full">
+        <div className="flex flex-col gap-1 w-full font-family-text">
             <label className="font-bold text-primary-100" htmlFor={fieldName}>
                 {title}
             </label>
@@ -36,7 +36,7 @@ const SelectInfo = ({ title, fieldName, value, onChange, error, touched }: Selec
                     onChange={onChange}
                     name={fieldName}
                     variant="standard"
-                    className="select w-full h-11 text-content-s-text items-center"
+                    className="font-medium select w-full h-11 text-content-s-text items-center"
                 >
                     {options.map((option, index) => {
                         return (

@@ -180,10 +180,12 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật học vấn</DialogHeader>
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-2xl">
+                Cập nhật học vấn
+            </DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
-                    <div className="flex flex-col gap-6 pb-4">
+                    <div className="flex flex-col gap-6 pb-4 mb:gap-4">
                         <CustomField
                             title="Trường *"
                             fieldName="school"
@@ -220,7 +222,7 @@ const EditForm = ({ handleOpen, open, educateToEdit }: EditForm) => {
                             }}
                         />
 
-                        <div className="flex gap-8 justify-between">
+                        <div className="flex gap-8 justify-between mb:flex-col tb:flex-col mb:gap-4">
                             <DateField
                                 title="Ngày bắt đầu *"
                                 error={formik.errors.dateFrom}

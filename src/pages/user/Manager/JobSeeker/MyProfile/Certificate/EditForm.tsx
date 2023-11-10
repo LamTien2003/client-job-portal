@@ -172,12 +172,14 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật chứng chỉ</DialogHeader>
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-2xl">
+                Cập nhật chứng chỉ
+            </DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center px-8">
-                    <div className="flex flex-col gap-6 pb-4">
+                    <div className="flex flex-col gap-6 pb-4 mb:gap-4">
                         <CustomField
-                            title="Tên giải thưởng"
+                            title="Tên giải thưởng *"
                             fieldName="name"
                             error={formik.errors.name}
                             touched={formik.touched.name}
@@ -188,7 +190,7 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
                         />
 
                         <CustomField
-                            title="Tổ chức"
+                            title="Tổ chức *"
                             fieldName="organization"
                             error={formik.errors.organization}
                             touched={formik.touched.organization}
@@ -198,7 +200,7 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
                             onChange={formik.handleChange}
                         />
 
-                        <div className="flex gap-8 justify-between">
+                        <div className="flex gap-8 justify-between mb:flex-col mb:gap-4">
                             <DateField
                                 title="Ngày bắt đầu *"
                                 error={formik.errors.dateFrom}
@@ -210,7 +212,7 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
                             />
 
                             <DateField
-                                title="Ngày kết thúc"
+                                title="Ngày kết thúc *"
                                 error={formik.errors.dateTo}
                                 touched={formik.touched.dateTo}
                                 value={dateToValue}

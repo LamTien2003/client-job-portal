@@ -177,10 +177,12 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật kinh nghiệm</DialogHeader>
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-2xl">
+                Cập nhật kinh nghiệm
+            </DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
-                    <div className="flex flex-col gap-6 border-b-2 pb-5">
+                    <div className="flex flex-col gap-6 border-b-2 pb-5 mb:gap-4">
                         <CustomField
                             title="Chức vụ *"
                             fieldName="position"
@@ -215,7 +217,7 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
                                 formik.setFieldValue('isWorking', isWorking);
                             }}
                         />
-                        <div className="flex gap-8 justify-between">
+                        <div className="flex gap-8 justify-between mb:flex-col mb:gap-4">
                             <DateField
                                 title="Ngày bắt đầu *"
                                 error={formik.errors.dateFrom}

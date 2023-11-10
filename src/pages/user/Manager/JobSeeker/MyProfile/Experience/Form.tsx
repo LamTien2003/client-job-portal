@@ -142,7 +142,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                 Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
             </p>
 
-            <div className="flex flex-col gap-6 border-b-2 pb-5">
+            <div className="flex flex-col gap-6 border-b-2 pb-5 mb:gap-4">
                 <CustomField
                     title="Chức vụ *"
                     fieldName="position"
@@ -181,7 +181,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
                         formik.setFieldValue('isWorking', isWorking);
                     }}
                 />
-                <div className="flex gap-8 justify-between">
+                <div className="flex gap-8 justify-between mb:flex-col mb:gap-4">
                     <DateField
                         title="Ngày bắt đầu *"
                         error={formik.errors.dateFrom}

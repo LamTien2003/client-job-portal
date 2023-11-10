@@ -143,9 +143,9 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-2 pt-5">
             <TipForm title="Cập nhật thông tin của bạn một cách chính xác!" />
 
-            <div className="flex flex-col gap-6 border-b-2 pb-5">
+            <div className="flex flex-col gap-6 border-b-2 pb-5 mb:gap-4">
                 <CustomField
-                    title="Trường"
+                    title="Trường *"
                     fieldName="school"
                     error={formik.errors.school}
                     touched={formik.touched.school}
@@ -157,7 +157,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                 />
 
                 <CustomField
-                    title="Ngành học"
+                    title="Ngành học *"
                     fieldName="major"
                     error={formik.errors.major}
                     touched={formik.touched.major}
@@ -181,7 +181,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
                     }}
                 />
 
-                <div className="flex gap-8 justify-between">
+                <div className="flex gap-8 justify-between mb:gap-4 mb:flex-col">
                     <DateField
                         title="Ngày bắt đầu *"
                         error={formik.errors.dateFrom}

@@ -141,9 +141,9 @@ const FormProject = ({ toggleOpen }: FormProject) => {
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
             <TipForm title="Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng" />
 
-            <div className="flex flex-col gap-6 border-b-2 pb-5">
+            <div className="flex flex-col gap-6 border-b-2 pb-5 mb:gap-4">
                 <CustomField
-                    title="Tên dự án"
+                    title="Tên dự án *"
                     fieldName="name"
                     error={formik.errors.name}
                     touched={formik.touched.name}
@@ -166,7 +166,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                         formik.setFieldValue('isWorking', isWorking);
                     }}
                 />
-                <div className="flex gap-8 justify-between">
+                <div className="flex gap-8 justify-between mb:gap-4 mb:flex-col">
                     <DateField
                         title="Ngày bắt đầu *"
                         error={formik.errors.dateFrom}
@@ -189,7 +189,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     />
                 </div>
                 <CustomField
-                    title="Mô tả chi tiết"
+                    title="Mô tả *"
                     fieldName="description"
                     error={formik.errors.description}
                     touched={formik.touched.description}
@@ -200,7 +200,7 @@ const FormProject = ({ toggleOpen }: FormProject) => {
                     onBlur={formik.handleBlur}
                 />
                 <CustomField
-                    title="Đường dẫn website"
+                    title="Link Website *"
                     fieldName="url"
                     error={formik.errors.url}
                     touched={formik.touched.url}

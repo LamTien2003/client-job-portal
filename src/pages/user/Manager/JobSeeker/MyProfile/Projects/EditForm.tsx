@@ -183,10 +183,12 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
     const dateToValue: any = dayjs(formik.values.dateTo);
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Cập nhật dự án</DialogHeader>
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-2xl">
+                Cập nhật dự án
+            </DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody className="flex flex-col items-center justify-center gap-4 px-8" divider>
-                    <div className="flex flex-col pb-4 gap-6">
+                    <div className="flex flex-col pb-4 gap-6 mb:gap-4">
                         <CustomField
                             title="Tên dự án"
                             fieldName="name"
@@ -196,6 +198,7 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                             placeholder="Nhập họ của bạn"
                             value={formik.values.name}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
                         <CustomField
                             title="Đường dẫn website"
@@ -206,6 +209,7 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                             placeholder="Nhập url website của bạn"
                             value={formik.values.url}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
                         <FormControlLabel
                             control={<Checkbox checked={formik.values.isWorking} />}
@@ -221,7 +225,7 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                             }}
                         />
 
-                        <div className="flex gap-8 justify-between">
+                        <div className="flex gap-8 justify-between mb:flex-col mb:gap-4">
                             <DateField
                                 title="Ngày bắt đầu *"
                                 error={formik.errors.dateFrom}
@@ -253,6 +257,7 @@ const EditForm = ({ handleOpen, open, projectToEdit }: EditForm) => {
                             placeholder="Nhập chi tiết dự án của bạn"
                             value={formik.values.description}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
                     </div>
                 </DialogBody>

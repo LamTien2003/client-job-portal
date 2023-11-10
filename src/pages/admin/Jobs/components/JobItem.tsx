@@ -9,10 +9,8 @@ const JobItem = ({ job }: { job: Job }) => {
 
     const deleteJobHandler = async () => {
         try {
-            const res = await deleteJob(job.id).unwrap();
-            if (res.status === 200) {
-                toast.success(res.data.msg);
-            }
+            await deleteJob(job.id);
+            toast.success('Xoá thành công!');
         } catch (error: any) {
             if (error.status === 400) {
                 toast.error(error.data.msg);

@@ -46,8 +46,15 @@ const FieldImages = ({ formik, isFormSubmitted }: { formik: any; isFormSubmitted
                     </div>
                     <input name="photosJob" id="file" type="file" multiple className="hidden" onChange={handleFiles} />
                 </label>
+
                 {selectedFiles.length > 0 && (
                     <>
+                        <div
+                            onClick={handleClearFiles}
+                            className="mt-2 text-sm font-semibold text-white rounded-md uppercase py-2 px-4 bg-red-600 hover:bg-red-800 duration-300"
+                        >
+                            Xoá tất cả ảnh
+                        </div>
                         <div className="grid grid-cols-6 items-center gap-5  object-cover mb:grid-cols-2 tb:grid-cols-4">
                             {selectedFiles.map((image, index) => (
                                 <div key={index} className="relative">
@@ -65,12 +72,6 @@ const FieldImages = ({ formik, isFormSubmitted }: { formik: any; isFormSubmitted
                                     </div>
                                 </div>
                             ))}
-                        </div>
-                        <div
-                            onClick={handleClearFiles}
-                            className="mt-2 text-sm font-semibold text-white rounded-md uppercase py-2 px-4 bg-red-600 hover:bg-red-800 duration-300"
-                        >
-                            Clear all files
                         </div>
                     </>
                 )}

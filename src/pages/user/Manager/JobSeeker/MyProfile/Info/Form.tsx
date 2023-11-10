@@ -1,4 +1,4 @@
-import { Dialog, DialogHeader, DialogBody } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import { AiOutlinePhone, AiOutlineUser } from 'react-icons/ai';
@@ -87,13 +87,17 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader>Thông tin cá nhân</DialogHeader>
-            <DialogBody divider>
-                <form onSubmit={formik.handleSubmit} className="flex flex-col items-center justify-center gap-4">
+            <DialogHeader>
+                <h5 className="w-full font-family-title text-3xl font-title mb:text-center tb:text-center lg:text-center">
+                    Thông tin cá nhân
+                </h5>
+            </DialogHeader>
+            <form onSubmit={formik.handleSubmit}>
+                <DialogBody divider className="flex flex-col items-center justify-center gap-4 ">
                     <AvatarSection formik={formik} />
-                    <div className="grid grid-cols-2 w-full gap-6">
+                    <div className="grid grid-cols-2 w-full gap-6 mb:grid-cols-1">
                         <CustomField
-                            title="Họ"
+                            title="Họ *"
                             fieldName="firstName"
                             error={formik.errors.firstName}
                             touched={formik.touched.firstName}
@@ -104,7 +108,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             onBlur={formik.handleBlur}
                         />
                         <CustomField
-                            title="Tên"
+                            title="Tên *"
                             fieldName="lastName"
                             error={formik.errors.lastName}
                             touched={formik.touched.lastName}
@@ -115,7 +119,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             onBlur={formik.handleBlur}
                         />
                         <SelectInfo
-                            title="Giới tính"
+                            title="Giới tính *"
                             fieldName="gender"
                             value={formik.values.gender}
                             onChange={formik.handleChange}
@@ -124,7 +128,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                         />
 
                         <CustomField
-                            title="Địa chỉ"
+                            title="Địa chỉ *"
                             fieldName="location"
                             error={formik.errors.location}
                             touched={formik.touched.location}
@@ -136,7 +140,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                         />
 
                         <CustomField
-                            title="Số điện thoại"
+                            title="Số điện thoại *"
                             fieldName="phoneNumber"
                             error={formik.errors.phoneNumber}
                             touched={formik.touched.phoneNumber}
@@ -146,12 +150,12 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         />
-                        <div className="flex items-end justify-end">
-                            <BtnBot toggleOpen={handleOpen} isLoading={isLoading} />
-                        </div>
                     </div>
-                </form>
-            </DialogBody>
+                </DialogBody>
+                <DialogFooter className="px-8">
+                    <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />
+                </DialogFooter>
+            </form>
         </Dialog>
     );
 };

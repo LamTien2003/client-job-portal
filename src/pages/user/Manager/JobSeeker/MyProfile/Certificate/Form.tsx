@@ -128,9 +128,9 @@ const FormCer = ({ toggleOpen }: FormCer) => {
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-[1px] border-gray-600 pt-5">
             <TipForm title="Mô tả thành tựu cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng" />
 
-            <div className="flex flex-col gap-6 border-b-2 pb-5">
+            <div className="flex flex-col gap-6 border-b-2 pb-5 mb:gap-4 ">
                 <CustomField
-                    title="Tên giải thưởng"
+                    title="Tên giải thưởng *"
                     fieldName="name"
                     error={formik.errors.name}
                     touched={formik.touched.name}
@@ -142,7 +142,7 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                 />
 
                 <CustomField
-                    title="Tổ chức"
+                    title="Tổ chức *"
                     fieldName="organization"
                     error={formik.errors.organization}
                     touched={formik.touched.organization}
@@ -152,7 +152,7 @@ const FormCer = ({ toggleOpen }: FormCer) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-                <div className="flex gap-8 justify-between">
+                <div className="flex gap-8 justify-between mb:gap-4 mb:flex-col">
                     <DateField
                         title="Ngày bắt đầu *"
                         error={formik.errors.dateFrom}

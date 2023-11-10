@@ -12,6 +12,7 @@ import SelectType from './SelectType';
 import { useGetSkillsQuery } from '@/services/utilsApiSlice';
 import { formatDateValue } from '@/utils/date';
 import { toast } from 'react-toastify';
+import { DatePicker } from '@mui/x-date-pickers';
 
 interface Values {
     title: string;
@@ -21,7 +22,7 @@ interface Values {
     jobRequire: string;
     type: string;
     photosJob: FileList | null;
-    deadline: Date | string;
+    deadline: any;
 }
 const initialValues: Values = {
     title: '',
@@ -75,6 +76,8 @@ const FormPostJob = () => {
                 today.setDate(today.getDate() + 20);
                 const deadlineDate = formatDateValue(today);
                 values.deadline = deadlineDate;
+            } else {
+                values.deadline = `${values.deadline.$y}-${values.deadline.$M + 1}-${values.deadline.$D}`;
             }
             const form = new FormData();
             Object.entries(values).forEach(([key, value]) => {
@@ -107,7 +110,7 @@ const FormPostJob = () => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <div className="grid grid-cols-2 w-full gap-6 tb:grid-cols-1">
+            <div className="grid grid-cols-2 w-full gap-6 mb:grid-cols-1  tb:grid-cols-1 ">
                 <CustomField
                     title="Tiêu đề"
                     fieldName="title"
@@ -174,19 +177,29 @@ const FormPostJob = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-                <CustomField
-                    title="Thời hạn"
-                    fieldName="deadline"
-                    type="date"
-                    error={formik.errors.deadline}
-                    touched={formik.touched.deadline}
-                    icon={images.logo.salary}
-                    placeholder="Nhập thời hạn của bạn!"
-                    value={formik.values.deadline}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
+
+                <div className="flex flex-col gap-2 w-full">
+                    <div className="font-medium text-content-text ">
+                        Thời hạn
+                        <span className="ml-2 font-title text-primary-100">*</span>
+                    </div>
+                    <DatePicker
+                        views={['year', 'month', 'day']}
+                        value={formik.values.deadline}
+                        onChange={(date: any) => {
+                            formik.setFieldValue('deadline', date);
+                        }}
+                    />
+                    {formik.errors.deadline && formik.touched.deadline ? (
+                        <div className="text-red-700 text-sm font-semibold">
+                            {typeof formik.errors.deadline === 'string'
+                                ? formik.errors.deadline
+                                : Object.values(formik.errors.deadline).join(', ')}
+                        </div>
+                    ) : null}
+                </div>
             </div>
+
             <FieldImages formik={formik} isFormSubmitted={isFormSubmitted} />
 
             <div className="flex justify-center">
@@ -195,7 +208,7 @@ const FormPostJob = () => {
                     className="w-1/2 mt-10 text-sm font-semibold text-white rounded-md uppercase py-3 px-8 bg-primary-100 hover:bg-black duration-300"
                     disabled={isLoading || isFormSubmitted}
                 >
-                    {isLoading ? 'Posting...' : 'Post Now'}
+                    {isLoading ? 'Đang đăng ...' : 'Đăng công việc'}
                 </button>
             </div>
         </form>

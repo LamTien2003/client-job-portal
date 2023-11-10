@@ -27,13 +27,43 @@ function Jobs() {
     const { data: jobsAccept, isLoading: jobAcceptLoading } = useGetJobsQuery(query);
 
     useEffect(() => {
-        if (!jobAllLoading && !jobAllError && jobsAll?.data?.data) {
+        if (!jobAllLoading && !jobAllError && jobsAll?.data?.data && selectedTab == 'all') {
             setData(jobsAll?.data?.data);
             if (total === 0) {
                 setTotal(jobsAll?.data?.totalItems || 0);
+            } else {
+                setTotal(jobsAll?.data?.totalItems || 0);
             }
         }
-    }, [jobsAll?.data?.data, jobAllLoading, jobAllError]);
+
+        if (!jobAcceptLoading && jobsAccept?.data?.data && selectedTab == 'accepted') {
+            setData(jobsAccept?.data?.data);
+            if (total === 0) {
+                setTotal(jobsAccept?.data?.totalItems || 0);
+            } else {
+                setTotal(jobsAccept?.data?.totalItems || 0);
+            }
+        }
+
+        if (!jobNotAcceptLoading && jobsNotAccept?.data?.data && selectedTab == 'notAccepted') {
+            setData(jobsNotAccept?.data?.data);
+            if (total === 0) {
+                setTotal(jobsNotAccept?.data?.totalItems || 0);
+            } else {
+                setTotal(jobsNotAccept?.data?.totalItems || 0);
+            }
+        }
+    }, [
+        jobsAll?.data?.data,
+        jobAllLoading,
+        jobAllError,
+
+        jobsAccept?.data?.data,
+        jobAcceptLoading,
+
+        jobsNotAccept?.data?.data,
+        jobNotAcceptLoading,
+    ]);
 
     useEffect(() => {
         setQuery((prevQuery) => ({
@@ -44,7 +74,7 @@ function Jobs() {
 
     const handleTabClick = (tab: string) => {
         setSelectedTab(tab);
-
+        setPage(1);
         setQuery((prevQuery) => ({
             ...prevQuery,
             page: 1,
@@ -72,8 +102,6 @@ function Jobs() {
             page: newPage,
         }));
     };
-    console.log('dataEnd', data);
-    console.log('page', page);
 
     return (
         <div className="flex flex-col gap-10 pb-10">
