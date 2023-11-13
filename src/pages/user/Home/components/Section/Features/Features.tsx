@@ -26,12 +26,11 @@ const Features = () => {
         if (total === 0) {
             setTotal(data?.data?.totalItems || 0);
         }
+        setIsLoadingMore(false);
     }, [data?.data?.data, isError, isLoading]);
 
     const seeMoreDataHandler = () => {
-        if (isLoading) return;
         setIsLoadingMore(true);
-
         const dataLength = jobs.length;
         const newLimit = dataLength + 3;
         if (newLimit <= 9) {
@@ -62,7 +61,7 @@ const Features = () => {
                     <FeaturesItem key={index} path={`job-detail/${job.id}`} job={job} />
                 ))}
             </div>
-            {data?.data?.data?.length !== 0 && total !== jobs.length && jobs.length >= 3 && jobs.length < 9 && (
+            {data?.data?.data?.length !== 0 && total !== jobs.length && jobs.length >= 3 && jobs.length <= 9 && (
                 <div className="flex items-center justify-center mt-10 font-family-text">
                     <button
                         onClick={() => seeMoreDataHandler()}

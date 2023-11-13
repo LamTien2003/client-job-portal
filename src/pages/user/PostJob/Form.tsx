@@ -13,6 +13,7 @@ import { useGetSkillsQuery } from '@/services/utilsApiSlice';
 import { formatDateValue } from '@/utils/date';
 import { toast } from 'react-toastify';
 import { DatePicker } from '@mui/x-date-pickers';
+import Textarea from './Textarea';
 
 interface Values {
     title: string;
@@ -23,6 +24,7 @@ interface Values {
     type: string;
     photosJob: FileList | null;
     deadline: any;
+    numberRecruitment: number;
 }
 const initialValues: Values = {
     title: '',
@@ -33,9 +35,11 @@ const initialValues: Values = {
     type: '',
     photosJob: null,
     deadline: '',
+    numberRecruitment: 1,
 };
 const validation = Yup.object().shape({
     title: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Tiêu đề không được bỏ trống!'),
+    numberRecruitment: Yup.number().required('Số lượng không được bỏ trống!').min(1, 'Số lượng không được nhỏ hơn 1'),
     description: Yup.string().max(500, 'Không được quá 500 kí tự!').required('Mô tả không được bỏ trống!'),
     jobRequire: Yup.string().max(100, 'Không được quá 500 kí tự!').required('Yêu cầu không được bỏ trống!'),
     skillsRequire: Yup.string().required('Kỹ năng không được bỏ trống!'),
@@ -53,6 +57,7 @@ const FormPostJob = () => {
     const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
     const [category, setCategory] = useState<any[]>([]);
     const [skills, setSkills] = useState<string[]>([]);
+    const [skillValue, setSkillValue] = useState<string[]>([]);
 
     const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery();
 
@@ -87,6 +92,8 @@ const FormPostJob = () => {
                             form.append('photosJob', value[i]);
                         }
                     }
+                } else if (key === 'skillsRequire') {
+                    form.append('skillsRequire', JSON.stringify(skillValue));
                 } else {
                     form.append(key, value);
                 }
@@ -98,11 +105,15 @@ const FormPostJob = () => {
                 if (res.status === 200) {
                     toast.success(res.data.msg);
                 }
+                setSkillValue([]);
                 setIsFormSubmitted(false);
                 formik.resetForm();
             } catch (error: any) {
                 if (error.status === 400) {
                     toast.error(error.data.msg);
+                }
+                if (error.status === 500) {
+                    toast.error('Lỗi server!');
                 }
             }
         },
@@ -122,41 +133,9 @@ const FormPostJob = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-                <SelectSkills
-                    title="Skills Require"
-                    fieldName="skillsRequire"
-                    icon={images.logo.category}
-                    options={skills}
-                    error={formik.errors.skillsRequire}
-                    touched={formik.touched.skillsRequire}
-                    value={formik.values.skillsRequire}
-                    onChange={formik.handleChange}
-                />
-                <CustomField
-                    title="Mô tả"
-                    fieldName="description"
-                    error={formik.errors.description}
-                    touched={formik.touched.description}
-                    icon={images.logo.jobMini}
-                    placeholder="Nhập tên của bạn"
-                    value={formik.values.description}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
-
-                <SelectType
-                    title="Danh mục"
-                    fieldName="type"
-                    icon={images.logo.category}
-                    options={category}
-                    error={formik.errors.type}
-                    touched={formik.touched.type}
-                    value={formik.values.type}
-                    onChange={formik.handleChange}
-                />
 
                 <CustomField
-                    title="Job Require"
+                    title="Yêu cầu công việc"
                     fieldName="jobRequire"
                     error={formik.errors.jobRequire}
                     touched={formik.touched.jobRequire}
@@ -177,7 +156,28 @@ const FormPostJob = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
-
+                <CustomField
+                    title="Số lượng"
+                    type="number"
+                    fieldName="numberRecruitment"
+                    error={formik.errors.numberRecruitment}
+                    touched={formik.touched.numberRecruitment}
+                    icon={images.logo.user}
+                    placeholder="Nhập số lượng nhân viên muốn tuyển"
+                    value={formik.values.numberRecruitment}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                />
+                <SelectType
+                    title="Danh mục"
+                    fieldName="type"
+                    icon={images.logo.category}
+                    options={category}
+                    error={formik.errors.type}
+                    touched={formik.touched.type}
+                    value={formik.values.type}
+                    onChange={formik.handleChange}
+                />
                 <div className="flex flex-col gap-2 w-full">
                     <div className="font-medium text-content-text ">
                         Thời hạn
@@ -198,6 +198,29 @@ const FormPostJob = () => {
                         </div>
                     ) : null}
                 </div>
+
+                <SelectSkills
+                    title="Yêu cầu kỹ năng"
+                    fieldName="skillsRequire"
+                    icon={images.logo.category}
+                    options={skills}
+                    error={formik.errors.skillsRequire}
+                    touched={formik.touched.skillsRequire}
+                    value={formik.values.skillsRequire}
+                    onChange={formik.handleChange}
+                    data={skillValue}
+                    setData={setSkillValue}
+                    formik={formik}
+                />
+                <Textarea
+                    title="Mô tả"
+                    fieldName="description"
+                    error={formik.errors.description}
+                    touched={formik.touched.description}
+                    value={formik.values.description}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                />
             </div>
 
             <FieldImages formik={formik} isFormSubmitted={isFormSubmitted} />

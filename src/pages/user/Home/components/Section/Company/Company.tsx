@@ -37,7 +37,7 @@ const Company = () => {
                         modules={[Autoplay]}
                         autoplay={{
                             delay: 2500,
-                            disableOnInteraction: true,
+                            disableOnInteraction: false,
                             pauseOnMouseEnter: true,
                         }}
                         onBeforeInit={(swiper) => {

@@ -1,4 +1,6 @@
 import { Select, MenuItem } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 interface SelectField {
     title: string;
     fieldName: string;
@@ -8,8 +10,43 @@ interface SelectField {
     touched: boolean | undefined;
     value?: string;
     onChange: any;
+    data: string[];
+    setData: React.Dispatch<React.SetStateAction<string[]>>;
+    formik: any;
 }
-const SelectSkills = ({ title, fieldName, options, icon, error, touched, value, onChange }: SelectField) => {
+const SelectSkills = ({
+    title,
+    fieldName,
+    options,
+    icon,
+    error,
+    touched,
+    value,
+    onChange,
+    data,
+    setData,
+    formik,
+}: SelectField) => {
+    const handleValueChange = (event: any) => {
+        const selectedValue: string = event.target.value;
+
+        if (selectedValue && selectedValue.trim() !== '' && !data.includes(selectedValue)) {
+            setData([...data, selectedValue]);
+        }
+    };
+
+    const handleRemoveSkill = (index: number): void => {
+        const newData = [...data];
+        newData.splice(index, 1);
+        setData(newData);
+    };
+
+    useEffect(() => {
+        if (data.length === 0) {
+            formik.setFieldValue('skillsRequire', '');
+        }
+    }, [data]);
+
     return (
         <div className="flex flex-col gap-2">
             <h5 className="font-medium text-content-text">
@@ -24,8 +61,11 @@ const SelectSkills = ({ title, fieldName, options, icon, error, touched, value, 
                 <span className="w-[1px] h-6 bg-gray-300 mx-2"></span>
                 <div className="w-full h-[48px]">
                     <Select
-                        value={value}
-                        onChange={onChange}
+                        value={data.length === 0 ? '' : value}
+                        onChange={(event) => {
+                            onChange(event);
+                            handleValueChange(event);
+                        }}
                         name={fieldName}
                         variant="standard"
                         className="select w-full h-[48px]  text-content-s-text items-center"
@@ -39,6 +79,24 @@ const SelectSkills = ({ title, fieldName, options, icon, error, touched, value, 
                 </div>
             </div>
             {error && touched ? <div className="text-red-700 text-sm font-semibold">{error}</div> : null}
+
+            <div className="flex flex-wrap gap-5">
+                {data.map((skill, index) => (
+                    <div
+                        className="flex items-center gap-2 text-content-text font-semibold px-4 py-1 bg-primary-200 border-2 border-primary-100 rounded-3xl"
+                        key={index}
+                    >
+                        {skill}
+                        <button
+                            type="button"
+                            className=" text-red-800 hover:text-red-500 "
+                            onClick={() => handleRemoveSkill(index)}
+                        >
+                            <AiOutlineCloseCircle />
+                        </button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
