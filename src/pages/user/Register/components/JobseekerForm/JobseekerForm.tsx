@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RegisterJobseekerRequest, useRegisterJobseekerMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
-import { EMAILREGEX, PWDREGEX, PHONEREGEX } from '@/constants/regex';
+import { EMAILREGEX, PHONEREGEX } from '@/constants/regex';
 import { useDispatch } from 'react-redux';
 import Fields from '../Fields/Fields';
 import SelectLocation from '../SelectLocation/SelectLocation';
@@ -37,7 +37,7 @@ function JobseekerForm() {
             location: Yup.string().required('Khu vực không được để trống'),
             phoneNumber: Yup.string().required('Số điện thoại không được để trống').matches(PHONEREGEX, 'Số điện thoại phải đúng định dạng'),
             introduce: Yup.string().max(250, 'Giới thiệu chỉ tối đa 250 kí tự'),
-            password: Yup.string().required('Mật khẩu không được để trống').matches(PWDREGEX, 'Mật khẩu phải ít nhất 8 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 kí tự đặc biệt'),
+            password: Yup.string().required('Mật khẩu không được để trống').min(8, 'Mật khẩu phải có ít nhất 8 ký tự'),
             passwordConfirm: Yup.string().required('Nhập lại mật khẩu không được để trống').oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
         }),
         onSubmit: async (values: RegisterJobseekerRequest) => {
@@ -52,7 +52,7 @@ function JobseekerForm() {
                         dispatch(setcredentialsToken(accessToken));
                         setToken(accessToken);
                     }
-                    navigate('/')
+                    navigate('/job-listing')
                 }
             } catch (error:any) {
                 if(error?.status === 400) {

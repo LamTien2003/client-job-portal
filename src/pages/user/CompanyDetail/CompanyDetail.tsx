@@ -1,8 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-
 import { useGetCompanyQuery } from "@/services/companiesApiSlice";
-
-import Banner from "@/components/Banner/Banner";
+// import Banner from "@/components/Banner/Banner";
 import { useParams } from "react-router-dom";
 import Job from "./components/Job/Job";
 import Company from "@/types/Company";
@@ -32,9 +30,9 @@ function CompanyDetail() {
         <>
             {isLoading && <Loader />}
             <div className="selection:bg-primary-100 selection:text-white">
-                <Banner page="Company Detail" />
+                {/* <Banner page="Company Detail" /> */}
 
-                <div className=" w-10/12 mt-28 mb-28 text-content-text mr-auto ml-auto">
+                <div className=" w-10/12 mt-[50px] mb-28 text-content-text mr-auto ml-auto">
                     {!isLoading && !isError && company && <CompanyInfo data={company}/>}
 
                     <div className=" flex lg:flex-col ">

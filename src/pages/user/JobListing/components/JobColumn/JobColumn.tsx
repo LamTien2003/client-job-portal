@@ -35,14 +35,6 @@ function JobColumn(props: Props) {
                                                         {job.postedBy.location}
                                                     </p>
                                                 </div>
-                                                <div className=" ml-3 group ">
-                                                    <div className=" w-7 h-7 bg-content-bgsave rounded-full top-0 right-0 relative duration-300 cursor-pointer group-hover:bg-primary-100">
-                                                        <FontAwesomeIcon
-                                                            className=" text-primary-100 text-sm top-1.5 right-2 absolute duration-300 group-hover:text-white"
-                                                            icon={faBookmark}
-                                                        />
-                                                    </div>
-                                                </div>
                                             </div>
                                             
                                             <div className=' flex'>
@@ -111,10 +103,6 @@ function JobColumn(props: Props) {
                 }
                 
             })}
-            <div className=' flex justify-center'>
-                <div className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() => props.changePage(1)}>1</div>
-                <div className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() => props.changePage(2)}>2</div>
-            </div>
         </>
     );
 }

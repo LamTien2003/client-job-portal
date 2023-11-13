@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { RegisterCompanyRequest, useRegisterCompanyMutation } from '@/services/authApiSlice';
+import { RegisterCompanyRequest, useLoginMutation, useRegisterCompanyMutation } from '@/services/authApiSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
-import { EMAILREGEX, PWDREGEX, PHONEREGEX } from '@/constants/regex';
+import { EMAILREGEX, PHONEREGEX } from '@/constants/regex';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { setToken } from '@/utils/storage';
@@ -28,6 +28,7 @@ const initialValues = {
     companySizeTo: '',
 };
 function CompanyForm() {
+    const [login] = useLoginMutation()
     const [RegisterCompany, { isLoading }] = useRegisterCompanyMutation();
 
     const navigate = useNavigate();
@@ -36,43 +37,19 @@ function CompanyForm() {
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: Yup.object({
-            firstName: Yup.string()
-                .required('Họ không được để trống')
-                .min(2, 'Họ phải tối thiểu 2 kí tự')
-                .max(30, 'Họ chỉ tối đa 30 kí tự'),
-            lastName: Yup.string()
-                .required('Tên không được để trống')
-                .min(2, 'Tên phải tối thiểu 2 kí tự')
-                .max(30, 'Tên chỉ tối đa 30 kí tự'),
+            firstName: Yup.string().required('Họ không được để trống').min(2, 'Họ phải tối thiểu 2 kí tự').max(30, 'Họ chỉ tối đa 30 kí tự'),
+            lastName: Yup.string().required('Tên không được để trống').min(2, 'Tên phải tối thiểu 2 kí tự').max(30, 'Tên chỉ tối đa 30 kí tự'),
             email: Yup.string().required('Email không được để trống').matches(EMAILREGEX, 'Email phải đúng định dạng'),
             location: Yup.string().required('Khu vực không được để trống'),
-            phoneNumber: Yup.string()
-                .required('Số điện thoại không được để trống')
-                .matches(PHONEREGEX, 'Số điện thoại phải đúng định dạng'),
-            companyName: Yup.string()
-                .required('Tên công ty không được để trống')
-                .min(2, 'Tên công ty phải tối thiểu 2 kí tự')
-                .max(100, 'Tên công ty chỉ tối đa 100 kí tự'),
+            phoneNumber: Yup.string().required('Số điện thoại không được để trống').matches(PHONEREGEX, 'Số điện thoại phải đúng định dạng'),
+            companyName: Yup.string().required('Tên công ty không được để trống').min(2, 'Tên công ty phải tối thiểu 2 kí tự').max(100, 'Tên công ty chỉ tối đa 100 kí tự'),
             description: Yup.string().max(500, 'Mô tả chỉ tối đa 500 kí tự'),
             EstablishDate: Yup.date().typeError('Hãy chọn ngày thành lập'),
             // EstablishDate: Yup.date().min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!'),
-            companySizeFrom: Yup.number()
-                .typeError('Chỉ được nhập số')
-                .required('companysizefrom không được để trống')
-                .min(1, 'Số lượng bắt đầu quy mô công ty phải có ít nhất 1 người'),
-            companySizeTo: Yup.number()
-                .typeError('Chỉ được nhập số')
-                .required('companysizeto không được để trống')
-                .moreThan(Yup.ref('companySizeFrom'), 'Phải ít hơn số lượng trước'),
-            password: Yup.string()
-                .required('Mật khẩu không được để trống')
-                .matches(
-                    PWDREGEX,
-                    'Mật khẩu phải ít nhất 8 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 kí tự đặc biệt',
-                ),
-            passwordConfirm: Yup.string()
-                .required('Nhập lại mật khẩu không được để trống')
-                .oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
+            companySizeFrom: Yup.number().typeError('Chỉ được nhập số').required('companysizefrom không được để trống').min(1, 'Số lượng bắt đầu quy mô công ty phải có ít nhất 1 người'),
+            companySizeTo: Yup.number().typeError('Chỉ được nhập số').required('companysizeto không được để trống').moreThan(Yup.ref('companySizeFrom'), 'Phải ít hơn số lượng trước'),
+            password: Yup.string().required('Mật khẩu không được để trống').min(8, 'Mật khẩu phải có ít nhất 8 ký tự'),
+            passwordConfirm: Yup.string().required('Nhập lại mật khẩu không được để trống').oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
         }),
         onSubmit: async (values) => {
             try {
@@ -102,8 +79,8 @@ function CompanyForm() {
                         dispatch(setCurrentUser(user));
                         dispatch(setcredentialsToken(accessToken));
                         setToken(accessToken);
+                        navigate('/');
                     }
-                    navigate('/');
                 }
             } catch (error:any) {
                 if(error?.status === 400) {
@@ -114,10 +91,6 @@ function CompanyForm() {
             }
         },
     });
-
-    function formatDate(date: Date | string) {
-        return new Date(date).toLocaleDateString();
-    }
 
     return (
         <>

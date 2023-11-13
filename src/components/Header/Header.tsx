@@ -1,5 +1,5 @@
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getToken, removeToken } from '@/utils/storage';
 import { useLogoutMutation } from '@/services/authApiSlice';
 import MainMenu from './MainMenu/MainMenu';
@@ -25,9 +25,9 @@ const Header = () => {
     return (
         <>
             <div className=' flex w-full items-center text-content-title bg-white px-[50px] xl:px-[30px] fixed z-20'>
-                <div className=' border-r border-[#f1f1f1] '>
-                    <img className='w-[140px] py-[10px] mr-[95px] xl:w-[100px] xl:mr-[65px] lg:py-2.5' src={images.logo.logoBlack} />
-                </div>
+                <Link to={'/'} className=' border-r border-[#f1f1f1] mr-[95px] '>
+                    <img className='w-[140px] py-[10px] xl:w-[100px] xl:mr-[65px] lg:py-2.5' src={images.logo.logoBlack} />
+                </Link>
 
                 <div className=' w-full flex items-center justify-between z-20 lg:justify-end tb:justify-end mb:justify-end'>
                     <MainMenu />

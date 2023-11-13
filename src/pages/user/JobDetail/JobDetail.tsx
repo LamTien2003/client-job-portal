@@ -1,13 +1,10 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { useGetJobQuery } from '@/services/jobsApiSlice';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
 import Banner from '@/components/Banner/Banner';
 import RelatedJob from './components/RelatedJob/RelatedJob';
 import JobInfo from './components/JobInfo/JobInfo';

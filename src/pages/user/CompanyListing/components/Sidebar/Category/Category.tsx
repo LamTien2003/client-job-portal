@@ -1,29 +1,34 @@
+import { useGetCategoriesQuery } from "@/services/categoriesApiSlice";
 import { CategoryType } from "@/services/jobsApiSlice";
-import { useState } from "react";
+import Category from "@/types/Category";
+import { useEffect, useState } from "react";
 
-type Props = {
-    data: CategoryType[]
-    handleFilter: Function
-}
-function Category(props: Props) {
-    const {data:category} = props
+function Category() {
 
+    const [categories, setCategories] = useState<Category[]>([])
     const [check, setCheck] = useState<boolean>(false)
     const [isId, setIsId] = useState<string>('')
+
+    const {data, isLoading, isError} = useGetCategoriesQuery()
 
     const handleCheck = (id: string) => {
         setIsId(id)
         if(isId === id) {
             setCheck(!check)
         }
-        props.handleFilter(id)
     }
+
+    useEffect(() => {
+        if(data?.data?.data && !isLoading && !isError) {
+            setCategories(data?.data?.data)
+        }
+    }, [data?.data?.data, isLoading, isError])
 
     return (
         <div className=' bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5'>
             <h3 className=' text-content-title font-semibold text-lg mb-2 lg:text-lg'>Company Category</h3>
             <div className=' max-h-64 overflow-scroll'>
-                {category?.map(cat => {
+                {categories?.map(cat => {
                     return(
                         <div key={cat.id} className=' mb-2 flex relative' >
                             <div className=" cursor-pointer">

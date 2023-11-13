@@ -4,10 +4,7 @@ import { useEffect, useState } from 'react';
 import Category from "./Category/Category";
 import { CategoryType, useGetCategoriesQuery } from '@/services/jobsApiSlice';
 
-type Props = {
-    filterJob: Function
-}
-function Sidebar(props: Props) {
+function Sidebar() {
     const [category, setCategory] = useState<CategoryType[]>([])
 
     const {data, isLoading, isError} = useGetCategoriesQuery()
@@ -16,14 +13,10 @@ function Sidebar(props: Props) {
         if(data?.data?.data && !isLoading && !isError) setCategory(data?.data?.data)
     }, [data?.data?.data, isLoading, isError])
 
-    function myFilter(id:string) {
-        props.filterJob(id)
-    }
-
     return (
         <div className=" w-1/4 pr-3 mr-auto ml-auto mb-8 lg:w-3/4 lg:pr-0 tb:w-11/12 mb:w-11/12">
             
-            <Category data={category} handleFilter={myFilter} />
+            <Category/>
             
             
             <div className=' bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5'>

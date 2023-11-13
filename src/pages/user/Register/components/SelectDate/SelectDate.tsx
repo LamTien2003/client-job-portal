@@ -18,6 +18,7 @@ function SelectDate({ label, id, value = new Date(Date.now()), onChange, error, 
             </label>
 
             <DatePicker
+                disableFuture
                 value={dayjs(value)}
                 onChange={(sth: any) => onChange('establishDate', dayjs(sth).toISOString())}
                 className=" w-full h-12 bg-white rounded-lg border-none outline-none px-10"

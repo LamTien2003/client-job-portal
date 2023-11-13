@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 const Error = () => {
     useEffect(() => {
@@ -12,9 +13,9 @@ const Error = () => {
             <p className="description text-xl mb-7">Something went wrong, web page that is displayed to the user when <br />
                 the server cannot find the requested page.</p>
             <div className="flex items-center justify-center">
-                <button className="bg-teal-500 hover:bg-teal-900 text-white font-bold py-2 px-4 my-6 rounded focus:outline-none focus:shadow-outline" type="button">
+                <Link to={'/'} className="bg-teal-500 hover:bg-teal-900 text-white font-bold py-2 px-4 my-6 rounded focus:outline-none focus:shadow-outline" type="button">
                     Back Homepage
-                </button>
+                </Link>
             </div>
         </div>
     )

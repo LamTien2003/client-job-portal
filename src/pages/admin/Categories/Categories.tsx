@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPen, faRemove, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { useAddCategoryMutation, useChangeCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery } from "@/services/categoriesApiSlice";
 import Category from "@/types/Category";
 import { toast } from "react-toastify";
+import Table from "@/components/Table/Table";
 
 function Categories() {
 
@@ -12,19 +13,18 @@ function Categories() {
     const [changeCategory] = useChangeCategoryMutation()
     const [addCategory] = useAddCategoryMutation()
 
-    const [title, setTitle] = useState<string>('')
     const [categories, setCategories] = useState<Category[]>([])
     const [category, setCategory] = useState<Category>()
-    const [categoryName, setCategoryName] = useState<string>('')
-    const [isHot, setIsHot] = useState<boolean>()
+    
+    const [title, setTitle] = useState<string>('')
     const [isUpdateForm, setIsUpdateForm] = useState<boolean>(false)
     const [isAddForm, setIsAddForm] = useState<boolean>(false)
 
-    useEffect(() => {
-        if(data?.data?.data && !isLoading && !isError) {
-            setCategories(data?.data?.data)
-        }
-    }, [data?.data?.data, !isLoading, !isError])
+    const [categoryName, setCategoryName] = useState<string>('')
+    const [isHot, setIsHot] = useState<boolean>()
+
+    const addFormRef = useRef<HTMLFormElement>(null)
+    const updateFormRef = useRef<HTMLFormElement>(null)
     
     const handleDeleteCategory = async (id: string) => {
         const isConfirm = confirm('Bạn có chắc muốn xóa danh mục này ?')
@@ -42,7 +42,6 @@ function Categories() {
         e.preventDefault()
         if(title === 'Change') {
             const changeObject = {...category, categoryName, isHotCategory: isHot} as Category
-            console.log(changeObject)
             const isConfirm = confirm('Bạn có chắc muốn cập nhật danh mục này ?')
             if(isConfirm) {
                 const response = await changeCategory(changeObject)
@@ -81,11 +80,35 @@ function Categories() {
         setIsAddForm(true)
     }
 
+    useEffect(() => {
+        if(data?.data?.data && !isLoading && !isError) {
+            setCategories(data?.data?.data)
+        }
+    }, [data?.data?.data, !isLoading, !isError])
+
+    useEffect(() => {
+        let handlerUpdate = (e:any) => {
+            if(!updateFormRef.current?.contains(e.target)) {
+                setIsUpdateForm(false)
+            }
+        }
+        document.addEventListener('mousedown', handlerUpdate)
+    }, [isUpdateForm])
+
+    useEffect(() => {
+        let handlerAdd = (e:any) => {
+            if(!addFormRef.current?.contains(e.target)) {
+                setIsAddForm(false)
+            }
+        }
+        document.addEventListener('mousedown', handlerAdd)
+    }, [isAddForm])
+
     return (
         <>
             {isUpdateForm && (
                 <div className=" w-full h-[100vh] text-content-title bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed">
-                    <form className=" flex flex-col w-[500px] h-auto bg-white rounded-lg p-10 mx-auto mt-40 relative" onSubmit={handleChangeCategory}>
+                    <form ref={updateFormRef} className=" flex flex-col w-[500px] h-auto bg-white rounded-lg p-10 mx-auto mt-40 relative" onSubmit={handleChangeCategory}>
                         <div className=" text-xl top-3 right-4 absolute cursor-pointer" onClick={() => setIsUpdateForm(false)}>
                             <FontAwesomeIcon icon={faRemove} />
                         </div>
@@ -110,7 +133,7 @@ function Categories() {
             )}
             {isAddForm && (
                 <div className=" w-full h-[100vh] text-content-title bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed">
-                    <form className=" flex flex-col w-[500px] h-auto bg-white rounded-lg p-10 mx-auto mt-40 relative" onSubmit={handleChangeCategory}>
+                    <form ref={addFormRef} className=" flex flex-col w-[500px] h-auto bg-white rounded-lg p-10 mx-auto mt-40 relative" onSubmit={handleChangeCategory}>
                         <div className=" text-xl top-3 right-4 absolute cursor-pointer" onClick={() => setIsAddForm(false)}>
                             <FontAwesomeIcon icon={faRemove} />
                         </div>
@@ -139,36 +162,11 @@ function Categories() {
                             <FontAwesomeIcon icon={faCaretDown} />
                         </div>
                     </div>
-                    <div className=" flex flex-col text-content-title mb-52 ">
-                        <div className=" flex item-center text-center font-semibold bg-white rounded-t-lg py-[14px]">
-                            <p className=" w-1/12">STT</p>
-                            <p className=" w-3/12">Tên danh mục</p>
-                            <p className=" w-3/12">Danh mục hot</p>
-                            <p className=" w-3/12">Tổng việc làm</p>
-                            <p className=" w-2/12">Hành động</p>
-                        </div>
-                        {categories?.map((category, index) => {
-                            return (
-                                <div key={index} className="flex item-center text-center justify-center bg-white py-[14px] mt-px">
-                                    <p className=" w-1/12">{index + 1}</p>
-                                    <p className=" w-3/12">{category.categoryName}</p>
-                                    <p className=" w-3/12">{category.isHotCategory ? 'Đang hot' : 'Không hot'}</p>
-                                    <p className=" w-3/12">{category.totalJobs}</p>
-                                    <div className=" w-2/12 flex items-center justify-center gap-[10px] ">
-                                        <div className=" text-white bg-blue-400 rounded-md py-[4px] px-[10px] cursor-pointer" onClick={() => handleActiveUpdateForm(category)}>
-                                            <FontAwesomeIcon icon={faPen} />
-                                        </div>
-                                        <div className=" text-white bg-red-400 rounded-md py-[4px] px-[10px] cursor-pointer">
-                                            <FontAwesomeIcon icon={faRemove} onClick={() => handleDeleteCategory(category.id)} />
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                        {isLoading && (
-                            <div className=" flex item-center justify-center text-center bg-white py-[14px]">Loading...</div>
-                        )}
-                    </div>
+                    {isLoading ? (
+                        <div className="flex items-center justify-center w-full bg-white py-7">Loading</div>
+                    ) : (
+                        <p>data</p>
+                    )}
                 </div>
             </div>
         </>

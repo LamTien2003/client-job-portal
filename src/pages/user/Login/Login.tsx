@@ -1,6 +1,5 @@
 import { useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/services/authApiSlice';
 import { setToken } from '@/utils/storage';
@@ -11,7 +10,7 @@ import Title from './components/Title/Title';
 import Others from './components/Others/Others';
 import Fields from './components/Fields/Fields';
 import Loader from '@/components/Loader/Loader';
-import { EMAILREGEX, PWDREGEX } from '@/constants/regex';
+import { EMAILREGEX } from '@/constants/regex';
 import { toast } from 'react-toastify';
 
 const Login = () => {
@@ -29,10 +28,7 @@ const Login = () => {
             email: Yup.string().required('Không được để trống').matches(EMAILREGEX, 'Email phải đúng định dạng'),
             password: Yup.string()
                 .required('Không được để trống')
-                .matches(
-                    PWDREGEX,
-                    'Mật khẩu phải từ 8 đến 24 kí tự. Phải có ít nhất 1 chữ hoa, 1 chữ thường, số và 1 kí tự đặc biệt',
-                ),
+                .min(8, 'Mật khẩu phải có ít nhất 8 ký tự')
         }),
         onSubmit: async (values) => {
             try {

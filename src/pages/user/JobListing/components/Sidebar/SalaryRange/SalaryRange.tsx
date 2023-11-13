@@ -7,8 +7,8 @@ type Props = {
 }
 function SalaryRange({salaryChange}: Props) {
     
-    const [rangeMin, setRangeMin] = useState<number>(500000)
-    const [rangeMax, setRangeMax] = useState<number>(10000000)
+    const [rangeMin, setRangeMin] = useState<number>(0)
+    const [rangeMax, setRangeMax] = useState<number>(100000000)
 
     const deBounceValueMin = useDebounce(rangeMin, 500)
     const deBounceValueMax = useDebounce(rangeMax, 500)
@@ -28,7 +28,7 @@ function SalaryRange({salaryChange}: Props) {
             <p>
                 {rangeMin.toLocaleString('IT')} - {rangeMax.toLocaleString('IT')}
             </p>
-            <Slider range min={500000} max={10000000} onChange={handleChange} />
+            <Slider step={5000000} range min={0} max={100000000} onChange={handleChange} />
             <div className=" max-h-64 overflow-scroll"></div>
         </div>
     );

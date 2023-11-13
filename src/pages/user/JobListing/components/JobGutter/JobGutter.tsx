@@ -92,10 +92,6 @@ function JobGutter(props: Props) {
                     );
                 })}
             </div>
-            <div className=' flex justify-center'>
-                <div className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() => props.changePage(1)}>1</div>
-                <div className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() => props.changePage(2)}>2</div>
-            </div>
         </>
     );
 }

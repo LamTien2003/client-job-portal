@@ -1,7 +1,6 @@
 import { useGetJobQuery, usePostCommentMutation } from "@/services/jobsApiSlice";
 import { RootState } from "@/store/store";
 import Job from "@/types/Job";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHearted } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -24,12 +23,18 @@ function Comments({data: job}: {data: Job}) {
 
     const navigate = useNavigate()
 
+    const handleCancelComment = () => {
+        setIsFocus(false)
+        setComment('')
+    }
+
     const handlePostComment = async () => {
         if(comment !== '') {
             try {
                 const response = await postComment({content: comment, id: job.id}).unwrap()
                 if(response.status === 200) {
                     toast.success(response.data.msg)
+                    setComment('')
                 }
             } catch(error: any) {
                 if(error.status === 401) {
@@ -46,10 +51,8 @@ function Comments({data: job}: {data: Job}) {
 
     // const toggleLikeComment = (id: string) => {
     //     if((id === likeCmt.id) && (likeCmt.isLike === true)) {
-    //         // console.log((id === likeCmt.id) && (likeCmt.isLike === true))
     //         return true
     //     }   else {
-    //         // console.log((id === likeCmt.id) && (likeCmt.isLike === true))
     //         return false
     //     }
     // }
@@ -61,8 +64,6 @@ function Comments({data: job}: {data: Job}) {
     //         setLikeCmt({id,isLike: true})
     //     }
     // }
-
-    // console.log(likeCmt)
 
     useEffect(() => {
         if(data?.data?.data && !isLoading && !isError) {
@@ -81,48 +82,22 @@ function Comments({data: job}: {data: Job}) {
                         <div className=" flex flex-col w-full">
                             <h3 className=" text-sm font-medium">
                                 {cmt.sender.firstName + ' ' + cmt.sender.lastName}
-                                {/* <span className=" text-sm text-primary-100"> [Người tìm việc]</span>
-                                <span className=" text-sm text-blue-600"> [Công ty]</span>
-                                <span className=" text-sm text-red-400"> [Admin]</span> */}
                             </h3>
                             <p className=" text-content-text font-medium">
                                 {cmt.content}
                             </p>
                             <div className=" flex items-center mt-2">
-                                {/* <div onClick={() => handleLikeComment(cmt.id)} className={toggleLikeComment(cmt.id) === false ? "text-red-400 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300" : "text-gray-800 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300"}>
-                                    <FontAwesomeIcon icon={toggleLikeComment(cmt.id) === true ? faHearted : faHeart} />
-                                </div> */}
                                 <div className="text-red-400 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300">
                                     <FontAwesomeIcon icon={faHearted} />
                                 </div>
                                 <p className=" text-sm text-content-text">465</p>
-                                {/* <div className=" text-sm bg-transparent rounded-2xl py-1 px-2.5 duration-300 cursor-pointer ml-3 hover:bg-gray-300" onClick={() => setIsReply(true)}>Trả lời</div> */}
                                 <div className=" text-sm bg-transparent rounded-2xl py-1 px-2.5 duration-300 cursor-pointer ml-3 hover:bg-gray-300">Trả lời</div>
                             </div>
-                            {/* {isReply && <div className=" flex items-start mt-2 ">
-                                <img className=" w-8 h-8 rounded-full mr-2" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/user-img.png" />
-                                <div className=" flex flex-col w-full">
-                                    <input 
-                                        className=" w-full text-content-text text-sm outline-none" 
-                                        value={comment} 
-                                        onChange={e => setComment(e.target.value)} 
-                                        onFocus={() => setIsFocus(true)} 
-                                        placeholder="Viết bình luận..."
-                                    />
-                                    <div className={" w-full border-b duration-300 " + (isFocus ? 'border-gray-800' : 'border-gray-300 ')}></div>
-                                    {isFocus && (
-                                        <div className=" flex items-center justify-end mt-2 gap-5">
-                                            <button onClick={() => setIsFocus(false)}>Hủy</button>
-                                            <button className={" text-center rounded-2xl py-[6px] px-4 duration-300 " + (comment ? 'text-white bg-primary-100' : 'bg-gray-300') }onClick={handlePostComment}>Bình luận</button>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>} */}
                         </div>
                     </div>
                 )
             })}
-            <p className=" text-content-title font-semibold cursor-pointer hover:underline" onClick={() => setLimit(prev => prev + 5)}>Xem thêm bình luận</p>
+            {currentJob && currentJob?.comments.length > limit && <p className=" text-content-title font-semibold cursor-pointer hover:underline" onClick={() => setLimit(prev => prev + 5)}>Xem thêm bình luận</p>}
             <div className=" flex items-start ">
                 <img className=" w-12 h-12 rounded-full mr-3" src={currentUser?.photo} />
                 <div className=" flex flex-col w-full">
@@ -130,13 +105,13 @@ function Comments({data: job}: {data: Job}) {
                         className=" w-full text-content-text py-1 outline-none" 
                         value={comment} 
                         onChange={e => setComment(e.target.value)} 
-                        onFocus={() => setIsFocus(true)} 
+                        onFocus={() => setIsFocus(true)}
                         placeholder="Viết bình luận..."
                     />
                     <div className={" w-full border-b duration-300 " + (isFocus ? 'border-gray-800' : 'border-gray-300 ')}></div>
                     {isFocus && (
                         <div className=" flex items-center justify-end mt-2 gap-5">
-                            <button onClick={() => setIsFocus(false)}>Hủy</button>
+                            <button onClick={handleCancelComment}>Hủy</button>
                             <button className={" text-center rounded-2xl py-[6px] px-4 duration-300 " + (comment ? 'text-white bg-primary-100' : 'bg-gray-300')} onClick={handlePostComment}>Bình luận</button>
                         </div>
                     )}

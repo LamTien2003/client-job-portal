@@ -14,7 +14,7 @@ function CompanyColumn(props: Props) {
                 const date = new Date(company.establishDate)
                 const myEstablishDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
                 return (
-                    <div key={company.companyName} className=' w-full border border-[#AEF0F2] pl-5 pb-5 mb-6'>
+                    <div key={company.id} className=' w-full border border-[#AEF0F2] pl-5 pb-5 mb-6'>
                         <div className=' flex flex-col bg-[#E7F4F5] relative'>
                             <div className=' flex items-center'>
                                 <div className=' flex justify-center items-end w-[60px] h-[100px] bg-[#9CEAEC] -top-[10px] left-0 absolute'>
@@ -31,7 +31,7 @@ function CompanyColumn(props: Props) {
                                     </svg>
                                 </div>
                             </div>
-                            <div className=' flex items-center py-5 gap-[100px] xl:gap-[35px] lg:gap-[55px] tb:gap-[30px] mb:gap-[20px] '>
+                            <div className=' flex items-center py-5 gap-[50px] xl:gap-[35px] lg:gap-[55px] tb:gap-[30px] mb:gap-[20px] '>
                                 <div className=' flex flex-col justify-start lg:w-[150px]'>
                                     <div className=' w-[200px] flex flex-col items-start ml-[70px] mb-8 gap-1.5 xl:w-[180px] lg:w-[140px] tb:w-[170px] tb:mb-[92px] mb:w-[110px] mb:mb-[80px] '>
                                         <h3 className=' text-lg text-content-title font-semibold lg:text-base tb:text-base mb:text-base'>{company.companyName}</h3>
