@@ -6,7 +6,7 @@ interface CustomFieldProps {
     touched: boolean | undefined;
     icon: string;
     type?: string;
-    value?: string | Date;
+    value?: string | Date | number;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     onBlur: React.ChangeEventHandler<HTMLInputElement>;
 }
@@ -29,16 +29,14 @@ const CustomField = ({
                 {title}
                 <span className="ml-2 font-title text-primary-100">*</span>
             </div>
-            <div
-                className={`flex items-center  border-2 border-primary-40 pl-3  rounded  ${
-                    error && touched && 'border-red-800'
-                }`}
-            >
+            <div className={`flex items-center  border-2  pl-3  rounded  ${error && touched && 'border-red-800'}`}>
                 <img className="w-4 h-4" src={icon} alt={icon} />
                 <span className="w-[1px] h-6 bg-gray-300 mx-2"></span>
                 <input
                     name={fieldName}
-                    className={`text-content-text w-full h-[48px] outline-none ${type === 'date' && 'pr-3'}`}
+                    className={`text-content-text w-full h-[48px] outline-none ${
+                        type === 'date' || (type === 'number' && 'pr-3')
+                    }`}
                     type={type ? type : 'text'}
                     placeholder={placeholder}
                     value={value !== undefined && value !== null ? value.toString() : ''}
