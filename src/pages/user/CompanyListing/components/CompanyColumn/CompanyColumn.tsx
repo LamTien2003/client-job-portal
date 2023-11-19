@@ -34,10 +34,10 @@ function CompanyColumn(props: Props) {
                             <div className=' flex items-center py-5 gap-[50px] xl:gap-[35px] lg:gap-[55px] tb:gap-[30px] mb:gap-[20px] '>
                                 <div className=' flex flex-col justify-start lg:w-[150px]'>
                                     <div className=' w-[200px] flex flex-col items-start ml-[70px] mb-8 gap-1.5 xl:w-[180px] lg:w-[140px] tb:w-[170px] tb:mb-[92px] mb:w-[110px] mb:mb-[80px] '>
-                                        <h3 className=' text-lg text-content-title font-semibold lg:text-base tb:text-base mb:text-base'>{company.companyName}</h3>
+                                        <h3 className=' font-family-title text-lg text-content-title font-semibold lg:text-base tb:text-base mb:text-base'>{company.companyName}</h3>
                                         <p className=' flex items-center text-content-text text-sm gap-2'>
                                             <img src='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/location.svg' />
-                                            {company.location}
+                                            {company.location.city}
                                         </p>
                                     </div>
                                     <p className=' text-content-text ml-2.5 mr-1.5 lg:text-[15px] tb:text-sm mb:text-sm '>Số lượng tuyển: <span className=' text-primary-100 font-semibold'>1</span></p>
@@ -48,24 +48,24 @@ function CompanyColumn(props: Props) {
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
                                                 <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Quy mô:</p>
-                                                <span className=' text-[15px] text-content-title font-semibold lg:text-sm tb:text-sm mb:text-xs'>{company.companySize.to} người</span>
+                                                <span className=' text-[15px] text-content-title font-medium lg:text-sm tb:text-sm mb:text-xs'>{company.companySize.to} người</span>
                                             </div>
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
                                                 <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Thành lập:</p>
-                                                <span className=' text-[15px] text-content-title font-semibold lg:text-sm tb:text-sm mb:text-xs'>{myEstablishDate}</span>
+                                                <span className=' text-[15px] text-content-title font-medium lg:text-sm tb:text-sm mb:text-xs'>{myEstablishDate}</span>
                                             </div>
                                         </div>
                                         <div className=' flex flex-col gap-1.5 pl-[30px] tb:pl-0 mb:pl-0 '>
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
                                                 <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Liên lạc:</p>
-                                                <span className=' text-[15px] text-content-title font-semibold underline lg:text-sm tb:text-sm mb:text-xs'>{company.phoneNumber}</span>
+                                                <span className=' text-[15px] text-content-title font-medium underline lg:text-sm tb:text-sm mb:text-xs'>{company.phoneNumber}</span>
                                             </div>
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
                                                 <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Website:</p>
-                                                <a href={company.website} className=' text-[15px] text-content-title font-semibold duration-300 cursor-pointer hover:text-primary-100 lg:text-sm tb:text-sm mb:text-xs'>{company.website || 'https://example.com/'}</a>
+                                                <a href={company.website} className=' text-[15px] text-content-title font-medium duration-300 cursor-pointer hover:text-primary-100 lg:text-sm tb:text-sm mb:text-xs'>{company.website || 'https://example.com/'}</a>
                                             </div>
                                         </div>
                                     </div>

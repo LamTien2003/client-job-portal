@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPen, faRemove, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { useAddCategoryMutation, useChangeCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery } from "@/services/categoriesApiSlice";
 import Category from "@/types/Category";
 import { toast } from "react-toastify";
-import Table from "@/components/Table/Table";
 
 function Categories() {
 
@@ -25,6 +24,24 @@ function Categories() {
 
     const addFormRef = useRef<HTMLFormElement>(null)
     const updateFormRef = useRef<HTMLFormElement>(null)
+
+    const column = useMemo(() => [
+        {
+            field: 'categoryName',
+            headerName: 'Tên danh mục',
+            width: 100,
+        },
+        {
+            field: 'isHotCategory',
+            headerName: 'Độ hot',
+            width: 100,
+        },
+        {
+            field: 'totalJobs',
+            headerName: 'Tổng việc làm',
+            width: 100,
+        },
+    ], [])
     
     const handleDeleteCategory = async (id: string) => {
         const isConfirm = confirm('Bạn có chắc muốn xóa danh mục này ?')
@@ -104,10 +121,12 @@ function Categories() {
         document.addEventListener('mousedown', handlerAdd)
     }, [isAddForm])
 
+    console.log(categories)
+
     return (
         <>
             {isUpdateForm && (
-                <div className=" w-full h-[100vh] text-content-title bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed">
+                <div className=" w-full h-[100vh] font-family-text text-content-title bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed">
                     <form ref={updateFormRef} className=" flex flex-col w-[500px] h-auto bg-white rounded-lg p-10 mx-auto mt-40 relative" onSubmit={handleChangeCategory}>
                         <div className=" text-xl top-3 right-4 absolute cursor-pointer" onClick={() => setIsUpdateForm(false)}>
                             <FontAwesomeIcon icon={faRemove} />
@@ -127,12 +146,12 @@ function Categories() {
                             </div>
                                 
                         </div>
-                        <button className=" w-full text-white bg-[#40189D] rounded-lg py-2" type="submit">Submit</button>
+                        <button className=" w-full text-white bg-primary-100 rounded-lg py-2" type="submit">Submit</button>
                     </form>
                 </div>
             )}
             {isAddForm && (
-                <div className=" w-full h-[100vh] text-content-title bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed">
+                <div className=" w-full h-[100vh] font-family-text text-content-title bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed">
                     <form ref={addFormRef} className=" flex flex-col w-[500px] h-auto bg-white rounded-lg p-10 mx-auto mt-40 relative" onSubmit={handleChangeCategory}>
                         <div className=" text-xl top-3 right-4 absolute cursor-pointer" onClick={() => setIsAddForm(false)}>
                             <FontAwesomeIcon icon={faRemove} />
@@ -140,24 +159,24 @@ function Categories() {
                         <h2 className=" text-center text-2xl font-semibold mb-10">{title} Category</h2>
                         <label>Category name:</label>
                         <input className=" w-full border border-gray-400 rounded-lg py-2 pl-3 mb-10 outline-none" value={categoryName} onChange={e => setCategoryName(e.target.value)} />
-                        <button className=" w-full text-white bg-[#40189D] rounded-lg py-2" type="submit">Submit</button>
+                        <button className=" w-full text-white bg-primary-100 rounded-lg py-2" type="submit">Submit</button>
                     </form>
                 </div>
             )}
-            <div className=" flex flex-col">
+            <div className=" flex flex-col font-family-text">
                 <div className=" flex flex-col">
-                    <button className=" w-[240px] text-center text-white text-xl font-semibold bg-[#40189D] rounded-2xl py-3 px-4 mb-10" onClick={handleActiveAddForm}>Thêm danh mục</button>
+                    <button className=" w-[240px] text-center text-white text-xl font-family-title font-semibold bg-primary-100 rounded-2xl py-3 px-4 mb-10" onClick={handleActiveAddForm}>Thêm danh mục</button>
                     <div className=" flex items-center justify-between mb-[20px]">
                         <div className=" flex flex-col">
-                            <h3 className=" text-content-title font-semibold">Hiển thị 5 danh mục</h3>
+                            <h3 className=" text-content-title font-semibold font-family-text ">Hiển thị 5 danh mục</h3>
                             <p className=" text-content-text">Theo sở thích của bạn</p>
                         </div>
                         <div className=" flex gap-[10px]">
-                            {/* <button className=" text-white bg-[#40189D] rounded-3xl py-[6px] px-[18px]">Tất cả</button>
-                            <button className=" text-[#40189D] bg-[#ECE8F5] border border-[#40189D] rounded-3xl py-[6px] px-[18px]">Tất cả</button>
-                            <button className=" text-[#40189D] bg-[#ECE8F5] border border-[#40189D] rounded-3xl py-[6px] px-[18px]">Tất cả</button> */}
+                            <button className=" text-white bg-primary-100 rounded-3xl py-[6px] px-[18px]">Tất cả</button>
+                            <button className=" text-primary-100 bg-[#ECE8F5] border border-primary-100 rounded-3xl py-[6px] px-[18px]">Tất cả</button>
+                            <button className=" text-primary-100 bg-[#ECE8F5] border border-primary-100 rounded-3xl py-[6px] px-[18px]">Tất cả</button>
                         </div>
-                        <div className=" flex items-center text-[#40189D] border border-[#40189D] rounded-lg py-[6px] px-[10px] gap-[5px]">
+                        <div className=" flex items-center text-primary-100 border border-primary-100 rounded-lg py-[6px] px-[10px] gap-[5px]">
                             <p>Mới nhất</p>
                             <FontAwesomeIcon icon={faCaretDown} />
                         </div>

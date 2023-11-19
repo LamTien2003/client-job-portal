@@ -18,9 +18,9 @@ function Users() {
 
     const toggleActiveTab = (tab: 'jobseeker' | 'company' | 'ban') => {
         if(activeTab === tab) {
-            return 'text-white bg-[#40189D] rounded-3xl py-[8px] px-[20px] cursor-pointer'
+            return 'text-white bg-primary-100 rounded-3xl py-[8px] px-[20px] cursor-pointer'
         } else {
-            return 'text-[#40189D] bg-[#ECE8F5] border border-[#40189D] rounded-3xl py-[8px] px-[20px] cursor-pointer'
+            return 'text-primary-100 bg-[#ECE8F5] border border-primary-100 rounded-3xl py-[8px] px-[20px] cursor-pointer'
         }
     }
 
@@ -53,7 +53,7 @@ function Users() {
     }
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col font-family-text">
             <div className=" flex justify-between gap-[30px]">
                 <div className=" w-full flex flex-col gap-[20px] mb-5">
                     <div className=" flex flex-wrap items-center gap-[12px]">
@@ -70,17 +70,16 @@ function Users() {
                     <div className=" w-[350px] ">
                         <div className=" flex flex-col items-center bg-white border-b border-b-[#D9D9D9] rounded-t-[10px] px-[15px] pt-[30px] pb-[10px] gap-[12px]">
                             <div className=" w-[100px] h-[100px] flex items-center justify-center bg-[#5FA76F] rounded-[10px] p-[10px]">
-                                <img src={images.admin.userAvt} />
                             </div>
                             <h2 className=" text-content-title text-xl font-semibold">{user?.firstName && user?.lastName ? user.firstName + ' ' + user.lastName : 'Đang cập nhật...'}</h2>
                             <p className=" text-content-text">{user ? user.educate.length !== 0 ? user.educate.map(edu => edu.major) : 'Chưa cập nhật ngành' : 'Đang cập nhật...'}</p>
                             <div className=" w-full flex flex-wrap items-center justify-between my-2 gap-[16px]">
                                 <div className=" flex items-center">
-                                    <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-[#40189D] rounded-full mr-3">
+                                    <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-primary-100 rounded-full mr-3">
                                         <img className=" w-[18px] h-[18px]" src={images.admin.locationAdmin} />
                                     </div>
                                     <div className=" flex flex-col items-center text-sm">
-                                        <h3 className=" text-content-title font-semibold">{user ? user.location : 'Đang cập nhật'}, Việt Nam</h3>
+                                        <h3 className=" text-content-title font-semibold">{user ? user.location.city : 'Cập nhật'}, Việt Nam</h3>
                                         <p className=" text-content-text">Vị trí</p>
                                     </div>
                                 </div>
@@ -111,7 +110,7 @@ function Users() {
                             <p className=" text-content-text">{user ? user.location : 'Đang cập nhật...'}</p>
                             <div className=" w-full flex flex-wrap items-center justify-between my-2 gap-[16px]">
                                 <div className=" flex items-center">
-                                    <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-[#40189D] rounded-full mr-3">
+                                    <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-primary-100 rounded-full mr-3">
                                         <img className=" w-[18px] h-[18px]" src={images.admin.locationAdmin} />
                                     </div>
                                     <div className=" flex flex-col items-center text-sm">

@@ -24,7 +24,7 @@ function CompanyInfo(props: Props) {
                     <div className=" flex">
                         <div className=" flex">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/map-2.svg" />
-                            <p className=" text-sm font-medium ml-2">{company.location}</p>
+                            <p className=" text-sm font-medium ml-2">{company.location.city}</p>
                         </div>
                         <div className=" flex ml-7 ">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/category-2.svg" />

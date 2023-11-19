@@ -1,5 +1,6 @@
 import logoBlack from './logo-black.png';
 import logoWhite from './logo-white.png';
+import logoAdmin from './logo-admin.svg'
 
 import candidates from './candidates.svg';
 import companies from './companies.svg';
@@ -23,7 +24,6 @@ import profit from './non-profit-org.svg';
 import receotionist from './receotionist.svg';
 import next from './slick-next.svg';
 import prev from './slick-prev.svg';
-import yellowStar from './yellowstar.png';
 
 import accoutCreate from './account-create.svg';
 import findJob from './job-find.svg';
@@ -31,6 +31,7 @@ import jobApply from './job-apply.svg';
 import up from './work-up-arrow.svg';
 import down from './work-down-arrow.svg';
 import location from './location.svg';
+import locationAdmin from './location.png'
 import quat from './quat-icon.svg';
 
 import person from './person-2.svg';
@@ -51,32 +52,25 @@ import userAdminAdmin from './user-admin-admin.svg';
 import banIconAdmin from './ban-icon-admin.png';
 import unbanIconAdmin from './unban-icon-admin.png';
 import filter from './filter.svg';
-import userAvt from './user-avt.png';
-import save from './save-admin.png';
 import spin from './spin.svg';
-import vnFlag from './vietnamflag.png';
-import japanFlag from './japanflag.png';
-import usaFlag from './usaflag.png';
-
-import jobseeker from './jobseeker.png';
-import company from './company.png';
-import admin from './admin.png';
-import censored from './censored.png';
-import uncensored from './uncensored.png';
-import categorypng from './category.png';
 import money from './money.png';
-import locationAdmin from './location.png';
 import benthanh from './Ben_Thanh_market_2.jpg';
 import hoguom from './ho-hoan-kiem-2.jpg';
 import hue from './hue.jpg';
 import nhatrang from './nhatrang.jpeg';
 import hoabinh from './hoabinh.jpg';
 
+import qc1 from './qc1.png'
+import qc2 from './qc2.png'
+import qc3 from './qc3.png'
+
 const images = {
+    qc1,
+    qc2,
+    qc3,
     find,
     findWhite,
     filter,
-    yellowStar,
     elliose,
     arrow,
     arrowLeft,
@@ -111,10 +105,10 @@ const images = {
         hue,
         hoguom,
         benthanh,
-        locationAdmin,
         money,
         logoBlack,
         logoWhite,
+        logoAdmin,
         calender2,
         salary,
         user,
@@ -123,6 +117,7 @@ const images = {
         person,
         quat,
         location,
+        locationAdmin,
         newJob,
         search,
         category,
@@ -138,10 +133,8 @@ const images = {
         companyAdmin,
         userAdminAdmin,
         banIconAdmin,
-        unbanIconAdmin,
-        userAvt,
-        save,
         locationAdmin,
+        unbanIconAdmin,
         spin,
     },
 };

@@ -14,7 +14,7 @@ function JobInfo(props: Props) {
                     <div className=' flex items-center '>
                         <img className=' w-10 rounded-full mr-2.5 ' src='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/company-01.png' />
                         <div className=' flex flex-col'>
-                            <h3 className=' text-content-title text-base font-semibold cursor-pointer duration-300 hover:text-primary-100 '>{job.title}</h3>
+                            <h3 className=' text-content-title font-family-title text-lg font-semibold cursor-pointer duration-300 hover:text-primary-100 '>{job.title}</h3>
                             <p className=' text-content-text text-sm font-medium duration-300 lg:text-sm'>{job.postedBy.companyName}</p>
                         </div>
                     </div>
@@ -23,7 +23,7 @@ function JobInfo(props: Props) {
                     <div className=" mr-6 xl:mr-3 lg:mb-2">
                         <div className=" mb-2 flex items-center relative">
                             <img className=" mr-1.5 top-1.25 absolute" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/map-2.svg" />
-                            <p className=" text-content-text text-cb font-normal ml-4"><span className=" text-content-title font-medium mr-1.5">Location:</span>{job.postedBy.location}</p>
+                            <p className=" text-content-text text-cb font-normal ml-4"><span className=" text-content-title font-medium mr-1.5">Location:</span>{job.postedBy.location.city}</p>
                         </div>
                         <div className=" flex items-center relative">
                             <img className=" mr-1.5 top-1.25 absolute" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/category-2.svg" />
@@ -46,39 +46,39 @@ function JobInfo(props: Props) {
                 {/* Description */}
                 <div className=" mb-9">
                     <p className=" text-content-text text-base font-medium mb-3">
-                        <span className=" text-content-title text-lg font-semibold mr-2">Job Description:</span>
+                        <span className=" font-family-title text-content-title text-lg font-semibold mr-2">Job Description:</span>
                         {job.description}
                     </p>
                 </div>
 
                 {/* Skill require */}
                 <div className=" mb-9">
-                    <p className=" text-content-text text-base font-medium mb-3">
-                        <span className=" text-content-title text-lg font-semibold mr-2">Skills Requirements:</span>
-                    </p>
-                    <div>
-                        {job.skillsRequire?.map(skill => {
-                            return (
-                                <p
-                                    key={skill}
-                                    className=" text-content-text text-cb font-medium flex items-center mb-2.5 ml-3 relative before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:-ml-3 before:pr-2 before:top-2 before:absolute"
-                                >
-                                    {skill}
-                                </p>
-                            )
-                        })}
+                    <div className=" text-content-text text-base font-medium">
+                        <p className=" font-family-title text-content-title text-lg font-semibold mr-2 mb-3">Skills Requirements:</p>
+                        <div>
+                            {job.skillsRequire?.map(skill => {
+                                return (
+                                    <p
+                                        key={skill}
+                                        className=" text-content-text text-cb font-medium flex items-center mb-2.5 ml-3 relative before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:-ml-3 before:pr-2 before:top-2 before:absolute"
+                                    >
+                                        {skill}
+                                    </p>
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
 
                 {/* Description */}
                 <div className=" mb-9">
-                    <p className=" text-content-text text-base font-medium mb-3">
-                        <span className=" text-content-title text-lg font-semibold mr-2">Experiences:</span>
-                    </p>
-                    <p 
-                        className=" text-content-text text-cb font-medium flex items-center mb-2.5 ml-3 relative before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:-ml-3 before:pr-2 before:top-2 before:absolute">
-                        2-3 năm kinh nghiệm
-                    </p>
+                    <div className=" text-content-text text-base font-medium mb-3">
+                        <p className=" font-family-title text-content-title text-lg font-semibold mr-2 mb-3">Experiences:</p>
+                        <div
+                            className=" text-content-text text-cb font-medium flex items-center mb-2.5 ml-3 relative before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:-ml-3 before:pr-2 before:top-2 before:absolute">
+                            2-3 năm kinh nghiệm
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

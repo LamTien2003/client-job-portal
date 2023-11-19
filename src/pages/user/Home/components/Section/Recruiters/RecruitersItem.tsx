@@ -14,7 +14,7 @@ const RecruitersItem = ({ company, path }: { company: Company; path: string }) =
                     <h5 className="text-content-title text-lg font-semibold">{company.companyName}</h5>
                     <div className="flex">
                         <img src={images.logo.location} alt={images.logo.location} />
-                        <p className="ml-3 text-content-text font-medium">{company.location}</p>
+                        <p className="ml-3 text-content-text font-medium">{company.location.city}</p>
                     </div>
                     <div className="flex">
                         <img src={images.logo.person} alt={images.logo.person} />

@@ -8,7 +8,12 @@ export default interface User {
     phoneNumber: string;
     gender: 'male' | 'female';
     photo: string;
-    location: string;
+    location: {
+        city: string;
+        district: string;
+        address: string;
+        _id: string;
+    };
     follows: User[];
     followers: User[];
     role: 'user' | 'admin';

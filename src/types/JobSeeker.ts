@@ -52,7 +52,12 @@ export interface JobApplicate {
         _id: string;
         companyName: string;
         description: string;
-        location: string;
+        location: {
+            city: string;
+            district: string;
+            address: string;
+            _id: string;
+        };
         photo: string;
     };
     job: {

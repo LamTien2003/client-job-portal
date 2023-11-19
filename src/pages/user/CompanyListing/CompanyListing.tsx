@@ -36,7 +36,7 @@ function CompanyListing() {
     return (
         <>
             {isLoading && <Loader/>}
-            <div className="selection:bg-primary-100 selection:text-white mb-[30px]">
+            <div className=" font-family-text selection:bg-primary-100 selection:text-white mb-[30px]">
                 <Banner page="Company Listing" />
 
                 <div className=" max-w-7xl ml-auto mr-auto pt-[50px] flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:flex-col tb:max-w-3xl mb:flex-col mb:max-w-2xl">

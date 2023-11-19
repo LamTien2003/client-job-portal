@@ -178,9 +178,9 @@ export function ArrowAdmin() {
 export function ManageAdmin() {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 30 22" fill="none">
-            <path d="M8 2H28" stroke="#40189D" strokeWidth="3" strokeLinecap="round"/>
-            <path d="M2 11H28" stroke="#40189D" strokeWidth="3" strokeLinecap="round"/>
-            <path d="M6 20H28" stroke="#40189D" strokeWidth="3" strokeLinecap="round"/>
+            <path d="M8 2H28" stroke="#00A7AC" strokeWidth="3" strokeLinecap="round"/>
+            <path d="M2 11H28" stroke="#00A7AC" strokeWidth="3" strokeLinecap="round"/>
+            <path d="M6 20H28" stroke="#00A7AC" strokeWidth="3" strokeLinecap="round"/>
         </svg>
     )
 }

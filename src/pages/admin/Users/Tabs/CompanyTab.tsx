@@ -42,7 +42,7 @@ function CompanyTab({selectingUser}: {selectingUser: (user: Company) => void}) {
     const toggleIsSelect = (user:Company) => {
         if(user.id === select) {
             selectingUser(user)
-            return 'flex flex-col items-center w-[31.4%] bg-white border-2 border-[#40189D] rounded-[10px] shadow-lg px-[20px] pt-[30px] pb-[20px] relative cursor-pointer'
+            return 'flex flex-col items-center w-[31.4%] bg-white border-2 border-primary-100 rounded-[10px] shadow-lg px-[20px] pt-[30px] pb-[20px] relative cursor-pointer'
         } else {
             return 'flex flex-col items-center w-[31.4%] bg-white rounded-[10px] px-[20px] pt-[30px] pb-[20px] relative cursor-pointer'
         }
@@ -56,7 +56,7 @@ function CompanyTab({selectingUser}: {selectingUser: (user: Company) => void}) {
                     <p className=" text-content-text">Dựa theo lựa chọn của bạn</p>
                 </div>
                 <div className=" flex items-center gap-[10px]">
-                    <div className=" flex items-center text-[#40189D] border border-[#40189D] rounded-lg py-[6px] px-[10px] gap-[5px]">
+                    <div className=" flex items-center text-primary-100 border border-primary-100 rounded-lg py-[6px] px-[10px] gap-[5px]">
                         <p>Mới nhất</p>
                         <FontAwesomeIcon icon={faCaretDown} />
                     </div>
@@ -72,7 +72,7 @@ function CompanyTab({selectingUser}: {selectingUser: (user: Company) => void}) {
                                 <img className=" w-[60px] h-[60px] rounded-full" src={company.photo} />
                             </div>
                             <h2 className=" text-content-title text-lg font-semibold mt-3">{company.companyName}</h2>
-                            <p className=" text-content-text text-sm mt-3">{company.location}</p>
+                            <p className=" text-content-text text-sm mt-3">{company.location.city}</p>
                             <div className=" flex items-center justify-center mt-4 gap-[10px] ">
                                 <img className=" w-[28px] bg-red-500 rounded-md py-1 px-1 cursor-pointer" src={images.admin.banIconAdmin} onClick={() => handleBanUser(company.id)} />
                             </div>
@@ -80,7 +80,7 @@ function CompanyTab({selectingUser}: {selectingUser: (user: Company) => void}) {
                     )
                 })}
             </div>
-            {totalItem && totalItem >= limit && <button className=" w-[100px] text-center text-white bg-[#40189D] rounded-md py-[8px] mx-auto" onClick={() => setLimit(prev => prev + 6)}>Xem thêm</button>}
+            {totalItem && totalItem >= limit && <button className=" w-[100px] text-center text-white bg-primary-100 rounded-md py-[8px] mx-auto" onClick={() => setLimit(prev => prev + 6)}>Xem thêm</button>}
         </>
     );
 }

@@ -14,7 +14,11 @@ export interface RegisterJobseekerRequest {
     firstName: string;
     lastName: string;
     email: string;
-    location: string;
+    location: {
+        city: string;
+        address: string;
+        district: string
+    }
     phoneNumber: string;
     introduce: string;
     password: string;
@@ -25,7 +29,11 @@ export interface RegisterCompanyRequest {
     firstName: string;
     lastName: string;
     email: string;
-    location: string;
+    location: {
+        city: string;
+        address: string;
+        district: string
+    }
     phoneNumber: string;
     password: string;
     passwordConfirm: string;

@@ -87,6 +87,7 @@ export const apiSlice = createApi({
         'JobApplications',
         'Comments',
         'Notifications',
+        'Location',
         'Category',
         'Skills',
     ],

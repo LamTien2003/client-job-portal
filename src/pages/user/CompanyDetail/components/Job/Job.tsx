@@ -37,7 +37,7 @@ function Job(props: Props) {
                                         <div className=" relative pl-3 mb-1 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:top-1.75 before:left-0 before:absolute">
                                             <p className=" text-cb font-medium">
                                                 Location:
-                                                <span className=" font-semibold ml-1.5">{company.location}</span>
+                                                <span className=" font-semibold ml-1.5">{company.location.city}</span>
                                             </p>
                                         </div>
                                         <div className=" relative pl-3 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:top-1.75 before:left-0 before:absolute">

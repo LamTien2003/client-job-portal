@@ -13,7 +13,7 @@ type FieldPropsType = {
 function Fields({ type, label, id, name, value, onChange, onBlur, error, touched, placeholder }: FieldPropsType) {
     return (
         <div className="w-1/2 flex flex-col p-2">
-            <label htmlFor={id} className=" text-white text-base font-semibold">
+            <label htmlFor={id} className=" text-base font-medium mb-2">
                 {label}
             </label>
 
@@ -25,7 +25,7 @@ function Fields({ type, label, id, name, value, onChange, onBlur, error, touched
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                className={'h-12 rounded-lg outline-none px-5 py-[5px] '}
+                className={'border border-primary-200 rounded-lg outline-none px-5 py-[10px] '}
             />
 
             {(error && touched) || (error && value) ? (
