@@ -104,17 +104,14 @@ function Users() {
                     <div className=" w-[350px] ">
                         <div className=" flex flex-col items-center bg-white border-b border-b-[#D9D9D9] rounded-t-[10px] px-[15px] pt-[30px] pb-[10px] gap-[12px]">
                             <div className=" w-[100px] h-[100px] flex items-center justify-center bg-[#5FA76F] rounded-[10px] p-[10px]">
-                                <img src={images.admin.userAvt} />
                             </div>
                             <h2 className=" text-content-title text-xl font-semibold">{user ? user.companyName : 'Đang cập nhật...'}</h2>
-                            <p className=" text-content-text">{user ? user.location : 'Đang cập nhật...'}</p>
                             <div className=" w-full flex flex-wrap items-center justify-between my-2 gap-[16px]">
                                 <div className=" flex items-center">
                                     <div className=" flex items-center justify-center w-[36px] h-[36px] text-white border border-primary-100 rounded-full mr-3">
                                         <img className=" w-[18px] h-[18px]" src={images.admin.locationAdmin} />
                                     </div>
                                     <div className=" flex flex-col items-center text-sm">
-                                        <h3 className=" text-content-title font-semibold">{user ? user.location : 'Đang cập nhật'}, Việt Nam</h3>
                                         <p className=" text-content-text">Vị trí</p>
                                     </div>
                                 </div>

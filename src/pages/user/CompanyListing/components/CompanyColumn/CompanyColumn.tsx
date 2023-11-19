@@ -11,23 +11,35 @@ function CompanyColumn(props: Props) {
         <>
             {companyList.length === 0 && 'Hiện danh mục này chưa có công ty nào'}
             {companyList?.map((company) => {
-                const date = new Date(company.establishDate)
-                const myEstablishDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+                const date = new Date(company.establishDate);
+                const myEstablishDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
                 return (
-                    <div key={company.id} className=' w-full border border-[#AEF0F2] pl-5 pb-5 mb-6'>
-                        <div className=' flex flex-col bg-[#E7F4F5] relative'>
-                            <div className=' flex items-center'>
-                                <div className=' flex justify-center items-end w-[60px] h-[100px] bg-[#9CEAEC] -top-[10px] left-0 absolute'>
-                                    <img className=' w-[45px] h-[45px] rounded-full mb-[20px] ' src={company.photo} />
+                    <div key={company.id} className=" w-full border border-[#AEF0F2] pl-5 pb-5 mb-6">
+                        <div className=" flex flex-col bg-[#E7F4F5] relative">
+                            <div className=" flex items-center">
+                                <div className=" flex justify-center items-end w-[60px] h-[100px] bg-[#9CEAEC] -top-[10px] left-0 absolute">
+                                    <img className=" w-[45px] h-[45px] rounded-full mb-[20px] " src={company.photo} />
                                 </div>
-                                <div className=' -left-2 -top-[10px] absolute'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="10" viewBox="0 0 8 10" fill="none">
-                                        <path d="M8 0L7.99991 10H0L8 0Z" fill="#91D9DB"/>
+                                <div className=" -left-2 -top-[10px] absolute">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="8"
+                                        height="10"
+                                        viewBox="0 0 8 10"
+                                        fill="none"
+                                    >
+                                        <path d="M8 0L7.99991 10H0L8 0Z" fill="#91D9DB" />
                                     </svg>
                                 </div>
-                                <div className=' left-[60px] -top-[10px] absolute'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="10" viewBox="0 0 8 10" fill="none">
-                                        <path d="M8 10L0 0V10H8Z" fill="#91D9DB"/>
+                                <div className=" left-[60px] -top-[10px] absolute">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="8"
+                                        height="10"
+                                        viewBox="0 0 8 10"
+                                        fill="none"
+                                    >
+                                        <path d="M8 10L0 0V10H8Z" fill="#91D9DB" />
                                     </svg>
                                 </div>
                             </div>
@@ -40,7 +52,9 @@ function CompanyColumn(props: Props) {
                                             {company.location.city}
                                         </p>
                                     </div>
-                                    <p className=' text-content-text ml-2.5 mr-1.5 lg:text-[15px] tb:text-sm mb:text-sm '>Số lượng tuyển: <span className=' text-primary-100 font-semibold'>1</span></p>
+                                    <p className=" text-content-text ml-2.5 mr-1.5 lg:text-[15px] tb:text-sm mb:text-sm ">
+                                        Số lượng tuyển: <span className=" text-primary-100 font-semibold">1</span>
+                                    </p>
                                 </div>
                                 <div className=' flex flex-col items-center justify-center'>
                                     <div className=' flex gap-[100px] mb-8 xl:gap-[35px] lg:gap-[25px] tb:flex-col tb:gap-1 mb:flex-col mb:gap-1.5 '>

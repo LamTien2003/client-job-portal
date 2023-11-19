@@ -32,7 +32,7 @@ function CompanyGutter(props: Props) {
                                             src={company.photo}
                                         />
                                         <div className="flex flex-col">
-                                            <h3 className=" font-family-title text-content-title font-semibold text-lg xl:text-base mb:text-cb">
+                                            <h3 className=" text-content-title font-semibold text-lg xl:text-base mb:text-cb">
                                                 {company.companyName}
                                             </h3>
                                             <div className=" text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start tb:flex-row mb:text-xs ">
@@ -54,7 +54,7 @@ function CompanyGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
                                             Quy mô: 
-                                            <span className=" text-content-title font-medium ml-1">
+                                            <span className=" text-content-title font-semibold ml-1">
                                                 {company.companySize.to} người
                                             </span>
                                         </p>
@@ -62,7 +62,7 @@ function CompanyGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
                                             Thành lập: 
-                                            <span className=" text-content-title font-medium ml-1">
+                                            <span className=" text-content-title font-semibold ml-1">
                                                 {myEstablistDate}
                                             </span>
                                         </p>
@@ -70,7 +70,7 @@ function CompanyGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
                                             Liên lạc: 
-                                            <span className=" text-content-title font-medium ml-1">
+                                            <span className=" text-content-title font-semibold ml-1">
                                                 {company.phoneNumber}
                                             </span>
                                         </p>
@@ -78,8 +78,8 @@ function CompanyGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
                                             Website: 
-                                            <span className=" text-content-title font-medium ml-1">
-                                                {company.website}
+                                            <span className=" text-content-title font-semibold ml-1">
+                                                {company.website || 'Cập nhật'}
                                             </span>
                                         </p>
                                     </div>

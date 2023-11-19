@@ -9,7 +9,7 @@ const JobItem = ({ job }: { job: Job }) => {
 
     const deleteJobHandler = async () => {
         try {
-            await deleteJob(job.id);
+            await deleteJob(job._id);
             toast.success('Xoá thành công!');
         } catch (error: any) {
             if (error.status === 400) {
@@ -20,7 +20,7 @@ const JobItem = ({ job }: { job: Job }) => {
 
     const approveJobHandler = async () => {
         try {
-            const res = await approveJob(job.id).unwrap();
+            const res = await approveJob(job._id).unwrap();
             if (res.status === 200) {
                 toast.success(res.data.msg);
             }
@@ -59,7 +59,7 @@ const JobItem = ({ job }: { job: Job }) => {
                     />
                 </div>
                 <div className="flex flex-col gap-1">
-                    <h5 className="font-family-title font-semibold ">{job.postedBy.location}</h5>
+                    <h5 className="font-family-title font-semibold ">{job.postedBy.location.city}</h5>
                     <p className="font-family-text font-normal text-sm">Location</p>
                 </div>
             </div>
