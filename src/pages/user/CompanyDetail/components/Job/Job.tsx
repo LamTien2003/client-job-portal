@@ -37,7 +37,7 @@ function Job(props: Props) {
                                         <div className=" relative pl-3 mb-1 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:top-1.75 before:left-0 before:absolute">
                                             <p className=" text-cb font-medium">
                                                 Location:
-                                                <span className=" font-semibold ml-1.5">{company.location}</span>
+                                                <span className=" font-semibold ml-1.5">{company.location.city}</span>
                                             </p>
                                         </div>
                                         <div className=" relative pl-3 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:top-1.75 before:left-0 before:absolute">
@@ -76,7 +76,8 @@ function Job(props: Props) {
                                 <div className=" flex lg:mb-4">
                                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/company-4.svg" />
                                     <p className=" text-sm font-medium ml-2">
-                                        Job Applied:<span className=" font-semibold ml-1.5">{job.countApplication}</span>
+                                        Job Applied:
+                                        <span className=" font-semibold ml-1.5">{job.countApplication}</span>
                                     </p>
                                 </div>
                                 <div className=" group lg:absolute lg:right-0 lg:bottom-2 mb:static ">
