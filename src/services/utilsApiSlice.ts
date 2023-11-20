@@ -18,6 +18,11 @@ export const utilsApiSlice = apiSlice.injectEndpoints({
             providesTags: () => [{ type: 'Location' as const, id: 'LIST' }],
         }),
 
+        getDistrictByCityCode: builder.query<ResponseApi<Location>, number | undefined>({
+            query: (code) => `utils/getCity/${code ? code : ''}`,
+            providesTags: () => [{ type: 'Location' as const, id: 'LIST' }],
+        }),
+
         getAllLocation: builder.query<ResponseApi<any[]>, ParamsGetLocaiton>({
             query: (arg) => {
                 const query = buildQueryString(arg);
@@ -53,4 +58,5 @@ export const {
     useGetProvincesQuery,
     useGetDistrictsQuery,
     useGetLocationQuery,
+    useGetDistrictByCityCodeQuery,
 } = utilsApiSlice;
