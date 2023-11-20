@@ -25,32 +25,34 @@ const JobListing = () => {
     const q = searchParams.get('q')
     const type = searchParams.get('type')
 
-    const { data, isLoading, isError } = useGetJobsQuery(q ? type ? {
-        page: page,
-        limit: 5,
-        q: q ? q : '',
-        type: type
-    } : {
-        page: page,
-        limit: 5,
-        q: q,
-    } : type ? {
-        page: page,
-        limit: 5,
-        type: type
-    } : (filter.idCat === null ? {
-        page: page,
-        limit: 5,
-        ['salary[gte]']: filter.salary.min,
-        ['salary[lte]']: filter.salary.max,
-    } : {
-        page: page,
-        limit: 5,
-        ['salary[gte]']: filter.salary.min,
-        ['salary[lte]']: filter.salary.max,
-        type: filter.idCat
-    }));
-
+    const { data, isLoading, isError } = useGetJobsQuery(
+        {page: 1, limit: 5}
+    //     q ? type ? {
+    //     page: page,
+    //     limit: 5,
+    //     q: q ? q : '',
+    //     type: type
+    // } : {
+    //     page: page,
+    //     limit: 5,
+    //     q: q,
+    // } : type ? {
+    //     page: page,
+    //     limit: 5,
+    //     type: type
+    // } : (filter.idCat === null ? {
+    //     page: page,
+    //     limit: 5,
+    //     ['salary[gte]']: filter.salary.min,
+    //     ['salary[lte]']: filter.salary.max,
+    // } : {
+    //     page: page,
+    //     limit: 5,
+    //     ['salary[gte]']: filter.salary.min,
+    //     ['salary[lte]']: filter.salary.max,
+    //     type: filter.idCat
+    // })
+    );
 
     const handleFilter = (filterObj: filterObject) => {
         setFilter(filterObj)
@@ -78,10 +80,10 @@ const JobListing = () => {
     return (
         <>
             <Banner page="Job Listing" />
-            <div className=" max-w-7xl ml-auto mr-auto pt-[50px] flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:max-w-3xl mb:max-w-2xl">
+            <div className=" max-w-7xl font-family-text ml-auto mr-auto pt-[50px] flex justify-between xl:mx-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:flex-col tb:max-w-3xl mb:flex-col mb:max-w-2xl">
                 <Sidebar filter={handleFilter} />
-                <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 tb:w-11/12">
-                    <div className=" mb-6 pl-3 pr-3 flex justify-between lg:flex-col">
+                <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:mx-auto lg:mx-auto tb:mx-auto mb:mx-auto lg:pr-0 lg:w-10/12 tb:w-10/12 mb:w-11/12">
+                    <div className=" mb-6 pl-3 pr-3 flex justify-between">
                         <p className="text-content-text font-medium pt-2 pb-2">
                             Hiện có <span className=" text-primary-100 font-semibold">{totalJob}</span> công việc
                         </p>

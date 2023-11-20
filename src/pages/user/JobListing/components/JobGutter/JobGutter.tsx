@@ -32,7 +32,7 @@ function JobGutter(props: Props) {
                                         <h3 className=" text-content-title font-semibold text-lg xl:text-base mb:text-cb">
                                             {job.title}
                                         </h3>
-                                        <div className=" text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start tb:flex-row mb:flex-col mb:items-start mb:text-xs ">
+                                        <div className=" font-family-title text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start tb:flex-row mb:flex-col mb:items-start mb:text-xs ">
                                             {job.postedBy.companyName}
                                             <div className=" h-3.5 w-px bg-content-title mr-2.5 ml-2.5 xl:hidden"></div>
                                             <p className=" text-content-title font-semibold flex mb:text-xs mb:ml-0 ">
@@ -45,7 +45,7 @@ function JobGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
                                             Lương: 
-                                            <span className=" text-content-title font-semibold ml-1">
+                                            <span className=" text-content-title font-medium ml-1">
                                                 {job.salary.toLocaleString('it')}đ /
                                             </span>{' '}
                                             tháng
@@ -54,7 +54,7 @@ function JobGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
                                             Kĩ năng yêu cầu: 
-                                            <span className=" text-content-title font-semibold ml-1">
+                                            <span className=" text-content-title font-medium ml-1">
                                                 {job.skillsRequire}
                                             </span>
                                         </p>
@@ -62,16 +62,16 @@ function JobGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
                                         <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
                                             Nơi làm việc: 
-                                            <span className=" text-content-title font-semibold ml-1">
-                                                {job.postedBy.location}
+                                            <span className=" text-content-title font-medium ml-1">
+                                                {job.postedBy.location.city}
                                             </span>
                                         </p>
                                     </div>
                                 </div>
                                 <div className=" mt-5 mb-3 flex relative">
-                                    {/* <div className=' text-content-title text-sm font-semibold bg-content-bg-full-time rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs '>Full Time</div> */}
-                                    {/* <div className=' text-content-title text-sm font-semibold bg-content-bg-part-time rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 mr-5 ml-5 lg:text-xs '>Part Time</div> */}
-                                    <div className=" text-content-title text-sm font-semibold bg-content-bg-remote rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs ">
+                                    {/* <div className=' text-content-title text-sm font-medium bg-content-bg-full-time rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs '>Full Time</div> */}
+                                    {/* <div className=' text-content-title text-sm font-medium bg-content-bg-part-time rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 mr-5 ml-5 lg:text-xs '>Part Time</div> */}
+                                    <div className=" text-content-title text-sm font-medium bg-content-bg-remote rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs ">
                                         Remote
                                     </div>
 

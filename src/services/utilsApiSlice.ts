@@ -1,4 +1,5 @@
 import { buildQueryString } from '@/utils/helper';
+import { Location } from '@/types/Location';
 import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
@@ -35,7 +36,21 @@ export const utilsApiSlice = apiSlice.injectEndpoints({
             },
             providesTags: () => [{ type: 'Location' as const, id: 'LIST' }],
         }),
+        getLocation: builder.query<ResponseApi<Location[]>, void>({
+            query() {
+                return {
+                    url: 'utils/getLocation',
+                };
+            },
+            providesTags: () => [{ type: 'Location' as const, id: 'LIST' }],
+        }),
     }),
 });
 
-export const { useGetSkillsQuery, useGetProvincesQuery, useGetAllLocationQuery, useGetDistrictsQuery } = utilsApiSlice;
+export const {
+    useGetSkillsQuery,
+    useGetAllLocationQuery,
+    useGetProvincesQuery,
+    useGetDistrictsQuery,
+    useGetLocationQuery,
+} = utilsApiSlice;

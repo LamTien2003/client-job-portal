@@ -38,7 +38,6 @@ export const companyApiSlice = apiSlice.injectEndpoints({
             query: (id) => `company/${id}`,
             providesTags: () => [{ type: 'Companies' as const, id: '' }],
         }),
-
         getJobApplication: builder.query<ResponseApi<any>, string>({
             query: (id) => `job/application/${id}`,
             providesTags: () => [{ type: 'Companies' as const, id: 'LIST-JOB-APPLICATION' }],

@@ -15,7 +15,7 @@ function Fields ({type, label, id, name, value, onChange, onBlur, error, touched
         <div className=" flex flex-col mb-4">
             <label 
                 htmlFor={id}
-                className=" text-white text-base font-semibold"
+                className=" text-base font-medium mb-2"
             >
                 {label}
             </label>
@@ -28,10 +28,10 @@ function Fields ({type, label, id, name, value, onChange, onBlur, error, touched
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                className={"h-14 rounded-lg outline-none px-5 py-[5px] "}
+                className={" border border-primary-200 rounded-lg outline-none px-5 py-[10px] "}
             />
 
-            {(error && touched) ? <p className=" mt-2 p-1 text-red-900 italic select-none">{error}</p> : null }
+            {(error && touched) ? <p className=" mt-2 p-1 text-red-700 italic select-none">{error}</p> : null }
         </div>
     );
 }

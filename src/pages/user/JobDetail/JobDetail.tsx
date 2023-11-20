@@ -33,7 +33,7 @@ function JobDetail() {
     return (
         <>
             {isLoading && <Loader/>}
-            <div className="selection:bg-primary-100 selection:text-white">
+            <div className=" font-family-text selection:bg-primary-100 selection:text-white">
                 <div className=" mb-28 ">
                     <Banner page="Job Detail" />
 
@@ -45,7 +45,7 @@ function JobDetail() {
                     {!isLoading && !isError && job && <Comments data={job} />}
 
                     <div className=" w-10/12 mx-auto">
-                        <h1 className=" text-content-title text-2xl font-semibold mb-10">Related Jobs:</h1>
+                        <h1 className=" font-family-title text-content-title text-2xl font-semibold mb-10">Related Jobs:</h1>
                         <Swiper
                             breakpoints={{
                                 0: {

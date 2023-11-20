@@ -1,21 +1,19 @@
 import { useLayoutEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '@/services/authApiSlice';
 import { setToken } from '@/utils/storage';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
-import Title from './components/Title/Title';
-import Others from './components/Others/Others';
 import Fields from './components/Fields/Fields';
 import Loader from '@/components/Loader/Loader';
 import { EMAILREGEX } from '@/constants/regex';
 import { toast } from 'react-toastify';
+import images from '@/assets/images';
 
 const Login = () => {
     const [login, { isLoading }] = useLoginMutation();
-    
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -33,6 +31,7 @@ const Login = () => {
         onSubmit: async (values) => {
             try {
                 const response = await login(values).unwrap();
+                console.log(response)
                 if(response?.status === 200) {
                     toast.success(response.data.msg)
                     const user = response.data.data;
@@ -58,36 +57,63 @@ const Login = () => {
     return (
         <>
             {isLoading && <Loader/>}
-            <div className=" max-w-[540px] h-auto bg-primary-100 rounded mt-16 mx-auto p-[50px] ">
-                <Title />
-
-                <form onSubmit={formik.handleSubmit}>
-                    <Fields
-                        type="text"
-                        label="Email"
-                        id="email"
-                        name="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.errors.email}
-                        touched={formik.touched.email}
-                        placeholder="info@example.com"
-                    />
-                    <Fields
-                        type="password"
-                        label="Password"
-                        id="password"
-                        name="password"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.errors.password}
-                        touched={formik.touched.password}
-                        placeholder="Enter your password"
-                    />
-                    <Others />
-                </form>
+            <div className=' w-full min-h-screen bg-gradient-to-r from-[#00032d] to-[#103185] py-20'>
+                <div className=' flex flex-col w-[550px] mx-auto'>
+                    <h1 className=' text-center font-family-title text-primary-100 font-semibold text-3xl mb-4'>Đăng nhập</h1>
+                    <div className=' w-full h-auto bg-white rounded-xl p-[40px]'>
+                        <form onSubmit={formik.handleSubmit}>
+                            <Fields
+                                type="text"
+                                label="Email"
+                                id="email"
+                                name="email"
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.errors.email}
+                                touched={formik.touched.email}
+                                placeholder="info@example.com"
+                            />
+                            <Fields
+                                type="password"
+                                label="Mật khẩu"
+                                id="password"
+                                name="password"
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.errors.password}
+                                touched={formik.touched.password}
+                                placeholder="Enter your password"
+                            />
+                            <div className=" flex flex-col ">
+                                <div className=" flex items-center justify-between mt-2">
+                                    <div className=" flex items-center">
+                                        <input id="rememberme" type="checkbox" className=" cursor-pointer" />
+                                        <label htmlFor="rememberme" className=" ml-1 cursor-pointer">
+                                            Ghi nhớ tôi
+                                        </label>
+                                    </div>
+                                    <p className=" font-medium duration-300 cursor-pointer hover:text-primary-100">Quên mật khẩu?</p>
+                                </div>
+                                <div className=" text-center">
+                                    <button
+                                        type="submit"
+                                        className=" w-full h-[50px] text-white font-semibold bg-primary-100 rounded-[0.625rem] mt-6 mb-4"
+                                    >
+                                        Đăng Nhập
+                                    </button>
+                                </div>
+                                <div className=" flex items-center justify-start mb-4">
+                                    <p>Bạn chưa có tài khoản?</p>
+                                    <Link to="/register/jobseeker" className=" font-medium ml-1.5 duration-300 cursor-pointer hover:text-primary-100">
+                                        Đăng ký ngay
+                                    </Link>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </>
     );

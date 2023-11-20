@@ -20,7 +20,7 @@ function RelatedJob(props: Props) {
                 <div className=" flex items-start mb-5 relative">
                     <img className=" rounded-full mr-5" src={logo} />
                     <div className=" w-full flex flex-col border-b border-content-border pb-3">
-                        <h3 className=" text-content-title text-lg font-semibold mb-1">{position}</h3>
+                        <h3 className=" font-family-title text-content-title text-lg font-semibold mb-1">{position}</h3>
                         <p className=" text-sm">{shiftsWork}</p>
                     </div>
                     <div className=" group right-0 top-3 absolute cursor-pointer">

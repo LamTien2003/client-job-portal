@@ -1,6 +1,6 @@
 import { MenuItem, Select } from '@mui/material';
-import { locationArray } from '@/constants/regex';
 import { FormikTouched } from 'formik';
+import { District } from '@/types/Location';
 
 type SelectFieldPropsType = {
     label: string;
@@ -11,26 +11,27 @@ type SelectFieldPropsType = {
     onBlur: any;
     error: any;
     touched: boolean | undefined | FormikTouched<Date> | any;
+    districtList: District[] | undefined
 };
-function SelectFields({ label, id, name, value, onChange, onBlur, error, touched }: SelectFieldPropsType) {
+function SelectDistrict({ label, id, name, value, onChange, onBlur, error, touched, districtList }: SelectFieldPropsType) {
     return (
         <div className="w-1/2 flex flex-col p-2">
-            <label htmlFor={id} className=" text-white text-base font-semibold">
+            <label htmlFor={id} className=" text-base font-medium">
                 {label}
             </label>
 
-            <div className=" w-full bg-white rounded-lg">
+            <div className=" w-full h-[45.6px] border border-primary-200 rounded-lg mt-2">
                 <Select
                     id={id}
                     name={name}
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}
-                    className={' w-full h-12 outline-none px-1 py-[5px] '}
+                    className={' w-full h-[45.6px] border-none px-1 '}
                 >
-                    {locationArray.map((location) => (
-                        <MenuItem key={location} value={location}>
-                            {location}
+                    {districtList?.map((district) => (
+                        <MenuItem key={district.code} value={district.name}>
+                            {district.name}
                         </MenuItem>
                     ))}
                 </Select>
@@ -41,4 +42,4 @@ function SelectFields({ label, id, name, value, onChange, onBlur, error, touched
     );
 }
 
-export default SelectFields;
+export default SelectDistrict;

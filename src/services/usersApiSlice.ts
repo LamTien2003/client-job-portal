@@ -45,7 +45,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             },
         }),
         getCurrentUser: builder.query<ResponseApi<MixinUser>, void>({
-            query: () => `user/getMe/`,
+            query: () => 'user/getMe/',
             providesTags: () => [{ type: 'Users' as const, id: 'CURRENT' }],
         }),
         changeMeUser: builder.mutation<ResponseApi<MixinUser>, FormData>({

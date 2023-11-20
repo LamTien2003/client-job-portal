@@ -39,7 +39,7 @@ function Sidebar(props: Props) {
     }, [filterObj])
 
     return (
-        <div className=" w-1/4 pr-3 mr-auto ml-auto mb-8 xl:w-5/12 lg:pr-0 lg:w-10/12 mb:w-11/12">
+        <div className=" w-1/4 pr-3 mx-auto mb-8 lg:pr-0 tb:pr-0 mb:pr-0 lg:w-10/12 tb:w-10/12 mb:w-11/12">
             <div className=" w-full bg-content-bg rounded-xl pl-5 pr-5 pt-5 pb-1">
                 <div>
                     <Category categoryChange={handleFilterCategory} />
@@ -47,7 +47,7 @@ function Sidebar(props: Props) {
                     <SalaryRange salaryChange={handleFilterSalary} />
 
                     <div className=" bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">
-                        <h3 className=" text-content-title font-semibold text-lg mb-2 lg:text-lg">Date of Post</h3>
+                        <h3 className=" font-family-title text-content-title font-semibold text-lg mb-2 lg:text-lg">Date of Post</h3>
                         <div className=" flex flex-wrap">
                             <p className=" text-content-text font-semibold text-sm mr-4 mb-3 duration-300 cursor-pointer hover:text-primary-100">
                                 Technology,

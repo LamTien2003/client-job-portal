@@ -5,7 +5,6 @@ import ProtectedRoutes from './layouts/auth/ProtectedRoutes/ProtectedRoutes';
 import JobListing from './pages/user/JobListing/JobListing';
 import Error from './pages/user/Error/Error';
 import Login from './pages/user/Login/Login';
-import Register from './pages/user/Register/Register';
 import JobDetail from './pages/user/JobDetail/JobDetail';
 import CompanyListing from './pages/user/CompanyListing/CompanyListing';
 import CompanyDetail from './pages/user/CompanyDetail/CompanyDetail';
@@ -36,6 +35,8 @@ import { useGetCurrentUserQuery } from '@/services/usersApiSlice';
 import ProxyManager from '@/pages/user/Manager/ProxyManager';
 import JobSeekerManager from './pages/user/Manager/JobSeeker/JobSeekerManager';
 import CompanyManager from './pages/user/Manager/Company/CompanyManager';
+import RegisterJobseeker from './pages/user/Register/RegisterJobseeker';
+import RegisterCompany from './pages/user/Register/RegisterCompany';
 
 function App() {
     const uiState = useSelector((state: RootState) => state.ui);
@@ -47,7 +48,8 @@ function App() {
                 {/* Public routes */}
                 <Route element={<DefaultLayout />}>
                     <Route path="login" index element={<Login />} />
-                    <Route path="register" index element={<Register />} />
+                    <Route path='register/jobseeker' index element={<RegisterJobseeker />} />
+                    <Route path='register/company' index element={<RegisterCompany />} />
                     <Route index element={<Home />} />
                     <Route path="job-listing" index element={<JobListing />} />
                     <Route path="job-detail/:id" index element={<JobDetail />} />
@@ -59,8 +61,6 @@ function App() {
                     <Route path="blogs" index element={<BlogGrid />} />
                     <Route path="blogDetail" index element={<BlogDetail />} />
                     <Route path="contact" index element={<Contact />} />
-                    <Route path="login" index element={<Login />} />
-                    <Route path="register" index element={<Register />} />
                     <Route path="setting" index element={<Setting />} />
 
                     <Route element={<ProtectedRoutes />}>

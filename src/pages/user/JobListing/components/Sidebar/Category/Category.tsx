@@ -28,7 +28,7 @@ function Category(props: Props) {
 
     return (
         <div className=" bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">
-            <h3 className=" text-content-title font-semibold text-lg mb-2 lg:text-lg">Job Category</h3>
+            <h3 className=" font-family-title text-content-title font-semibold text-lg mb-2 lg:text-lg">Job Category</h3>
             <div className=" max-h-64 overflow-scroll">
                 <div className=" mb-2 flex relative">
                     <div className=" cursor-pointer">

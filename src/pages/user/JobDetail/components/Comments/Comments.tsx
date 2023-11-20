@@ -73,14 +73,14 @@ function Comments({data: job}: {data: Job}) {
 
     return (
         <div className=' flex flex-col w-10/12 mx-auto mb-12 gap-[30px]'>
-            <h2 className=' text-2xl font-semibold'>{currentJob?.comments.length} bình luận</h2>
+            <h2 className=' font-family-title text-2xl font-semibold'>{currentJob?.comments.length} bình luận</h2>
             
             {currentJob?.comments?.slice(0, limit).map((cmt, index) => {
                 return (
                     <div key={index} className=" flex items-start pr-10  ">
                         <img className=" w-10 h-10 rounded-full mr-3" src={cmt.sender.photo} />
                         <div className=" flex flex-col w-full">
-                            <h3 className=" text-sm font-medium">
+                            <h3 className=" font-family-title text-sm font-semibold">
                                 {cmt.sender.firstName + ' ' + cmt.sender.lastName}
                             </h3>
                             <p className=" text-content-text font-medium">
