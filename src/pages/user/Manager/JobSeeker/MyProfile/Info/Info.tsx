@@ -15,14 +15,15 @@ const Info = () => {
     return (
         <>
             <Card handleOpen={handleOpen}>
-                <div className="flex items-center gap-4 mb:flex-col ">
+                <div className="flex items-center gap-4 mb:flex-col">
                     <div className="w-full flex justify-start">
                         <img className="w-20 h-20 object-cover rounded-full" src={currentUser?.photo} alt="avt" />
                     </div>
                     <div className="flex flex-col gap-2">
-                        <h6 className="text-2xl font-family-title font-title text-primary-100 ">
-                            {currentUser?.firstName} {currentUser?.lastName}
-                        </h6>
+                        <div className="flex gap-2 text-2xl font-family-title font-title text-primary-100">
+                            <h6>{currentUser?.firstName}</h6>
+                            <h6>{currentUser?.lastName}</h6>
+                        </div>
                         <div className="font-family-text flex items-center gap-2 text-content-title font-medium">
                             <MdEmail />
                             <p>{currentUser?.email}</p>

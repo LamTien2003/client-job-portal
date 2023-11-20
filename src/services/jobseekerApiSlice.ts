@@ -54,8 +54,13 @@ export const jobseekerApiSlice = apiSlice.injectEndpoints({
                           { type: 'Users' as const, id: 'CURRENT' },
                       ],
         }),
-        getMyApplication: builder.query<ResponseApi<JobApplicate[]>, void>({
-            query: () => `jobseeker/myApplication`,
+        getMyApplication: builder.query<ResponseApi<JobApplicate[]>, ParamsGetAllJob>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `jobseeker/myApplication?${query && query}`,
+                };
+            },
             providesTags: () => [{ type: 'JobSeeker' as const, id: 'LIST' }],
         }),
 
@@ -75,4 +80,9 @@ export const jobseekerApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useGetJobseekersQuery, useJobseekerChangeMeMutation, useGetMyApplicationQuery, useRemoveJobApplyMutation } = jobseekerApiSlice;
+export const {
+    useGetJobseekersQuery,
+    useJobseekerChangeMeMutation,
+    useGetMyApplicationQuery,
+    useRemoveJobApplyMutation,
+} = jobseekerApiSlice;

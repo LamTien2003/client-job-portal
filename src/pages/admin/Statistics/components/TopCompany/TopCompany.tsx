@@ -1,11 +1,11 @@
-import { useGetCompaniesQuery } from '@/services/companiesApiSlice';
 import ItemCompany from './Company';
 import Company from '@/types/Company';
-import { useEffect, useState } from 'react';
-
+import { useGetTopCompanyQuery } from '@/services/statisticApiSlice';
+import { useState, useEffect } from 'react';
+import { StatisticTopCompany } from '@/types/Statistic';
 const TopCompany = () => {
-    const [companies, setCompanies] = useState<Company[]>([]);
-    const { data, isLoading, isError } = useGetCompaniesQuery({ limit: 3 });
+    const [companies, setCompanies] = useState<StatisticTopCompany[]>([]);
+    const { data, isLoading, isError } = useGetTopCompanyQuery();
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
@@ -16,7 +16,7 @@ const TopCompany = () => {
     return (
         <div className="flex flex-col gap-5">
             <h5 className="font-family-title text-xl font-medium">Top Công Ty</h5>
-            <div className="flex justify-between gap-8">
+            <div className="flex flex-wrap gap-8">
                 {companies.map((company, index) => (
                     <ItemCompany key={index} company={company} />
                 ))}

@@ -135,17 +135,6 @@ const FormPostJob = () => {
                 />
 
                 <CustomField
-                    title="Yêu cầu công việc"
-                    fieldName="jobRequire"
-                    error={formik.errors.jobRequire}
-                    touched={formik.touched.jobRequire}
-                    icon={images.logo.jobMini}
-                    placeholder="Job Require"
-                    value={formik.values.jobRequire}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
-                <CustomField
                     title="Lương"
                     fieldName="salary"
                     error={formik.errors.salary}
@@ -212,17 +201,26 @@ const FormPostJob = () => {
                     setData={setSkillValue}
                     formik={formik}
                 />
-                <Textarea
-                    title="Mô tả"
-                    fieldName="description"
-                    error={formik.errors.description}
-                    touched={formik.touched.description}
-                    value={formik.values.description}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
             </div>
+            <Textarea
+                title="Mô tả"
+                fieldName="description"
+                error={formik.errors.description}
+                touched={formik.touched.description}
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+            />
 
+            <Textarea
+                title="Yêu cầu"
+                fieldName="jobRequire"
+                error={formik.errors.jobRequire}
+                touched={formik.touched.jobRequire}
+                value={formik.values.jobRequire}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+            />
             <FieldImages formik={formik} isFormSubmitted={isFormSubmitted} />
 
             <div className="flex justify-center">

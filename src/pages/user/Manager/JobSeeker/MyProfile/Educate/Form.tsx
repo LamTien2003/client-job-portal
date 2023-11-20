@@ -76,7 +76,7 @@ const validation = Yup.object().shape({
     }),
 });
 const FormEducation = ({ toggleOpen }: FormEducation) => {
-    const currentUser = useSelector((state: RootState) => state.user.user);
+    const currentUser = useSelector((state: RootState) => state?.user?.user);
     const [education, setEducation] = useState<Education[]>([]);
     useEffect(() => {
         if (isJobSeeker(currentUser)) {

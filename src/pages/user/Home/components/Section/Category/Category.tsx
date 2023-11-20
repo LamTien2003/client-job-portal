@@ -26,6 +26,12 @@ const Category = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType 
                 </Box>
             )}
 
+            {data?.data?.data?.length === 0 && (
+                <div className="text-content-title text-center font-title text-xl font-family-text">
+                    Danh sách danh mục trống !
+                </div>
+            )}
+
             <Swiper
                 modules={[Autoplay]}
                 autoplay={{

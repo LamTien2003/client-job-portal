@@ -4,6 +4,8 @@ import JobApplication from './JobApplication';
 
 export default interface Job {
     id: string;
+    _id: string;
+
     postedBy: Company;
     title: string;
     description: string;
@@ -24,5 +26,5 @@ export default interface Job {
     countApplication: number;
     comments: Comment[];
     createdAt: Date;
-    numberRecruitment: number
+    numberRecruitment: number;
 }

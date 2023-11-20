@@ -1,5 +1,10 @@
 import Notification from './Notification';
 
+interface Location {
+    city: string;
+    district: string;
+    address: string;
+}
 export default interface User {
     id: string;
     firstName: string;
@@ -8,7 +13,7 @@ export default interface User {
     phoneNumber: string;
     gender: 'male' | 'female';
     photo: string;
-    location: string;
+    location: Location;
     follows: User[];
     followers: User[];
     role: 'user' | 'admin';

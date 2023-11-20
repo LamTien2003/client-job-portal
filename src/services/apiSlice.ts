@@ -89,6 +89,8 @@ export const apiSlice = createApi({
         'Notifications',
         'Category',
         'Skills',
+        'Location',
+        'Statistic',
     ],
     baseQuery: staggeredBaseQuery,
 

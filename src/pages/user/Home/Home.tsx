@@ -21,7 +21,7 @@ const Home = () => {
     );
     const titleFeatured = (
         <span>
-            Latest <span className="text-primary-100">Featured</span> Jobs
+            Việc Làm <span className="text-primary-100">Nổi Bật</span> Mới Nhất
         </span>
     );
 
@@ -65,10 +65,9 @@ const Home = () => {
             </Section>
             <Section
                 title={titleFeatured}
-                subTitle="To choose your trending job dream & to make future bright."
+                subTitle="Bạn có thể tìm kiếm công việc theo tỉnh thành."
                 bg="bg-content-bg"
                 path="job-listing"
-                right={true}
             >
                 <Features />
             </Section>

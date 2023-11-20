@@ -3,6 +3,38 @@ import LocationItem from './LocationItem';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper as SwiperType } from 'swiper';
 import images from '@/assets/images';
+interface Location {
+    path: string;
+    imgLocation: string;
+    name: string;
+}
+const locationData: Location[] = [
+    {
+        path: 'Thành phố Hồ Chí Minh',
+        imgLocation: images.logo.benthanh,
+        name: 'Hồ Chí Minh',
+    },
+    {
+        path: 'Thành phố Hà Nội',
+        imgLocation: images.logo.hoguom,
+        name: 'Hà Nội',
+    },
+    {
+        path: 'Tỉnh Hoà Bình',
+        imgLocation: images.logo.hoabinh,
+        name: 'Hoà Bình',
+    },
+    {
+        path: 'Tỉnh Thừa Thiên Huế',
+        imgLocation: images.logo.hue,
+        name: 'Huế',
+    },
+    {
+        path: 'Tỉnh Nha Trang',
+        imgLocation: images.logo.nhatrang,
+        name: 'Nha Trang',
+    },
+];
 
 const Location = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
     return (
@@ -35,22 +67,15 @@ const Location = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType 
                 }}
                 className="w-full"
             >
-                <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.benthanh} location="Hồ Chí Minh" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.hoguom} location="Hà Nội" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.hue} location="Huế" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.nhatrang} location="Nha Trang" />
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <LocationItem imgLocation={images.logo.hoabinh} location="Hoà Bình" />
-                </SwiperSlide>
+                {locationData.map((location, index) => (
+                    <SwiperSlide key={index}>
+                        <LocationItem
+                            path={location.path}
+                            imgLocation={location.imgLocation}
+                            location={location.name}
+                        />
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </div>
     );

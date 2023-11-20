@@ -1,6 +1,6 @@
 import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
 import * as Yup from 'Yup';
-import { useFormik } from 'formik';
+import { ErrorMessage, useFormik } from 'formik';
 import BtnBot from '../../../components/BtnBot';
 import { DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { useAcceptJobMutation } from '@/services/companiesApiSlice';
@@ -16,16 +16,19 @@ interface FormAcceptJob {
 interface Values {
     interviewDate: any;
     interviewTime: any;
+    interviewAddress: string;
 }
 const initialValues: Values = {
     interviewDate: '',
     interviewTime: '',
+    interviewAddress: '',
 };
 const validation = Yup.object().shape({
     interviewDate: Yup.date()
         .min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!')
         .required('Ngày không được bỏ trống'),
-    interviewTime: Yup.string().required('Ngày không được bỏ trống'),
+    interviewTime: Yup.string().required('Ngày không được bỏ trống!'),
+    interviewAddress: Yup.string().required('Địa điểm không được bỏ trống!'),
 });
 const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
     const [acceptJob, { isLoading }] = useAcceptJobMutation();
@@ -66,10 +69,10 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
     });
 
     return (
-        <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader>Thông tin cá nhân</DialogHeader>
+        <Dialog className="font-family-title" size="lg" open={open} handler={handleOpen}>
+            <DialogHeader>Thông tin phỏng vấn</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
-                <DialogBody divider className="flex items-center justify-between gap-8">
+                <DialogBody divider className="grid grid-cols-2 items-center justify-between gap-8">
                     <div className="flex flex-col gap-1 w-full">
                         <h5 className="font-bold text-primary-100">Ngày phỏng vấn *</h5>
                         <DatePicker
@@ -103,6 +106,25 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
                                     ? formik.errors.interviewTime
                                     : Object.values(formik.errors.interviewTime).join(', ')}
                             </div>
+                        ) : null}
+                    </div>
+
+                    <div className="flex flex-col gap-2 w-full">
+                        <h5 className="font-bold text-primary-100">Địa điểm *</h5>
+                        <textarea
+                            name="interviewAddress"
+                            className={`text-content-text  border-2 outline-none w-full p-3 rounded-md font-medium ${
+                                formik.errors.interviewAddress && formik.touched.interviewAddress && 'border-red-800'
+                            }`}
+                            placeholder="Nhập địa điểm..."
+                            value={formik.values.interviewAddress}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            cols={5}
+                            rows={2}
+                        />
+                        {formik.errors.interviewAddress && formik.touched.interviewAddress ? (
+                            <div className="text-red-700 text-sm font-semibold">{formik.errors.interviewAddress}</div>
                         ) : null}
                     </div>
                 </DialogBody>

@@ -1,11 +1,16 @@
 import images from '@/assets/images';
+import { Link } from 'react-router-dom';
 type Location = {
     imgLocation: string;
     location: string;
+    path: string;
 };
-const LocationItem: React.FC<Location> = ({ imgLocation, location }) => {
+const LocationItem: React.FC<Location> = ({ imgLocation, location, path }) => {
     return (
-        <div className="flex flex-col items-center group cursor-pointer font-family-text gap-3">
+        <Link
+            to={`/job-listing?p=${path}`}
+            className="flex flex-col items-center group cursor-pointer font-family-text gap-3"
+        >
             <div className="relative rounded max-w-xs overflow-hidden bg-cover bg-no-repeat">
                 <img
                     className="h-44 w-72 object-cover group-hover:scale-110 duration-300"
@@ -20,7 +25,7 @@ const LocationItem: React.FC<Location> = ({ imgLocation, location }) => {
                     {location}
                 </h5>
             </div>
-        </div>
+        </Link>
     );
 };
 

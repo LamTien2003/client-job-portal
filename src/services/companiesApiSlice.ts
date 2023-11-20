@@ -73,12 +73,23 @@ export const companyApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: (_result, error, _body) =>
                 error ? [] : [{ type: 'Companies' as const, id: 'LIST-JOB-APPLICATION' }],
         }),
-        getMyJobCreated: builder.query<ResponseApi<any[]>, void>({
-            query: () => `company/myJobCreated`,
+        getMyJobCreated: builder.query<ResponseApi<any[]>, ParamsGetAllJob>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `company/myJobCreated?${query && query}`,
+                };
+            },
+
             providesTags: () => [{ type: 'Companies' as const, id: 'LIST-JOB-CREATED' }],
         }),
-        getJobDeleted: builder.query<ResponseApi<any[]>, void>({
-            query: () => `job/deleted`,
+        getJobDeleted: builder.query<ResponseApi<any[]>, ParamsGetAllJob>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `job/deleted?${query && query}`,
+                };
+            },
             providesTags: () => [{ type: 'Companies' as const, id: 'LIST-JOB-DELETED' }],
         }),
 

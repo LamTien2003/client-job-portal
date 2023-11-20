@@ -1,14 +1,41 @@
+import { buildQueryString } from '@/utils/helper';
 import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
-
+interface ParamsGetLocaiton {
+    code?: string;
+}
 export const utilsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getSkills: builder.query<ResponseApi<string[]>, void>({
             query: () => `utils/getSkills`,
             providesTags: () => [{ type: 'Skills' as const, id: 'LIST' }],
         }),
+
+        getProvinces: builder.query<ResponseApi<any[]>, void>({
+            query: () => `utils/getCity`,
+            providesTags: () => [{ type: 'Location' as const, id: 'LIST' }],
+        }),
+
+        getAllLocation: builder.query<ResponseApi<any[]>, ParamsGetLocaiton>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `utils/getLocation?${query && query}`,
+                };
+            },
+            providesTags: () => [{ type: 'Location' as const, id: 'LIST' }],
+        }),
+        getDistricts: builder.query<ResponseApi<any[]>, ParamsGetLocaiton>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
+                return {
+                    url: `utils/getDistrict?${query && query}`,
+                };
+            },
+            providesTags: () => [{ type: 'Location' as const, id: 'LIST' }],
+        }),
     }),
 });
 
-export const { useGetSkillsQuery } = utilsApiSlice;
+export const { useGetSkillsQuery, useGetProvincesQuery, useGetAllLocationQuery, useGetDistrictsQuery } = utilsApiSlice;

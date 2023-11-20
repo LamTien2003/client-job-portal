@@ -11,7 +11,7 @@ interface TextareaProps {
 
 const Textarea = ({ fieldName, title, error, touched, value, onChange, onBlur }: TextareaProps) => {
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mb-3 mt-3">
             <div className="font-medium text-content-text ">
                 {title}
                 <span className="ml-2 font-title text-primary-100">*</span>
@@ -27,7 +27,7 @@ const Textarea = ({ fieldName, title, error, touched, value, onChange, onBlur }:
                 onChange={onChange}
                 onBlur={onBlur}
                 cols={30}
-                rows={4}
+                rows={3}
             ></textarea>
             {error && touched ? <div className="text-red-700 text-sm font-semibold">{error}</div> : null}
         </div>

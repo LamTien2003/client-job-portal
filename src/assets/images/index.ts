@@ -71,6 +71,7 @@ import hoguom from './ho-hoan-kiem-2.jpg';
 import hue from './hue.jpg';
 import nhatrang from './nhatrang.jpeg';
 import hoabinh from './hoabinh.jpg';
+import userFg from './userFg.png';
 
 const images = {
     find,
@@ -106,6 +107,7 @@ const images = {
         transportation,
     },
     logo: {
+        userFg,
         nhatrang,
         hoabinh,
         hue,

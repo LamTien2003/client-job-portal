@@ -9,30 +9,30 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import { useGetJobMonthlyQuery } from '@/services/statisticApiSlice';
+import { StatisticJobMonthly } from '@/types/Statistic';
+import { useState, useEffect } from 'react';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const ChartStatis = () => {
+    const { data: jobMonthlyData, isLoading, isError } = useGetJobMonthlyQuery();
+    const [job, setJob] = useState<StatisticJobMonthly[]>([]);
+
+    useEffect(() => {
+        if (!isLoading && !isError && jobMonthlyData?.data?.data) {
+            setJob(jobMonthlyData?.data?.data);
+        }
+    }, [jobMonthlyData?.data?.data, isError, isLoading]);
+
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: job.map((item) => `Tháng ${item.month}`).reverse(),
         datasets: [
             {
-                label: 'Dataset 1',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            },
-            {
-                label: 'Dataset 2',
-                data: [28, 48, 40, 19, 86, 27, 100],
-                borderColor: 'rgb(53, 162, 235)',
-                backgroundColor: 'rgba(53, 162, 235, 0.5)',
-            },
-            {
-                label: 'Dataset 3',
-                data: [48, 32, 15, 87, 25, 45, 60],
-                borderColor: 'rgb(53, 162, 58)',
-                backgroundColor: 'rgba(53, 162, 58, 0.5)',
+                label: 'Công việc',
+                data: job.map((item) => item.amountJob).reverse(),
+                borderColor: 'rgb(0, 167, 172)',
+                backgroundColor: 'rgb(0, 167, 172)',
             },
         ],
     };
@@ -45,13 +45,13 @@ const ChartStatis = () => {
             },
             title: {
                 display: true,
-                text: 'Biểu đồ thống kê',
+                text: 'Biểu đồ thống kê công việc được tạo theo tháng',
             },
         },
     };
 
     return (
-        <div className=" w-[70%]">
+        <div className="w-[80%]">
             <Line data={data} options={options} />
         </div>
     );

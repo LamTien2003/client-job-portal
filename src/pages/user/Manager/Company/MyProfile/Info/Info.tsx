@@ -1,6 +1,6 @@
 import { MdEmail } from 'react-icons/md';
 import Card from '../../../components/Card';
-import FormInfo from './Form';
+import FormInfo from '../../../components/FormInfo';
 import { useState } from 'react';
 import { RootState } from '@/store/store';
 

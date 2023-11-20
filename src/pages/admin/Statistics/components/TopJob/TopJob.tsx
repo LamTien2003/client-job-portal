@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import JobItem from './Job';
-import Job from '@/types/Job';
-import { useGetAllJobsQuery } from '@/services/jobsApiSlice';
+import { useGetTopJobQuery } from '@/services/statisticApiSlice';
+import { StatisticTopJob } from '@/types/Statistic';
 
 const TopJob = () => {
-    const [jobs, setJobs] = useState<Job[]>([]);
+    const [jobs, setJobs] = useState<StatisticTopJob[]>();
 
-    const { data, isLoading, isError } = useGetAllJobsQuery({ limit: 2 });
+    const { data, isLoading, isError } = useGetTopJobQuery();
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
@@ -18,8 +18,8 @@ const TopJob = () => {
         <div className="flex flex-col  w-[30%]  gap-6">
             <h5 className="font-family-title text-xl font-medium text-center">Top Công Việc</h5>
 
-            <div className="flex flex-col gap-4">
-                {jobs.map((job, index) => (
+            <div className="flex flex-col gap-5 border-2 border-primary-100 p-4 rounded-xl">
+                {jobs?.map((job, index) => (
                     <JobItem key={index} job={job} />
                 ))}
             </div>

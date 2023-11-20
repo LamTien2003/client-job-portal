@@ -102,6 +102,18 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                     <Skeleton />
                 </div>
             )}
+
+            {dataCate?.data?.data?.length === 0 && (
+                <div className="text-content-title text-center font-title text-xl font-family-text">
+                    Danh sách lĩnh vực trống !
+                </div>
+            )}
+
+            {data?.data?.data?.length === 0 && (
+                <div className="text-content-title text-center font-title text-xl font-family-text">
+                    Danh sách công ty trống !
+                </div>
+            )}
             <Swiper
                 modules={[Autoplay]}
                 autoplay={{
@@ -134,7 +146,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
                         >
                             {companies.map((company, index) => (
                                 <SwiperSlide key={index}>
-                                    <RecruitersItem path={`company-detail/${company.id}`} company={company} />
+                                    <RecruitersItem path={`company-detail/${company._id}`} company={company} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
