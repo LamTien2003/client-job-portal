@@ -1,7 +1,8 @@
-import { useGetAllLocationQuery, useGetDistrictsQuery, useGetProvincesQuery } from '@/services/utilsApiSlice';
+import { useGetDistrictByCityCodeQuery } from '@/services/utilsApiSlice';
+import { District } from '@/types/Location';
 import { Select, MenuItem } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { BsGenderTrans } from 'react-icons/bs';
+import { CiLocationOn } from 'react-icons/ci';
 interface SelectDistrict {
     title: string;
     fieldName: string;
@@ -9,18 +10,20 @@ interface SelectDistrict {
     onChange: any;
     error: string | undefined;
     touched: boolean | undefined;
+    code?: number;
 }
 
-const SelectDistrict = ({ title, fieldName, value, onChange, error, touched }: SelectDistrict) => {
-    const { data, isLoading, isError } = useGetAllLocationQuery({});
+const SelectDistrict = ({ title, fieldName, value, onChange, error, touched, code }: SelectDistrict) => {
+    const { data, isLoading, isError } = useGetDistrictByCityCodeQuery(code);
 
-    const [provices, setProvinces] = useState<any[]>([]);
+    const [districts, setDistricts] = useState<District[]>();
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
-            setProvinces(data?.data?.data);
+            setDistricts(data?.data?.data?.districts);
         }
     }, [data?.data?.data, isError, isLoading]);
+
     return (
         <div className="flex flex-col gap-1 w-full">
             <label className="font-bold text-primary-100" htmlFor={fieldName}>
@@ -32,7 +35,7 @@ const SelectDistrict = ({ title, fieldName, value, onChange, error, touched }: S
                 }`}
             >
                 <div className="text-lg px-3">
-                    <BsGenderTrans />
+                    <CiLocationOn />
                 </div>
                 <Select
                     value={value}
@@ -41,7 +44,7 @@ const SelectDistrict = ({ title, fieldName, value, onChange, error, touched }: S
                     variant="standard"
                     className="select w-full h-11 text-content-s-text items-center"
                 >
-                    {provices.map((item: any, index: any) => {
+                    {districts?.map((item: any, index: any) => {
                         return (
                             <MenuItem key={index} value={item.name}>
                                 {item.name}

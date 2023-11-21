@@ -12,10 +12,17 @@ const TopCompany = () => {
             setCompanies(data?.data?.data);
         }
     }, [isLoading, isError, data?.data?.data]);
+    console.log(companies);
 
     return (
         <div className="flex flex-col gap-5">
-            <h5 className="font-family-title text-xl font-medium">Top Công Ty</h5>
+            <div className="flex flex-col gap-1">
+                <h5 className="font-family-title text-xl font-title">Top Công Ty</h5>
+                <h5 className="font-family-text text-content-text font-medium">
+                    Top 3 công ty có nhiều bài đăng nhất.
+                </h5>
+            </div>
+
             <div className="flex flex-wrap gap-8">
                 {companies.map((company, index) => (
                     <ItemCompany key={index} company={company} />

@@ -1,7 +1,8 @@
-import { useGetAllLocationQuery, useGetProvincesQuery } from '@/services/utilsApiSlice';
+import { useGetProvincesQuery } from '@/services/utilsApiSlice';
 import { Select, MenuItem } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { BsGenderTrans } from 'react-icons/bs';
+import { useEffect, useState, Dispatch } from 'react';
+import { CiLocationOn } from 'react-icons/ci';
+
 interface SelectInfo {
     title: string;
     fieldName: string;
@@ -9,10 +10,11 @@ interface SelectInfo {
     onChange: any;
     error: string | undefined;
     touched: boolean | undefined;
+    onSetCode: Dispatch<React.SetStateAction<number | undefined>>;
 }
 
-const SelectCity = ({ title, fieldName, value, onChange, error, touched }: SelectInfo) => {
-    const { data, isLoading, isError } = useGetAllLocationQuery({});
+const SelectCity = ({ title, fieldName, value, onChange, error, touched, onSetCode }: SelectInfo) => {
+    const { data, isLoading, isError } = useGetProvincesQuery();
 
     const [provices, setProvinces] = useState<any[]>([]);
 
@@ -32,7 +34,7 @@ const SelectCity = ({ title, fieldName, value, onChange, error, touched }: Selec
                 }`}
             >
                 <div className="text-lg px-3">
-                    <BsGenderTrans />
+                    <CiLocationOn />
                 </div>
                 <Select
                     value={value}
@@ -43,7 +45,7 @@ const SelectCity = ({ title, fieldName, value, onChange, error, touched }: Selec
                 >
                     {provices.map((item: any, index: any) => {
                         return (
-                            <MenuItem key={index} value={item.name}>
+                            <MenuItem onClick={() => onSetCode(item.code)} key={index} value={item.name}>
                                 {item.name}
                             </MenuItem>
                         );

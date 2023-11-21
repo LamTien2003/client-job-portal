@@ -18,11 +18,11 @@ export interface StatisticTotal {
 export interface StatisticTopJob {
     _id: string;
     amountApplication: number;
-    job: Job[];
+    job: Job;
 }
 
 export interface StatisticTopCompany {
     _id: string;
     amountJobPosted: number;
-    company: Company[];
+    company: Company;
 }

@@ -10,7 +10,7 @@ import BtnBot from './BtnBot';
 import { useChangeMeUserMutation } from '@/services/usersApiSlice';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SelectCity from './SelectCity';
 import SelectDistrict from './SelectDistrict';
 interface FormInfo {
@@ -26,6 +26,7 @@ interface Values {
     locationAddress: string;
     photo: string;
     locationCity: string;
+    locationDistrict: string;
 }
 const initialValues: Values = {
     firstName: '',
@@ -35,12 +36,14 @@ const initialValues: Values = {
     locationAddress: '',
     photo: '',
     locationCity: '',
+    locationDistrict: '',
 };
 const validation = Yup.object().shape({
     firstName: Yup.string().max(30, 'Không được quá 30 kí tự!').required('Họ không được bỏ trống!'),
     lastName: Yup.string().max(30, 'Không được quá 30 kí tự!').required('Tên không được bỏ trống!'),
-    locationAddress: Yup.string().required('Địa chỉ không được bỏ trống!'),
-    locationCity: Yup.string().required('Địa chỉ không được bỏ trống!'),
+    locationAddress: Yup.string().required('Địa chỉ phố không được bỏ trống!'),
+    locationDistrict: Yup.string().required('Quận, Huyện không  được bỏ trống!'),
+    locationCity: Yup.string().required('Tỉnh, Thành không được bỏ trống!'),
     gender: Yup.string().required('Giới tính không được bỏ trống!'),
     phoneNumber: Yup.string()
         .matches(/^(0|\+84)[0-9]{9}$/, 'Số điện thoại không hợp lệ')
@@ -48,6 +51,8 @@ const validation = Yup.object().shape({
 });
 const FormInfo = ({ handleOpen, open }: FormInfo) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
+    // Đợi backend trả về code của city để initial value ở đây
+    const [code, setCode] = useState<number>(1);
 
     const [changeInfo, { isLoading }] = useChangeMeUserMutation();
 
@@ -60,6 +65,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                 form.append('firstName', values.firstName);
                 form.append('lastName', values.lastName);
                 form.append('location[address]', values.locationAddress);
+                form.append('location[district]', values.locationDistrict);
                 form.append('location[city]', values.locationCity);
                 form.append('gender', values.gender);
                 form.append('phoneNumber', values.phoneNumber);
@@ -82,6 +88,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                 phoneNumber: currentUser.phoneNumber || '',
                 gender: currentUser.gender || '',
                 locationAddress: currentUser.location.address || '',
+                locationDistrict: currentUser.location.district || '',
                 locationCity: currentUser.location.city || '',
             });
         }
@@ -130,15 +137,17 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             onChange={formik.handleChange}
                             error={formik.errors.locationCity}
                             touched={formik.touched.locationCity}
+                            onSetCode={setCode}
                         />
 
                         <SelectDistrict
                             title="Quận, Huyện"
-                            fieldName="locationCity"
-                            value={formik.values.locationCity}
+                            fieldName="locationDistrict"
+                            value={formik.values.locationDistrict}
                             onChange={formik.handleChange}
-                            error={formik.errors.locationCity}
-                            touched={formik.touched.locationCity}
+                            error={formik.errors.locationDistrict}
+                            touched={formik.touched.locationDistrict}
+                            code={code}
                         />
 
                         <CustomField
@@ -150,6 +159,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             placeholder="Nhập số điện thoại của bạn"
                             value={formik.values.locationAddress}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
 
                         <CustomField

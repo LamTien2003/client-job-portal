@@ -57,7 +57,7 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                         </div>
                         <div className="flex gap-1 items-center text-sm">
                             <img src={images.logo.location} alt={images.logo.calender2} />
-                            <p className="text-content-text font-medium">{job?.company?.location}</p>
+                            <p className="text-content-text font-medium">{job?.company?.location.city}</p>
                         </div>
 
                         <div className="flex gap-1 items-center text-sm">
