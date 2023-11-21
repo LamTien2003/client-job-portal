@@ -1,6 +1,6 @@
 import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
 import * as Yup from 'Yup';
-import { ErrorMessage, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import BtnBot from '../../../components/BtnBot';
 import { DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { useAcceptJobMutation } from '@/services/companiesApiSlice';
@@ -16,19 +16,16 @@ interface FormAcceptJob {
 interface Values {
     interviewDate: any;
     interviewTime: any;
-    interviewAddress: string;
 }
 const initialValues: Values = {
     interviewDate: '',
     interviewTime: '',
-    interviewAddress: '',
 };
 const validation = Yup.object().shape({
     interviewDate: Yup.date()
         .min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!')
         .required('Ngày không được bỏ trống'),
     interviewTime: Yup.string().required('Ngày không được bỏ trống!'),
-    interviewAddress: Yup.string().required('Địa điểm không được bỏ trống!'),
 });
 const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
     const [acceptJob, { isLoading }] = useAcceptJobMutation();
@@ -109,7 +106,7 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
                         ) : null}
                     </div>
 
-                    <div className="flex flex-col gap-2 w-full">
+                    {/* <div className="flex flex-col gap-2 w-full">
                         <h5 className="font-bold text-primary-100">Địa điểm *</h5>
                         <textarea
                             name="interviewAddress"
@@ -126,7 +123,7 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
                         {formik.errors.interviewAddress && formik.touched.interviewAddress ? (
                             <div className="text-red-700 text-sm font-semibold">{formik.errors.interviewAddress}</div>
                         ) : null}
-                    </div>
+                    </div> */}
                 </DialogBody>
                 <DialogFooter className="px-8">
                     <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />

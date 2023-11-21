@@ -25,6 +25,8 @@ const ChartStatis = () => {
         }
     }, [jobMonthlyData?.data?.data, isError, isLoading]);
 
+    console.log(job);
+
     const data = {
         labels: job.map((item) => `Tháng ${item.month}`).reverse(),
         datasets: [
@@ -45,13 +47,44 @@ const ChartStatis = () => {
             },
             title: {
                 display: true,
-                text: 'Biểu đồ thống kê công việc được tạo theo tháng',
+                text: 'Thống Kê Công Việc Được Tạo Theo Tháng',
+                font: {
+                    family: `'Exo 2', sans-serif`,
+                    size: 22,
+                    weight: 'bold',
+                },
+                color: 'rgb(0, 167, 172)',
+            },
+        },
+        scales: {
+            x: {
+                ticks: {
+                    font: {
+                        family: `'Work Sans', sans-serif`,
+                        size: 15,
+                    },
+                    color: 'rgb(6, 20, 33)',
+                },
+            },
+            y: {
+                ticks: {
+                    font: {
+                        family: `'Work Sans', sans-serif`,
+                        size: 14,
+                    },
+                    color: 'rgb(89, 89, 89)',
+                },
+            },
+        },
+        elements: {
+            point: {
+                radius: 6,
             },
         },
     };
 
     return (
-        <div className="w-[80%]">
+        <div className="w-full">
             <Line data={data} options={options} />
         </div>
     );
