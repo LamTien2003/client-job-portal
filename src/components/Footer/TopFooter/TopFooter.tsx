@@ -1,7 +1,4 @@
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ItemCol from "./ItemCol/ItemCol";
-
 
 function TopFooter() {
     return (

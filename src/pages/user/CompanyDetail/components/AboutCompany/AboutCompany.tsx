@@ -10,7 +10,7 @@ function AboutCompany(props: Props) {
     return (
         <div className=" w-2/3 pr-3 lg:w-full">
             <div className=" mb-10">
-                <h3 className=" text-content-title text-lg font-semibold mb-2">About Company</h3>
+                <h3 className=" text-content-title text-lg font-semibold mb-2">Mô tả về công ty</h3>
                 <p className=" text-base font-medium">
                     {company?.description}
                 </p>

@@ -1,5 +1,5 @@
 import images from '@/assets/images';
-import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
+import { useGetCategoriesQuery } from '@/services/jobsApiSlice';
 import Category from '@/types/Category';
 import { Select, MenuItem } from '@mui/material';
 import { useState, useEffect } from 'react';

@@ -2,13 +2,15 @@ import Category from '@/types/Category';
 import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
+import { buildQueryString } from '@/utils/helper';
 
 export const categoriesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getCategories: builder.query<ResponseApi<Category[]>, void>({
-            query: () => {
+        getCategories: builder.query<ResponseApi<Category[]>, {page?: number, limit?: number, q?:number}>({
+            query: (arg) => {
+                const query = buildQueryString(arg);
                 return {
-                    url: 'categoryJob',
+                    url: `categoryJob?${query && query}`,
                 };
             },
             providesTags(result) {

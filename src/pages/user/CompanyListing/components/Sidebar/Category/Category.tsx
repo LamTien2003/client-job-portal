@@ -1,5 +1,4 @@
 import { useGetCategoriesQuery } from "@/services/categoriesApiSlice";
-import { CategoryType } from "@/services/jobsApiSlice";
 import Category from "@/types/Category";
 import { useEffect, useState } from "react";
 
@@ -9,7 +8,7 @@ function Category() {
     const [check, setCheck] = useState<boolean>(false)
     const [isId, setIsId] = useState<string>('')
 
-    const {data, isLoading, isError} = useGetCategoriesQuery()
+    const {data, isLoading, isError} = useGetCategoriesQuery({limit: 100})
 
     const handleCheck = (id: string) => {
         setIsId(id)
@@ -25,7 +24,7 @@ function Category() {
     }, [data?.data?.data, isLoading, isError])
 
     return (
-        <div className=' bg-white border-content-border border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5'>
+        <div className=' bg-white border-[#eee] border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5'>
             <h3 className=' font-family-title text-content-title font-semibold text-lg mb-2 lg:text-lg'>Company Category</h3>
             <div className=' max-h-64 overflow-scroll'>
                 {categories?.map(cat => {

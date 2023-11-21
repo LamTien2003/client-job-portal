@@ -31,7 +31,7 @@ const ArticleItem: React.FC<Article> = ({ month, date, comment, name, title, img
                 </div>
             </div>
 
-            <h4 className="my-3 font-semibold text-content-title text-lxl lg:text-lg">{title}</h4>
+            <h4 className="my-3 font-semibold text-content-title text-base lg:text-lg">{title}</h4>
             <div className="group">
                 <div className="flex items-center group-hover:cursor-pointer ">
                     <div className="mr-2 relative">

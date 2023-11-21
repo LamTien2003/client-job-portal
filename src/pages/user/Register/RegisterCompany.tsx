@@ -91,7 +91,7 @@ function RegisterCompany() {
                         dispatch(setCurrentUser(user));
                         dispatch(setcredentialsToken(accessToken));
                         setToken(accessToken);
-                        navigate('/');
+                        navigate('/profile/company');
                     }
                 }
             } catch (error:any) {

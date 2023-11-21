@@ -1,195 +1,147 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faPen, faRemove, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import { useAddCategoryMutation, useChangeCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery } from "@/services/categoriesApiSlice";
+import { Box, Modal } from "@mui/material";
+import { useEffect, useState } from "react";
+import AddForm from "./Forms/AddForm";
+import ChangeForm from "./Forms/ChangeForm";
 import Category from "@/types/Category";
+import { useAddCategoryMutation, useChangeCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery } from "@/services/categoriesApiSlice";
+import CategoryAction from "./CategoryActions/CategoryActions";
+import { DataGrid } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
+import Loader from "@/components/Loader/Loader";
 
 function Categories() {
 
-    const {data, isLoading, isError} = useGetCategoriesQuery()
-    const [deleteCategory] = useDeleteCategoryMutation()
-    const [changeCategory] = useChangeCategoryMutation()
-    const [addCategory] = useAddCategoryMutation()
+    const [categoryList, setCategoryList] = useState<Category[]>([])
+    const [categoryCount, setCategoryCount] = useState<number>(0)
+    const [paginationModel, setPaginationModel] = useState({
+        page: 0,
+        pageSize: 5
+    })
 
-    const [categories, setCategories] = useState<Category[]>([])
-    const [category, setCategory] = useState<Category>()
-    
-    const [title, setTitle] = useState<string>('')
-    const [isUpdateForm, setIsUpdateForm] = useState<boolean>(false)
-    const [isAddForm, setIsAddForm] = useState<boolean>(false)
+    const [activeForm, setActiveForm] = useState<boolean>(false)
+    const [formType, setFormType] = useState<string>('')
 
-    const [categoryName, setCategoryName] = useState<string>('')
-    const [isHot, setIsHot] = useState<boolean>()
+    const [category, setCategory] = useState<Category | undefined>()
 
-    const addFormRef = useRef<HTMLFormElement>(null)
-    const updateFormRef = useRef<HTMLFormElement>(null)
+    const {data: dataCategory, isLoading: isLoadingCategory, isError: isErrorCategory} = useGetCategoriesQuery({page: paginationModel.page + 1, limit: paginationModel.pageSize})
+    const [addCategory, { isLoading: isLoadingAdd}] = useAddCategoryMutation()
+    const [changeCategory, {isLoading: isLoadingChange}] = useChangeCategoryMutation()
+    const [deleteCategory, {isLoading: isLoadingDelete}] = useDeleteCategoryMutation()
 
-    const column = useMemo(() => [
-        {
-            field: 'categoryName',
-            headerName: 'Tên danh mục',
-            width: 100,
-        },
-        {
-            field: 'isHotCategory',
-            headerName: 'Độ hot',
-            width: 100,
-        },
-        {
-            field: 'totalJobs',
-            headerName: 'Tổng việc làm',
-            width: 100,
-        },
-    ], [])
-    
-    const handleDeleteCategory = async (id: string) => {
-        const isConfirm = confirm('Bạn có chắc muốn xóa danh mục này ?')
+    const handleAddCategory = async (categoryName: string) => {
+        const isConfirm = confirm('Bạn có chắc muốn thêm danh mục này?')
         if(isConfirm) {
-            const response = await deleteCategory(id)
-            if(response) {
-                toast.success('Xóa danh mục thành công');
-            }
-        } else {
-            return
-        }
-    }
-    
-    const handleChangeCategory = async (e:any) => {
-        e.preventDefault()
-        if(title === 'Change') {
-            const changeObject = {...category, categoryName, isHotCategory: isHot} as Category
-            const isConfirm = confirm('Bạn có chắc muốn cập nhật danh mục này ?')
-            if(isConfirm) {
-                const response = await changeCategory(changeObject)
-                if(response) {
-                    setIsUpdateForm(false)
-                    toast.success('Cập nhật danh mục thành công');
+            setActiveForm(false)
+            try {
+                const response = await addCategory({categoryName}).unwrap()
+                if(response.status === 200) {
+                    toast.success(response.data.msg)
                 }
-            } else {
-                return
+            } catch(err:any) {
+                toast.error(err.data.msg)
             }
-        } else {
-            const isConfirm = confirm('Bạn có chắc muốn thêm danh mục này ?')
-            if(isConfirm) {
-                const response = await addCategory({categoryName: categoryName})
-                if(response) {
-                    setIsUpdateForm(false)
-                    toast.success('Thêm danh mục thành công');
+        }
+    }
+
+    const handleActiveChange = (id: string) => {
+        const categoryById = categoryList.filter(item => item.id === id)
+        setCategory(categoryById[0])
+        setActiveForm(true)
+        setFormType('change')
+    }
+
+    const handleChangeCategory = async (category: Category) => {
+        const isConfirm = confirm('Bạn có chắc muốn thay đổi danh mục này?')
+        if(isConfirm) {
+            setActiveForm(false)
+            try {
+                const response = await changeCategory(category).unwrap()
+                if(response.status === 200) {
+                    toast.success(response.data.msg)
                 }
-            } else {
-                return
+            } catch(err:any) {
+                toast.error(err.data.msg)
             }
         }
     }
 
-    const handleActiveUpdateForm = (category: Category) => {
-        setCategoryName(category.categoryName)
-        setIsHot(category.isHotCategory)
-        setCategory(category)
-        setTitle('Change')
-        setIsUpdateForm(true)
-    }
-
-    const handleActiveAddForm = () => {
-        setCategoryName('')
-        setTitle('Add')
-        setIsAddForm(true)
-    }
-
-    useEffect(() => {
-        if(data?.data?.data && !isLoading && !isError) {
-            setCategories(data?.data?.data)
-        }
-    }, [data?.data?.data, !isLoading, !isError])
-
-    useEffect(() => {
-        let handlerUpdate = (e:any) => {
-            if(!updateFormRef.current?.contains(e.target)) {
-                setIsUpdateForm(false)
+    const handleDeleteCategory = async (id: string) => {
+        const isConfirm = confirm('Bạn có chắc muốn xóa danh mục này?')
+        if(isConfirm) {
+            try {
+                const response = await deleteCategory(id).unwrap()
+                if(response.status === 200) {
+                    toast.success(response.data.msg)
+                }
+            } catch(err:any) {
+                toast.error(err.data.msg)
             }
         }
-        document.addEventListener('mousedown', handlerUpdate)
-    }, [isUpdateForm])
+    }
 
     useEffect(() => {
-        let handlerAdd = (e:any) => {
-            if(!addFormRef.current?.contains(e.target)) {
-                setIsAddForm(false)
-            }
+        if(dataCategory?.data?.data && !isLoadingCategory && !isErrorCategory) {
+            setCategoryList(dataCategory?.data?.data)
         }
-        document.addEventListener('mousedown', handlerAdd)
-    }, [isAddForm])
+    }, [dataCategory?.data?.data, isLoadingCategory, isErrorCategory])
 
-    console.log(categories)
+    useEffect(() => {
+        if(dataCategory?.data?.totalItems && !isLoadingCategory && !isErrorCategory) {
+            setCategoryCount(dataCategory?.data?.totalItems)
+        }
+    }, [dataCategory?.data?.totalItems, isLoadingCategory, isErrorCategory])
+
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 300},
+        { field: 'categoryName', headerName: 'Tên danh mục', width: 240 },
+        { field: 'isHotCategory', headerName: 'Độ hot danh mục', width: 240, renderCell: (params: any) => <>{params.row.isHotCategory === true ? 'Đang hot' : 'Không hot'}</> },
+        { field: 'totalJobs', headerName: 'Tổng công việc', width: 240},
+        { field: 'actions', headerName: 'Hành động', type: 'actions', renderCell: (params: any) => <CategoryAction params={params} onChange={handleActiveChange} onDelete={handleDeleteCategory} /> },
+    ];
 
     return (
         <>
-            {isUpdateForm && (
-                <div className=" w-full h-[100vh] font-family-text text-content-title bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed">
-                    <form ref={updateFormRef} className=" flex flex-col w-[500px] h-auto bg-white rounded-lg p-10 mx-auto mt-40 relative" onSubmit={handleChangeCategory}>
-                        <div className=" text-xl top-3 right-4 absolute cursor-pointer" onClick={() => setIsUpdateForm(false)}>
-                            <FontAwesomeIcon icon={faRemove} />
-                        </div>
-                        <h2 className=" text-center text-2xl font-semibold mb-10">{title} Category</h2>
-                        <div>
-                            <label>Category name:</label>
-                            <input className=" w-full border border-gray-400 rounded-lg py-2 pl-3 mb-10 outline-none" value={categoryName} onChange={e => setCategoryName(e.target.value)} />
-                        </div>
-                        <div>
-                            <label>Category hot:</label>
-                            <div className="flex justify-between w-full border border-gray-400 rounded-lg py-2 px-3 mb-10 ">
-                                <input className=" outline-none" value={isHot ? 'Đang hot' : 'Không hot'} onChange={e => setCategoryName(e.target.value)} />
-                                <div className=" rounded-md px-1 duration-300 cursor-pointer hover:bg-gray-300" onClick={() => setIsHot(!isHot)}>
-                                    <FontAwesomeIcon icon={faRepeat} />
-                                </div>
-                            </div>
-                                
-                        </div>
-                        <button className=" w-full text-white bg-primary-100 rounded-lg py-2" type="submit">Submit</button>
-                    </form>
-                </div>
-            )}
-            {isAddForm && (
-                <div className=" w-full h-[100vh] font-family-text text-content-title bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed">
-                    <form ref={addFormRef} className=" flex flex-col w-[500px] h-auto bg-white rounded-lg p-10 mx-auto mt-40 relative" onSubmit={handleChangeCategory}>
-                        <div className=" text-xl top-3 right-4 absolute cursor-pointer" onClick={() => setIsAddForm(false)}>
-                            <FontAwesomeIcon icon={faRemove} />
-                        </div>
-                        <h2 className=" text-center text-2xl font-semibold mb-10">{title} Category</h2>
-                        <label>Category name:</label>
-                        <input className=" w-full border border-gray-400 rounded-lg py-2 pl-3 mb-10 outline-none" value={categoryName} onChange={e => setCategoryName(e.target.value)} />
-                        <button className=" w-full text-white bg-primary-100 rounded-lg py-2" type="submit">Submit</button>
-                    </form>
-                </div>
-            )}
-            <div className=" flex flex-col font-family-text">
-                <div className=" flex flex-col">
-                    <button className=" w-[240px] text-center text-white text-xl font-family-title font-semibold bg-primary-100 rounded-2xl py-3 px-4 mb-10" onClick={handleActiveAddForm}>Thêm danh mục</button>
-                    <div className=" flex items-center justify-between mb-[20px]">
-                        <div className=" flex flex-col">
-                            <h3 className=" text-content-title font-semibold font-family-text ">Hiển thị 5 danh mục</h3>
-                            <p className=" text-content-text">Theo sở thích của bạn</p>
-                        </div>
-                        <div className=" flex gap-[10px]">
-                            <button className=" text-white bg-primary-100 rounded-3xl py-[6px] px-[18px]">Tất cả</button>
-                            <button className=" text-primary-100 bg-[#ECE8F5] border border-primary-100 rounded-3xl py-[6px] px-[18px]">Tất cả</button>
-                            <button className=" text-primary-100 bg-[#ECE8F5] border border-primary-100 rounded-3xl py-[6px] px-[18px]">Tất cả</button>
-                        </div>
-                        <div className=" flex items-center text-primary-100 border border-primary-100 rounded-lg py-[6px] px-[10px] gap-[5px]">
-                            <p>Mới nhất</p>
-                            <FontAwesomeIcon icon={faCaretDown} />
-                        </div>
-                    </div>
-                    {isLoading ? (
-                        <div className="flex items-center justify-center w-full bg-white py-7">Loading</div>
-                    ) : (
-                        <p>data</p>
-                    )}
-                </div>
+            {(isLoadingAdd || isLoadingChange || isLoadingDelete) && <Loader />}
+            <div className=" font-family-text">
+                {formType === 'add' ? (
+                    <Modal
+                        children={<AddForm onAddForm={handleAddCategory} />}
+                        open={activeForm}
+                        onClose={() => setActiveForm(false)}
+                    />
+                ) : (
+                    <Modal
+                        children={<ChangeForm category={category} onChangeForm={handleChangeCategory} />}
+                        open={activeForm}
+                        onClose={() => setActiveForm(false)}
+                    />
+                )}
+                
+                <button 
+                    className=" w-[250px] font-family-title font-semibold text-xl text-primary-100 bg-white rounded-md border-2 border-primary-100 mb-[30px] py-2 duration-300 hover:text-white hover:bg-primary-100"
+                    onClick={() => {
+                        setActiveForm(true)
+                        setFormType('add')
+                    }} 
+                >
+                    Thêm Danh Mục
+                </button>
+
+                <Box sx={{marginBottom: 10, width: '100%', height: 400}}>
+                    <DataGrid
+                        columns={columns}
+                        rows={categoryList}
+                        rowCount={categoryCount}
+                        pageSizeOptions={[5, 10, 25]}
+                        paginationModel={paginationModel}
+                        onPaginationModelChange={setPaginationModel}
+                        disableRowSelectionOnClick
+                    />
+                </Box>
+                
             </div>
         </>
     );
 }
-
+ 
 export default Categories;

@@ -21,30 +21,30 @@ const BlogGrid = () => {
                             <img className='overflow-hidden rounded-md' src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/blog/blog-img-01.png" alt="" />
                         </div>
                         <div className='grid grid-cols-3 text-[16px]'>
-                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-footer-color-hover '>
+                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-[#009FAC]  '>
                                 <b>02</b>
                                 <p>March</p>
                             </div>
 
 
-                            <div className='ml-[-30px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-30px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-[#009FAC] ' />
                                     03 Comment
                                 </p>
 
                             </div>
 
-                            <div className='ml-[-20px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-20px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-[#009FAC] ' />
                                     Mr. Jack Frank
                                 </p>
                             </div>
                         </div>
 
                         {/* TITLE */}
-                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-footer-color-hover transition duration-[350ms] ease-in-out'>
+                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-[#009FAC]  transition duration-[350ms] ease-in-out'>
                             <p>To Make Your Smartness & Catch Your Bright Dream.</p>
                         </div>
 
@@ -73,30 +73,30 @@ const BlogGrid = () => {
                             <img className='overflow-hidden rounded-md' src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/blog/blog-img-02.png" alt="" />
                         </div>
                         <div className='grid grid-cols-3 text-[16px]'>
-                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-footer-color-hover '>
+                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-[#009FAC]  '>
                                 <b>04</b>
                                 <p>March</p>
                             </div>
 
 
-                            <div className='ml-[-30px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-30px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-[#009FAC] ' />
                                     11 Comment
                                 </p>
 
                             </div>
 
-                            <div className='ml-[-20px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-20px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-[#009FAC] ' />
                                     Mr. Jack Frank
                                 </p>
                             </div>
                         </div>
 
                         {/* TITLE */}
-                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-footer-color-hover transition duration-[350ms] ease-in-out'>
+                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-[#009FAC]  transition duration-[350ms] ease-in-out'>
                             <p>Be Confident Your Dream & Struggle About Your Bright Dream.</p>
                         </div>
 
@@ -125,30 +125,30 @@ const BlogGrid = () => {
                             <img className='overflow-hidden rounded-md' src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/blog/blog-img-03.png" alt="" />
                         </div>
                         <div className='grid grid-cols-3 text-[16px]'>
-                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-footer-color-hover '>
+                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-[#009FAC]  '>
                                 <b>05</b>
                                 <p>March</p>
                             </div>
 
 
-                            <div className='ml-[-30px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-30px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-[#009FAC] ' />
                                     02 Comment
                                 </p>
 
                             </div>
 
-                            <div className='ml-[-20px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-20px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-[#009FAC] ' />
                                     Mr. Jack Frank
                                 </p>
                             </div>
                         </div>
 
                         {/* TITLE */}
-                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-footer-color-hover transition duration-[350ms] ease-in-out'>
+                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-[#009FAC]  transition duration-[350ms] ease-in-out'>
                             <p>How To Be Confident When Your Job Viva In Online, You Get To Know.</p>
                         </div>
 
@@ -178,30 +178,30 @@ const BlogGrid = () => {
                             <img className='overflow-hidden rounded-md' src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/blog/blog-img-04.png" alt="" />
                         </div>
                         <div className='grid grid-cols-3 text-[16px]'>
-                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-footer-color-hover '>
+                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-[#009FAC]  '>
                                 <b>08</b>
                                 <p>April</p>
                             </div>
 
 
-                            <div className='ml-[-30px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-30px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-[#009FAC] ' />
                                     12 Comment
                                 </p>
 
                             </div>
 
-                            <div className='ml-[-20px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-20px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-[#009FAC] ' />
                                     Mr. Jack Frank
                                 </p>
                             </div>
                         </div>
 
                         {/* TITLE */}
-                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-footer-color-hover transition duration-[350ms] ease-in-out'>
+                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-[#009FAC]  transition duration-[350ms] ease-in-out'>
                             <p>To Find Out Your Job Location With Discussion Among Others.</p>
                         </div>
 
@@ -229,30 +229,30 @@ const BlogGrid = () => {
                             <img className='overflow-hidden rounded-md' src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/blog/blog-img-05.png" alt="" />
                         </div>
                         <div className='grid grid-cols-3 text-[16px]'>
-                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-footer-color-hover '>
+                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-[#009FAC]  '>
                                 <b>11</b>
                                 <p>August</p>
                             </div>
 
 
-                            <div className='ml-[-30px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-30px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-[#009FAC] ' />
                                     22 Comment
                                 </p>
 
                             </div>
 
-                            <div className='ml-[-20px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-20px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-[#009FAC] ' />
                                     Mr. Jack Frank
                                 </p>
                             </div>
                         </div>
 
                         {/* TITLE */}
-                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-footer-color-hover transition duration-[350ms] ease-in-out'>
+                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-[#009FAC]  transition duration-[350ms] ease-in-out'>
                             <p>Be Awareness Your Job Interviewing & Be Punctual Your Time.</p>
                         </div>
 
@@ -280,30 +280,30 @@ const BlogGrid = () => {
                             <img className='overflow-hidden rounded-md' src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/blog/blog-img-06.png" alt="" />
                         </div>
                         <div className='grid grid-cols-3 text-[16px]'>
-                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-footer-color-hover '>
+                            <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-white ml-4 -translate-y-8 bg-[#009FAC]  '>
                                 <b>12</b>
                                 <p>June</p>
                             </div>
 
 
-                            <div className='ml-[-30px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-30px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faMessage} className='mr-2 text-[#009FAC] ' />
                                     07 Comment
                                 </p>
 
                             </div>
 
-                            <div className='ml-[-20px] mt-3 hover:text-footer-color-hover'>
+                            <div className='ml-[-20px] mt-3 hover:text-[#009FAC] '>
                                 <p>
-                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-footer-color-hover' />
+                                    <FontAwesomeIcon icon={faUser} className='mr-2 text-[#009FAC] ' />
                                     Mr. Jack Frank
                                 </p>
                             </div>
                         </div>
 
                         {/* TITLE */}
-                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-footer-color-hover transition duration-[350ms] ease-in-out'>
+                        <div className='text-[1.063rem] font-semibold ml-6 hover:text-[#009FAC]  transition duration-[350ms] ease-in-out'>
                             <p>How To Improve Your Interview Question & Easy Answering Step By Step.</p>
                         </div>
 
@@ -369,9 +369,9 @@ const BlogGrid = () => {
                             </div>
                         </a>
                     </li>
-                    <li className='ml-5 pt-[2px] w-7 h-7 text-white hover:text-white  border rounded-full bg-footer-color-hover'><a href="#" >01</a></li>
-                    <li className='ml-5 pt-[2px] w-7 h-7  border rounded-full border-footer-color-hover hover:bg-footer-color-hover hover:text-white'><a href="#">02</a></li>
-                    <li className='ml-5 pt-[2px] w-7 h-7   border rounded-full border-footer-color-hover hover:bg-footer-color-hover hover:text-white'><a href="#">03</a></li>
+                    <li className='ml-5 pt-[2px] w-7 h-7 text-white hover:text-white  border rounded-full bg-[#009FAC] '><a href="#" >01</a></li>
+                    <li className='ml-5 pt-[2px] w-7 h-7  border rounded-full border-[#009FAC]  hover:bg-[#009FAC]  hover:text-white'><a href="#">02</a></li>
+                    <li className='ml-5 pt-[2px] w-7 h-7   border rounded-full border-[#009FAC]  hover:bg-[#009FAC]  hover:text-white'><a href="#">03</a></li>
                     <li>
                         <a href="#">
                             <div className="group">

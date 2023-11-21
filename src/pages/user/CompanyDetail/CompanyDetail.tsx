@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useGetCompanyQuery } from "@/services/companiesApiSlice";
-// import Banner from "@/components/Banner/Banner";
 import { useParams } from "react-router-dom";
 import Job from "./components/Job/Job";
 import Company from "@/types/Company";

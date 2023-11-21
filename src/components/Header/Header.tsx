@@ -7,9 +7,12 @@ import UserMenu from './UserMenu/UserMenu';
 import NonLoginMenu from './NonLoginMenu/NonLoginMenu';
 import images from '@/assets/images';
 import { useGetCurrentUserQuery } from '@/services/usersApiSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 const Header = () => {
-    const {data, isLoading, isError} = useGetCurrentUserQuery()
+    const {data} = useGetCurrentUserQuery()
+    const currentUser = useSelector((state: RootState) => state.user.user)
     const [logout] = useLogoutMutation()
     
     const navigate = useNavigate();
@@ -22,7 +25,7 @@ const Header = () => {
         navigate('/login')
     }
 
-    console.log(data)
+    const user = currentUser ? currentUser : data?.data?.data
 
     return (
         <>
@@ -33,7 +36,7 @@ const Header = () => {
 
                 <div className=' w-full flex items-center justify-between z-20 lg:justify-end tb:justify-end mb:justify-end'>
                     <MainMenu />
-                    {data?.data?.data && !isLoading && !isError && token ? <UserMenu user={data?.data?.data} logout={handleLogout} /> : <NonLoginMenu />}
+                    {user && token ? <UserMenu user={user} logout={handleLogout} /> : <NonLoginMenu />}
                 </div>
             </div>
             <div className=' w-px h-[84px] xl:h-[62px] lg:h-[66px] tb:h-[61px] mb:h-[57px]'></div>

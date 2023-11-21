@@ -72,7 +72,7 @@ import { Swiper as SwiperType } from 'swiper';
 import { useGetCompaniesQuery } from '@/services/companiesApiSlice';
 import { useState, useEffect } from 'react';
 import Company from '@/types/Company';
-import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
+import { useGetCategoriesQuery } from '@/services/jobsApiSlice';
 import Category from '@/types/Category';
 import Skeleton from '@/components/Loading/Skeleton';
 

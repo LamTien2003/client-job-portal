@@ -26,32 +26,38 @@ const JobListing = () => {
     const type = searchParams.get('type')
 
     const { data, isLoading, isError } = useGetJobsQuery(
-        {page: 1, limit: 5}
-    //     q ? type ? {
-    //     page: page,
-    //     limit: 5,
-    //     q: q ? q : '',
-    //     type: type
-    // } : {
-    //     page: page,
-    //     limit: 5,
-    //     q: q,
-    // } : type ? {
-    //     page: page,
-    //     limit: 5,
-    //     type: type
-    // } : (filter.idCat === null ? {
-    //     page: page,
-    //     limit: 5,
-    //     ['salary[gte]']: filter.salary.min,
-    //     ['salary[lte]']: filter.salary.max,
-    // } : {
-    //     page: page,
-    //     limit: 5,
-    //     ['salary[gte]']: filter.salary.min,
-    //     ['salary[lte]']: filter.salary.max,
-    //     type: filter.idCat
-    // })
+        // {page: 1, limit: 5, 'salary[gte]': 1200000, 'salary[lte]': 50000000}
+        // {
+        //     page: page,
+        //     limit: 5,
+        //     'salary[gte]': filter.salary.min,
+        //     'salary[lte]': filter.salary.max,
+        // }
+        q ? type ? {
+            page: page,
+            limit: 5,
+            q: q ? q : '',
+            type: type
+        } : {
+            page: page,
+            limit: 5,
+            q: q,
+        } : type ? {
+            page: page,
+            limit: 5,
+            type: type
+        } : (filter.idCat === null ? {
+            page: page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+        } : {
+            page: page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+            type: filter.idCat
+        })
     );
 
     const handleFilter = (filterObj: filterObject) => {
@@ -102,7 +108,14 @@ const JobListing = () => {
                         {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} changePage={setPage} />}
                         <div className=' flex justify-center'>
                             {pageNumber !== 1 && [...Array(pageNumber)].map((item, index) => (
-                                <div key={index} className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() =>setPage(index + 1)}>{item}{index + 1}</div>
+                                <div 
+                                    key={index} 
+                                    className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' 
+                                    onClick={() => {
+                                        window.scrollTo(0, 0)
+                                        setPage(index + 1)
+                                    }}>{item}{index + 1}
+                                </div>
                             ))}
                         </div>
                     </div>

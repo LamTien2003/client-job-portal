@@ -20,23 +20,23 @@ const BlogDetail = () => {
               <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/blog/blog-dt-img.png" alt="" />
             </div>
             <div className='grid grid-cols-6 text-[16px]'>
-              <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-footer-color-hover bg-content-bg ml-4 -translate-y-8 border-solid border-[1px] border-footer-color-hover '>
+              <div className='w-[67px] h-[67px] pt-2 rounded-md text-center text-[#009FAC]  bg-[#f8f8f8] ml-4 -translate-y-8 border-solid border-[1px] border-[#009FAC]  '>
                 <b>02</b>
                 <p>March</p>
               </div>
 
 
-              <div className='ml-[-30px] text-content-text mt-3 hover:text-footer-color-hover'>
+              <div className='ml-[-30px] text-content-text mt-3 hover:text-[#009FAC] '>
                 <p>
-                  <FontAwesomeIcon icon={faMessage} className='mr-2 text-footer-color-hover' />
+                  <FontAwesomeIcon icon={faMessage} className='mr-2 text-[#009FAC] ' />
                   03 Comment
                 </p>
 
               </div>
 
-              <div className='ml-[-20px] text-content-text mt-3 hover:text-footer-color-hover'>
+              <div className='ml-[-20px] text-content-text mt-3 hover:text-[#009FAC] '>
                 <p>
-                  <FontAwesomeIcon icon={faUser} className='mr-2 text-footer-color-hover' />
+                  <FontAwesomeIcon icon={faUser} className='mr-2 text-[#009FAC] ' />
                   Mr. Jack Frank
                 </p>
               </div>
@@ -48,7 +48,7 @@ const BlogDetail = () => {
             <p className='text-[2.25rem] font-semibold'>How To Improve Your Interview Question & Easy Answering Step By Step.</p>
           </div>
 
-          <hr className="my-5 border-t-2 border-linehr-boder" />
+          <hr className="my-5 border-t-2 border-[rgba(0,167,172,.1607843137)]" />
 
           <p className='text-content-text leading-8 mb-[35px]'>
             <span className='text-[2.25rem]'>A</span>
@@ -161,13 +161,13 @@ const BlogDetail = () => {
 
 
           {/* 2 nut chuyen */}
-          <div className=' w-full h-[118px] border-t-[1px] border-b-[1px] border-content-border mb-20'>
-            <div className='w-14 h-14 rounded-full  translate-y-8 border-[1px] border-footer-color-hover'>
-              <FontAwesomeIcon icon={faAngleLeft} className='text-2xl pl-5 pt-4 text-footer-color-hover' />
+          <div className=' w-full h-[118px] border-t-[1px] border-b-[1px] border-[#eee] mb-20'>
+            <div className='w-14 h-14 rounded-full  translate-y-8 border-[1px] border-[#009FAC] '>
+              <FontAwesomeIcon icon={faAngleLeft} className='text-2xl pl-5 pt-4 text-[#009FAC] ' />
             </div>
 
-            <div className='float-right w-14 h-14 rounded-full -translate-y-6  border-[1px] border-footer-color-hover'>
-              <FontAwesomeIcon icon={faAngleRight} className='text-2xl pl-5 pt-4 text-footer-color-hover' />
+            <div className='float-right w-14 h-14 rounded-full -translate-y-6  border-[1px] border-[#009FAC] '>
+              <FontAwesomeIcon icon={faAngleRight} className='text-2xl pl-5 pt-4 text-[#009FAC] ' />
             </div>
           </div>
 
@@ -192,12 +192,12 @@ const BlogDetail = () => {
                       <div className='w-[70%]  grid grid-cols-3'>
                         <h6 className='text-content-title font-semibold text-[1rem]'>Loiuse Brown,</h6>
                         <span className='ml-[-30px]'>
-                          <FontAwesomeIcon icon={faCalendar} className='mr-2 text-footer-color-hover' />
+                          <FontAwesomeIcon icon={faCalendar} className='mr-2 text-[#009FAC] ' />
                           03 August, 2023
                         </span>
                       </div>
 
-                      <div className='float-right -translate-y-8 text-footer-color-hover hover:text-black'>
+                      <div className='float-right -translate-y-8 text-[#009FAC]  hover:text-black'>
                         <FontAwesomeIcon icon={faReply} className='mr-2 ' />
                         <a href="">Reply</a>
                       </div>
@@ -219,12 +219,12 @@ const BlogDetail = () => {
                       <div className='w-[70%]  grid grid-cols-3'>
                         <h6 className='text-content-title font-semibold text-[1rem]'>Macoline Farray,</h6>
                         <span className='ml-[-30px]'>
-                          <FontAwesomeIcon icon={faCalendar} className='mr-2 text-footer-color-hover' />
+                          <FontAwesomeIcon icon={faCalendar} className='mr-2 text-[#009FAC] ' />
                           11 July, 2023
                         </span>
                       </div>
 
-                      <div className='float-right -translate-y-8 text-footer-color-hover hover:text-black'>
+                      <div className='float-right -translate-y-8 text-[#009FAC]  hover:text-black'>
                         <FontAwesomeIcon icon={faReply} className='mr-2 ' />
                         <a href="">Reply</a>
                       </div>
@@ -241,7 +241,7 @@ const BlogDetail = () => {
 
 
           <div >
-            <form className='w-full bg-content-bg rounded-md pl-10 pb-10  leading-10'>
+            <form className='w-full bg-[#f8f8f8] rounded-md pl-10 pb-10  leading-10'>
 
               <div>
                 <h5 className='font-semibold text-content-title text-[1.25rem] pt-5'>Leave A Reply</h5>
@@ -250,7 +250,7 @@ const BlogDetail = () => {
               <div className='grid grid-cols-2 '>
                 <div>
                   <label>Your Name*</label> <br />
-                  <div className='border-r-2 border-footer-color-hover w-5 translate-x-3 translate-y-[30px]'>
+                  <div className='border-r-2 border-[#009FAC]  w-5 translate-x-3 translate-y-[30px]'>
                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/user-2.svg" alt="" />
                   </div>
 
@@ -260,7 +260,7 @@ const BlogDetail = () => {
 
                 <div>
                   <label>Email*</label> <br />
-                  <div className='border-r-2 border-footer-color-hover w-5 translate-x-3 translate-y-[30px]'>
+                  <div className='border-r-2 border-[#009FAC]  w-5 translate-x-3 translate-y-[30px]'>
                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/email-2.svg" alt="" />
                   </div>
                   <input type="email" placeholder='info@example.com' />
@@ -275,11 +275,11 @@ const BlogDetail = () => {
 
 
               <label >Message</label><br />
-              <textarea className='pl-5 text-[.875rem] font-normal h-[100px] w-[95%] rounded-md border-[0.5px] border-footer-color-hover focus:outline-none hover:border-2' placeholder='Message...'>
+              <textarea className='pl-5 text-[.875rem] font-normal h-[100px] w-[95%] rounded-md border-[0.5px] border-[#009FAC]  focus:outline-none hover:border-2' placeholder='Message...'>
 
               </textarea>
 
-              <button type='button' className='text-[17px] text-white font-medium w-[172px] h-[45px] bg-footer-color-hover rounded-md mt-5 hover:bg-black '>
+              <button type='button' className='text-[17px] text-white font-medium w-[172px] h-[45px] bg-[#009FAC]  rounded-md mt-5 hover:bg-black '>
                 Send Message
               </button>
 
@@ -298,14 +298,14 @@ const BlogDetail = () => {
         <div className='bg-gray-400 '>
           <div></div>
 
-          <div className='h-[400px] bg-content-bg rounded-lg '>
+          <div className='h-[400px] bg-[#f8f8f8] rounded-lg '>
             <div className='ml-6 mr-6 leading-7'>
               <h5 className='font-semibold text-content-title text-[1.25rem] pt-5'>Hey! Do You Looking For Any Jobs?</h5>
               <p className='font-normal text-[1rem] text-content-text mt-3'>Job agencies may also offer additional services such as resume building.</p>
             </div>
 
             <div>
-            <button type='button' className='ml-6 text-[1.063rem] text-white font-medium w-[118px] h-[41px] bg-footer-color-hover rounded-md mt-5 hover:bg-black transition duration-500 ease-all'>
+            <button type='button' className='ml-6 text-[1.063rem] text-white font-medium w-[118px] h-[41px] bg-[#009FAC]  rounded-md mt-5 hover:bg-black transition duration-500 ease-all'>
                 Find Jod
               </button>
             </div>

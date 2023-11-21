@@ -1,16 +1,15 @@
 import { useLayoutEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/services/authApiSlice';
 import { setToken } from '@/utils/storage';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
-import Fields from './components/Fields/Fields';
+import Fields from './Fields/Fields';
 import Loader from '@/components/Loader/Loader';
 import { EMAILREGEX } from '@/constants/regex';
 import { toast } from 'react-toastify';
-import images from '@/assets/images';
 
 const Login = () => {
     const [login, { isLoading }] = useLoginMutation();
@@ -31,7 +30,6 @@ const Login = () => {
         onSubmit: async (values) => {
             try {
                 const response = await login(values).unwrap();
-                console.log(response)
                 if(response?.status === 200) {
                     toast.success(response.data.msg)
                     const user = response.data.data;

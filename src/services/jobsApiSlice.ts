@@ -3,6 +3,7 @@ import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
 import { buildQueryString } from '@/utils/helper';
+import Category from '@/types/Category';
 
 interface ParamsGetAllJob {
     q?: string;
@@ -14,13 +15,6 @@ interface ParamsGetAllJob {
     sort?: string;
     type?: string;
 }
-
-export type CategoryType = {
-    _id: string;
-    categoryName: string;
-    isHotCategory: boolean;
-    id: string;
-};
 
 export const jobsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -83,7 +77,7 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
             query: (id) => `job/${id}`,
             providesTags: () => [{ type: 'Jobs' as const, id: 'LIST' }],
         }),
-        getCategories: builder.query<ResponseApi<CategoryType[]>, void>({
+        getCategories: builder.query<ResponseApi<Category[]>, void>({
             query: () => 'categoryJob',
             providesTags: () => [{ type: 'Jobs' as const, id: '' }],
         }),

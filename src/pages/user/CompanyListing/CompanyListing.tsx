@@ -64,7 +64,14 @@ function CompanyListing() {
                             {!isLoading && !isError && companyList && listStyle === 'gutter' && <CompanyGutter data={companyList} />}
                             <div className=' flex justify-center'>
                                 {pageNumber !== 1 && [...Array(pageNumber)].map((item, index) => (
-                                    <div key={index} className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' onClick={() =>setPage(index + 1)}>{item}{index + 1}</div>
+                                    <div 
+                                        key={index} 
+                                        className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' 
+                                        onClick={() => {
+                                            window.scrollTo(0, 0)
+                                            setPage(index + 1)
+                                        }}>{item}{index + 1}
+                                    </div>
                                 ))}
                             </div>
                         </div>

@@ -13,8 +13,8 @@ const FeaturesItem = ({ job, path }: { job: Job; path: string }) => {
         <NavLink to={path} className="group">
             <div className="bg-white h-[380px] rounded-r pt-9 pb-9 pr-6 pl-6 border-l-4 border-primary-blur group-hover:border-primary-100 font-family-text">
                 <div className=" flex items-start mb-5 relative">
-                    <img className="w-13 h-13 object-cover rounded-full mr-5" src={job.postedBy.photo} />
-                    <div className="w-full flex flex-col border-b border-content-border pb-3">
+                    <img className="w-[52px] h-[52px] object-cover rounded-full mr-5" src={job.postedBy.photo} />
+                    <div className="w-full flex flex-col border-b border-[#eee] pb-3">
                         <h3 className=" text-content-title text-lg font-semibold mb-1">{job.title}</h3>
                         <p className="text-sm">{job.description}</p>
                     </div>
@@ -27,33 +27,33 @@ const FeaturesItem = ({ job, path }: { job: Job; path: string }) => {
                         </div>
                     </div>
                 </div>
-                <div className="  bg-content-bgjob pt-7.5 pb-7.5 pr-6 pl-6 flex flex-col">
+                <div className="  bg-[#fdf9f9] pt-[30px] pb-[30px] pr-6 pl-6 flex flex-col">
                     <div className=" flex items-start mb-2">
                         <img
-                            className=" mt-1.25"
+                            className=" mt-[5px]"
                             src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg"
                         />
-                        <p className=" text-content-text text-cb font-medium ml-1.5">
+                        <p className=" text-content-text text-base font-medium ml-1.5">
                             Lương: <span className=" text-content-title font-semibold ml-1 mr-1.5">{salary} /</span>
                             Tháng
                         </p>
                     </div>
                     <div className=" flex items-start mb-2">
                         <img
-                            className=" mt-1.25"
+                            className=" mt-[5px]"
                             src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg"
                         />
-                        <p className=" text-content-text text-cb font-medium ml-1.5">Vacancy: Per month</p>
+                        <p className=" text-content-text text-base font-medium ml-1.5">Vacancy: Per month</p>
                     </div>
                     <div className=" flex items-start mb-2">
                         <img
-                            className=" mt-1.25"
+                            className=" mt-[5px]"
                             src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg"
                         />
-                        <p className=" text-content-text text-cb font-medium ml-1.5">Thời hạn: {date}</p>
+                        <p className=" text-content-text text-base font-medium ml-1.5">Thời hạn: {date}</p>
                     </div>
                 </div>
-                <div className=" group pt-7.5 ml-2.5">
+                <div className=" group pt-[30px] ml-2.5">
                     <Link
                         to="/job-detail"
                         className=" text-primary-100 flex items-center relative group-hover:cursor-pointer "

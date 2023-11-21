@@ -12,13 +12,13 @@ const Contact = () => {
                         <p className="text-center font-semibold">Main Office</p>
                         <div className="rounded-md border-solid border-2 border-gray-200 mt-5 pl-5 pt-2 leading-10">
                             <p className=" font-semibold">Dhaka, Bangladesh</p>
-                            <p className="hover:text-footer-color-hover">
-                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-footer-color-hover" />
+                            <p className="hover:text-[#009FAC] ">
+                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-[#009FAC] " />
                                 +880-187 346 8987
                             </p>
 
-                            <p className="hover:text-footer-color-hover">
-                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-footer-color-hover" />
+                            <p className="hover:text-[#009FAC] ">
+                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-[#009FAC] " />
                                 Mirpur DOSH, Avenue-01, Road-02, House-147/148
                             </p>
                         </div>
@@ -28,13 +28,13 @@ const Contact = () => {
                         <p className="text-center text-[1.25rem] font-semibold">Office-01</p>
                         <div className="rounded-md border-solid border-2 border-gray-200 mt-5 pl-5 pt-2 leading-10">
                             <p className=" font-semibold">New York, USA</p>
-                            <p className="hover:text-footer-color-hover">
-                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-footer-color-hover" />
+                            <p className="hover:text-[#009FAC] ">
+                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-[#009FAC] " />
                                 +981-187 346 8987
                             </p>
 
-                            <p className="hover:text-footer-color-hover">
-                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-footer-color-hover" />
+                            <p className="hover:text-[#009FAC] ">
+                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-[#009FAC] " />
                                 New York, Avenue-01, Block-B, House-140/142
                             </p>
                         </div>
@@ -44,13 +44,13 @@ const Contact = () => {
                         <p className="text-center text-[1.25rem] font-semibold">Office-02</p>
                         <div className="rounded-md border-solid border-2 border-gray-200 mt-5 pl-5 pt-2 leading-10">
                             <p className=" font-semibold">London City, UK</p>
-                            <p className="hover:text-footer-color-hover">
-                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-footer-color-hover" />
+                            <p className="hover:text-[#009FAC] ">
+                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-[#009FAC] " />
                                 +998-737 346 898
                             </p>
 
-                            <p className="hover:text-footer-color-hover">
-                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-footer-color-hover" />
+                            <p className="hover:text-[#009FAC] ">
+                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-[#009FAC] " />
                                 West London, Avenue-05, Block No-C, House-08/10
                             </p>
                         </div>

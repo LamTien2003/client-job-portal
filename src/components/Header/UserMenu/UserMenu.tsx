@@ -37,7 +37,7 @@ function UserMenu(props: Props) {
         }
         document.addEventListener('mousedown', handler)
     }, [dropDownNot])
-    
+
     return (
         <div className=' w-[158px] flex items-center justify-between lg:w-[200px] tb:w-[200px] mb:w-[200px]'>
             <div className=" flex items-center justify-center w-[34px] h-[34px] bg-[#eff1f0] border border-gray-400 rounded-full cursor-pointer relative">
@@ -46,45 +46,28 @@ function UserMenu(props: Props) {
                 </div>
                 <div className=" flex items-center justify-center w-[12px] h-[12px] text-[9px] text-white bg-primary-100 rounded-full top-0 right-0 absolute">5</div>
             </div>
-            <div ref={notificationRef} className=" flex items-center justify-center w-[34px] h-[34px] bg-[#eff1f0] border border-gray-400 rounded-full cursor-pointer relative" onClick={() => setDropDownNot(!dropDownNot)}>
+            <div className=" flex items-center justify-center w-[34px] h-[34px] bg-[#eff1f0] border border-gray-400 rounded-full cursor-pointer relative" onClick={() => setDropDownNot(!dropDownNot)}>
                 <div className=" fill-primary-100">
                     <BellIcon />
                 </div>
                 <div className=" flex items-center justify-center w-[12px] h-[12px] text-[9px] text-white bg-primary-100 rounded-full top-0 right-0 absolute">5</div>
                 {dropDownNot && (
-                    <div className=" w-[278.4px] flex flex-col bg-white rounded shadow-md top-[63px] right-0 absolute cursor-default">
-                        <p className=" text-center text-content-title font-semibold p-[15px]">5 Notifications</p>
-                        <div className=" flex items-start border-t border-[#eee] p-[10px]">
-                            <img className=" w-[30px] h-[30px] rounded-full mr-[10px]" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/notifacion-1.png" />
-                            <div className=" flex flex-col">
-                                <Link className=" text-sm text-content-title font-medium mb-1 duration-300 cursor-pointer hover:text-primary-100" to={'/'}>Your application has accepted in 5 vacancies.</Link>
-                                <div className=" flex items-center">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/clock-1.svg" />
-                                    <p className=" text-xs text-content-text ml-1">10 mins ago</p>
+                    <div ref={notificationRef} className=" w-[278.4px] flex flex-col bg-white rounded shadow-md top-[63px] right-0 absolute cursor-default">
+                        <p className=" text-center text-content-title font-family-title font-semibold p-[15px]">{currentUser.notifications.length} Thông báo</p>
+                        {currentUser.notifications.map(notification => {
+                            const date = new Date(notification.createdAt)
+                            return (
+                                <div className=" flex items-start border-t border-[#eee] p-[15px]">
+                                    <div className=" flex flex-col">
+                                        <p className=" text-sm text-content-title font-medium mb-2" >{notification.content}</p>
+                                        <div className=" flex items-center">
+                                            <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/clock-1.svg" />
+                                            <p className=" text-xs text-content-text ml-1">Vào ngày {`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className=" flex items-start border-t border-[#eee] p-[10px]">
-                            <img className=" w-[30px] h-[30px] rounded-full mr-[10px]" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/notifacion-1.png" />
-                            <div className=" flex flex-col">
-                                <Link className=" text-sm text-content-title font-medium mb-1 duration-300 cursor-pointer hover:text-primary-100" to={'/'}>Your application has accepted in 5 vacancies.</Link>
-                                <div className=" flex items-center">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/clock-1.svg" />
-                                    <p className=" text-xs text-content-text ml-1">10 mins ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className=" flex items-start border-t border-[#eee] p-[10px]">
-                            <img className=" w-[30px] h-[30px] rounded-full mr-[10px]" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/company-logo/notifacion-1.png" />
-                            <div className=" flex flex-col">
-                                <Link className=" text-sm text-content-title font-medium mb-1 duration-300 cursor-pointer hover:text-primary-100" to={'/'}>Your application has accepted in 5 vacancies.</Link>
-                                <div className=" flex items-center">
-                                    <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/clock-1.svg" />
-                                    <p className=" text-xs text-content-text ml-1">10 mins ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <p className=" text-center text-content-title font-semibold border-t border-[#eee] p-[15px] duration-300 cursor-pointer hover:text-primary-100">5 Notifications</p>
+                            )}
+                        )}
                     </div>
                 )}
             </div>

@@ -1,7 +1,6 @@
 import BotFooter from "./BotFooter/BotFooter";
 import TopFooter from "./TopFooter/TopFooter";
 
-
 const Footer = () => {
     return (
         <div className=" w-full text-white bg-[#1a1a1a] pt-[90px]">

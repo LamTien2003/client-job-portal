@@ -16,14 +16,14 @@ function CompanyInfo(props: Props) {
                     className=" w-full mr-auto ml-auto rounded-t-xl"
                     src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/blog-dt-img.png"
                 />
-                <div className=" w-22.5 h-22.5 bg-content-bg rounded -bottom-11.25 left-1/2 -translate-x-1/2 rotate-45 flex items-center justify-center absolute">
+                <div className=" w-[90px] h-[90px] bg-[#f8f8f8] rounded -bottom-11.25 left-1/2 -translate-x-1/2 rotate-45 flex items-center justify-center absolute">
                     <img
                         className=" rounded-full"
                         src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/blog-dt-logo.png"
                     />
                 </div>
             </div>
-            <div className=" w-full pt-7.5 pr-7.5 pl-7.5 pb-12 mr-auto ml-auto flex justify-between lg:flex-col">
+            <div className=" w-full pt-[30px] pr-[30px] pl-[30px] pb-12 mr-auto ml-auto flex justify-between lg:flex-col">
                 <div className=" flex flex-col lg:mb-2">
                     <h1 className=" text-content-title text-2xl font-semibold mb-2.5">{company.companyName}</h1>
                     <div className=" flex">
@@ -44,16 +44,16 @@ function CompanyInfo(props: Props) {
                     <div className=" flex flex-col items-center lg:items-start mb:mb-2">
                         <div className=" mb-2 flex">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/web-5.svg" />
-                            <p className=" text-content-title font-medium text-cb ml-2">Website Link:</p>
+                            <p className=" text-content-title font-medium text-base ml-2">Website Link:</p>
                         </div>
-                        <a href={company.website} className=" text-content-link text-sm font-medium">
+                        <a href={company.website} className=" text-[#0279cf] text-sm font-medium">
                             {company.website}
                         </a>
                     </div>
                     <div className=" ml-10 flex flex-col mb:items-start mb:ml-0">
                         <div className=" mb-3 flex">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/share-icon.svg" />
-                            <p className=" text-content-title font-medium text-cb ml-2">Follow Company:</p>
+                            <p className=" text-content-title font-medium text-base ml-2">Follow Company:</p>
                         </div>
                         <div className=" flex lg:justify-between">
                             <FontAwesomeIcon className=" mr-3" icon={faFacebookF} />

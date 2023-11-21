@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
+import { useGetCategoriesQuery } from '@/services/jobsApiSlice';
 import CategoryItem from './CategoryItem';
 import images from '@/assets/images';
 import Category from '@/types/Category';

@@ -16,10 +16,10 @@ function RelatedJob(props: Props) {
     const {logo, position, shiftsWork, salary, vacancy, deadline} = props
     return (
         <div className=" ">
-            <div className=" bg-content-bgjob rounded-r pt-6 pb-6 pr-6 pl-6 border-l-4 border-primary-100 ">
+            <div className=" bg-[#fdf9f9] rounded-r pt-6 pb-6 pr-6 pl-6 border-l-4 border-primary-100 ">
                 <div className=" flex items-start mb-5 relative">
                     <img className=" rounded-full mr-5" src={logo} />
-                    <div className=" w-full flex flex-col border-b border-content-border pb-3">
+                    <div className=" w-full flex flex-col border-b border-[#eee] pb-3">
                         <h3 className=" font-family-title text-content-title text-lg font-semibold mb-1">{position}</h3>
                         <p className=" text-sm">{shiftsWork}</p>
                     </div>
@@ -31,16 +31,16 @@ function RelatedJob(props: Props) {
                 </div>
                 <div className=" bg-white pt-5 pb-5 pr-5 pl-5 flex flex-col">
                     <div className=" flex items-start mb-2">
-                        <img className=" mt-1.25" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg" />
-                        <p className=" text-content-text text-cb font-medium ml-1.5">Salary: <span className=" text-content-title font-semibold ml-1 mr-1.5">{salary} /</span>Per month</p>
+                        <img className=" mt-[5px]" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg" />
+                        <p className=" text-content-text text-base font-medium ml-1.5">Salary: <span className=" text-content-title font-semibold ml-1 mr-1.5">{salary} /</span>Per month</p>
                     </div>
                     <div className=" flex items-start mb-2">
-                        <img className=" mt-1.25" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg" />
-                        <p className=" text-content-text text-cb font-medium ml-1.5">Vacancy: {vacancy}</p>
+                        <img className=" mt-[5px]" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg" />
+                        <p className=" text-content-text text-base font-medium ml-1.5">Vacancy: {vacancy}</p>
                     </div>
                     <div className=" flex items-start">
-                        <img className=" mt-1.25" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg" />
-                        <p className=" text-content-text text-cb font-medium ml-1.5">Deadline: {deadline}</p>
+                        <img className=" mt-[5px]" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/arrow2.svg" />
+                        <p className=" text-content-text text-base font-medium ml-1.5">Deadline: {deadline}</p>
                     </div>
                 </div>
                 <div className=" mt-6 flex items-center relative mb:flex-col mb:items-start">

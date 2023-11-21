@@ -18,7 +18,7 @@ function JobGutter(props: Props) {
                     const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                     return (
                         <div key={job.id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full ">
-                            <div className=" border-content-border border rounded p-4 relative">
+                            <div className=" border-[#eee] border rounded p-4 relative">
                                 <img
                                     className=" rounded tb:w-full"
                                     src={job.postedBy.coverPhoto}
@@ -41,9 +41,9 @@ function JobGutter(props: Props) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className=" list-none border-t border-content-border pt-5">
+                                <div className=" list-none border-t border-[#eee] pt-5">
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
-                                        <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
+                                        <p className=" text-content-text font-medium text-base lg:text-sm mb:text-xs ">
                                             Lương: 
                                             <span className=" text-content-title font-medium ml-1">
                                                 {job.salary.toLocaleString('it')}đ /
@@ -52,7 +52,7 @@ function JobGutter(props: Props) {
                                         </p>
                                     </div>
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
-                                        <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
+                                        <p className=" text-content-text font-medium text-base lg:text-sm mb:text-xs ">
                                             Kĩ năng yêu cầu: 
                                             <span className=" text-content-title font-medium ml-1">
                                                 {job.skillsRequire}
@@ -60,7 +60,7 @@ function JobGutter(props: Props) {
                                         </p>
                                     </div>
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-200 before:mr-2">
-                                        <p className=" text-content-text font-medium text-cb lg:text-sm mb:text-xs ">
+                                        <p className=" text-content-text font-medium text-base lg:text-sm mb:text-xs ">
                                             Nơi làm việc: 
                                             <span className=" text-content-title font-medium ml-1">
                                                 {job.postedBy.location.city}
@@ -69,16 +69,14 @@ function JobGutter(props: Props) {
                                     </div>
                                 </div>
                                 <div className=" mt-5 mb-3 flex relative">
-                                    {/* <div className=' text-content-title text-sm font-medium bg-content-bg-full-time rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs '>Full Time</div> */}
-                                    {/* <div className=' text-content-title text-sm font-medium bg-content-bg-part-time rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 mr-5 ml-5 lg:text-xs '>Part Time</div> */}
-                                    <div className=" text-content-title text-sm font-medium bg-content-bg-remote rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs ">
-                                        Remote
+                                    <div className=" text-content-title text-sm font-medium bg-gray-300 rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs ">
+                                        Fulltime
                                     </div>
 
                                     <div className=" group bottom-2 right-0 absolute cursor-pointer ">
                                         <div className=" border border-primary-100 pr-5 pl-5 pt-1 pb-1 rounded-md group duration-300 hover:bg-primary-100 right-0 mb:static mb:mt-3 mb:ml-2">
                                             <Link
-                                                to={'/job-detail/' + job.id}
+                                                to={'/job-detail/' + job._id}
                                                 className=" text-primary-100 flex items-center duration-300 group-hover:text-white group-hover:cursor-pointer "
                                             >
                                                 <span className=" text-sm font-medium mb:text-xs ">Xem thêm</span>
