@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import SelectCity from './SelectCity';
 import SelectDistrict from './SelectDistrict';
+import { toast } from 'react-toastify';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -51,8 +52,7 @@ const validation = Yup.object().shape({
 });
 const FormInfo = ({ handleOpen, open }: FormInfo) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
-    // Đợi backend trả về code của city để initial value ở đây
-    const [code, setCode] = useState<number>(1);
+    const [code, setCode] = useState<number>();
 
     const [changeInfo, { isLoading }] = useChangeMeUserMutation();
 
@@ -70,12 +70,22 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                 form.append('gender', values.gender);
                 form.append('phoneNumber', values.phoneNumber);
                 form.append('photo', values.photo);
-                await changeInfo(form);
-                alert('Cập nhật thông tin thành công!');
+
+                const res = await changeInfo(form).unwrap();
+
+                if (res.status === 200) {
+                    toast.success('Cập nhật thông tin thành công!');
+                }
+
                 formik.resetForm();
                 handleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                if (error.status === 400) {
+                    toast.error(error.data.msg);
+                }
+                if (error.status === 500) {
+                    toast.error('Lỗi server');
+                }
             }
         },
     });
@@ -96,33 +106,35 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Thông tin cá nhân</DialogHeader>
+            <DialogHeader className="px-8 bg-primary-200 text-2xl font-family-title">Thông tin cá nhân</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
                     <AvatarSection formik={formik} />
-                    <div className="grid grid-cols-2 w-full gap-6">
+                    <div className="grid grid-cols-2 w-full gap-6 tb:grid-cols-1 mb:grid-cols-1">
                         <CustomField
-                            title="Họ"
+                            title="Họ *"
                             fieldName="firstName"
                             error={formik.errors.firstName}
                             touched={formik.touched.firstName}
                             icon={<AiOutlineUser />}
                             placeholder="Nhập họ của bạn"
                             value={formik.values.firstName}
+                            onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
                         />
                         <CustomField
-                            title="Tên"
+                            title="Tên *"
                             fieldName="lastName"
                             error={formik.errors.lastName}
                             touched={formik.touched.lastName}
                             icon={<AiOutlineUser />}
                             placeholder="Nhập tên của bạn"
                             value={formik.values.lastName}
+                            onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
                         />
                         <SelectGender
-                            title="Giới tính"
+                            title="Giới tính *"
                             fieldName="gender"
                             value={formik.values.gender}
                             onChange={formik.handleChange}
@@ -131,7 +143,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                         />
 
                         <SelectCity
-                            title="Tỉnh, Thành Phố"
+                            title="Tỉnh, Thành Phố *"
                             fieldName="locationCity"
                             value={formik.values.locationCity}
                             onChange={formik.handleChange}
@@ -141,7 +153,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                         />
 
                         <SelectDistrict
-                            title="Quận, Huyện"
+                            title="Quận, Huyện *"
                             fieldName="locationDistrict"
                             value={formik.values.locationDistrict}
                             onChange={formik.handleChange}
@@ -151,7 +163,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                         />
 
                         <CustomField
-                            title="Địa chỉ"
+                            title="Địa chỉ *"
                             fieldName="locationAddress"
                             error={formik.errors.locationAddress}
                             touched={formik.touched.locationAddress}
@@ -163,13 +175,14 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                         />
 
                         <CustomField
-                            title="Số điện thoại"
+                            title="Số điện thoại *"
                             fieldName="phoneNumber"
                             error={formik.errors.phoneNumber}
                             touched={formik.touched.phoneNumber}
                             icon={<AiOutlinePhone />}
                             placeholder="Nhập số điện thoại của bạn"
                             value={formik.values.phoneNumber}
+                            onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
                         />
                     </div>

@@ -20,9 +20,17 @@ const SelectDistrict = ({ title, fieldName, value, onChange, error, touched, cod
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
-            setDistricts(data?.data?.data?.districts);
+            const receivedDistricts = data?.data?.data?.districts;
+            if (receivedDistricts && receivedDistricts.length > 0) {
+                setDistricts(receivedDistricts);
+                const initialValue = receivedDistricts.some((district) => district.name === value)
+                    ? value
+                    : receivedDistricts[0]?.name;
+
+                onChange({ target: { name: fieldName, value: initialValue } });
+            }
         }
-    }, [data?.data?.data, isError, isLoading]);
+    }, [data?.data?.data, isError, isLoading, onChange]);
 
     return (
         <div className="flex flex-col gap-1 w-full">
@@ -30,7 +38,7 @@ const SelectDistrict = ({ title, fieldName, value, onChange, error, touched, cod
                 {title}
             </label>
             <div
-                className={`flex items-center text-s-text w-full border-2 bg-input rounded-md ${
+                className={`flex items-center text-content-title w-full border-2 bg-input rounded-md ${
                     error && touched && 'border-red-800'
                 }`}
             >
@@ -44,13 +52,11 @@ const SelectDistrict = ({ title, fieldName, value, onChange, error, touched, cod
                     variant="standard"
                     className="select w-full h-11 text-content-s-text items-center"
                 >
-                    {districts?.map((item: any, index: any) => {
-                        return (
-                            <MenuItem key={index} value={item.name}>
-                                {item.name}
-                            </MenuItem>
-                        );
-                    })}
+                    {districts?.map((item: any, index: any) => (
+                        <MenuItem key={index} value={item.name}>
+                            {item.name}
+                        </MenuItem>
+                    ))}
                 </Select>
             </div>
             {error && touched ? <div className="text-red-700 text-sm font-semibold">{error}</div> : null}

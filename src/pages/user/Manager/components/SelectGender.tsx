@@ -24,7 +24,7 @@ const SelectGender = ({ title, fieldName, value, onChange, error, touched }: Sel
                 {title}
             </label>
             <div
-                className={`flex items-center text-s-text w-full border-2 bg-input rounded-md ${
+                className={`flex items-center text-content-title w-full border-2 bg-input rounded-md ${
                     error && touched && 'border-red-800'
                 }`}
             >

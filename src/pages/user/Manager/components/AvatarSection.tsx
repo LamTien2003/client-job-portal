@@ -23,7 +23,7 @@ const AvatarSection = ({ formik }: { formik: any }) => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-2">
-            <img src={previewImage ? previewImage : currentUser?.photo} alt="avt" className="w-32 h-32 rounded-full" />
+            <img src={previewImage ? previewImage : currentUser?.photo} alt="avt" className="w-24 h-24 rounded-full" />
             <div className="flex gap-6">
                 <div>
                     <label
@@ -38,7 +38,7 @@ const AvatarSection = ({ formik }: { formik: any }) => {
                     <input name="photo" id="photo" className="hidden" type="file" onChange={handleFile} />
                 </div>
 
-                <button type='button' onClick={handleDelete} className="flex items-center hover:text-primary-100">
+                <button type="button" onClick={handleDelete} className="flex items-center hover:text-primary-100">
                     <span className="text-xl">
                         <MdDeleteOutline />
                     </span>
