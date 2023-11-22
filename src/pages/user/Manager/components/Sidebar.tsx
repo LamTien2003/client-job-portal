@@ -1,5 +1,5 @@
 import { MdOutlineDashboard, MdWork } from 'react-icons/md';
-import { RiLogoutCircleRLine } from 'react-icons/ri';
+import { RiLockPasswordLine, RiLogoutCircleRLine } from 'react-icons/ri';
 import TitleProfile from './TitleProfile';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
@@ -19,6 +19,8 @@ const Sidebar = () => {
 
             {company && <TitleProfile title="Thùng rác" path="company/job-deleted" logo={<MdOutlineDashboard />} />}
             {company && <TitleProfile title="Thêm công việc" path="company/post-job" logo={<MdOutlineDashboard />} />}
+
+            <TitleProfile title="Đổi mật khẩu" path="/profile/updateMyPassword" logo={<RiLockPasswordLine />} />
         </div>
     );
 };

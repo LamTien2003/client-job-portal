@@ -3,6 +3,7 @@ import { apiSlice } from './apiSlice';
 import Company from '@/types/Company';
 import { ResponseApi } from '@/types/ResponseApi';
 import { buildQueryString } from '@/utils/helper';
+import { UpdateMyPassword } from '@/types/User';
 
 type MixinUser = JobSeeker | Company;
 
@@ -67,7 +68,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 return {
                     url: `user/ban/${id}`,
                     method: 'PATCH',
-                } 
+                };
             },
             invalidatesTags: (_result, error) => {
                 if (!error) {
@@ -84,8 +85,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             query: (id) => {
                 return {
                     url: `user/unban/${id}`,
-                    method: 'PATCH'
-                }
+                    method: 'PATCH',
+                };
             },
             invalidatesTags: (_result, error) => {
                 if (!error) {
@@ -98,6 +99,21 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 return [];
             },
         }),
+
+        updateMyPassword: builder.mutation<ResponseApi<MixinUser>, UpdateMyPassword>({
+            query(body) {
+                try {
+                    return {
+                        url: `user/updateMyPassword`,
+                        method: 'PATCH',
+                        body,
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Users' as const, id: 'CURRENT' }]),
+        }),
     }),
 });
 
@@ -108,4 +124,5 @@ export const {
     useChangeMeUserMutation,
     useBanUserMutation,
     useUnbanUserMutation,
+    useUpdateMyPasswordMutation,
 } = usersApiSlice;

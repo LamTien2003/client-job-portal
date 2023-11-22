@@ -21,3 +21,9 @@ export default interface User {
     notifications: Notification[];
     type: 'jobseeker' | 'company';
 }
+
+export interface UpdateMyPassword {
+    currentPassword: string;
+    password: string;
+    passwordConfirm: string;
+}

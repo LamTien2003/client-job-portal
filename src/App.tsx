@@ -37,6 +37,7 @@ import JobSeekerManager from './pages/user/Manager/JobSeeker/JobSeekerManager';
 import CompanyManager from './pages/user/Manager/Company/CompanyManager';
 import RegisterJobseeker from './pages/user/Register/RegisterJobseeker';
 import RegisterCompany from './pages/user/Register/RegisterCompany';
+import UpdatePassword from './pages/user/Manager/components/UpdatePassword/UpdatePassword';
 
 function App() {
     const uiState = useSelector((state: RootState) => state.ui);
@@ -48,8 +49,8 @@ function App() {
                 {/* Public routes */}
                 <Route element={<DefaultLayout />}>
                     <Route path="login" index element={<Login />} />
-                    <Route path='register/jobseeker' index element={<RegisterJobseeker />} />
-                    <Route path='register/company' index element={<RegisterCompany />} />
+                    <Route path="register/jobseeker" index element={<RegisterJobseeker />} />
+                    <Route path="register/company" index element={<RegisterCompany />} />
                     <Route index element={<Home />} />
                     <Route path="job-listing" index element={<JobListing />} />
                     <Route path="job-detail/:id" index element={<JobDetail />} />
@@ -79,6 +80,7 @@ function App() {
                                 <Route path="job-deleted" element={<JobDeleted />} />
                                 <Route path="post-job" element={<PostJob />} />
                             </Route>
+                            <Route path="updateMyPassword" element={<UpdatePassword />} />
                         </Route>
                     </Route>
                 </Route>

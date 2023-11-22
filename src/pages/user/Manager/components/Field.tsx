@@ -1,5 +1,6 @@
 import { FormikErrors } from 'formik';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 interface CustomFieldProps {
     fieldName: string;
@@ -13,6 +14,7 @@ interface CustomFieldProps {
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     disabled?: boolean;
     onBlur?: React.ChangeEventHandler<HTMLInputElement>;
+    showPass?: boolean;
 }
 
 const CustomField = ({
@@ -27,7 +29,9 @@ const CustomField = ({
     onChange,
     disabled,
     onBlur,
+    showPass,
 }: CustomFieldProps) => {
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     return (
         <div className="flex flex-col gap-1 w-full">
             <label className="font-family-title font-bold text-primary-100" htmlFor={fieldName}>
@@ -42,13 +46,21 @@ const CustomField = ({
                 <input
                     name={fieldName}
                     className={`w-full h-12 rounded-md py-2 outline-none bg-input ${type === 'date' && 'pr-3'}`}
-                    type={type ? type : 'text'}
+                    type={type && type === 'password' ? (showPassword ? 'text' : 'password') : type || 'text'}
                     placeholder={placeholder}
                     value={value !== undefined && value !== null ? value.toString() : ''}
                     onChange={onChange}
                     disabled={disabled}
                     onBlur={onBlur}
                 />
+                {showPass && (
+                    <div
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="text-xl px-3 cursor-pointer hover:text-primary"
+                    >
+                        {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                    </div>
+                )}
             </div>
             {error && touched ? (
                 <div className="text-red-700 text-sm font-semibold">
