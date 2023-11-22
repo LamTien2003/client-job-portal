@@ -13,7 +13,7 @@ export const utilsApiSlice = apiSlice.injectEndpoints({
             providesTags: () => [{ type: 'Skills' as const, id: 'LIST' }],
         }),
 
-        getProvinces: builder.query<ResponseApi<any[]>, void>({
+        getProvinces: builder.query<ResponseApi<Location[]>, void>({
             query: () => `utils/getCity`,
             providesTags: () => [{ type: 'Location' as const, id: 'LIST' }],
         }),
