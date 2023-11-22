@@ -106,11 +106,11 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Thông tin cá nhân</DialogHeader>
+            <DialogHeader className="px-8 bg-primary-200 text-2xl font-family-title">Thông tin cá nhân</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
                     <AvatarSection formik={formik} />
-                    <div className="grid grid-cols-2 w-full gap-6">
+                    <div className="grid grid-cols-2 w-full gap-6 tb:grid-cols-1 mb:grid-cols-1">
                         <CustomField
                             title="Họ *"
                             fieldName="firstName"
@@ -119,6 +119,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             icon={<AiOutlineUser />}
                             placeholder="Nhập họ của bạn"
                             value={formik.values.firstName}
+                            onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
                         />
                         <CustomField
@@ -129,6 +130,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             icon={<AiOutlineUser />}
                             placeholder="Nhập tên của bạn"
                             value={formik.values.lastName}
+                            onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
                         />
                         <SelectGender
@@ -180,6 +182,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             icon={<AiOutlinePhone />}
                             placeholder="Nhập số điện thoại của bạn"
                             value={formik.values.phoneNumber}
+                            onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
                         />
                     </div>

@@ -41,7 +41,7 @@ const validation = Yup.object().shape({
     title: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Tiêu đề không được bỏ trống!'),
     numberRecruitment: Yup.number().required('Số lượng không được bỏ trống!').min(1, 'Số lượng không được nhỏ hơn 1'),
     description: Yup.string().max(500, 'Không được quá 500 kí tự!').required('Mô tả không được bỏ trống!'),
-    jobRequire: Yup.string().max(100, 'Không được quá 500 kí tự!').required('Yêu cầu không được bỏ trống!'),
+    jobRequire: Yup.string().max(1000, 'Không được quá 1000 kí tự!').required('Yêu cầu không được bỏ trống!'),
     skillsRequire: Yup.string().required('Kỹ năng không được bỏ trống!'),
     type: Yup.string().required('type không được bỏ trống!'),
     salary: Yup.number()
