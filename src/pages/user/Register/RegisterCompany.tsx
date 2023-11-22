@@ -33,7 +33,7 @@ const initialValues = {
     companySizeTo: '',
 };
 function RegisterCompany() {
-    const [RegisterCompany, { isLoading: iisLoadingRegister }] = useRegisterCompanyMutation();
+    const [RegisterCompany, { isLoading: isLoadingRegister }] = useRegisterCompanyMutation();
 
     const [city, setCity] = useState<Location[]>([])
     const [district, setDistrict] = useState<District[]>([])
@@ -83,15 +83,15 @@ function RegisterCompany() {
                     },
                 } as RegisterCompanyRequest;
                 const response = await RegisterCompany(myValues).unwrap();
-                if(response.status === 201) {
+                if(response) {
                     toast.success(response.data.msg)
                     const user = response.data.data;
                     const accessToken = response.data.accessToken;
                     if (user && accessToken) {
-                        dispatch(setCurrentUser(user));
-                        dispatch(setcredentialsToken(accessToken));
                         setToken(accessToken);
-                        navigate('/profile/company');
+                        setcredentialsToken(accessToken)
+                        setCurrentUser(user)
+                        navigate('/')
                     }
                 }
             } catch (error:any) {
@@ -110,7 +110,7 @@ function RegisterCompany() {
 
     return (
         <>
-            {iisLoadingRegister && <Loader />}
+            {isLoadingRegister && <Loader />}
             <div className=' w-full bg-gradient-to-r from-[#00032d] to-[#103185] py-20'>
                 <div className=' flex flex-col w-[900px] mx-auto '>
                     <h1 className=' text-center font-family-title text-primary-100 font-semibold text-3xl mb-4'>Đăng ký (Công ty)</h1>

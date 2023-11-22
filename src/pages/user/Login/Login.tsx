@@ -52,6 +52,8 @@ const Login = () => {
         window.scrollTo(0, 0)
     }, [])
 
+    console.log(isLoading)
+
     return (
         <>
             {isLoading && <Loader/>}

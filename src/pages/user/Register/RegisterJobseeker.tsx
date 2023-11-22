@@ -64,8 +64,8 @@ function RegisterJobseeker() {
                 },
                 phoneNumber: values.phoneNumber,
                 introduce: values.introduce,
-                password: values.type,
-                passwordConfirm: values.type
+                password: values.password,
+                passwordConfirm: values.passwordConfirm
             } as RegisterJobseekerRequest
             try {
                 const response = await registerJobseeker(myValue).unwrap();
