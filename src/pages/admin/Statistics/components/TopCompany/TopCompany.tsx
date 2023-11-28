@@ -12,10 +12,9 @@ const TopCompany = () => {
             setCompanies(data?.data?.data);
         }
     }, [isLoading, isError, data?.data?.data]);
-    console.log(companies);
 
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
                 <h5 className="font-family-title text-xl font-title">Top Công Ty</h5>
                 <h5 className="font-family-text text-content-text font-medium">

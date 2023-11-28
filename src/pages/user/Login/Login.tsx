@@ -23,15 +23,13 @@ const Login = () => {
         },
         validationSchema: Yup.object({
             email: Yup.string().required('Không được để trống').matches(EMAILREGEX, 'Email phải đúng định dạng'),
-            password: Yup.string()
-                .required('Không được để trống')
-                .min(8, 'Mật khẩu phải có ít nhất 8 ký tự')
+            password: Yup.string().required('Không được để trống').min(8, 'Mật khẩu phải có ít nhất 8 ký tự'),
         }),
         onSubmit: async (values) => {
             try {
                 const response = await login(values).unwrap();
-                if(response?.status === 200) {
-                    toast.success(response.data.msg)
+                if (response?.status === 200) {
+                    toast.success(response.data.msg);
                     const user = response.data.data;
                     const accessToken = response.data.accessToken;
                     if (user && accessToken) {
@@ -41,26 +39,27 @@ const Login = () => {
                     }
                     navigate(-1);
                 }
-            } catch(error:any) {
-                toast.error(error.data.msg)
+            } catch (error: any) {
+                toast.error(error.data.msg);
             }
-            
         },
     });
 
     useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+        window.scrollTo(0, 0);
+    }, []);
 
-    console.log(isLoading)
+    console.log(isLoading);
 
     return (
         <>
-            {isLoading && <Loader/>}
-            <div className=' w-full min-h-screen bg-gradient-to-r from-[#00032d] to-[#103185] py-20'>
-                <div className=' flex flex-col w-[550px] mx-auto'>
-                    <h1 className=' text-center font-family-title text-primary-100 font-semibold text-3xl mb-4'>Đăng nhập</h1>
-                    <div className=' w-full h-auto bg-white rounded-xl p-[40px]'>
+            {isLoading && <Loader />}
+            <div className=" w-full min-h-screen bg-gradient-to-r from-[#00032d] to-[#103185] py-20">
+                <div className=" flex flex-col w-[550px] mx-auto">
+                    <h1 className=" text-center font-family-title text-primary-100 font-semibold text-3xl mb-4">
+                        Đăng nhập
+                    </h1>
+                    <div className=" w-full h-auto bg-white rounded-xl p-[40px]">
                         <form onSubmit={formik.handleSubmit}>
                             <Fields
                                 type="text"
@@ -94,7 +93,9 @@ const Login = () => {
                                             Ghi nhớ tôi
                                         </label>
                                     </div>
-                                    <p className=" font-medium duration-300 cursor-pointer hover:text-primary-100">Quên mật khẩu?</p>
+                                    <p className=" font-medium duration-300 cursor-pointer hover:text-primary-100">
+                                        Quên mật khẩu?
+                                    </p>
                                 </div>
                                 <div className=" text-center">
                                     <button
@@ -106,7 +107,10 @@ const Login = () => {
                                 </div>
                                 <div className=" flex items-center justify-start mb-4">
                                     <p>Bạn chưa có tài khoản?</p>
-                                    <Link to="/register/jobseeker" className=" font-medium ml-1.5 duration-300 cursor-pointer hover:text-primary-100">
+                                    <Link
+                                        to="/register/jobseeker"
+                                        className=" font-medium ml-1.5 duration-300 cursor-pointer hover:text-primary-100"
+                                    >
                                         Đăng ký ngay
                                     </Link>
                                 </div>

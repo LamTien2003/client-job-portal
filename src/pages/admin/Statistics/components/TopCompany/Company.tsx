@@ -3,7 +3,7 @@ import { StatisticTopCompany } from '@/types/Statistic';
 const Company = ({ company }: { company: StatisticTopCompany }) => {
     return (
         <>
-            <div className="flex justify-between gap-6 bg-white shadow-lg rounded-lg p-4 items-center w-1/3  font-family-text">
+            <div className="flex justify-between gap-6 bg-white shadow-lg rounded-lg p-4 items-center w-[31%]  font-family-text">
                 <img className="w-16 h-16 object-cover rounded-lg" src={company?.company?.photo} alt="company" />
 
                 <div className="flex flex-col gap-1">

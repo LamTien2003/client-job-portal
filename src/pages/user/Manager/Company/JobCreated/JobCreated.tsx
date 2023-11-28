@@ -29,6 +29,7 @@ const JobCreated = () => {
             page: newPage,
         }));
     };
+
     return (
         <>
             {data?.data?.data?.length === 0 && (

@@ -14,6 +14,8 @@ import { formatDateValue } from '@/utils/date';
 import { toast } from 'react-toastify';
 import { DatePicker } from '@mui/x-date-pickers';
 import Textarea from './Textarea';
+import { useDispatch } from 'react-redux';
+import { hideLoading, showLoading } from '@/store/uiSlice';
 
 interface Values {
     title: string;
@@ -53,6 +55,7 @@ const validation = Yup.object().shape({
         .required('Thời hạn không được bỏ trống!'),
 });
 const FormPostJob = () => {
+    const dispatch = useDispatch();
     const [createJob, { isLoading }] = useCreateJobMutation();
     const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
     const [category, setCategory] = useState<any[]>([]);
@@ -71,6 +74,15 @@ const FormPostJob = () => {
             setSkills(skillsData?.data?.data);
         }
     }, [loadingCate, errorCate, categories?.data?.data, loadingSkills, errorSkills, skillsData?.data?.data]);
+
+    useEffect(() => {
+        const isLoadingAll = isLoading || loadingCate || loadingSkills;
+        if (isLoadingAll) {
+            dispatch(showLoading());
+            return;
+        }
+        dispatch(hideLoading());
+    }, [isLoading, loadingCate, loadingSkills]);
 
     const formik = useFormik({
         initialValues: initialValues,
@@ -129,7 +141,7 @@ const FormPostJob = () => {
                     touched={formik.touched.title}
                     icon={images.logo.user2}
                     value={formik.values.title}
-                    placeholder="Job Title"
+                    placeholder="Nhập công việc"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
@@ -140,7 +152,7 @@ const FormPostJob = () => {
                     error={formik.errors.salary}
                     touched={formik.touched.salary}
                     icon={images.logo.salary}
-                    placeholder="Salary"
+                    placeholder="Nhập lương / tháng"
                     value={formik.values.salary}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -205,6 +217,7 @@ const FormPostJob = () => {
             <Textarea
                 title="Mô tả"
                 fieldName="description"
+                placeholder="Nhập mô tả công việc"
                 error={formik.errors.description}
                 touched={formik.touched.description}
                 value={formik.values.description}
@@ -215,6 +228,7 @@ const FormPostJob = () => {
             <Textarea
                 title="Yêu cầu"
                 fieldName="jobRequire"
+                placeholder="Nhập yêu cầu công việc"
                 error={formik.errors.jobRequire}
                 touched={formik.touched.jobRequire}
                 value={formik.values.jobRequire}

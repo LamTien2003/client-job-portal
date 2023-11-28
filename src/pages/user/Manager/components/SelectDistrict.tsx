@@ -1,3 +1,4 @@
+import Loader from '@/components/Loader/Loader';
 import { useGetDistrictByCityCodeQuery } from '@/services/utilsApiSlice';
 import { District } from '@/types/Location';
 import { Select, MenuItem } from '@mui/material';
@@ -34,6 +35,7 @@ const SelectDistrict = ({ title, fieldName, value, onChange, error, touched, cod
 
     return (
         <div className="flex flex-col gap-1 w-full">
+            {isLoading && <Loader />}
             <label className="font-bold text-primary-100" htmlFor={fieldName}>
                 {title}
             </label>

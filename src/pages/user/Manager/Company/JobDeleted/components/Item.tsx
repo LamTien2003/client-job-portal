@@ -4,9 +4,10 @@ import { formatDate } from '@/utils/date';
 import { toast } from 'react-toastify';
 import images from '@/assets/images';
 import { formatNumberToVND } from '@/utils/number';
+import Loader from '@/components/Loader/Loader';
 
 const Item = ({ job }: { job: any }) => {
-    const [deleteJob, { isLoading }] = useDeleteJobCreatedMutation();
+    const [deleteJob, { isLoading: loadingDeleteJob }] = useDeleteJobCreatedMutation();
     const [restoreJob, { isLoading: loadingRestoreJob }] = useRestoreJobMutation();
 
     const handleRemoveJob = async (id: string) => {
@@ -37,9 +38,10 @@ const Item = ({ job }: { job: any }) => {
     };
     const deadline = formatDate(job.deadline);
     const salary = formatNumberToVND(job.salary);
-
+    const isLoading = loadingDeleteJob || loadingRestoreJob;
     return (
         <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-2">
+            {isLoading && <Loader />}
             <div className="flex gap-4 w-[30%] items-center">
                 <img
                     className="bg-primary-100 w-16 h-16  object-fit rounded-lg"
@@ -102,14 +104,14 @@ const Item = ({ job }: { job: any }) => {
                     className="py-2 px-4 text-white bg-primary-100 rounded-lg hover:bg-black duration-300"
                     type="button"
                 >
-                    {loadingRestoreJob ? 'Đang khôi phục...' : 'Khôi phục'}
+                    Khôi phục
                 </button>
                 <button
                     onClick={() => handleRemoveJob(job._id)}
                     className="py-2 px-4 text-white bg-red-700 rounded-lg hover:bg-black duration-300"
                     type="button"
                 >
-                    {isLoading ? 'Đang xoá...' : 'Xoá'}
+                    Xoá
                 </button>
             </div>
         </div>

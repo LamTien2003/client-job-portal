@@ -29,7 +29,6 @@ const userSlice = createSlice({
 
     extraReducers: (builder) => {
         builder.addMatcher(usersApiSlice.endpoints.getCurrentUser.matchFulfilled, (state, { payload }) => {
-            console.log(payload.data.data);
             state.user = payload.data.data;
         });
         builder.addMatcher(authApiSlice.endpoints.login.matchFulfilled, (state, { payload }) => {

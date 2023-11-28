@@ -4,29 +4,29 @@ const Process = () => {
     return (
         <div className="flex py-10 justify-center items-center gap-16 xl:flex-wrap lg:flex-wrap tb:flex-wrap mb:flex-col mb:gap-4">
             <ProcessItem
-                title="Account Create"
-                paragraph="To create your account be confident & safely."
+                title="Tạo tài khoản"
+                paragraph="Đăng ký tài khoản ứng viên trên JobHub."
                 image={images.process.accoutCreate}
                 arrow="up"
             />
 
             <ProcessItem
-                title="Create Resume"
-                paragraph="To create your account be confident & safely."
+                title="Tạo sơ yếu lý lịch"
+                paragraph="Liệt kê các thông tin cá nhân vào hồ sơ."
                 image={images.process.resume}
                 arrow="down"
             />
 
             <ProcessItem
-                title="Find Jobs"
-                paragraph="To create your account be confident & safely."
+                title="Tìm việc"
+                paragraph="Tìm kiếm công việc theo tiêu chí của cá nhân."
                 image={images.process.findJob}
                 arrow="up"
             />
 
             <ProcessItem
-                title="Apply Jobs"
-                paragraph="To create your account be confident & safely."
+                title="Nộp đơn xin việc"
+                paragraph="Sau khi chọn được việc hãy ứng tuyển vị trí."
                 image={images.process.jobApply}
                 arrow="down"
             />

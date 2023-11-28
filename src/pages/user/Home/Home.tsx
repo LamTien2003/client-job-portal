@@ -16,7 +16,7 @@ const Home = () => {
 
     const titleCategory = (
         <span>
-            Trending Jobs <span className="text-primary-100">Category</span>
+            <span className="text-primary-100">Danh Mục</span> Công Việc
         </span>
     );
     const titleFeatured = (
@@ -27,25 +27,25 @@ const Home = () => {
 
     const titleProcess = (
         <span>
-            JOBES Working <span className="text-primary-100">Process</span>
+            <span className="text-primary-100">Quá Trình</span> Làm Việc
         </span>
     );
 
     const titleLocation = (
         <span>
-            Get Dream With <span className="text-primary-100">Location</span>
+            <span className="text-primary-100">Địa Điểm</span> Làm Việc
         </span>
     );
 
     const titleRecruiters = (
         <span>
-            Our Top <span className="text-primary-100">Recruiters</span>
+            <span className="text-primary-100">Nhà tuyển dụng</span> hàng đầu
         </span>
     );
 
     const titleArticle = (
         <span>
-            Portal Recent <span className="text-primary-100">Article</span>
+            <span className="text-primary-100">Bài Viết</span> Gần Đây
         </span>
     );
 
@@ -55,7 +55,7 @@ const Home = () => {
             <Section
                 title={titleCategory}
                 path="category"
-                subTitle="To choose your trending job dream & to make future bright."
+                subTitle="Các ngành nghề xu hướng hiện nay và phát triển trong tương lai."
                 bg=""
                 slick={true}
                 right={true}
@@ -74,7 +74,7 @@ const Home = () => {
 
             <Section
                 title={titleRecruiters}
-                subTitle="To choose your trending job dream & to make future bright."
+                subTitle="Các nhà tuyển dụng uy tín hàng đầu mà bạn có thể tìm hiểu và ứng tuyển."
                 bg=""
                 right={true}
                 path=""
@@ -86,7 +86,7 @@ const Home = () => {
 
             <Section
                 title={titleProcess}
-                subTitle="To choose your trending job dream & to make future bright."
+                subTitle="Hãy làm theo các bước để ứng viên mới có thể dễ dàng tìm việc trên JobHub"
                 path=""
                 bg=""
             >
@@ -96,7 +96,7 @@ const Home = () => {
             <Section
                 path="article"
                 title={titleArticle}
-                subTitle="To choose your trending job dream & to make future bright."
+                subTitle="Tham khảo các bài viết mới để nắm bắt được nhu cầu và xu hướng của thị trường"
                 bg=""
             >
                 <Article />
@@ -105,7 +105,7 @@ const Home = () => {
 
             <Section
                 title={titleLocation}
-                subTitle="To choose your trending job dream & to make future bright."
+                subTitle="Những địa điểm có nền kinh tế phát triển nhất mà mọi người muốn được tiếp cận."
                 bg=""
                 right={true}
                 path=""

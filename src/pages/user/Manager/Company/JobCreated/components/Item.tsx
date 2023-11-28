@@ -1,4 +1,5 @@
 import images from '@/assets/images';
+import Loader from '@/components/Loader/Loader';
 import { useRemoveJobCreatedMutation } from '@/services/companiesApiSlice';
 import Job from '@/types/Job';
 import { formatDate } from '@/utils/date';
@@ -24,6 +25,7 @@ const Item = ({ job }: { job: Job }) => {
     const salary = formatNumberToVND(job.salary);
     return (
         <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-2">
+            {isLoading && <Loader />}
             <div className="flex gap-4 w-[30%] items-center">
                 <img
                     className="bg-primary-100 w-16 h-16  object-fit rounded-lg"
@@ -91,7 +93,7 @@ const Item = ({ job }: { job: Job }) => {
                     onClick={() => handleRemoveJob(job.id)}
                     className="py-2 px-4 text-white bg-red-700 rounded-lg hover:bg-black duration-300"
                 >
-                    {isLoading ? '...' : 'Xoá'}
+                    Xoá
                 </button>
             </div>
         </div>

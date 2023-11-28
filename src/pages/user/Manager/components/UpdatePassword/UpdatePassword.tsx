@@ -5,6 +5,9 @@ import * as Yup from 'Yup';
 import CustomField from '../Field';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { UpdateMyPassword } from '@/types/User';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { hideLoading, showLoading } from '@/store/uiSlice';
 interface Values {
     currentPassword: string;
     password: string;
@@ -32,7 +35,16 @@ const validation = Yup.object().shape({
         .required('Xác nhận mật khẩu không được bỏ trống!'),
 });
 const UpdatePassword = () => {
+    const dispatch = useDispatch();
     const [updateMyPassword, { isLoading }] = useUpdateMyPasswordMutation();
+
+    useEffect(() => {
+        if (isLoading) {
+            dispatch(showLoading());
+            return;
+        }
+        dispatch(hideLoading());
+    }, [isLoading]);
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validation,
@@ -64,6 +76,7 @@ const UpdatePassword = () => {
             }
         },
     });
+
     return (
         <div className="bg-white p-6 rounded-md font-family-text">
             <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>

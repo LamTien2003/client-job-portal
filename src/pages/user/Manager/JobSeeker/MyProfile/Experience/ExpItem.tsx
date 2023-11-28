@@ -1,7 +1,7 @@
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { RootState } from '@/store/store';
 import { Experience } from '@/types/JobSeeker';
-import { formatDate, formatDateWithMonthAndYear } from '@/utils/date';
+import { formatDateWithMonthAndYear } from '@/utils/date';
 import { isJobSeeker } from '@/utils/helper';
 import { useState, useEffect } from 'react';
 import { BiEdit } from 'react-icons/bi';

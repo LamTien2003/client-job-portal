@@ -12,7 +12,7 @@ function Loader() {
     }, []);
 
     return (
-        <div className=" w-full h-[100%] flex items-center justify-center bg-[rgba(0,0,0,.5)] z-50 top-0 left-0 fixed">
+        <div className="z-[10000000000000000] w-full h-[100%] flex items-center justify-center bg-[rgba(0,0,0,.5)]  top-0 left-0 fixed">
             <ClimbingBoxLoader color={'#00A7AC'} loading size={15} aria-label="Loading Spinner" data-testid="loader" />
         </div>
     );

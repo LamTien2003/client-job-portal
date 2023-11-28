@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CardSub from '../components/CardSub';
 import Form from './Form';
 import { useSelector } from 'react-redux';

@@ -8,6 +8,7 @@ import { FaCheck } from 'react-icons/fa';
 import { useApproveJobMutation, useDeleteJobMutation } from '@/services/jobsApiSlice';
 import { toast } from 'react-toastify';
 import { AiFillDelete } from 'react-icons/ai';
+import Loader from '@/components/Loader/Loader';
 function Jobs() {
     const [data, setData] = useState<Job[]>([]);
     const [page, setPage] = useState<number>(1);
@@ -26,6 +27,9 @@ function Jobs() {
     const { data: jobsNotAccept, isLoading: jobNotAcceptLoading } = useGetJobsNotAcceptQuery(query);
 
     const { data: jobsAccept, isLoading: jobAcceptLoading } = useGetJobsQuery(query);
+
+    const [deleteJob, { isLoading: isLoadingDeleteJob }] = useDeleteJobMutation();
+    const [approveJob, { isLoading: isLoadingApproveJob }] = useApproveJobMutation();
 
     useEffect(() => {
         if (!jobAllLoading && !jobAllError && jobsAll?.data?.data && selectedTab == 'all') {
@@ -95,8 +99,6 @@ function Jobs() {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value);
     };
-    const [deleteJob] = useDeleteJobMutation();
-    const [approveJob] = useApproveJobMutation();
 
     const deleteJobHandler = async (id: string) => {
         try {
@@ -189,9 +191,13 @@ function Jobs() {
         state: job.isAccepted,
         action: 'Xoá',
     }));
+    const isLoading =
+        isLoadingApproveJob || isLoadingDeleteJob || jobAllLoading || jobAcceptLoading || jobNotAcceptLoading;
 
     return (
         <div className="flex flex-col gap-5 pb-10">
+            {isLoading && <Loader />}
+
             <div className="flex justify-between items-center">
                 <div className="flex gap-5 font-family-title text-primary-100 font-medium">
                     <button

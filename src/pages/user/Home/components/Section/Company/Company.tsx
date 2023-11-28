@@ -24,7 +24,7 @@ const Company = () => {
         <div className="bg-[#D9F2F3]">
             <div className="max-w-7xl mx-auto  py-14 flex flex-col justify-between lg:px-3 mb:px-3 tb:px-3 xl:px-3">
                 <div className="flex gap-3 items-center">
-                    <h4 className="text-lg text-content-title font-semibold font-family-title">Our Trusted Company</h4>
+                    <h4 className="text-lg text-content-title font-semibold font-family-title">Các công ty uy tín</h4>
                     <span className="h-[2px] w-32 bg-primary-200"></span>
                 </div>
                 {isLoading && (

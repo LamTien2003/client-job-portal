@@ -36,7 +36,7 @@ const CustomField = ({
                 <div className="text-xl px-3">{icon}</div>
                 <input
                     name={fieldName}
-                    className="w-full h-11 rounded-md py-2 outline-none bg-input"
+                    className="font-family-text w-full h-11 rounded-md py-2 outline-none bg-input"
                     type={type ? type : 'text'}
                     placeholder={placeholder}
                     value={value}

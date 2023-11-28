@@ -1,3 +1,4 @@
+import Loader from '@/components/Loader/Loader';
 import { useGetProvincesQuery } from '@/services/utilsApiSlice';
 import { Location } from '@/types/Location';
 import { Select, MenuItem } from '@mui/material';
@@ -42,6 +43,7 @@ const SelectCity = ({ title, fieldName, value, onChange, error, touched, onSetCo
     }, [data?.data?.data, isError, isLoading, onChange]);
     return (
         <div className="flex flex-col gap-1 w-full">
+            {isLoading && <Loader />}
             <label className="font-bold text-primary-100" htmlFor={fieldName}>
                 {title}
             </label>

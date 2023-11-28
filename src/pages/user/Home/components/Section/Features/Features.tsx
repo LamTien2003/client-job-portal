@@ -9,6 +9,7 @@ import { BsArrowRight } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FilterJob from './FilterJob';
+
 const Features = () => {
     const [jobs, setJobs] = useState<Job[]>([]);
     const [total, setTotal] = useState<number>(0);

@@ -115,7 +115,7 @@ const Search = () => {
                 <div className="absolute rounded inset-0 w-0 bg-black transition-all duration-300 ease-out group-hover:w-full"></div>
 
                 <div className="relative flex justify-between items-center">
-                    <img className="mr-2" src={images.logo.search} alt={images.logo.search} /> Search
+                    <img className="mr-2" src={images.logo.search} alt={images.logo.search} /> Tìm
                 </div>
             </button>
         </form>

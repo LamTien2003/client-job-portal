@@ -25,8 +25,6 @@ const ChartStatis = () => {
         }
     }, [jobMonthlyData?.data?.data, isError, isLoading]);
 
-    console.log(job);
-
     const data = {
         labels: job.map((item) => `Tháng ${item.month}`).reverse(),
         datasets: [

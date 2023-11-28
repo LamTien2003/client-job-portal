@@ -9,11 +9,12 @@ import SelectGender from './SelectGender';
 import BtnBot from './BtnBot';
 import { useChangeMeUserMutation } from '@/services/usersApiSlice';
 import { RootState } from '@/store/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import SelectCity from './SelectCity';
 import SelectDistrict from './SelectDistrict';
 import { toast } from 'react-toastify';
+import { hideLoading, showLoading } from '@/store/uiSlice';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -103,6 +104,16 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
             });
         }
     }, [currentUser]);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (isLoading) {
+            dispatch(showLoading());
+            return;
+        }
+        dispatch(hideLoading());
+    }, [isLoading]);
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
