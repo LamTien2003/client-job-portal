@@ -8,8 +8,8 @@ interface ParamsGetLocaiton {
 }
 export const utilsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getSkills: builder.query<ResponseApi<string[]>, void>({
-            query: () => `utils/getSkills`,
+        getSkills: builder.query<ResponseApi<string[]>, string>({
+            query: (name) => `utils/getSkills?name=${name ? name : ''}`,
             providesTags: () => [{ type: 'Skills' as const, id: 'LIST' }],
         }),
 

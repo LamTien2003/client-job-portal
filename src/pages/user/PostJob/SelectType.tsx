@@ -9,8 +9,21 @@ interface SelectField {
     touched: boolean | undefined;
     value?: string;
     onChange: any;
+    onSetCate: React.Dispatch<React.SetStateAction<string>>;
+    onSetSkillValue: React.Dispatch<React.SetStateAction<string[]>>;
 }
-const SelectType = ({ title, fieldName, options, icon, error, touched, value, onChange }: SelectField) => {
+const SelectType = ({
+    title,
+    fieldName,
+    options,
+    icon,
+    error,
+    touched,
+    value,
+    onChange,
+    onSetCate,
+    onSetSkillValue,
+}: SelectField) => {
     return (
         <div className="flex flex-col gap-2">
             <h5 className="font-medium text-content-text">
@@ -33,8 +46,15 @@ const SelectType = ({ title, fieldName, options, icon, error, touched, value, on
                         className="select w-full h-[48px]  text-content-s-text items-center"
                     >
                         {options.map((option, index) => (
-                            <MenuItem key={index} value={option.id}>
-                                {option.categoryName}
+                            <MenuItem
+                                key={index}
+                                value={option?.id}
+                                onClick={() => {
+                                    onSetCate(option?.categoryName);
+                                    onSetSkillValue([]);
+                                }}
+                            >
+                                {option?.categoryName}
                             </MenuItem>
                         ))}
                     </Select>

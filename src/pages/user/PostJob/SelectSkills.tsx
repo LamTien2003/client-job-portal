@@ -1,5 +1,5 @@
 import { Select, MenuItem } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 interface SelectField {
     title: string;
@@ -70,6 +70,11 @@ const SelectSkills = ({
                         variant="standard"
                         className="select w-full h-[48px]  text-content-s-text items-center"
                     >
+                        {options.length === 0 && (
+                            <MenuItem value="" disabled>
+                                Chọn danh mục trước khi chọn kỹ năng
+                            </MenuItem>
+                        )}
                         {options.map((option, index) => (
                             <MenuItem key={index} value={option}>
                                 {option}

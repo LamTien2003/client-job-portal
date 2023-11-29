@@ -61,28 +61,30 @@ const FormPostJob = () => {
     const [category, setCategory] = useState<any[]>([]);
     const [skills, setSkills] = useState<string[]>([]);
     const [skillValue, setSkillValue] = useState<string[]>([]);
-
+    const [cate, setCate] = useState<string>('');
     const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery();
 
-    const { data: skillsData, isLoading: loadingSkills, isError: errorSkills } = useGetSkillsQuery();
+    const { data: skillsData, isLoading: loadingSkills, isError: errorSkills } = useGetSkillsQuery(cate ? cate : '');
 
     useEffect(() => {
         if (!loadingCate && !errorCate && categories?.data?.data) {
             setCategory(categories?.data?.data);
         }
+    }, [loadingCate, errorCate, categories?.data?.data]);
+
+    useEffect(() => {
         if (!loadingSkills && !errorSkills && skillsData?.data?.data) {
             setSkills(skillsData?.data?.data);
         }
-    }, [loadingCate, errorCate, categories?.data?.data, loadingSkills, errorSkills, skillsData?.data?.data]);
+    }, [loadingSkills, errorSkills, skillsData?.data?.data, cate]);
 
     useEffect(() => {
-        const isLoadingAll = isLoading || loadingCate || loadingSkills;
-        if (isLoadingAll) {
+        if (isLoading) {
             dispatch(showLoading());
             return;
         }
         dispatch(hideLoading());
-    }, [isLoading, loadingCate, loadingSkills]);
+    }, [isLoading]);
 
     const formik = useFormik({
         initialValues: initialValues,
@@ -178,6 +180,8 @@ const FormPostJob = () => {
                     touched={formik.touched.type}
                     value={formik.values.type}
                     onChange={formik.handleChange}
+                    onSetCate={setCate}
+                    onSetSkillValue={setSkillValue}
                 />
                 <div className="flex flex-col gap-2 w-full">
                     <div className="font-medium text-content-text ">
