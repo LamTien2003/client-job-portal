@@ -30,7 +30,7 @@ const locationData: Location[] = [
         name: 'Huế',
     },
     {
-        path: 'Tỉnh Nha Trang',
+        path: 'Thành phố Nha Trang',
         imgLocation: images.logo.nhatrang,
         name: 'Nha Trang',
     },
