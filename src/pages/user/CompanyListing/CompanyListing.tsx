@@ -12,13 +12,23 @@ import Loader from '@/components/Loader/Loader';
 function CompanyListing() {
     const [companyList, setCompanyList] = useState<Company[]>([])
     const [totalCompany, setTotalCompany] = useState<number>(0)
+    const [city, setCity] = useState<string>('')
     const [page, setPage] = useState<number>(1);
     const [listStyle, setListStyle] = useState('column');
 
-    const { data, isLoading, isError } = useGetCompaniesQuery({
-        page: page,
+    const { data, isLoading, isError } = useGetCompaniesQuery((city !== '' && city === 'allLocation') ? {
+        page,
         limit: 5
+    } : {
+        page,
+        limit: 5,
+        p: city
     });
+
+    const handleFilter = (city: string) => {
+        setCity(city)
+        setPage(1)
+    }
 
     useEffect(() => {
         if(!isLoading && !isError && data?.data?.data && data?.data?.totalItems) {
@@ -37,12 +47,12 @@ function CompanyListing() {
         <>
             {isLoading && <Loader/>}
             <div className=" font-family-text selection:bg-primary-100 selection:text-white mb-[30px]">
-                <Banner page="Company Listing" />
+                <Banner page="Tìm công ty" />
 
                 <div className=" max-w-7xl ml-auto mr-auto pt-[50px] flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:flex-col tb:max-w-3xl mb:flex-col mb:max-w-2xl">
                     {/* job sidebar */}
                     
-                        <Sidebar />
+                        <Sidebar filter={handleFilter} />
 
                     {/* list */}
                     <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 lg:mx-auto tb:w-11/12 mb:w-11/12 mb:mx-auto">

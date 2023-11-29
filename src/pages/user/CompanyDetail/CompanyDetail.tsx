@@ -34,7 +34,7 @@ function CompanyDetail() {
                 <div className=" w-10/12 mt-[50px] mb-28 text-content-text mr-auto ml-auto">
                     {!isLoading && !isError && company && <CompanyInfo data={company}/>}
 
-                    <div className=" flex lg:flex-col ">
+                    <div className=" flex lg:flex-col tb:flex-col mb:flex-col ">
                         {!isLoading && !isError && company && <AboutCompany data={company}/>}
                         {!isLoading && !isError && company && <CompanyOverview data={company}/>}
                     </div>

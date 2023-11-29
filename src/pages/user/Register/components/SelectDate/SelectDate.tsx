@@ -24,7 +24,7 @@ function SelectDate({ label, id, value = new Date(Date.now()), onChange, error, 
                     value={dayjs(value)}
                     onChange={(sth: any) => onChange('establishDate', dayjs(sth).toISOString())}
                     className=" w-full h-full bg-white rounded-lg border-none outline-none px-10"
-                    sx={{borderColor: '#00A7AC'}}
+                    sx={{borderColor: '#00A7AC', color: '#595959'}}
                 />
             </div>
 

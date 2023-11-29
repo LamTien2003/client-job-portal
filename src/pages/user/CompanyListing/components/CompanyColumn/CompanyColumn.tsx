@@ -46,7 +46,7 @@ function CompanyColumn(props: Props) {
                             <div className=' flex items-center py-5 gap-[50px] xl:gap-[35px] lg:gap-[55px] tb:gap-[30px] mb:gap-[20px] '>
                                 <div className=' flex flex-col justify-start lg:w-[150px]'>
                                     <div className=' w-[200px] flex flex-col items-start ml-[70px] mb-8 gap-1.5 xl:w-[180px] lg:w-[140px] tb:w-[170px] tb:mb-[92px] mb:w-[110px] mb:mb-[80px] '>
-                                        <h3 className=' font-family-title text-lg text-content-title font-semibold lg:text-base tb:text-base mb:text-base'>{company.companyName}</h3>
+                                        <Link to={'/company-detail/' + company.id} className=' font-family-title text-lg text-content-title font-semibold duration-300 hover:text-primary-100 lg:text-base tb:text-base mb:text-base'>{company.companyName}</Link>
                                         <p className=' flex items-center text-content-text text-sm gap-2'>
                                             <img src='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/location.svg' />
                                             {company.location.city}

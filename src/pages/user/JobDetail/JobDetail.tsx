@@ -35,7 +35,7 @@ function JobDetail() {
             {isLoading && <Loader/>}
             <div className=" font-family-text selection:bg-primary-100 selection:text-white">
                 <div className=" mb-28 ">
-                    <Banner page="Job Detail" />
+                    <Banner page="Chi tiết công việc" />
 
                     <div className=" w-10/12 mx-auto pt-16 flex lg:flex-col marker:">
                         {!isLoading && !isError && job && <JobInfo data={job} />}

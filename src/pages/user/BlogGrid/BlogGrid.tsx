@@ -11,7 +11,7 @@ const BlogGrid = () => {
     }, []);
     return (
         <div>
-            <Banner page='Blog' />
+            <Banner page='Tin tức' />
 
 
             <div className='max-w-7xl ml-auto mr-auto pt-28 flex justify-between'>

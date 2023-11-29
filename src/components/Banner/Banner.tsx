@@ -11,7 +11,7 @@ const Banner = (props: Props) => {
                 <div className='w-16 h-px left-4 top-1/3 bg-primary-100 translate-y-2/4 absolute'></div>
             </span>
             <div className='font-medium flex justify-center'>
-                <Link to={'/'} className='text-content-title text-center font-medium transition ease-in-out delay-0 duration-300 hover:text-primary-100'>Home </Link>
+                <Link to={'/'} className='text-content-title text-center font-medium transition ease-in-out delay-0 duration-300 hover:text-primary-100'>Trang chủ </Link>
                 
                 <p className='text-primary-100 font-semibold flex'>
                     <img className=" mr-2 ml-2" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/company-2.svg" />

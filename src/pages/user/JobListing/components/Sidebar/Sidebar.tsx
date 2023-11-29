@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 import Category from './Category/Category';
 import SalaryRange from './SalaryRange/SalaryRange';
+import Location from './Location/Location';
 
 type filterObject = {
-    idCat: string | null,
+    idCat: string,
     salary: {min: number, max: number}
+    city: string,
 }
 type Props = {
     filter: (filter: filterObject) => void
 };
 function Sidebar(props: Props) {
 
-    const [filterObj, setFilterObj] = useState<filterObject>({idCat: null, salary: {min: 1000000, max: 100000000}})
+    const [filterObj, setFilterObj] = useState<filterObject>({idCat: '', salary: {min: 1000000, max: 100000000}, city: ''})
    
-    const handleFilterCategory = (id: string | null) => {
+    const handleFilterCategory = (id: string) => {
         setFilterObj(prev => {
             return {
                 ...prev,
@@ -33,6 +35,15 @@ function Sidebar(props: Props) {
             }
         })
     }
+    
+    const handleFilterLocation = (city: string) => {
+        setFilterObj(prev => {
+            return {
+                ...prev,
+                city
+            }
+        })
+    }
 
     useEffect(() => {
         props.filter(filterObj)
@@ -45,6 +56,8 @@ function Sidebar(props: Props) {
                     <Category categoryChange={handleFilterCategory} />
 
                     <SalaryRange salaryChange={handleFilterSalary} />
+
+                    <Location locationChange={handleFilterLocation} />
 
                 </div>
             </div>

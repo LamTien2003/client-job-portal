@@ -127,7 +127,7 @@ function Categories() {
                     Thêm Danh Mục
                 </button>
 
-                <Box sx={{marginBottom: 10, width: '100%', height: 400}}>
+                <Box sx={{marginBottom: 10, width: '100%', minHeight: 500}}>
                     <DataGrid
                         columns={columns}
                         rows={categoryList}

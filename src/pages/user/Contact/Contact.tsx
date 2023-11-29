@@ -5,7 +5,7 @@ import { faPhoneVolume, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 const Contact = () => {
     return (
         <div>
-            <Banner page="Contact" />
+            <Banner page="Liên hệ" />
             <div className="max-w-7xl ml-auto mr-auto pt-28 flex justify-between">
                 <div className="w-[100%] grid grid-cols-3 gap-10 text-[1.125rem] font-normal">
                     <div>

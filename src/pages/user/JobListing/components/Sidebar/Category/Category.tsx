@@ -3,7 +3,7 @@ import Category from '@/types/Category';
 import { useEffect, useState } from 'react';
 
 type Props = {
-    categoryChange: (id: string | null) => void
+    categoryChange: (id: string) => void
 };
 function Category(props: Props) {
 
@@ -26,7 +26,7 @@ function Category(props: Props) {
         if (isId && isId === id) {
             setCheck(!check);
         }
-        props.categoryChange(null)
+        props.categoryChange('')
     }
 
     useEffect(() => {

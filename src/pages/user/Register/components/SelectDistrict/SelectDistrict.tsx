@@ -22,6 +22,7 @@ function SelectDistrict({ label, id, name, value, onChange, onBlur, error, touch
 
             <div className=" w-full h-[45.6px] border border-primary-200 rounded-lg mt-2">
                 <Select
+                    sx={{color: '#595959'}}
                     id={id}
                     name={name}
                     value={value}

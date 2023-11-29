@@ -14,6 +14,8 @@ interface ParamsGetAllJob {
     ['skillsRequire[in]']?: string[];
     sort?: string;
     type?: string;
+    p?: string;
+    d?: string
 }
 
 export const jobsApiSlice = apiSlice.injectEndpoints({

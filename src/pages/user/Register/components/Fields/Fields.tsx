@@ -25,7 +25,7 @@ function Fields({ type, label, id, name, value, onChange, onBlur, error, touched
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                className={'border border-primary-200 rounded-lg outline-none px-5 py-[10px] '}
+                className={' text-content-text border border-primary-200 rounded-lg outline-none px-5 py-[10px] '}
             />
 
             {(error && touched) || (error && value) ? (

@@ -11,53 +11,63 @@ import Skeleton from '@/components/Loading/Skeleton';
 import { useSearchParams } from 'react-router-dom';
 
 type filterObject = {
-    idCat: string | null,
+    idCat: string,
     salary: {min: number, max: number}
+    city: string,
 }
 const JobListing = () => {
     const [jobList, setJobList] = useState<Job[]>([]);
     const [totalJob, setTotalJob] = useState<number>(0)
-    const [filter, setFilter] = useState<filterObject>({idCat: null, salary: {min: 500000, max: 10000000}})
+    const [filter, setFilter] = useState<filterObject>({idCat: '', salary: {min: 500000, max: 10000000}, city: ''})
     const [listStyle, setListStyle] = useState<'column' | 'gutter'>('column');
     const [page, setPage] = useState<number>(1)
     
     const [searchParams] = useSearchParams()
     const q = searchParams.get('q')
     const type = searchParams.get('type')
+    const p = searchParams.get('p')
 
     const { data, isLoading, isError } = useGetJobsQuery(
-        // {page: 1, limit: 5, 'salary[gte]': 1200000, 'salary[lte]': 50000000}
-        // {
-        //     page: page,
-        //     limit: 5,
-        //     'salary[gte]': filter.salary.min,
-        //     'salary[lte]': filter.salary.max,
-        // }
-        q ? type ? {
-            page: page,
+        p ? {
+            page,
+            limit: 5,
+            p: p
+        } : q ? type ? {
+            page,
             limit: 5,
             q: q ? q : '',
             type: type
         } : {
-            page: page,
+            page,
             limit: 5,
             q: q,
         } : type ? {
-            page: page,
+            page,
             limit: 5,
             type: type
-        } : (filter.idCat === null ? {
-            page: page,
+        } : (filter.idCat === '' && filter.city === '') ? {
+            page,
             limit: 5,
-            'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
-        } : {
-            page: page,
+            "salary[gte]": filter.salary.min,
+            "salary[lte]": filter.salary.max,
+        } : (filter.idCat !== '' ? {
+            page,
             limit: 5,
-            'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
+            "salary[gte]": filter.salary.min,
+            "salary[lte]": filter.salary.max,
             type: filter.idCat
-        })
+        } : (filter.city !== '' && filter.city === 'allLocation' ? {
+            page,
+            limit: 5,
+            "salary[gte]": filter.salary.min,
+            "salary[lte]": filter.salary.max,
+        } : {
+            page,
+            limit: 5,
+            "salary[gte]": filter.salary.min,
+            "salary[lte]": filter.salary.max,
+            p: filter.city
+        }))
     );
 
     const handleFilter = (filterObj: filterObject) => {
@@ -85,7 +95,7 @@ const JobListing = () => {
 
     return (
         <>
-            <Banner page="Job Listing" />
+            <Banner page="Tìm việc" />
             <div className=" max-w-7xl font-family-text ml-auto mr-auto pt-[50px] flex justify-between xl:mx-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:flex-col tb:max-w-3xl mb:flex-col mb:max-w-2xl">
                 <Sidebar filter={handleFilter} />
                 <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:mx-auto lg:mx-auto tb:mx-auto mb:mx-auto lg:pr-0 lg:w-10/12 tb:w-10/12 mb:w-11/12">

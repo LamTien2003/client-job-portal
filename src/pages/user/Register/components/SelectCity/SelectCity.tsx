@@ -41,12 +41,13 @@ function SelectCity({ label, id, name, value, onChange, onBlur, error, touched, 
 
             <div className=" w-full h-[45.6px] border border-primary-200 rounded-lg mt-2">
                 <Select
+                    sx={{color: '#595959'}}
                     id={id}
                     name={name}
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}
-                    className={' w-full h-[45.6px] border-none px-1 '}
+                    className={' w-full h-[45.6px] text-content-text border-none px-1 '}
                 >
                     {cities?.map((city) => (
                         <MenuItem key={city.code} value={city.name}>
