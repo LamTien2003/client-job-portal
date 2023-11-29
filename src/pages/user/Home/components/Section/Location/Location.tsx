@@ -20,7 +20,7 @@ const locationData: Location[] = [
         name: 'Hà Nội',
     },
     {
-        path: 'Tỉnh Hoà Bình',
+        path: 'Thành phố Hoà Bình',
         imgLocation: images.logo.hoabinh,
         name: 'Hoà Bình',
     },
