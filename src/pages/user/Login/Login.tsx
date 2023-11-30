@@ -22,8 +22,8 @@ const Login = () => {
             password: '',
         },
         validationSchema: Yup.object({
-            email: Yup.string().required('Không được để trống').matches(EMAILREGEX, 'Email phải đúng định dạng'),
-            password: Yup.string().required('Không được để trống').min(8, 'Mật khẩu phải có ít nhất 8 ký tự'),
+            email: Yup.string().required('Email không được để trống').matches(EMAILREGEX, 'Email phải đúng định dạng'),
+            password: Yup.string().required('Mật khẩu không được để trống').min(8, 'Mật khẩu phải có ít nhất 8 ký tự'),
         }),
         onSubmit: async (values) => {
             try {
@@ -81,7 +81,7 @@ const Login = () => {
                                 onBlur={formik.handleBlur}
                                 error={formik.errors.password}
                                 touched={formik.touched.password}
-                                placeholder="Enter your password"
+                                placeholder="Nhập mật khẩu"
                             />
                             <div className=" flex flex-col ">
                                 <div className=" flex items-center justify-between mt-2">
@@ -91,9 +91,9 @@ const Login = () => {
                                             Ghi nhớ tôi
                                         </label>
                                     </div>
-                                    <p className=" font-medium duration-300 cursor-pointer hover:text-primary-100">
+                                    <Link to={'/forgot-password'} className=" font-medium duration-300 cursor-pointer hover:text-primary-100">
                                         Quên mật khẩu?
-                                    </p>
+                                    </Link>
                                 </div>
                                 <div className=" text-center">
                                     <button
