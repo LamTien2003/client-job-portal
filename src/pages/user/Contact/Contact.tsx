@@ -1,63 +1,31 @@
 import Banner from '@/components/Banner/Banner';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhoneVolume, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import ItemContact from './ItemContact';
 const Contact = () => {
     return (
         <div>
             <Banner page="Liên hệ" />
-            <div className="max-w-7xl ml-auto mr-auto pt-28 flex justify-between">
-                <div className="w-[100%] grid grid-cols-3 gap-10 text-[1.125rem] font-normal">
-                    <div>
-                        <p className="text-center font-semibold">Main Office</p>
-                        <div className="rounded-md border-solid border-2 border-gray-200 mt-5 pl-5 pt-2 leading-10">
-                            <p className=" font-semibold">Dhaka, Bangladesh</p>
-                            <p className="hover:text-[#009FAC] ">
-                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-[#009FAC] " />
-                                +880-187 346 8987
-                            </p>
-
-                            <p className="hover:text-[#009FAC] ">
-                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-[#009FAC] " />
-                                Mirpur DOSH, Avenue-01, Road-02, House-147/148
-                            </p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <p className="text-center text-[1.25rem] font-semibold">Office-01</p>
-                        <div className="rounded-md border-solid border-2 border-gray-200 mt-5 pl-5 pt-2 leading-10">
-                            <p className=" font-semibold">New York, USA</p>
-                            <p className="hover:text-[#009FAC] ">
-                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-[#009FAC] " />
-                                +981-187 346 8987
-                            </p>
-
-                            <p className="hover:text-[#009FAC] ">
-                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-[#009FAC] " />
-                                New York, Avenue-01, Block-B, House-140/142
-                            </p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <p className="text-center text-[1.25rem] font-semibold">Office-02</p>
-                        <div className="rounded-md border-solid border-2 border-gray-200 mt-5 pl-5 pt-2 leading-10">
-                            <p className=" font-semibold">London City, UK</p>
-                            <p className="hover:text-[#009FAC] ">
-                                <FontAwesomeIcon icon={faPhoneVolume} className="mr-2 text-[#009FAC] " />
-                                +998-737 346 898
-                            </p>
-
-                            <p className="hover:text-[#009FAC] ">
-                                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-[#009FAC] " />
-                                West London, Avenue-05, Block No-C, House-08/10
-                            </p>
-                        </div>
-                    </div>
+            <div className="max-w-7xl ml-auto mr-auto mt-11 flex justify-between mb:px-3 tb:px-3 lg:px-3">
+                <div className="w-[100%] grid grid-cols-3 gap-10 text-[1.125rem] font-normal font-family-text mb:grid-cols-1 tb:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+                    <ItemContact
+                        title="CHI NHÁNH HỒ CHÍ MINH"
+                        phone="84+ 968880945"
+                        email="jobhubhcm@gmail.vn"
+                        address="QTSC 9, CVPM Quang Trung, Quận 12"
+                    />
+                    <ItemContact
+                        title="CHI NHÁNH HÀ NỘI"
+                        phone="84+ 968880945"
+                        email="jobhubhn@gmail.vn"
+                        address="12 Hai Bà Trưng, Cửa Nam, Hoàn Kiếm"
+                    />
+                    <ItemContact
+                        title="CHI NHÁNH ĐÀ NẴNG"
+                        phone="84+ 968880945"
+                        email="jobhubdnm@gmail.vn"
+                        address="121 Trần Thái Tông, An Khê, Thanh Khê"
+                    />
                 </div>
-
-                {/* Gan GOOGLE MAP */}
             </div>
 
             <div className="mt-10">
