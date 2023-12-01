@@ -8,6 +8,7 @@ import { isJobSeeker } from '@/utils/helper';
 import { useSelector } from 'react-redux';
 import { useGetSkillsQuery } from '@/services/utilsApiSlice';
 import { Select, MenuItem } from '@mui/material';
+
 interface Form {
     toggleOpen?: () => void;
 }
@@ -19,7 +20,8 @@ const Form = ({ toggleOpen }: Form) => {
     const [skills, setSkills] = useState<string[]>([]);
     const [skillsUser, setSkillsUser] = useState<string[]>([]);
 
-    const { data: skillsData, isLoading: loadingSkills, isError: errorSkills } = useGetSkillsQuery();
+    // Đợi Tiến update API
+    const { data: skillsData, isLoading: loadingSkills, isError: errorSkills } = useGetSkillsQuery('');
 
     useEffect(() => {
         if (isJobSeeker(currentUser)) {
@@ -106,6 +108,7 @@ const Form = ({ toggleOpen }: Form) => {
                     </div>
                 ))}
             </div>
+
             <BtnBot toggleOpen={toggleOpen} isLoading={isLoading} />
         </form>
     );
