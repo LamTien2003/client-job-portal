@@ -33,9 +33,11 @@ const JobApplication = () => {
 
     return (
         <>
-            {jobApplycation.map((candicate, index) => (
-                <Item key={index} candicate={candicate} />
-            ))}
+            <div className="flex flex-col gap-6">
+                {jobApplycation.map((candicate, index) => (
+                    <Item key={index} candicate={candicate} />
+                ))}
+            </div>
             {data?.data.data.length === 0 && (
                 <div className="font-family-text text-center border border-primary-100 p-5 text-xl">
                     Chưa có ứng viên đăng ký

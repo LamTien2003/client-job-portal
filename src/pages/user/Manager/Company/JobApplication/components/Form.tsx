@@ -6,6 +6,7 @@ import { DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { useAcceptJobMutation } from '@/services/companiesApiSlice';
 import dayjs from 'dayjs';
 import { toast } from 'react-toastify';
+import Loader from '@/components/Loader/Loader';
 
 interface FormAcceptJob {
     handleOpen: () => void;
@@ -67,6 +68,7 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
 
     return (
         <Dialog className="font-family-title" size="lg" open={open} handler={handleOpen}>
+            {isLoading && <Loader />}
             <DialogHeader>Thông tin phỏng vấn</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="grid grid-cols-2 items-center justify-between gap-8">
@@ -105,25 +107,6 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
                             </div>
                         ) : null}
                     </div>
-
-                    {/* <div className="flex flex-col gap-2 w-full">
-                        <h5 className="font-bold text-primary-100">Địa điểm *</h5>
-                        <textarea
-                            name="interviewAddress"
-                            className={`text-content-text  border-2 outline-none w-full p-3 rounded-md font-medium ${
-                                formik.errors.interviewAddress && formik.touched.interviewAddress && 'border-red-800'
-                            }`}
-                            placeholder="Nhập địa điểm..."
-                            value={formik.values.interviewAddress}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            cols={5}
-                            rows={2}
-                        />
-                        {formik.errors.interviewAddress && formik.touched.interviewAddress ? (
-                            <div className="text-red-700 text-sm font-semibold">{formik.errors.interviewAddress}</div>
-                        ) : null}
-                    </div> */}
                 </DialogBody>
                 <DialogFooter className="px-8">
                     <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />

@@ -3,7 +3,7 @@ import FormAcceptJob from './Form';
 import { useCancelJobMutation } from '@/services/companiesApiSlice';
 import { toast } from 'react-toastify';
 import images from '@/assets/images';
-import { Link } from 'react-router-dom';
+import Loader from '@/components/Loader/Loader';
 
 const Item = ({ candicate }: { candicate: any }) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -24,6 +24,7 @@ const Item = ({ candicate }: { candicate: any }) => {
     return (
         <>
             <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-2">
+                {isLoading && <Loader />}
                 <div className="flex gap-4 w-[40%] items-center">
                     <img
                         className="bg-primary-100 w-16 h-16  object-fit rounded-lg"
@@ -56,20 +57,26 @@ const Item = ({ candicate }: { candicate: any }) => {
                         alt={images.logo.userFg}
                     />
                     <div className="flex flex-col gap-2">
-                        <Link className="text-primary-100 hover:text-blue-800 duration-300 underline text-lg" to={`#`}>
-                            Xem CV Ứng Viên
-                        </Link>
+                        {candicate.candicate.cvImage ? (
+                            <a
+                                className="text-primary-100 hover:text-blue-800 duration-300 underline text-lg"
+                                href={candicate.candicate.cvImage}
+                                target="_blank"
+                            >
+                                Xem CV
+                            </a>
+                        ) : (
+                            <p>Chưa có CV</p>
+                        )}
 
                         {candicate.status === 'accepted' && (
-                            <div className="py-1 text-center  border-primary-100 border-2 rounded-lg ">Đã duyệt</div>
+                            <div className="  text-primary-100 font-medium">Đã duyệt</div>
                         )}
 
                         {candicate.status === 'pending' && (
-                            <div className="py-1 text-center  border-[#7307C9] border-2 rounded-lg ">Chưa duyệt</div>
+                            <div className="  text-[#7307C9]  font-medium">Chưa duyệt</div>
                         )}
-                        {candicate.status === 'canceled' && (
-                            <div className="py-1 text-center  border-[#c90707] border-2 rounded-lg ">Từ chối</div>
-                        )}
+                        {candicate.status === 'canceled' && <div className="text-[#c90707] font-medium">Từ chối</div>}
                     </div>
                 </div>
 
@@ -93,7 +100,7 @@ const Item = ({ candicate }: { candicate: any }) => {
                         </div>
                     ) : (
                         <button className="bg-green-400 p-2 rounded-md text-white font-semibold " type="button">
-                            Đã thực hiện
+                            Hoàn thành
                         </button>
                     )}
                 </div>

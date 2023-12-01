@@ -39,6 +39,7 @@ import RegisterJobseeker from './pages/user/Register/RegisterJobseeker';
 import RegisterCompany from './pages/user/Register/RegisterCompany';
 import UpdatePassword from './pages/user/Manager/components/UpdatePassword/UpdatePassword';
 import ForgotPassword from './pages/user/FotgotPassword/FotgotPassword';
+import AddCV from './pages/user/Manager/JobSeeker/AddCV/AddCV';
 
 function App() {
     const uiState = useSelector((state: RootState) => state.ui);
@@ -73,6 +74,7 @@ function App() {
                             <Route path="jobseeker" element={<JobSeekerManager />}>
                                 <Route index element={<JobseekerProfile />} />
                                 <Route path="applied-jobs" element={<AppliedJobs />} />
+                                <Route path="add-cv" element={<AddCV />} />
                             </Route>
 
                             <Route path="company" element={<CompanyManager />}>
