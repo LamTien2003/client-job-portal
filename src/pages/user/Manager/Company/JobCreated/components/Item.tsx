@@ -28,8 +28,8 @@ const Item = ({ job }: { job: Job }) => {
             {isLoading && <Loader />}
             <div className="flex gap-4 w-[35%] items-center">
                 <img
-                    className="bg-primary-100 w-14 h-14  object-fit rounded-lg"
-                    src={job.postedBy.photo}
+                    className=" w-14 h-14  object-fit rounded-lg"
+                    src={job.photosJob[0] ? job.photosJob[0] : images.logo.job}
                     alt="company"
                 />
                 <div className="flex flex-col gap-1">
