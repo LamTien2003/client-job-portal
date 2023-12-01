@@ -6,7 +6,7 @@ import Skeleton from '@/components/Loading/Skeleton';
 
 const JobCreated = () => {
     const [page, setPage] = useState<number>(1);
-    const [query, setQuery] = useState({ page: page, limit: 4 });
+    const [query, setQuery] = useState({ page: page, limit: 5 });
     const [total, setTotal] = useState<number>(0);
     const { data, isLoading, isError } = useGetMyJobCreatedQuery(query);
     const [jobCreated, setJobCreated] = useState<any[]>([]);

@@ -26,24 +26,20 @@ const Item = ({ job }: { job: Job }) => {
     return (
         <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-2">
             {isLoading && <Loader />}
-            <div className="flex gap-4 w-[30%] items-center">
+            <div className="flex gap-4 w-[35%] items-center">
                 <img
-                    className="bg-primary-100 w-16 h-16  object-fit rounded-lg"
+                    className="bg-primary-100 w-14 h-14  object-fit rounded-lg"
                     src={job.postedBy.photo}
                     alt="company"
                 />
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-1">
                     <h5 className="font-family-title font-title text-primary-100 text-lg">{job.title}</h5>
 
-                    <p className="">Thời hạn: {deadline}</p>
-                    <p className="">Số lượng: {job.numberRecruitment}</p>
-
-                    <Link
-                        className="text-primary-100 hover:text-blue-800 duration-300 underline"
-                        to={`/profile/company/jobApplication/${job.id}`}
-                    >
-                        Xem danh sách đăng ký
-                    </Link>
+                    {job.isAccepted ? (
+                        <div className="text-sm text-primary-100 font-semibold">Đã duyệt</div>
+                    ) : (
+                        <div className="text-sm text-[#7307C9] font-semibold">Chưa duyệt</div>
+                    )}
                 </div>
             </div>
 
@@ -54,9 +50,13 @@ const Item = ({ job }: { job: Job }) => {
                     alt={images.logo.money}
                 />
                 <div className="flex flex-col gap-1">
-                    <h5 className="font-family-title font-semibold">{salary}/Tháng</h5>
-
-                    <p className="font-normal text-sm">{job.description}</p>
+                    <h5 className="font-family-title">{salary}/Tháng</h5>
+                    <Link
+                        className="text-primary-100 hover:text-blue-800 duration-300 underline text-sm"
+                        to={`/profile/company/jobApplication/${job.id}`}
+                    >
+                        Xem danh sách
+                    </Link>
                 </div>
             </div>
 
@@ -67,28 +67,12 @@ const Item = ({ job }: { job: Job }) => {
                     alt={images.logo.userFg}
                 />
                 <div className="flex flex-col gap-1">
-                    <div className="flex flex-wrap gap-2 font-family-title">
-                        <span className="font-semibold">Kỹ năng:</span>
-                        {job.skillsRequire.map((skill, index) => (
-                            <p key={index}>{skill}</p>
-                        ))}
-                    </div>
-                    <div className="flex gap-2 font-family-title">
-                        <span className="font-semibold">Yêu cầu:</span>
-                        {job.jobRequire.map((job, index) => (
-                            <p key={index}>{job}</p>
-                        ))}
-                    </div>
+                    <p className="">Số lượng: {job.numberRecruitment}</p>
+                    <p className="">Thời hạn: {deadline}</p>
                 </div>
             </div>
 
-            <div className="flex flex-col gap-2 font-medium w-[11%] justify-end">
-                {job.isAccepted ? (
-                    <div className="py-2 text-center  border-primary-100 border-2 rounded-lg">Đã duyệt</div>
-                ) : (
-                    <div className="py-2 text-center  border-[#7307C9] border-2 rounded-lg ">Chưa duyệt</div>
-                )}
-
+            <div className="flex flex-col gap-2 font-medium w-[10%] justify-end text-sm">
                 <button
                     onClick={() => handleRemoveJob(job.id)}
                     className="py-2 px-4 text-white bg-red-700 rounded-lg hover:bg-black duration-300"

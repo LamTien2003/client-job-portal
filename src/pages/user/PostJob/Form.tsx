@@ -16,6 +16,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import Textarea from './Textarea';
 import { useDispatch } from 'react-redux';
 import { hideLoading, showLoading } from '@/store/uiSlice';
+import { useNavigate } from 'react-router-dom';
 
 interface Values {
     title: string;
@@ -56,6 +57,7 @@ const validation = Yup.object().shape({
 });
 const FormPostJob = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [createJob, { isLoading }] = useCreateJobMutation();
     const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
     const [category, setCategory] = useState<any[]>([]);
@@ -122,6 +124,7 @@ const FormPostJob = () => {
                 setSkillValue([]);
                 setIsFormSubmitted(false);
                 formik.resetForm();
+                navigate('/profile/company/job-created');
             } catch (error: any) {
                 if (error.status === 400) {
                     toast.error(error.data.msg);
