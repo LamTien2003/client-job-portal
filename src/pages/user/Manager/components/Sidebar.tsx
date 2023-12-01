@@ -1,4 +1,4 @@
-import { MdOutlineDashboard, MdOutlineDelete, MdWorkOutline } from 'react-icons/md';
+import { MdOutlineDashboard, MdOutlineDelete, MdWorkOutline, MdOutlineMedicalInformation } from 'react-icons/md';
 import { IoBagAddOutline } from 'react-icons/io5';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import TitleProfile from './TitleProfile';
@@ -18,7 +18,9 @@ const Sidebar = () => {
                 logo={<MdOutlineDashboard />}
             />
             {jobSeeker && <TitleProfile title="Đơn ứng tuyển" path="jobseeker/applied-jobs" logo={<MdWorkOutline />} />}
-            {jobSeeker && <TitleProfile title="Thêm CV" path="jobseeker/add-cv" logo={<MdWorkOutline />} />}
+            {jobSeeker && (
+                <TitleProfile title="Thêm CV" path="jobseeker/add-cv" logo={<MdOutlineMedicalInformation />} />
+            )}
             {company && <TitleProfile title="Công việc đã tạo" path="company/job-created" logo={<MdWorkOutline />} />}
 
             {company && <TitleProfile title="Thùng rác" path="company/job-deleted" logo={<MdOutlineDelete />} />}

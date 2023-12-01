@@ -7,6 +7,8 @@ import { formatNumberToVND } from '@/utils/number';
 const ItemJob = ({ job }: { job: JobApplicate }) => {
     const createDate = formatDate(job?.createdAt);
 
+    console.log(job);
+
     const currentDate: Date = new Date();
 
     const jobCreateDate: Date = new Date(job?.job?.createdAt);
@@ -52,17 +54,7 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                         <h5 className="font-family-title font-title text-lg text-primary-100">{job?.job.title}</h5>
 
                         <div className="flex gap-1 items-center text-sm">
-                            <span className="font-semibold">Công ty: </span>
                             <p className="text-content-text font-medium">{job?.company?.companyName}</p>
-                        </div>
-                        <div className="flex gap-1 items-center text-sm">
-                            <img src={images.logo.location} alt={images.logo.calender2} />
-                            <p className="text-content-text font-medium">{job?.company?.location.city}</p>
-                        </div>
-
-                        <div className="flex gap-1 items-center text-sm">
-                            <img src={images.logo.calender2} alt={images.logo.calender2} />
-                            <p className="text-content-text font-medium">{displayDate}</p>
                         </div>
                     </div>
                 </div>
@@ -75,11 +67,15 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                     />
                     <div className="flex flex-col gap-2">
                         <h5 className="font-family-title font-semibold ">{salary} / Tháng</h5>
-                        <p className="font-family-text font-normal text-sm ">{job?.job?.description}</p>
+
+                        <div className="flex gap-1 items-center text-sm">
+                            <img src={images.logo.location} alt={images.logo.calender2} />
+                            <p className="text-content-text font-medium">{job?.company?.location.city}</p>
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex gap-3 w-[25%] items-center">
+                <div className="flex gap-3 w-[28%] items-center">
                     <img
                         className="w-12 h-12 bg-[#fba555] p-3 rounded-lg object-contain"
                         src={images.logo.userFg}
@@ -87,18 +83,13 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                     />
                     <div className="flex flex-col gap-1">
                         <div className="flex gap-1 items-center text-sm">
-                            <span className="font-semibold">Nộp đơn: </span>
-                            <p className="text-content-text font-medium">{createDate}</p>
+                            <img src={images.logo.calender2} alt={images.logo.calender2} />
+                            <p className="text-content-text font-medium">{displayDate}</p>
                         </div>
 
                         <div className="flex gap-1 items-center text-sm">
                             <span className="font-semibold">Phỏng vấn: </span>
                             <p className="text-content-text font-medium">{interviewDate ? interviewDate : 'Chưa có'}</p>
-                        </div>
-
-                        <div className="flex gap-1 items-center text-sm">
-                            <span className="font-semibold">Địa điểm: </span>
-                            <p className="text-content-text font-medium">{interviewDate ? interviewDate : 'HCM'}</p>
                         </div>
                     </div>
                 </div>
@@ -106,11 +97,11 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                 <div className="flex gap-2 font-medium w-[15%] justify-end">
                     {job.status === 'pending' && (
                         <div className="flex flex-col gap-2">
-                            <div className="py-2 px-4  border-primary-100 border-2 rounded-lg">Đang chờ</div>
+                            <div className="py-1 px-3  border-primary-100 border-2 rounded-lg">Đang chờ</div>
 
                             <button
                                 onClick={() => removeJobHandle(job._id)}
-                                className="py-2 px-4 text-white bg-red-700 rounded-lg hover:bg-black duration-300"
+                                className="py-1 px-3 text-white bg-red-700 rounded-lg hover:bg-black duration-300"
                             >
                                 {isLoading ? 'Đang xoá' : 'Xoá'}
                             </button>
@@ -118,7 +109,7 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                     )}
 
                     {job.status === 'accepted' && (
-                        <div className="py-2 px-4 text-center text-white  rounded-lg bg-primary-100 ">Thành công</div>
+                        <div className="py-1 px-3 text-center text-white  rounded-lg bg-primary-100 ">Đã duyệt</div>
                     )}
                 </div>
             </div>

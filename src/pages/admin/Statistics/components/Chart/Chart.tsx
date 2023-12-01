@@ -26,11 +26,11 @@ const ChartStatis = () => {
     }, [jobMonthlyData?.data?.data, isError, isLoading]);
 
     const data = {
-        labels: job.map((item) => `Tháng ${item.month}`).reverse(),
+        labels: job.map((item) => `Tháng ${item.month}`),
         datasets: [
             {
                 label: 'Công việc',
-                data: job.map((item) => item.amountJob).reverse(),
+                data: job.map((item) => item.amountJob),
                 borderColor: 'rgb(0, 167, 172)',
                 backgroundColor: 'rgb(0, 167, 172)',
             },

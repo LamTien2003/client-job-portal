@@ -48,6 +48,7 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
                 const data: string = `${dateValue}T${timeValue}`;
 
                 const formattedDate = dayjs(data).format('YYYY-MM-DDTHH:mm:ssZ');
+
                 const body: any = {
                     interviewDate: formattedDate,
                 };

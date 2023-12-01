@@ -20,18 +20,18 @@ const Total = () => {
     return (
         <>
             {isLoading ? (
-                <div className="w-full flex justify-between gap-10 mb:flex-col tb:flex-col ">
+                <div className="w-full flex  gap-10 mb:flex-col tb:flex-col ">
                     <Skeleton />
                     <Skeleton />
                     <Skeleton />
                     <Skeleton />
                 </div>
             ) : (
-                <div className="flex justify-between">
-                    <Item icon={<FaUserAlt />} title="Người dùng" total={total?.totalUsers} />
-                    <Item icon={<MdWork />} title="Đơn xin việc" total={total?.totalApplications} />
-                    <Item icon={<BiSolidUserDetail />} title="Công việc" total={total?.totalJobs} />
-                    <Item icon={<FaList />} title="Danh mục" total={total?.totalApplications} />
+                <div className="flex gap-10">
+                    <Item icon={<FaUserAlt />} title="Người dùng" total={total?.totalUsers} path="users" />
+                    <Item icon={<MdWork />} title="Đơn xin việc" total={total?.totalApplications} path="jobs" />
+                    <Item icon={<BiSolidUserDetail />} title="Công việc" total={total?.totalJobs} path="jobs" />
+                    <Item icon={<FaList />} title="Danh mục" total={total?.totalApplications} path="categories" />
                 </div>
             )}
         </>
