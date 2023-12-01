@@ -37,7 +37,7 @@ const Login = () => {
                         dispatch(setcredentialsToken(accessToken));
                         setToken(accessToken);
                     }
-                    navigate(-1);
+                    navigate('/');
                 }
             } catch (error: any) {
                 toast.error(error.data.msg);
@@ -52,7 +52,7 @@ const Login = () => {
     return (
         <>
             {isLoading && <Loader />}
-            <div className=" w-full min-h-screen bg-gradient-to-r from-[#00032d] to-[#103185] py-20">
+            <div className=" w-full min-h-screen font-family-text bg-gradient-to-r from-[#00032d] to-[#103185] py-20">
                 <div className=" flex flex-col w-[550px] mx-auto">
                     <h1 className=" text-center font-family-title text-primary-100 font-semibold text-3xl mb-4">
                         Đăng nhập

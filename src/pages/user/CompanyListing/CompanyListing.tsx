@@ -57,7 +57,7 @@ function CompanyListing() {
                     {/* list */}
                     <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 lg:mx-auto tb:w-11/12 mb:w-11/12 mb:mx-auto">
                         <div className=" mb-6 pl-3 pr-3 flex justify-between lg:flex-col">
-                            <p className="text-content-text font-medium pt-2 pb-2">Hiện có <span className=' text-primary-100 font-semibold'>{companyList.length}</span> công ty</p>
+                            <p className="text-content-text font-medium pt-2 pb-2">Hiện có <span className=' text-primary-100 font-semibold'>{totalCompany}</span> công ty</p>
                             <div>
                                 <button className=" mr-5 ml-7" onClick={() => setListStyle('gutter')}>
                                     <ListGutter color={listStyle} />

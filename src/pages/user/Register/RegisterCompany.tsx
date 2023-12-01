@@ -111,7 +111,7 @@ function RegisterCompany() {
     return (
         <>
             {isLoadingRegister && <Loader />}
-            <div className=' w-full bg-gradient-to-r from-[#00032d] to-[#103185] py-20'>
+            <div className=' w-full font-family-text bg-gradient-to-r from-[#00032d] to-[#103185] py-20'>
                 <div className=' flex flex-col w-[900px] mx-auto '>
                     <h1 className=' text-center font-family-title text-primary-100 font-semibold text-3xl mb-4'>Đăng ký (Công ty)</h1>
                     <div className=' w-full h-auto bg-white rounded-xl p-[40px]'>

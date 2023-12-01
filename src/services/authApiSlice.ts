@@ -126,6 +126,45 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 }
             },
         }),
+        forgotPassword: builder.mutation<ResponseApi, {email: string}>({
+            query(body) {
+                try {
+                    return {
+                        url: 'auth/forgotPassword',
+                        method: 'POST',
+                        body
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+        }),
+        confirmOTP: builder.mutation<ResponseApi, {email: string, otp: string}>({
+            query(body) {
+                try {
+                    return {
+                        url: 'auth/confirmOtp',
+                        method: 'POST',
+                        body
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+        }),
+        resetPassword: builder.mutation<ResponseApi, {email: string, otp: string, password: string}>({
+            query(body) {
+                try {
+                    return {
+                        url: 'auth/resetPassword',
+                        method: 'POST',
+                        body
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+        }),
     }),
 });
 
@@ -135,4 +174,7 @@ export const {
     useRegisterCompanyMutation,
     useRegisterJobseekerMutation,
     useLogoutMutation,
+    useForgotPasswordMutation,
+    useConfirmOTPMutation,
+    useResetPasswordMutation,
 } = authApiSlice;
