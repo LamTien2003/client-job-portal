@@ -48,6 +48,7 @@ export type Skill = 'ReactJS' | 'NodeJS' | 'PHP' | 'Java' | 'Javascript' | 'Gola
 export interface JobApplicate {
     _id: string;
     candicate: string;
+    cvImage: string;
     company: {
         _id: string;
         companyName: string;

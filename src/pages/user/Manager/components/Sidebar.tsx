@@ -18,6 +18,7 @@ const Sidebar = () => {
                 logo={<MdOutlineDashboard />}
             />
             {jobSeeker && <TitleProfile title="Đơn ứng tuyển" path="jobseeker/applied-jobs" logo={<MdWorkOutline />} />}
+            {jobSeeker && <TitleProfile title="Thêm CV" path="jobseeker/add-cv" logo={<MdWorkOutline />} />}
             {company && <TitleProfile title="Công việc đã tạo" path="company/job-created" logo={<MdWorkOutline />} />}
 
             {company && <TitleProfile title="Thùng rác" path="company/job-deleted" logo={<MdOutlineDelete />} />}
