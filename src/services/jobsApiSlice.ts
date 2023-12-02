@@ -3,7 +3,6 @@ import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
 import { buildQueryString } from '@/utils/helper';
-import Category from '@/types/Category';
 
 interface ParamsGetAllJob {
     q?: string;
@@ -15,7 +14,7 @@ interface ParamsGetAllJob {
     sort?: string;
     type?: string;
     p?: string;
-    d?: string
+    d?: string;
 }
 
 export const jobsApiSlice = apiSlice.injectEndpoints({
@@ -98,7 +97,7 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
                 return {
                     url: 'job/apply/' + id,
                     method: 'POST',
-                }
+                };
             },
             invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: '' }]),
         }),
@@ -128,15 +127,15 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
             },
             invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }]),
         }),
-        postComment: builder.mutation<ResponseApi<Job>, {content: string, id: string}>({
+        postComment: builder.mutation<ResponseApi<Job>, { content: string; id: string }>({
             query: (body) => {
                 return {
                     url: `job/comment/${body.id}`,
                     method: 'POST',
-                    body: {content: body.content}
-                }
+                    body: { content: body.content },
+                };
             },
-            invalidatesTags: (result, error) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }])
+            invalidatesTags: (result, error) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }]),
         }),
     }),
 });

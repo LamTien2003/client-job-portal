@@ -26,7 +26,7 @@ function AdminLayout() {
                     <Sidebar isActiveSidebar={activeSidebar} />
                     <div
                         className={
-                            ' w-full flex flex-col duration-300 pr-[30px] ' +
+                            ' w-full min-h-screen flex flex-col duration-300 pr-[30px] ' +
                             (activeSidebar ? 'pl-[330px]' : 'pl-[90px]')
                         }
                     >

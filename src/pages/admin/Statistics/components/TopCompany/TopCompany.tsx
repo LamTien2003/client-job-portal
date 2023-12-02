@@ -1,5 +1,4 @@
 import ItemCompany from './Company';
-import Company from '@/types/Company';
 import { useGetTopCompanyQuery } from '@/services/statisticApiSlice';
 import { useState, useEffect } from 'react';
 import { StatisticTopCompany } from '@/types/Statistic';
