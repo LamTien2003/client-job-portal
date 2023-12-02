@@ -98,7 +98,7 @@ function RegisterJobseeker() {
         <>
             {isLoadingSignup && <Loader />}
             <div className=' w-full font-family-text bg-gradient-to-r from-[#00032d] to-[#103185] py-20'>
-                <div className=' flex flex-col w-[900px] mx-auto'>
+                <div className=' flex flex-col w-[900px] mx-auto duration-300 xl:w-[700px] lg:w-[550px] tb:w-[450px] mb:w-[350px]'>
                     <h1 className=' text-center font-family-title text-primary-100 font-semibold text-3xl mb-4'>Đăng ký (Người tìm việc)</h1>
                     <div className=' w-full h-auto bg-white rounded-xl p-[40px]'>
                         <form onSubmit={formik.handleSubmit}>
@@ -222,15 +222,7 @@ function RegisterJobseeker() {
                                     placeholder="Nhập lại mật khẩu"
                                 />
                             </div>
-                            <div className=" flex flex-col p-2 ">
-                                <div className=" flex items-center justify-between mt-2">
-                                    <div className=" flex items-center">
-                                        <input id="rememberme" type="checkbox" className=" cursor-pointer" />
-                                        <label htmlFor="rememberme" className=" ml-1 cursor-pointer">
-                                            Tôi đồng ý với tất cả các điều khoản của bạn
-                                        </label>
-                                    </div>
-                                </div>
+                            <div className=" flex flex-col p-2 tb:flex-col mb:flex-col ">
                                 <div className=" text-center">
                                     <button
                                         type="submit"

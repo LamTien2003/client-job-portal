@@ -11,15 +11,15 @@ function JobGutter(props: Props) {
     return (
         <>
             {jobList.length === 0 && 'Hiện đang không có công việc nào theo yêu cầu của bạn.'}
-            <div className=" flex flex-wrap tb:flex-col ">
+            <div className=" flex flex-wrap tb:flex-col mb:flex-col ">
                 {jobList?.map((job) => {
                     const date = new Date(job.deadline)
                     const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                     return (
-                        <div key={job.id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full ">
+                        <div key={job.id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full mb:w-full ">
                             <div className=" border-[#eee] border rounded p-4 relative">
                                 <img
-                                    className=" rounded tb:w-full"
+                                    className=" w-full rounded "
                                     src={job.postedBy.coverPhoto}
                                 />
                                 <div className=" mt-5 mb-5 flex items-center">
@@ -31,10 +31,10 @@ function JobGutter(props: Props) {
                                         <h3 className=" text-content-title font-semibold text-lg xl:text-base mb:text-cb">
                                             {job.title}
                                         </h3>
-                                        <div className=" font-family-title text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start tb:flex-row mb:flex-col mb:items-start mb:text-xs ">
+                                        <div className=" font-family-title text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start lg:flex-col lg:items-start tb:flex-row mb:flex-col mb:items-start mb:text-xs ">
                                             {job.postedBy.companyName}
-                                            <div className=" h-3.5 w-px bg-content-title mr-2.5 ml-2.5 xl:hidden"></div>
-                                            <p className=" text-content-title font-semibold flex mb:text-xs mb:ml-0 ">
+                                            <div className=" h-3.5 w-px bg-content-title mr-2.5 ml-2.5 xl:hidden lg:hidden tb:hidden mb:hidden"></div>
+                                            <p className=" text-content-title font-semibold flex tb:ml-10 mb:text-xs mb:ml-0 ">
                                                 Hạn chót <span className=" font-medium">: {mydeadline}</span>{' '}
                                             </p>
                                         </div>
@@ -54,7 +54,7 @@ function JobGutter(props: Props) {
                                         <p className=" text-content-text font-medium text-base lg:text-sm mb:text-xs ">
                                             Kĩ năng yêu cầu: 
                                             <span className=" text-content-title font-medium ml-1">
-                                                {job.skillsRequire}
+                                                {job.skillsRequire.join(', ')}
                                             </span>
                                         </p>
                                     </div>
@@ -67,12 +67,12 @@ function JobGutter(props: Props) {
                                         </p>
                                     </div>
                                 </div>
-                                <div className=" mt-5 mb-3 flex relative">
+                                <div className=" mt-5 mb-3 flex items-center justify-between">
                                     <div className=" text-content-title text-sm font-medium bg-gray-300 rounded-3xl pt-1.5 pb-1.5 pl-6 pr-6 lg:text-xs ">
                                         Fulltime
                                     </div>
 
-                                    <div className=" group bottom-2 right-0 absolute cursor-pointer ">
+                                    <div className=" group cursor-pointer ">
                                         <div className=" border border-primary-100 pr-5 pl-5 pt-1 pb-1 rounded-md group duration-300 hover:bg-primary-100 right-0 mb:static mb:mt-3 mb:ml-2">
                                             <Link
                                                 to={'/job-detail/' + job._id}

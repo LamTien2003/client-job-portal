@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import * as Yup from 'Yup';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 interface Values {
     title: string;
 
@@ -55,8 +56,8 @@ const Search = () => {
                 }
 
                 navigate(`/job-listing${queryData}`);
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                toast.error('Lỗi khi gửi form:', error);
             }
         },
     });

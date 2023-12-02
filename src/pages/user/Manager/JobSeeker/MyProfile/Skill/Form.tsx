@@ -8,6 +8,7 @@ import { isJobSeeker } from '@/utils/helper';
 import { useSelector } from 'react-redux';
 import { useGetSkillsQuery } from '@/services/utilsApiSlice';
 import { Select, MenuItem } from '@mui/material';
+import { toast } from 'react-toastify';
 
 interface Form {
     toggleOpen?: () => void;
@@ -62,8 +63,8 @@ const Form = ({ toggleOpen }: Form) => {
                 await changeSkill(skillData);
                 setData([]);
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: any) {
+            toast.error(error);
         }
     };
 

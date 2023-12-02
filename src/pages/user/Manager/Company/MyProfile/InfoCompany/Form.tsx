@@ -17,6 +17,7 @@ import Company from '@/types/Company';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import Loader from '@/components/Loader/Loader';
+import { toast } from 'react-toastify';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -85,8 +86,8 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                 alert('Cập nhật thông tin thành công!');
                 formik.resetForm();
                 handleOpen();
-            } catch (error) {
-                console.error('Lỗi khi gửi form:', error);
+            } catch (error: any) {
+                toast.error('Lỗi khi gửi form:', error);
             }
         },
     });

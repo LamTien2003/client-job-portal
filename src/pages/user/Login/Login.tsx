@@ -52,8 +52,8 @@ const Login = () => {
     return (
         <>
             {isLoading && <Loader />}
-            <div className=" w-full min-h-screen font-family-text bg-gradient-to-r from-[#00032d] to-[#103185] py-20">
-                <div className=" flex flex-col w-[550px] mx-auto">
+            <div className=" w-full min-h-screen font-family-text bg-gradient-to-r from-[#00032d] to-[#103185] py-20 tb:text-sm mb:text-sm">
+                <div className=" flex flex-col w-[550px] mx-auto duration-300 xl:w-[500px] lg:w-[450px] tb:w-[400px] mb:w-[350px]">
                     <h1 className=" text-center font-family-title text-primary-100 font-semibold text-3xl mb-4">
                         Đăng nhập
                     </h1>
@@ -84,13 +84,7 @@ const Login = () => {
                                 placeholder="Nhập mật khẩu"
                             />
                             <div className=" flex flex-col ">
-                                <div className=" flex items-center justify-between mt-2">
-                                    <div className=" flex items-center">
-                                        <input id="rememberme" type="checkbox" className=" cursor-pointer" />
-                                        <label htmlFor="rememberme" className=" ml-1 cursor-pointer">
-                                            Ghi nhớ tôi
-                                        </label>
-                                    </div>
+                                <div className=" flex items-center justify-end mt-2">
                                     <Link to={'/forgot-password'} className=" font-medium duration-300 cursor-pointer hover:text-primary-100">
                                         Quên mật khẩu?
                                     </Link>
@@ -103,7 +97,7 @@ const Login = () => {
                                         Đăng Nhập
                                     </button>
                                 </div>
-                                <div className=" flex items-center justify-start mb-4">
+                                <div className=" flex items-center justify-start mb-4 tb:text-sm mb:text-sm">
                                     <p>Bạn chưa có tài khoản?</p>
                                     <Link
                                         to="/register/jobseeker"

@@ -34,7 +34,7 @@ function SelectCity({ label, id, name, value, onChange, onBlur, error, touched, 
     }, [value])
 
     return (
-        <div className="w-1/2 flex flex-col p-2">
+        <div className="w-1/2 flex flex-col p-2 tb:w-full mb:w-full">
             <label htmlFor={id} className=" text-base font-medium">
                 {label}
             </label>

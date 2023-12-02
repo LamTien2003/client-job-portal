@@ -46,19 +46,8 @@ function JobSummary(props: Props) {
         <div className=" w-1/3 pl-3 pr-3 lg:w-full ">
             {isjs && (
                 <div className=" mb-12 flex items-center justify-end">
-                    <div className=" group flex items-center cursor-pointer relative">
-                        <p className=" text-content-text text-lg font-medium duration-300 mr-2.5 group-hover:text-primary-100 xl:text-base lg:text-lg mb:text-sm">
-                            Save Job
-                        </p>
-                        <div className=" w-7 h-7 bg-[#eff3f2] rounded-full duration-300 group-hover:bg-primary-100">
-                            <FontAwesomeIcon
-                                className=" w-3 text-primary-100 text-sm top-1.5 right-2 absolute duration-300 group-hover:text-white"
-                                icon={faBookmark}
-                            />
-                        </div>
-                    </div>
                     <button onClick={handleApply} className=" font-medium pt-2 pb-2 pl-7 pr-7 bg-primary-100 text-white rounded ml-8 duration-500 hover:bg-black xl:pl-3 xl:pr-3 xl:text-sm xl:ml-4 lg:pl-7 lg:pr-7 lg:text-base mb:pl-4 mb:pr-4">
-                        Apply Position
+                        Ứng tuyển vị trí này
                     </button>
                 </div>
             )}

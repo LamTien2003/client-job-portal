@@ -51,25 +51,27 @@ function UserMenu(props: Props) {
                     <BellIcon />
                 </div>
                 <div className=" flex items-center justify-center w-[12px] h-[12px] text-[9px] text-white bg-primary-100 rounded-full top-0 right-0 absolute">5</div>
-                {dropDownNot && (
-                    <div ref={notificationRef} className=" w-[278.4px] flex flex-col bg-white rounded shadow-md top-[63px] right-0 absolute cursor-default">
-                        <p className=" text-center text-content-title font-family-title font-semibold p-[15px]">{currentUser.notifications.length} Thông báo</p>
-                        {currentUser.notifications.map(notification => {
-                            const date = new Date(notification.createdAt)
-                            return (
-                                <div className=" flex items-start border-t border-[#eee] p-[15px]">
-                                    <div className=" flex flex-col">
-                                        <p className=" text-sm text-content-title font-medium mb-2" >{notification.content}</p>
-                                        <div className=" flex items-center">
-                                            <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/clock-1.svg" />
-                                            <p className=" text-xs text-content-text ml-1">Vào ngày {`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`}</p>
+                    {dropDownNot && (
+                        <div ref={notificationRef} className=" w-[278.4px] flex flex-col bg-white rounded shadow-md top-[63px] right-0 absolute cursor-default">
+                            <p className=" text-center text-content-title font-family-title font-semibold p-[15px]">{currentUser.notifications.length} Thông báo</p>
+                            <div className=" h-[300px] overflow-scroll">
+                            {currentUser.notifications.map(notification => {
+                                const date = new Date(notification.createdAt)
+                                return (
+                                    <div className=" flex items-start border-t border-[#eee] p-[15px]">
+                                        <div className=" flex flex-col">
+                                            <p className=" text-sm text-content-title font-medium mb-2" >{notification.content}</p>
+                                            <div className=" flex items-center">
+                                                <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/clock-1.svg" />
+                                                <p className=" text-xs text-content-text ml-1">Vào ngày {`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
-                        )}
-                    </div>
-                )}
+                                )}
+                                )}
+                            </div>
+                        </div>
+                    )}
             </div>
             <div ref={menuRef} className=" flex items-center justify-center w-[40px] h-[40px] relative" onClick={() => setDropDownMenu(!dropDownMenu)}>
                 <img className=" w-full h-full rounded-full cursor-pointer" src={currentUser.photo} />

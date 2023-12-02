@@ -13,7 +13,7 @@ type SelectFieldPropsType = {
 };
 function SelectDate({ label, id, value = new Date(Date.now()), onChange, error, touched }: SelectFieldPropsType) {
     return (
-        <div className="w-1/2 flex flex-col p-2">
+        <div className="w-1/2 flex flex-col p-2 tb:w-full mb:w-full">
             <label htmlFor={id} className=" text-white text-base font-semibold">
                 {label}
             </label>
