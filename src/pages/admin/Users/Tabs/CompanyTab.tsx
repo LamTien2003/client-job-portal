@@ -67,11 +67,10 @@ function CompanyTab({setIsLoading}: {setIsLoading: (arg: boolean) => void}) {
                 columns={columns}
                 rows={companyList}
                 rowCount={companyCount}
-                pageSizeOptions={[5]}
+                pageSizeOptions={[5, 10, 25]}
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}
                 disableRowSelectionOnClick
-                
             />
         </Box>
     );

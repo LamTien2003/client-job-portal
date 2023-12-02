@@ -79,10 +79,6 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
             query: (id) => `job/${id}`,
             providesTags: () => [{ type: 'Jobs' as const, id: 'LIST' }],
         }),
-        getCategories: builder.query<ResponseApi<Category[]>, void>({
-            query: () => 'categoryJob',
-            providesTags: () => [{ type: 'Jobs' as const, id: '' }],
-        }),
         createJob: builder.mutation<ResponseApi<Job>, FormData>({
             query(body) {
                 try {
@@ -148,7 +144,6 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
 export const {
     useGetJobQuery,
     useGetJobsQuery,
-    useGetCategoriesQuery,
     useCreateJobMutation,
     useApplyJobMutation,
     useGetAllJobsQuery,

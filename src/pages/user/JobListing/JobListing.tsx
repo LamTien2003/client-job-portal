@@ -79,10 +79,10 @@ const JobListing = () => {
         if (!isLoading && !isError && data?.data?.data) {
             setJobList(data?.data?.data);
         }
-    }, [data?.data?.data , isError, isLoading]);
+    }, [data?.data?.data, isError, isLoading]);
 
     useEffect(() => {
-        if (!isLoading && !isError && data?.data?.totalItems) {
+        if (!isLoading && !isError && typeof data?.data?.totalItems === 'number') {
             setTotalJob(data?.data?.totalItems)
         }
     }, [data?.data?.totalItems , isError, isLoading]);
@@ -101,7 +101,7 @@ const JobListing = () => {
                 <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:mx-auto lg:mx-auto tb:mx-auto mb:mx-auto lg:pr-0 lg:w-10/12 tb:w-10/12 mb:w-11/12">
                     <div className=" mb-6 pl-3 pr-3 flex justify-between">
                         <p className="text-content-text font-medium pt-2 pb-2">
-                            Hiện có <span className=" text-primary-100 font-semibold">{totalJob}</span> công việc
+                            Đang hiển thị <span className=" text-primary-100 font-semibold">{jobList.length}</span> công việc
                         </p>
                         <div>
                             <button className=" mr-5 ml-7" onClick={() => setListStyle('gutter')}>
@@ -114,8 +114,8 @@ const JobListing = () => {
                     </div>
                     <div className=' mb-10'>
                         {isLoading && [...Array(5)].map((item, index) => <div key={index} className=' mb-7'><Skeleton />{item}</div>)}
-                        {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} changePage={setPage} />}
-                        {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} changePage={setPage} />}
+                        {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} />}
+                        {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} />}
                         <div className=' flex justify-center'>
                             {pageNumber !== 1 && [...Array(pageNumber)].map((item, index) => (
                                 <div 

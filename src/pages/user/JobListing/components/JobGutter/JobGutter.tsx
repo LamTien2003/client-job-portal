@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 interface Props {
     data: Job[];
-    changePage: (page:number) => void
 }
 
 function JobGutter(props: Props) {
@@ -11,7 +10,7 @@ function JobGutter(props: Props) {
 
     return (
         <>
-            {jobList.length === 0 && 'Hiện danh mục này chưa có công việc nào'}
+            {jobList.length === 0 && 'Hiện đang không có công việc nào theo yêu cầu của bạn.'}
             <div className=" flex flex-wrap tb:flex-col ">
                 {jobList?.map((job) => {
                     const date = new Date(job.deadline)

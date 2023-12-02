@@ -7,8 +7,6 @@ import { formatNumberToVND } from '@/utils/number';
 const ItemJob = ({ job }: { job: JobApplicate }) => {
     const createDate = formatDate(job?.createdAt);
 
-    console.log(job);
-
     const currentDate: Date = new Date();
 
     const jobCreateDate: Date = new Date(job?.job?.createdAt);

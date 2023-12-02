@@ -4,19 +4,19 @@ function TopFooter() {
     return (
         <div className=" flex items-start justify-between mx-auto lg:flex-wrap lg:w-10/12 tb:flex-wrap tb:w-8/12 mb:flex-col mb:items-center ">
             <ItemCol
-                title='About Company'
-                list={['Contact Us', 'Terms & Condition', 'Privacy & Policy', 'Candidate Listing']}
+                title='Giới thiệu về công ty'
+                list={['Liên hệ chúng tôi', 'Điều khoản & Điều kiện', 'Chính sách bảo mật', 'Danh sách ứng viên']}
             />
             <ItemCol
-                title="For Candidate's"
-                list={['Create Resume', 'Browse Categories', 'Save Jobs List', 'Browse Jobs', 'Candidate Dashboard']}
+                title="Dành cho ứng viên"
+                list={['Tạo sơ yếu lý lịch', 'Duyệt danh mục', 'Lưu danh sách công việc', 'Duyệt công việc', 'Trang tổng quan về ứng viên']}
             />
             <ItemCol
-                title="For Employer's"
-                list={['Post A Job', 'Browse Candidates', 'Job Packages', 'Jobs Featured', 'Employer Dashboard']}
+                title="Đối với nhà tuyển dụng"
+                list={['Đăng tuyển', 'Duyệt ứng viên', 'Gói công việc', 'Việc làm nổi bật', 'Trang tổng quan']}
             />
             <div className=" flex flex-col  ">
-                <h3 className=" text-xl font-semibold mb-[25px] ">Download App</h3>
+                <h3 className=" text-xl font-semibold mb-[25px] ">Tải ứng dụng</h3>
                 <div className=" border border-gray-800 py-3 px-[14px] mb-[30px] cursor-pointer">
                     <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/apple-app.svg" />
                 </div>

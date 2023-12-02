@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery } from '@/services/jobsApiSlice';
+import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
 import CategoryItem from './CategoryItem';
 import images from '@/assets/images';
 import Category from '@/types/Category';
@@ -9,7 +9,7 @@ import { Swiper as SwiperType } from 'swiper';
 import { Autoplay } from 'swiper/modules';
 import { Box, LinearProgress } from '@mui/material';
 const Category = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperType | undefined> }) => {
-    const { data, isLoading, isError } = useGetCategoriesQuery();
+    const { data, isLoading, isError } = useGetCategoriesQuery({});
     const [categories, setCategories] = useState<Category[]>([]);
 
     useEffect(() => {

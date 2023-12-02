@@ -32,7 +32,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
                     body
                 }
             },
-            invalidatesTags: (result, error) => (error ? [] : [{type: 'Category', id: 'LIST'}])
+            invalidatesTags: (_result, error) => (error ? [] : [{type: 'Category', id: 'LIST'}])
         }),
         changeCategory: builder.mutation<ResponseApi<Category>, Category>({
             query: (body) => {
@@ -42,7 +42,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
                     body: {categoryName: body.categoryName, isHotCategory: body.isHotCategory}
                 }
             },
-            invalidatesTags: (result, error) => (error ? [] : [{type: 'Category', id: 'LIST'}])
+            invalidatesTags: (_result, error) => (error ? [] : [{type: 'Category', id: 'LIST'}])
         }),
         deleteCategory: builder.mutation<ResponseApi<Category>, string>({
             query: (id) => {
@@ -51,7 +51,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
                     method: 'DELETE'
                 }
             },
-            invalidatesTags: (result, error) => (error ? [] : [{type: 'Category', id: 'LIST'}])
+            invalidatesTags: (_result, error) => (error ? [] : [{type: 'Category', id: 'LIST'}])
         })
     }),
 });

@@ -60,7 +60,7 @@ function Email({changePage, handleEmail}: EmailProps) {
                         type="submit"
                         className=" w-full h-[50px] text-white font-semibold bg-primary-100 rounded-[0.625rem] mt-6 "
                     >
-                        Gửi mã Otp
+                        Gửi mã OTP
                     </button>
                 </div>
             </form>

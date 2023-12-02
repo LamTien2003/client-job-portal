@@ -6,7 +6,8 @@ import CustomField from './Field';
 import SelectSkills from './SelectSkills';
 import images from '@/assets/images';
 import FieldImages from './FieldImages';
-import { useCreateJobMutation, useGetCategoriesQuery } from '@/services/jobsApiSlice';
+import { useCreateJobMutation } from '@/services/jobsApiSlice';
+import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
 import { useEffect, useState } from 'react';
 import SelectType from './SelectType';
 import { useGetSkillsQuery } from '@/services/utilsApiSlice';
@@ -64,7 +65,7 @@ const FormPostJob = () => {
     const [skills, setSkills] = useState<string[]>([]);
     const [skillValue, setSkillValue] = useState<string[]>([]);
     const [cate, setCate] = useState<string>('');
-    const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery();
+    const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery({});
 
     const { data: skillsData, isLoading: loadingSkills, isError: errorSkills } = useGetSkillsQuery(cate ? cate : '');
 

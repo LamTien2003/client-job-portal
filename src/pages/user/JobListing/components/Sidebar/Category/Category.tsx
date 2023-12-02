@@ -7,7 +7,7 @@ type Props = {
 };
 function Category(props: Props) {
 
-    const { data, isLoading, isError } = useGetCategoriesQuery({limit: 100});
+    const { data, isLoading, isError } = useGetCategoriesQuery({});
     
     const [category, setCategory] = useState<Category[]>([]);
     const [check, setCheck] = useState<boolean>(false);

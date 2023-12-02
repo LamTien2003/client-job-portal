@@ -42,7 +42,7 @@ const ChangeForm = React.forwardRef(({category, onChangeForm}: ChangeFormProps) 
                     htmlFor='isHotCategory'
                     className=" text-base font-medium font-family-title mb-2"
                 >
-                    Tên danh mục
+                    Độ hot
                 </label>
                 
                 <div className={" flex items-center border border-primary-200 rounded-lg outline-none px-5 py-[10px] "}>

@@ -8,7 +8,7 @@ type Props = {
 function ItemCol({title, list}: Props) {
     return (
         <div className=" flex flex-col mx-3 mb-8 mb:items-center mb:jus">
-            <h3 className=" text-xl font-semibold mb-[25px] xl:text-lg">{title}</h3>
+            <h3 className=" text-xl font-semibold font-family-title mb-[25px] xl:text-lg">{title}</h3>
             <ul className=" flex flex-col text-[#b3b3b3] font-medium tracking-wide mb:items-center">
                 {list?.map(item => (
                     <li key={item} className=" group flex items-center mb-3 cursor-pointer ">

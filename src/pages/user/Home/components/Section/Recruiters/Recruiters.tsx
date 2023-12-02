@@ -72,7 +72,7 @@ import { Swiper as SwiperType } from 'swiper';
 import { useGetCompaniesQuery } from '@/services/companiesApiSlice';
 import { useState, useEffect } from 'react';
 import Company from '@/types/Company';
-import { useGetCategoriesQuery } from '@/services/jobsApiSlice';
+import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
 import Category from '@/types/Category';
 import Skeleton from '@/components/Loading/Skeleton';
 
@@ -82,7 +82,7 @@ const Recruiters = ({ swiperRef }: { swiperRef: React.MutableRefObject<SwiperTyp
 
     const { data, isLoading, isError } = useGetCompaniesQuery({});
 
-    const { data: dataCate, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery();
+    const { data: dataCate, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery({});
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {
             setCompanies(data?.data?.data);

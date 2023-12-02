@@ -103,7 +103,6 @@ function RegisterJobseeker() {
                     <div className=' w-full h-auto bg-white rounded-xl p-[40px]'>
                         <form onSubmit={formik.handleSubmit}>
                             <div className=" flex flex-wrap">
-
                                 <Fields
                                     type='text'
                                     label='Họ'

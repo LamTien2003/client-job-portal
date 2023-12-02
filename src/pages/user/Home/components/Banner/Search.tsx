@@ -1,5 +1,5 @@
 import images from '@/assets/images';
-import { useGetCategoriesQuery } from '@/services/jobsApiSlice';
+import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
 import Category from '@/types/Category';
 import { Select, MenuItem } from '@mui/material';
 import { useState, useEffect } from 'react';
@@ -32,7 +32,7 @@ const Search = () => {
     const navigate = useNavigate();
     const [category, setCategory] = useState<Category[]>([]);
 
-    const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery();
+    const { data: categories, isLoading: loadingCate, isError: errorCate } = useGetCategoriesQuery({});
 
     useEffect(() => {
         if (!loadingCate && !errorCate && categories?.data?.data) {

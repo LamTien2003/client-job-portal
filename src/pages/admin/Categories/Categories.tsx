@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import AddForm from "./Forms/AddForm";
 import ChangeForm from "./Forms/ChangeForm";
 import Category from "@/types/Category";
-import { useAddCategoryMutation, useChangeCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery } from "@/services/categoriesApiSlice";
+import { useGetCategoriesQuery ,useAddCategoryMutation, useChangeCategoryMutation, useDeleteCategoryMutation } from "@/services/categoriesApiSlice";
 import CategoryAction from "./CategoryActions/CategoryActions";
 import { DataGrid } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
