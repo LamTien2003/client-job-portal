@@ -29,3 +29,20 @@ export const formatDateValue = (dateString: string | Date) => {
     const formattedDate = `${year}-${month}-${day}`;
     return formattedDate;
 };
+
+export const formatDateWithDayMonthYear = (dateValue: Date) => {
+    const date = new Date(dateValue);
+
+    if (!(date instanceof Date)) {
+        console.error('Đối tượng đầu vào không phải là một đối tượng Date');
+        return;
+    }
+
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    const dateString: string = `${day}/${month}/${year}`;
+
+    return dateString;
+};
