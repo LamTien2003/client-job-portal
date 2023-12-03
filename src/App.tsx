@@ -16,7 +16,6 @@ import PostJob from './pages/user/PostJob/PostJob';
 import Manager from './pages/user/Manager/Manager';
 import { default as JobseekerProfile } from './pages/user/Manager/JobSeeker/MyProfile/MyProfile';
 import AppliedJobs from './pages/user/Manager/JobSeeker/AppliedJobs/AppliedJobs';
-import Setting from './components/Settings/Settings';
 import AdminLayout from './layouts/admin/AdminLayout/AdminLayout';
 
 import { default as CompanyProfile } from './pages/user/Manager/Company/MyProfile/MyProfile';
@@ -65,7 +64,6 @@ function App() {
                     <Route path="blogs" index element={<BlogGrid />} />
                     <Route path="blogDetail" index element={<BlogDetail />} />
                     <Route path="contact" index element={<Contact />} />
-                    <Route path="setting" index element={<Setting />} />
 
                     <Route element={<ProtectedRoutes />}>
                         <Route path="profile" element={<Manager />}>
@@ -91,7 +89,7 @@ function App() {
 
                 <Route path="admin" element={<ProtectedRoutes />}>
                     <Route element={<AdminLayout />}>
-                        <Route index element={<Statistics />} />
+                        <Route path='statistics' element={<Statistics />} />
                         <Route path="users" element={<Users />} />
                         <Route path="jobs" element={<Jobs />} />
                         <Route path="categories" element={<Categories />} />

@@ -34,28 +34,28 @@ function CompanyInfo(props: Props) {
                         <div className=" flex ml-7 mb:ml-0 ">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/category-2.svg" />
                             <p className=" text-sm font-medium ml-2">
-                                <span className=" text-content-title font-semibold mr-1.5">Category:</span>Software
-                                Agency
+                                <span className=" text-content-title mr-1.5">Quy mô:</span>
+                                {`${company.companySize.from} - ${company.companySize.to} thành viên`}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div className=" flex mb:flex-col">
-                    <div className=" flex flex-col items-center lg:items-start tb:items-start mb:items-start mb:mb-2">
-                        <div className=" mb-2 flex">
+                <div className=" flex lg:flex-col tb:flex-col mb:flex-col">
+                    <div className=" flex flex-col items-center lg:items-center lg:flex-row lg:mb-2 tb:flex-row tb:items-center mb:items-start mb:mb-2">
+                        <div className=" mb-2 flex lg:mb-0 tb:mb-0">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/web-5.svg" />
-                            <p className=" text-content-title font-medium text-base ml-2">Website Link:</p>
+                            <p className=" text-content-title font-medium text-base ml-2">Website:</p>
                         </div>
                         <a href={company.website} className=" text-[#0279cf] text-sm font-medium">
-                            {company.website}
+                            {company.website ? company.website : 'Cập nhật'}
                         </a>
                     </div>
-                    <div className=" ml-10 flex flex-col lg:ml-[28px] tb:ml-[28px] mb:items-start mb:ml-0">
-                        <div className=" mb-3 flex">
+                    <div className=" ml-10 flex flex-col lg:flex-row lg:items-center lg:ml-0 tb:ml-[28px] mb:items-start mb:ml-0">
+                        <div className=" mb-3 flex lg:mb-0">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/share-icon.svg" />
                             <p className=" text-content-title font-medium text-base ml-2">Follow Company:</p>
                         </div>
-                        <div className=" flex lg:justify-between">
+                        <div className=" flex ">
                             <FontAwesomeIcon className=" mr-3" icon={faFacebookF} />
                             <FontAwesomeIcon className=" mr-3 ml-3" icon={faTwitter} />
                             <FontAwesomeIcon className=" mr-3 ml-3" icon={faLinkedinIn} />

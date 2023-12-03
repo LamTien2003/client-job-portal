@@ -1,4 +1,4 @@
-import { BellIcon, Logout, MesNot, Profile, Setting } from "@/components/Icons";
+import { BellIcon, Logout, Profile } from "@/components/Icons";
 import User from "@/types/User";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,20 +39,14 @@ function UserMenu(props: Props) {
     }, [dropDownNot])
 
     return (
-        <div className=' w-[158px] flex items-center justify-between lg:w-[200px] tb:w-[200px] mb:w-[200px]'>
-            <div className=" flex items-center justify-center w-[34px] h-[34px] bg-[#eff1f0] border border-gray-400 rounded-full cursor-pointer relative">
-                <div className=" fill-primary-100">
-                    <MesNot />
-                </div>
-                <div className=" flex items-center justify-center w-[12px] h-[12px] text-[9px] text-white bg-primary-100 rounded-full top-0 right-0 absolute">5</div>
-            </div>
-            <div className=" flex items-center justify-center w-[34px] h-[34px] bg-[#eff1f0] border border-gray-400 rounded-full cursor-pointer relative" onClick={() => setDropDownNot(!dropDownNot)}>
+        <div className=' w-[100px] flex items-center justify-between lg:w-[130px] tb:w-[130px] mb:w-[130px]'>
+            <div ref={notificationRef} className=" flex items-center justify-center w-[34px] h-[34px] bg-[#eff1f0] border border-gray-400 rounded-full cursor-pointer relative" onClick={() => setDropDownNot(!dropDownNot)}>
                 <div className=" fill-primary-100">
                     <BellIcon />
                 </div>
                 <div className=" flex items-center justify-center w-[12px] h-[12px] text-[9px] text-white bg-primary-100 rounded-full top-0 right-0 absolute">5</div>
                     {dropDownNot && (
-                        <div ref={notificationRef} className=" w-[278.4px] flex flex-col bg-white rounded shadow-md top-[63px] right-0 absolute cursor-default">
+                        <div className=" w-[278.4px] flex flex-col bg-white rounded shadow-md top-[63px] right-0 absolute cursor-default">
                             <p className=" text-center text-content-title font-family-title font-semibold p-[15px]">{currentUser.notifications.length} Thông báo</p>
                             <div className=" h-[300px] overflow-scroll">
                             {currentUser.notifications.map(notification => {
@@ -82,19 +76,13 @@ function UserMenu(props: Props) {
                             <div className=' primary-icon pr-2'>
                                 <Profile />
                             </div>
-                            <p className=" duration-300 cursor-pointer group-hover:text-primary-100">My Profile</p>
-                        </Link>
-                        <Link to={'/setting'} className=' group w-60 flex items-center text-content-title font-semibold rounded-sm bg-white pl-5 py-3 mb-0.5 cursor-default '>
-                            <div className=' primary-icon pr-2'>
-                                <Setting />
-                            </div>
-                            <p className=" duration-300 cursor-pointer group-hover:text-primary-100">Settings</p>
+                            <p className=" duration-300 cursor-pointer group-hover:text-primary-100">Hồ sơ cá nhân</p>
                         </Link>
                         <div className=' group w-60 flex items-center text-content-title font-semibold rounded-sm bg-white pl-5 py-3 mb-0.5 ' onClick={handleLogout}>
                             <div className=' primary-icon pr-2'>
                                 <Logout />
                             </div>
-                            <p className=" duration-300 cursor-pointer group-hover:text-primary-100">Logout</p>
+                            <p className=" duration-300 cursor-pointer group-hover:text-primary-100">Đăng xuất</p>
                         </div>
                     
                     </div>

@@ -44,7 +44,6 @@ import calender2 from './calender2.svg';
 
 import find from './find.png';
 import findWhite from './find-white.png';
-import messageAdmin from './message-admin.svg';
 import notificationAdmin from './notification-admin.svg';
 import jobseekerAdmin from './jobseeker-admin.svg';
 import companyAdmin from './company-admin.svg';
@@ -129,7 +128,6 @@ const images = {
         companies,
     },
     admin: {
-        messageAdmin,
         notificationAdmin,
         jobseekerAdmin,
         companyAdmin,
