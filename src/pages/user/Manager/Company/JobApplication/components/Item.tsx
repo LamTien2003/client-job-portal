@@ -23,9 +23,9 @@ const Item = ({ candicate }: { candicate: any }) => {
     };
     return (
         <>
-            <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-2">
+            <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-4 mb:grid mb:grid-cols-2  ">
                 {isLoading && <Loader />}
-                <div className="flex gap-4 w-[40%] items-center">
+                <div className="flex gap-4 w-[40%] items-center mb:w-full tb:w-full ">
                     <img
                         className="bg-primary-100 w-16 h-16  object-fit rounded-lg"
                         src={candicate.candicate.photo}
@@ -50,7 +50,7 @@ const Item = ({ candicate }: { candicate: any }) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex  gap-4 w-[30%] items-center">
+                <div className="flex  gap-4 w-[30%] items-center mb:w-full tb:w-full ">
                     <img
                         className="w-16 h-16 bg-[#fba555] p-3 rounded-lg object-contain"
                         src={images.logo.userFg}
@@ -80,9 +80,9 @@ const Item = ({ candicate }: { candicate: any }) => {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-2 font-medium w-[20%] justify-end">
+                <div className="flex flex-col gap-2 font-medium w-[20%] justify-end mb:w-full tb:w-full ">
                     {candicate.status === 'pending' ? (
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 mb:flex-row">
                             <button
                                 onClick={handleOpen}
                                 className="bg-blue-400 p-2 rounded-md text-white font-semibold hover:bg-black duration-200"

@@ -24,9 +24,9 @@ const Item = ({ job }: { job: Job }) => {
     const deadline = formatDate(job.deadline);
     const salary = formatNumberToVND(job.salary);
     return (
-        <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-2">
+        <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-4 mb:grid mb:grid-cols-2  tb:grid tb:grid-cols-2 lg:grid lg:grid-cols-2">
             {isLoading && <Loader />}
-            <div className="flex gap-4 w-[35%] items-center">
+            <div className="flex gap-4 w-[35%] items-center mb:w-full tb:w-full lg:w-full">
                 <img
                     className=" w-14 h-14  object-fit rounded-lg"
                     src={job.photosJob[0] ? job.photosJob[0] : images.logo.job}
@@ -43,7 +43,7 @@ const Item = ({ job }: { job: Job }) => {
                 </div>
             </div>
 
-            <div className="flex gap-3 w-[30%] items-center ">
+            <div className="flex gap-3 w-[30%] items-center mb:w-full tb:w-full lg:w-full">
                 <img
                     className="w-12 h-12 bg-[#2bc155] p-3 rounded-lg object-contain"
                     src={images.logo.money}
@@ -60,7 +60,7 @@ const Item = ({ job }: { job: Job }) => {
                 </div>
             </div>
 
-            <div className="flex  gap-3 w-[30%] items-center">
+            <div className="flex  gap-3 w-[30%] items-center mb:w-full tb:w-full lg:w-full">
                 <img
                     className="w-12 h-12 bg-[#fba555] p-3 rounded-lg object-contain"
                     src={images.logo.userFg}
@@ -72,7 +72,7 @@ const Item = ({ job }: { job: Job }) => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-2 font-medium w-[10%] justify-end text-sm">
+            <div className="flex flex-col gap-2 font-medium w-[10%] justify-end text-sm mb:w-[70%] tb:w-[60%] lg:w-1/3">
                 <button
                     onClick={() => handleRemoveJob(job.id)}
                     className="py-2 px-4 text-white bg-red-700 rounded-lg hover:bg-black duration-300"

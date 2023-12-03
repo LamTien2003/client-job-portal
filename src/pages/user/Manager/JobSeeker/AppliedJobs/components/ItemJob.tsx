@@ -5,8 +5,6 @@ import { useRemoveJobApplyMutation } from '@/services/jobseekerApiSlice';
 import { toast } from 'react-toastify';
 import { formatNumberToVND } from '@/utils/number';
 const ItemJob = ({ job }: { job: JobApplicate }) => {
-    const createDate = formatDate(job?.createdAt);
-
     const currentDate: Date = new Date();
 
     const jobCreateDate: Date = new Date(job?.job?.createdAt);
@@ -45,8 +43,8 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
     const salary = formatNumberToVND(job?.job?.salary);
     return (
         <>
-            <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-8">
-                <div className="flex gap-4 w-[30%] items-center">
+            <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-8 mb:grid mb:grid-cols-2  tb:grid tb:grid-cols-2 lg:grid lg:grid-cols-2">
+                <div className="flex gap-4 w-[30%] items-center mb:w-full tb:w-full lg:w-full">
                     <img className="w-16 h-16 object-fit rounded-lg" src={job.company.photo} alt="company" />
                     <div className="flex flex-col gap-1 w-full">
                         <h5 className="font-family-title font-title text-lg text-primary-100">{job?.job.title}</h5>
@@ -57,14 +55,14 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                     </div>
                 </div>
 
-                <div className="flex  gap-3 w-[35%] items-center">
+                <div className="flex  gap-3 w-[35%] items-center mb:w-full tb:w-full lg:w-full">
                     <img
                         className="w-12 h-12 bg-[#2bc155] p-3 rounded-lg object-contain"
                         src={images.logo.money}
                         alt={images.logo.money}
                     />
                     <div className="flex flex-col gap-2">
-                        <h5 className="font-family-title font-semibold ">{salary} / Tháng</h5>
+                        <h5 className="font-family-title font-semibold ">{salary}/Tháng</h5>
 
                         <div className="flex gap-1 items-center text-sm">
                             <img src={images.logo.location} alt={images.logo.calender2} />
@@ -73,7 +71,7 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                     </div>
                 </div>
 
-                <div className="flex gap-3 w-[28%] items-center">
+                <div className="flex gap-3 w-[28%] items-center mb:w-full tb:w-full lg:w-full">
                     <img
                         className="w-12 h-12 bg-[#fba555] p-3 rounded-lg object-contain"
                         src={images.logo.userFg}
@@ -92,7 +90,7 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                     </div>
                 </div>
 
-                <div className="flex gap-2 font-medium w-[15%] justify-end">
+                <div className="flex gap-2 font-medium w-[15%] justify-end mb:w-full  mb:justify-start  tb:w-full tb:justify-start lg:w-full lg:justify-start">
                     {job.status === 'pending' && (
                         <div className="flex flex-col gap-2">
                             <div className="py-1 px-3  border-primary-100 border-2 rounded-lg">Đang chờ</div>
