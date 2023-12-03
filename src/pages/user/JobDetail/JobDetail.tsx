@@ -37,14 +37,14 @@ function JobDetail() {
                 <div className=" mb-28 ">
                     <Banner page="Chi tiết công việc" />
 
-                    <div className=" w-10/12 mx-auto pt-16 flex lg:flex-col marker:">
+                    <div className=" w-10/12 mx-auto pt-16 flex lg:flex-col tb:flex-col mb:flex-col ">
                         {!isLoading && !isError && job && <JobInfo data={job} />}
                         {!isLoading && !isError && job && <JobSummary data={job} />}
                     </div>
 
                     {!isLoading && !isError && job && <Comments data={job} />}
 
-                    <div className=" w-10/12 mx-auto">
+                    {/* <div className=" w-10/12 mx-auto">
                         <h1 className=" font-family-title text-content-title text-2xl font-semibold mb-10">Related Jobs:</h1>
                         <Swiper
                             breakpoints={{
@@ -81,7 +81,7 @@ function JobDetail() {
                                 );
                             })}
                         </Swiper>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

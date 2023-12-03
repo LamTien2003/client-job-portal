@@ -22,9 +22,9 @@ function BotFooter() {
             <div className=" flex items-center justify-between py-5 lg:flex-col mb:py-3 ">
                 <div className=" flex items-center justify-start">
                     <p className=" text-sm ml-3">©Copyright 2023 
-                        <span className=" text-primary-100 duration-300 cursor-pointer hover:text-[#b3b3b3]"> JOBES </span>
+                        <span className=" text-primary-100 duration-300 cursor-pointer hover:text-[#b3b3b3]"> JOBHUB </span>
                         | Thiết kế bởi
-                        <span className=" text-primary-100 duration-300 cursor-pointer hover:text-[#b3b3b3]"> tên nhóm</span>
+                        <span className=" text-primary-100 duration-300 cursor-pointer hover:text-[#b3b3b3]"> JOBHUB</span>
                         
                     </p>
                 </div>

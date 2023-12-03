@@ -6,7 +6,7 @@ type Props = {
 function JobInfo(props: Props) {
     const {data: job} = props
     return (
-        <div className=" w-2/3 pl-3 pr-3 lg:w-full ">
+        <div className=" w-2/3 pl-3 pr-3 lg:w-full tb:w-full mb:w-full ">
             <div className=" h-1.5 bg-primary-100 rounded-t-lg"></div>
             <div className=" border-b border-[#eee] pt-6 pb-6 pr-4 rounded-b-lg pl-4 mb-8 flex justify-between bg-[#f8f8f8] mb:flex-col">
                 <div className=" flex mb:mb-7">
@@ -18,8 +18,8 @@ function JobInfo(props: Props) {
                         </div>
                     </div>
                 </div>
-                <div className=" flex justify-end xl:ml-5 lg:flex-col mb:ml-0">
-                    <div className=" mr-6 xl:mr-3 lg:mb-2">
+                <div className=" flex justify-end xl:ml-5 lg:flex-col tb:flex-col mb:flex-col mb:ml-0">
+                    <div className=" mr-6 xl:mr-3 lg:mb-2 tb:mb-2 mb:mb-2">
                         <div className=" mb-2 flex items-center relative">
                             <img className=" mr-1.5 top-[5px] absolute" src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/map-2.svg" />
                             <p className=" text-content-text text-base font-normal ml-4"><span className=" text-content-title font-medium mr-1.5">Địa điểm:</span>{job.postedBy.location.city}</p>

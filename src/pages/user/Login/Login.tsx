@@ -36,8 +36,12 @@ const Login = () => {
                         dispatch(setCurrentUser(user));
                         dispatch(setcredentialsToken(accessToken));
                         setToken(accessToken);
+                        if(user.role === 'admin') {
+                            navigate('/admin')
+                        } else {
+                            navigate('/');
+                        }
                     }
-                    navigate('/');
                 }
             } catch (error: any) {
                 toast.error(error.data.msg);

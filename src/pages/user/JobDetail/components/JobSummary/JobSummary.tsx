@@ -43,7 +43,7 @@ function JobSummary(props: Props) {
     }
 
     return (
-        <div className=" w-1/3 pl-3 pr-3 lg:w-full ">
+        <div className=" w-1/3 pl-3 pr-3 lg:w-full tb:w-full mb:w-full ">
             {isjs && (
                 <div className=" mb-12 flex items-center justify-end">
                     <button onClick={handleApply} className=" font-medium pt-2 pb-2 pl-7 pr-7 bg-primary-100 text-white rounded ml-8 duration-500 hover:bg-black xl:pl-3 xl:pr-3 xl:text-sm xl:ml-4 lg:pl-7 lg:pr-7 lg:text-base mb:pl-4 mb:pr-4">
@@ -55,7 +55,7 @@ function JobSummary(props: Props) {
 
             <div className=" w-full h-1.5 rounded-t-md bg-primary-100"></div>
 
-            <div className=" w-full bg-[#f8f8f8] pt-[70px] pb-[70px] pl-10 pr-10 ">
+            <div className=" w-full bg-[#f8f8f8] py-[70px] px-10 mb:py-[30px] mb:px-[20px] ">
                 <h3 className=" font-family-title text-content-title text-lg font-semibold mr-2 mb-6">Tóm tắt công việc:</h3>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
                     <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">

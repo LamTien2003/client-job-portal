@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ArrowAdmin, CategoryAdmin, JobAdmin, ProfileAdmin, SettingAdmin, StatisticsAdmin, UserAdmin } from "@/components/Icons";
+import { ArrowAdmin, CategoryAdmin, JobAdmin, StatisticsAdmin, UserAdmin } from "@/components/Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import images from "@/assets/images";
 type SidebarProps = {
     isActiveSidebar: boolean
@@ -12,38 +12,18 @@ function Sidebar(props: SidebarProps) {
     const myURL = window.location.href
     const page = new URL(myURL)
 
-    const [active, setActive] = useState<any>(() => {
-        if(page.pathname === '/admin') {
-            return 'statistics'
-        } else if(page.pathname === '/admin/users') {
-            return 'user'
-        } else if(page.pathname === '/admin/jobs') {
-            return 'job'
-        } else if(page.pathname === '/admin/categories') {
-            return 'category'
-        } else if(page.pathname === '/admin/profile') {
-            return 'profile'
-        } else if(page.pathname === '/admin/setting') {
-            return 'setting'
-        } else {
-            return
-        }
-    })
-
-    const toggleActiveStyle = (id: string) => {
-        if(id === active) {
-            return 'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative'
-        }   else {
-            return 'flex items-center text-white fill-white py-[18px] pl-5 relative'
-        }
-    }
-
     return (
         props.isActiveSidebar ? (
             <div className=" w-[300px] h-[100vh] font-family-text text-white bg-primary-100 rounded-r-[10px] mr-[30px] duration-300 left-0 fixed">
                 <Link className=" flex items-center justify-center w-[150px] h-[120px] mx-auto" to={'/'}><img src={images.logo.logoAdmin} /></Link>
                 <div className=" pl-4">
-                    <Link to={'/admin'} className={toggleActiveStyle('statistics')} onClick={() => setActive('statistics')}>
+                    <NavLink 
+                        to={'statistics'} 
+                        className={nav => (nav.isActive ? 
+                            'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
+                            'flex items-center text-white fill-white py-[18px] pl-5 relative')
+                        }
+                    >
                         <div className=" w-5 h-5">
                             <StatisticsAdmin />
                         </div>
@@ -51,8 +31,14 @@ function Sidebar(props: SidebarProps) {
                         <div className=" right-2 absolute">
                             <ArrowAdmin />
                         </div>
-                    </Link>
-                    <Link to={'/admin/users'} className={toggleActiveStyle('user')} onClick={() => setActive('user')}>
+                    </NavLink>
+                    <NavLink 
+                        to={'users'} 
+                        className={nav => (nav.isActive ? 
+                            'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
+                            'flex items-center text-white fill-white py-[18px] pl-5 relative')
+                        }
+                    >
                         <div className=" w-5 h-5 ">
                             <UserAdmin />
                         </div>
@@ -60,8 +46,14 @@ function Sidebar(props: SidebarProps) {
                         <div className=" right-2 absolute">
                             <ArrowAdmin />
                         </div>
-                    </Link>
-                    <Link to={'/admin/jobs'} className={toggleActiveStyle('job')} onClick={() => setActive('job')}>
+                    </NavLink>
+                    <NavLink 
+                        to={'jobs'} 
+                        className={nav => (nav.isActive ? 
+                            'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
+                            'flex items-center text-white fill-white py-[18px] pl-5 relative')
+                        }
+                        >
                         <div className=" w-5 h-5 ">
                             <JobAdmin />
                         </div>
@@ -69,8 +61,14 @@ function Sidebar(props: SidebarProps) {
                         <div className="  right-2 absolute">
                             <ArrowAdmin />
                         </div>
-                    </Link>
-                    <Link to={'/admin/categories'} className={toggleActiveStyle('category')} onClick={() => setActive('category')}>
+                    </NavLink>
+                    <NavLink 
+                    to={'categories'} 
+                    className={nav => (nav.isActive ? 
+                        'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
+                        'flex items-center text-white fill-white py-[18px] pl-5 relative')
+                    }
+                    >
                         <div className=" w-5 h-5 ">
                             <CategoryAdmin />
                         </div>
@@ -78,56 +76,64 @@ function Sidebar(props: SidebarProps) {
                         <div className="  right-2 absolute">
                             <ArrowAdmin />
                         </div>
-                    </Link>
-                    <Link to={'/admin/profile'} className={toggleActiveStyle('profile')} onClick={() => setActive('profile')}>
-                        <div className=" w-5 h-5">
-                            <ProfileAdmin />
-                        </div>
-                        <p className=" pl-3">Profile</p>
-                    </Link>
-                    <Link to={'/admin/setting'} className={toggleActiveStyle('setting')} onClick={() => setActive('setting')}>
-                        <div className=" w-5 h-5">
-                            <SettingAdmin />
-                        </div>
-                        <p className=" pl-3">Cài đặt</p>
-                    </Link>
+                    </NavLink>
                 </div>
             </div>
         ) : (
             <div className=" w-[60px] h-[100vh] text-white bg-primary-100 rounded-r-[10px] mr-[30px] duration-300 left-0 fixed">
-                <Link to={'/'} className=" flex items-center justify-center w-full h-5 my-[55px]">
+                <Link 
+                    to={'/'} 
+                    className=" flex items-center justify-center w-full h-5 my-[55px]">
                     <FontAwesomeIcon icon={faHouse} />
                 </Link>
-                <Link to={'/admin'} className={toggleActiveStyle('statistics')} onClick={() => setActive('statistics')}>
+
+                <NavLink 
+                    to={'statistics'} 
+                    className={nav => (nav.isActive ? 
+                        'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
+                        'flex items-center text-white fill-white py-[18px] pl-5 relative')
+                    }
+                    >
                     <div className=" w-5 h-5">
                         <StatisticsAdmin />
                     </div>
-                </Link>
-                <Link to={'/admin/users'} className={toggleActiveStyle('user')} onClick={() => setActive('user')}>
+                </NavLink>
+
+                <NavLink 
+                    to={'users'} 
+                    className={nav => (nav.isActive ? 
+                        'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
+                        'flex items-center text-white fill-white py-[18px] pl-5 relative')
+                    }
+                    >
                     <div className=" w-5 h-5 ">
                         <UserAdmin />
                     </div>
-                </Link>
-                <Link to={'/admin/jobs'} className={toggleActiveStyle('job')} onClick={() => setActive('job')}>
+                </NavLink>
+
+                <NavLink 
+                    to={'jobs'} 
+                    className={nav => (nav.isActive ? 
+                        'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
+                        'flex items-center text-white fill-white py-[18px] pl-5 relative')
+                    }
+                    >
                     <div className=" w-5 h-5 ">
                         <JobAdmin />
                     </div>
-                </Link>
-                <Link to={'/admin/categories'} className={toggleActiveStyle('category')} onClick={() => setActive('category')}>
+                </NavLink>
+
+                <NavLink 
+                    to={'categories'} 
+                    className={nav => (nav.isActive ? 
+                        'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
+                        'flex items-center text-white fill-white py-[18px] pl-5 relative')
+                    }
+                    >
                     <div className=" w-5 h-5 ">
                         <CategoryAdmin />
                     </div>
-                </Link>
-                <Link to={'/admin/profile'} className={toggleActiveStyle('profile')} onClick={() => setActive('profile')}>
-                    <div className=" w-5 h-5">
-                        <ProfileAdmin />
-                    </div>
-                </Link>
-                <Link to={'/admin/setting'} className={toggleActiveStyle('setting')} onClick={() => setActive('setting')}>
-                    <div className=" w-5 h-5">
-                        <SettingAdmin />
-                    </div>
-                </Link>
+                </NavLink>
             </div>
         )
         
