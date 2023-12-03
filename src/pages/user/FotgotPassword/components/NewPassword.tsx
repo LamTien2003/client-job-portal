@@ -45,7 +45,7 @@ function NewPassword({email, otp}: {email: string, otp: string}) {
                     </label>
                     
                     <input
-                        type='text'
+                        type='password'
                         id='newPassword'
                         name='newPassword'
                         placeholder='Nhập mật khẩu mới'
@@ -66,7 +66,7 @@ function NewPassword({email, otp}: {email: string, otp: string}) {
                     </label>
 
                     <input
-                        type='text'
+                        type='password'
                         id='confirmNewPassword'
                         name='confirmNewPassword'
                         placeholder='Nhập mật khẩu mới'

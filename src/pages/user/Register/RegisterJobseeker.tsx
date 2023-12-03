@@ -153,18 +153,6 @@ function RegisterJobseeker() {
                                 />
                                 <Fields
                                     type='text'
-                                    label='Giới thiệu'
-                                    id='introduce'
-                                    name='introduce'
-                                    value={formik.values.introduce}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.errors.introduce}
-                                    touched={formik.touched.introduce}
-                                    placeholder="Nhập phần giới thiệu"
-                                />
-                                <Fields
-                                    type='text'
                                     label='Địa chỉ'
                                     id='address'
                                     name='address'
@@ -220,6 +208,18 @@ function RegisterJobseeker() {
                                     error={formik.errors.passwordConfirm}
                                     touched={formik.touched.passwordConfirm}
                                     placeholder="Nhập lại mật khẩu"
+                                />
+                                <Fields
+                                    type='text'
+                                    label='Giới thiệu'
+                                    id='introduce'
+                                    name='introduce'
+                                    value={formik.values.introduce}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.errors.introduce}
+                                    touched={formik.touched.introduce}
+                                    placeholder="Nhập phần giới thiệu"
                                 />
                             </div>
                             <div className=" flex flex-col p-2 tb:flex-col mb:flex-col ">

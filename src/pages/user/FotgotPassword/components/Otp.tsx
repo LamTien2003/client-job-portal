@@ -53,6 +53,8 @@ function Otp({changePage, email, handleOtp}: OtpProps) {
                             <input
                                 key={index}
                                 type="text"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
                                 placeholder="0"
                                 className=" w-16 h-16 text-center text-3xl text-content-title bg-gray-100 border-2 border-gray-500 rounded-lg outline-none"
                                 maxLength={1}

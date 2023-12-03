@@ -9,8 +9,6 @@ import JobDetail from './pages/user/JobDetail/JobDetail';
 import CompanyListing from './pages/user/CompanyListing/CompanyListing';
 import CompanyDetail from './pages/user/CompanyDetail/CompanyDetail';
 
-import BlogGrid from './pages/user/BlogGrid/BlogGrid';
-import BlogDetail from './pages/user/BlogDetail/BlogDetail';
 import Contact from './pages/user/Contact/Contact';
 import PostJob from './pages/user/PostJob/PostJob';
 import Manager from './pages/user/Manager/Manager';
@@ -49,21 +47,19 @@ function App() {
             <Routes>
                 {/* Public routes */}
                 <Route element={<DefaultLayout />}>
-                    <Route path="login" index element={<Login />} />
-                    <Route path="register/jobseeker" index element={<RegisterJobseeker />} />
-                    <Route path="register/company" index element={<RegisterCompany />} />
-                    <Route path="forgot-password" index element={<ForgotPassword />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="register/jobseeker" element={<RegisterJobseeker />} />
+                    <Route path="register/company" element={<RegisterCompany />} />
+                    <Route path="forgot-password" element={<ForgotPassword />} />
                     <Route index element={<Home />} />
-                    <Route path="job-listing" index element={<JobListing />} />
-                    <Route path="job-detail/:id" index element={<JobDetail />} />
-                    <Route path="company-listing" index element={<CompanyListing />} />
-                    <Route path="company-detail/:id" index element={<CompanyDetail />} />
+                    <Route path="job-listing" element={<JobListing />} />
+                    <Route path="job-detail/:id" element={<JobDetail />} />
+                    <Route path="company-listing" element={<CompanyListing />} />
+                    <Route path="company-detail/:id" element={<CompanyDetail />} />
 
-                    <Route path="error" index element={<Error />} />
-                    <Route path="unauthorized" index element={<>unauthorized</>} />
-                    <Route path="blogs" index element={<BlogGrid />} />
-                    <Route path="blogDetail" index element={<BlogDetail />} />
-                    <Route path="contact" index element={<Contact />} />
+                    <Route path="error" element={<Error />} />
+                    <Route path="unauthorized" element={<>unauthorized</>} />
+                    <Route path="contact" element={<Contact />} />
 
                     <Route element={<ProtectedRoutes />}>
                         <Route path="profile" element={<Manager />}>

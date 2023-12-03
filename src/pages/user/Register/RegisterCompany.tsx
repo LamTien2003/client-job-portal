@@ -177,19 +177,18 @@ function RegisterCompany() {
                                 />
                                 <Fields
                                     type="text"
-                                    label="Mô tả công ty"
-                                    id="description"
-                                    name="description"
-                                    value={formik.values.description}
+                                    label="Địa chỉ"
+                                    id="address"
+                                    name="address"
+                                    value={formik.values.address}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    error={formik.errors.description}
-                                    touched={formik.touched.description}
-                                    placeholder="Nhập mô tả công ty"
+                                    error={formik.errors.address}
+                                    touched={formik.touched.address}
+                                    placeholder="Nhập địa chỉ"
                                 />
-
                                 <Fields
-                                    type="text"
+                                    type="number"
                                     label="Quy mô (từ)"
                                     id="companySizeFrom"
                                     name="companySizeFrom"
@@ -201,7 +200,7 @@ function RegisterCompany() {
                                     placeholder="Nhập số lượng thành viên ít nhất"
                                 />
                                 <Fields
-                                    type="text"
+                                    type="number"
                                     label="Quy mô (đến)"
                                     id="companySizeTo"
                                     name="companySizeTo"
@@ -211,42 +210,6 @@ function RegisterCompany() {
                                     error={formik.errors.companySizeTo}
                                     touched={formik.touched.companySizeTo}
                                     placeholder="Nhập số lượng thành viên nhiều nhất"
-                                />
-                                <Fields
-                                    type="password"
-                                    label="Mật khẩu"
-                                    id="password"
-                                    name="password"
-                                    value={formik.values.password}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.errors.password}
-                                    touched={formik.touched.password}
-                                    placeholder="Nhập mật khẩu"
-                                />
-                                <Fields
-                                    type="password"
-                                    label="Xác nhận mật khẩu"
-                                    id="passwordConfirm"
-                                    name="passwordConfirm"
-                                    value={formik.values.passwordConfirm}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.errors.passwordConfirm}
-                                    touched={formik.touched.passwordConfirm}
-                                    placeholder="Nhập lại mật khẩu"
-                                />
-                                <Fields
-                                    type="text"
-                                    label="Địa chỉ"
-                                    id="address"
-                                    name="address"
-                                    value={formik.values.address}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.errors.address}
-                                    touched={formik.touched.address}
-                                    placeholder="Nhập địa chỉ"
                                 />
                                 <SelectCity
                                     label="Chọn tỉnh, thành"
@@ -277,6 +240,42 @@ function RegisterCompany() {
                                     onChange={formik.setFieldValue}
                                     error={formik.errors.establishDate}
                                     touched={formik.touched.establishDate}
+                                />
+                                <Fields
+                                    type="password"
+                                    label="Mật khẩu"
+                                    id="password"
+                                    name="password"
+                                    value={formik.values.password}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.errors.password}
+                                    touched={formik.touched.password}
+                                    placeholder="Nhập mật khẩu"
+                                />
+                                <Fields
+                                    type="password"
+                                    label="Xác nhận mật khẩu"
+                                    id="passwordConfirm"
+                                    name="passwordConfirm"
+                                    value={formik.values.passwordConfirm}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.errors.passwordConfirm}
+                                    touched={formik.touched.passwordConfirm}
+                                    placeholder="Nhập lại mật khẩu"
+                                />
+                                <Fields
+                                    type="text"
+                                    label="Mô tả công ty"
+                                    id="description"
+                                    name="description"
+                                    value={formik.values.description}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.errors.description}
+                                    touched={formik.touched.description}
+                                    placeholder="Nhập mô tả công ty"
                                 />
                             </div>
                             <div className=" flex flex-col p-2 ">

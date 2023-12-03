@@ -15,9 +15,6 @@ function MainMenu() {
                 <Link to={'/company-listing'}>Tìm công ty</Link>
             </div>
             <div className=' flex items-center p-[30px] xl:p-[18px] duration-300 cursor-pointer hover:text-primary-100 relative'>
-                <Link to={'/blogs'}>Tin tức</Link>
-            </div>
-            <div className=' flex items-center p-[30px] xl:p-[18px] duration-300 cursor-pointer hover:text-primary-100 relative'>
                 <Link to={'/contact'}>Liên hệ</Link>
             </div>
         </div>

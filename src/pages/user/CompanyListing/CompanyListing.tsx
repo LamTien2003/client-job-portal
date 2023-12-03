@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-
 import Banner from '@/components/Banner/Banner';
 import CompanyColumn from './components/CompanyColumn/CompanyColumn';
 import CompanyGutter from './components/CompanyGutter/CompanyGutter';
@@ -24,12 +23,6 @@ function CompanyListing() {
         limit: 5,
         p: city
     });
-
-    // const { data, isLoading, isError } = useGetCompaniesQuery({
-    //     page,
-    //     limit: 5,
-    //     p: 'Tỉnh Bình Dương'
-    // });
 
     const handleFilter = (city: string) => {
         setCity(city)
