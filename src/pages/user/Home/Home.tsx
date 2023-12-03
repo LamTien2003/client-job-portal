@@ -6,7 +6,6 @@ import Process from './components/Section/Process/Process';
 import Location from './components/Section/Location/Location';
 import Company from './components/Section/Company/Company';
 import Recruiters from './components/Section/Recruiters/Recruiters';
-import Article from './components/Section/Article/Article';
 import { Swiper as SwiperType } from 'swiper';
 import { useRef } from 'react';
 const Home = () => {
@@ -40,12 +39,6 @@ const Home = () => {
     const titleRecruiters = (
         <span>
             <span className="text-primary-100">Nhà tuyển dụng</span> hàng đầu
-        </span>
-    );
-
-    const titleArticle = (
-        <span>
-            <span className="text-primary-100">Bài Viết</span> Gần Đây
         </span>
     );
 
@@ -93,14 +86,6 @@ const Home = () => {
                 <Process />
             </Section>
 
-            <Section
-                path="article"
-                title={titleArticle}
-                subTitle="Tham khảo các bài viết mới để nắm bắt được nhu cầu và xu hướng của thị trường"
-                bg=""
-            >
-                <Article />
-            </Section>
             <Company />
 
             <Section

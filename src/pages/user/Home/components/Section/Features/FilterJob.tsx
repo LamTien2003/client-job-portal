@@ -46,8 +46,25 @@ const FilterJob = ({ onSetCity }: { onSetCity: Dispatch<React.SetStateAction<str
                         swiperRef.current = swiper;
                     }}
                     spaceBetween={10}
-                    slidesPerView={4}
-                    breakpoints={{}}
+                    slidesPerView={1}
+                    breakpoints={{
+                        639: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        767: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        1023: {
+                            slidesPerView: 3,
+                            spaceBetween: 10,
+                        },
+                        1279: {
+                            slidesPerView: 4,
+                            spaceBetween: 10,
+                        },
+                    }}
                     className="flex items-center"
                 >
                     {provices?.map((item: any, index: any) => (
