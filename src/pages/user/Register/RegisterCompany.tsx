@@ -175,18 +175,6 @@ function RegisterCompany() {
                                     placeholder="Nhập tên công ty"
                                 />
                                 <Fields
-                                    type="text"
-                                    label="Địa chỉ"
-                                    id="address"
-                                    name="address"
-                                    value={formik.values.address}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.errors.address}
-                                    touched={formik.touched.address}
-                                    placeholder="Nhập địa chỉ"
-                                />
-                                <Fields
                                     type="number"
                                     label="Quy mô (từ)"
                                     id="companySizeFrom"
@@ -231,6 +219,18 @@ function RegisterCompany() {
                                     error={formik.errors.district}
                                     touched={formik.touched.district}
                                     districtList={district}
+                                />
+                                <Fields
+                                    type="text"
+                                    label="Địa chỉ"
+                                    id="address"
+                                    name="address"
+                                    value={formik.values.address}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.errors.address}
+                                    touched={formik.touched.address}
+                                    placeholder="Nhập địa chỉ"
                                 />
                                 <SelectDate
                                     label="EstablistDate"

@@ -151,18 +151,6 @@ function RegisterJobseeker() {
                                     touched={formik.touched.phoneNumber}
                                     placeholder="Nhập số điện thoại"
                                 />
-                                <Fields
-                                    type='text'
-                                    label='Địa chỉ'
-                                    id='address'
-                                    name='address'
-                                    value={formik.values.address}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.errors.address}
-                                    touched={formik.touched.address}
-                                    placeholder="Nhập phần địa chỉ"
-                                />
                                 <SelectCity
                                     label='Chọn tỉnh, thành'
                                     id='city'
@@ -184,6 +172,18 @@ function RegisterJobseeker() {
                                     error={formik.errors.district}
                                     touched={formik.touched.district}
                                     districtList={district}
+                                />
+                                <Fields
+                                    type='text'
+                                    label='Địa chỉ'
+                                    id='address'
+                                    name='address'
+                                    value={formik.values.address}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.errors.address}
+                                    touched={formik.touched.address}
+                                    placeholder="Nhập phần địa chỉ"
                                 />
                                 <Fields
                                     type='password'
@@ -228,7 +228,7 @@ function RegisterJobseeker() {
                                         type="submit"
                                         className=" w-full h-[50px] text-white text-lg font-semibold bg-primary-100 rounded-[0.625rem] mt-6 mb-4"
                                     >
-                                        Đăng Nhập
+                                        Đăng Ký
                                     </button>
                                 </div>
                                 <div className=" flex items-center justify-start mb-4">
