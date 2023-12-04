@@ -33,17 +33,18 @@ const AvatarSection = ({ formik }: { formik: any }) => {
                         <div className="text-xl">
                             <AiOutlineCamera />
                         </div>
-                        Sửa
+                        Cập nhật
                     </label>
                     <input name="photo" id="photo" className="hidden" type="file" onChange={handleFile} />
                 </div>
-
-                <button type="button" onClick={handleDelete} className="flex items-center hover:text-primary-100">
-                    <span className="text-xl">
-                        <MdDeleteOutline />
-                    </span>
-                    Xoá
-                </button>
+                {previewImage && (
+                    <button type="button" onClick={handleDelete} className="flex items-center hover:text-primary-100">
+                        <span className="text-xl">
+                            <MdDeleteOutline />
+                        </span>
+                        Xoá
+                    </button>
+                )}
             </div>
         </div>
     );

@@ -83,7 +83,7 @@ const AddCV = () => {
                     className="flex p-2 border-2 rounded-md gap-2 items-center justify-center font-medium cursor-pointer border-primary-100 text-primary-100 hover:border-black hover:text-black duration-300"
                 >
                     <TbFileInfo className="text-lg" />
-                    {cvImage ? 'Sửa' : 'Tải lên CV'}
+                    {cvImage ? 'Cập nhật' : 'Tải lên CV'}
                     <input name="photo" id="photo" className="hidden" type="file" onChange={handleFile} />
                 </label>
                 {previewImage && (
@@ -106,11 +106,7 @@ const AddCV = () => {
                 </button>
             </div>
 
-            <img
-                src={previewImage ? previewImage : cvImage}
-                alt="avt"
-                className="w-[80%] h-[550px] object-fit rounded-md"
-            />
+            <img src={previewImage ? previewImage : cvImage} alt="avt" className="object-contain rounded-md" />
         </form>
     );
 };
