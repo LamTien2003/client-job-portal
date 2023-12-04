@@ -41,8 +41,16 @@ const initialValues: Values = {
     locationDistrict: '',
 };
 const validation = Yup.object().shape({
-    firstName: Yup.string().max(30, 'Không được quá 30 kí tự!').required('Họ không được bỏ trống!'),
-    lastName: Yup.string().max(30, 'Không được quá 30 kí tự!').required('Tên không được bỏ trống!'),
+    firstName: Yup.string()
+        .max(30, 'Không được quá 30 kí tự!')
+        .min(2, 'Họ phải lớn hơn 1 kí tự!')
+        .matches(/^[^\d]+$/, 'Họ không được chứa số!')
+        .required('Họ không được bỏ trống!'),
+    lastName: Yup.string()
+        .max(30, 'Không được quá 30 kí tự!')
+        .min(2, 'Tên phải lớn hơn 1 kí tự!')
+        .matches(/^[^\d]+$/, 'Tên không được chứa số!')
+        .required('Tên không được bỏ trống!'),
     locationAddress: Yup.string().required('Địa chỉ phố không được bỏ trống!'),
     locationDistrict: Yup.string().required('Quận, Huyện không  được bỏ trống!'),
     locationCity: Yup.string().required('Tỉnh, Thành không được bỏ trống!'),
