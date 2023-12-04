@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 function Location({locationChange}: {locationChange: (city: string) => void}) {
     const [id, setId] = useState<string>('')
 

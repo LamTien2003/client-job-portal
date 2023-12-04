@@ -3,7 +3,6 @@ import { RegisterCompanyRequest, useRegisterCompanyMutation } from '@/services/a
 import { useFormik } from 'formik';
 import * as Yup from 'Yup';
 import { EMAILREGEX, PHONEREGEX } from '@/constants/regex';
-import { useDispatch } from 'react-redux';
 import { setCurrentUser, setcredentialsToken } from '@/store/userSlice';
 import { setToken } from '@/utils/storage';
 import Loader from '@/components/Loader/Loader';
@@ -13,7 +12,7 @@ import SelectDate from './components/SelectDate/SelectDate';
 import SelectDistrict from './components/SelectDistrict/SelectDistrict';
 import { toast } from 'react-toastify';
 import { useLayoutEffect, useState } from 'react';
-import { District, Location } from '@/types/Location';
+import { District } from '@/types/Location';
 
 const initialValues = {
     type: 'company',

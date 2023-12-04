@@ -48,7 +48,7 @@ function UserMenu(props: Props) {
                     {dropDownNot && (
                         <div className=" w-[278.4px] flex flex-col bg-white rounded shadow-md top-[63px] right-0 absolute cursor-default">
                             <p className=" text-center text-content-title font-family-title font-semibold p-[15px]">{currentUser.notifications.length} Thông báo</p>
-                            <div className=" h-[300px] overflow-scroll">
+                            <div className=" max-h-[300px] overflow-scroll">
                             {currentUser.notifications.map(notification => {
                                 const date = new Date(notification.createdAt)
                                 return (
