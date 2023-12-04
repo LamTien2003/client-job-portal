@@ -85,7 +85,7 @@ function App() {
 
                 <Route path="admin" element={<ProtectedRoutes />}>
                     <Route element={<AdminLayout />}>
-                        <Route path='statistics' element={<Statistics />} />
+                        <Route index element={<Statistics />} />
                         <Route path="users" element={<Users />} />
                         <Route path="jobs" element={<Jobs />} />
                         <Route path="categories" element={<Categories />} />

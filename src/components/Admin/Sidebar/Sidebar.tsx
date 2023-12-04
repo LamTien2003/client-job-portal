@@ -17,7 +17,8 @@ function Sidebar(props: SidebarProps) {
                 <Link className=" flex items-center justify-center w-[150px] h-[120px] mx-auto" to={'/'}><img src={images.logo.logoAdmin} /></Link>
                 <div className=" pl-4">
                     <NavLink 
-                        to={'statistics'} 
+                        to={''} 
+                        end
                         className={nav => (nav.isActive ? 
                             'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
                             'flex items-center text-white fill-white py-[18px] pl-5 relative')
@@ -87,7 +88,7 @@ function Sidebar(props: SidebarProps) {
                 </Link>
 
                 <NavLink 
-                    to={'statistics'} 
+                    to={''} 
                     className={nav => (nav.isActive ? 
                         'flex items-center text-content-title fill-primary-100 bg-[#EEE] rounded-l-[50px] py-[16px] pl-5 relative' :
                         'flex items-center text-white fill-white py-[18px] pl-5 relative')

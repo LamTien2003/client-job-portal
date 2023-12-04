@@ -45,18 +45,21 @@ function JobSummary(props: Props) {
     }
 
     useEffect(() => {
-        job.applications?.filter(apply => {
-            if(apply.candicate.id === currentUser?.id) {
-                setIsApplied(true)
-            } else {
-                setIsApplied(false)
-            }
-        })
-    }, [currentUser, job])
+        if(job.applications?.length !== 0) {
+            job.applications?.map(apply => {
+                if(apply.candicate.id === currentUser?.id) {
+                    setIsApplied(true)
+                } else {
+                }
+            })
+        } else {
+            setIsApplied(false)
+        }
+    }, [job.applications])
 
     return (
         <div className=" w-1/3 pl-3 pr-3 lg:w-full tb:w-full mb:w-full ">
-            {isjs && isApplied ? (
+            {isjs ? !isApplied ? (
                 <div className=" mb-12 flex items-center justify-end">
                     <button onClick={handleApply} className=" font-medium pt-2 pb-2 pl-7 pr-7 bg-primary-100 text-white rounded ml-8 duration-500 hover:bg-black xl:pl-3 xl:pr-3 xl:text-sm xl:ml-4 lg:pl-7 lg:pr-7 lg:text-base mb:pl-4 mb:pr-4">
                         Ứng tuyển vị trí này
@@ -68,6 +71,8 @@ function JobSummary(props: Props) {
                         Đã ứng tuyển
                     </button>
                 </div>
+            ) : (
+                ''
             )}
             
 
