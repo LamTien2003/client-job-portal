@@ -39,6 +39,7 @@ function JobSummary(props: Props) {
                 
                 if(response) {
                     toast.success('Bạn đã apply job thành công!')
+                    setIsApplied(true)
                 }
             }
         }
@@ -46,8 +47,10 @@ function JobSummary(props: Props) {
 
     useEffect(() => {
         if(job.applications?.length !== 0) {
+            console.log('hi')
             job.applications?.map(apply => {
                 if(apply.candicate.id === currentUser?.id) {
+                    console.log('ba')
                     setIsApplied(true)
                 } else {
                 }
@@ -55,7 +58,7 @@ function JobSummary(props: Props) {
         } else {
             setIsApplied(false)
         }
-    }, [job.applications])
+    }, [job.applications, job.countApplication])
 
     return (
         <div className=" w-1/3 pl-3 pr-3 lg:w-full tb:w-full mb:w-full ">
