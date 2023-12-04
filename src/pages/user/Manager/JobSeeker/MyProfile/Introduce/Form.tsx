@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import { MdTipsAndUpdates } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import Loader from '@/components/Loader/Loader';
 interface FormIntro {
     handleOpen: () => void;
     open: boolean;
@@ -30,11 +31,15 @@ const Form = ({ handleOpen, open }: FormIntro) => {
             if (error.status === 400) {
                 toast.error(error.data.msg);
             }
+            if (error.status === 500) {
+                toast.error('Lỗi server');
+            }
         }
     };
     return (
         <>
             <Dialog className="rounded-sm" size="lg" open={open} handler={handleOpen}>
+                {isLoading && <Loader />}
                 <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">
                     Giới thiệu bản thân
                 </DialogHeader>

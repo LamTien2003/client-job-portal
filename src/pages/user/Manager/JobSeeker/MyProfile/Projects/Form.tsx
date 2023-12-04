@@ -43,8 +43,8 @@ const validation = Yup.object().shape({
     dateFrom: Yup.date()
         .required('Ngày bắt đầu không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent;
-            if (!dateTo) {
+            const { dateFrom } = this.parent;
+            if (!dateFrom) {
                 return true;
             }
             const dataNow = new Date();

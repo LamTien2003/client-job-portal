@@ -5,23 +5,31 @@ import { toast } from 'react-toastify';
 import images from '@/assets/images';
 import { formatNumberToVND } from '@/utils/number';
 import Loader from '@/components/Loader/Loader';
+import { useState, useEffect } from 'react';
+import ConfirmDelete from '@/components/Dialog/ConfirmDelete';
 
 const Item = ({ job }: { job: any }) => {
     const [deleteJob, { isLoading: loadingDeleteJob }] = useDeleteJobCreatedMutation();
     const [restoreJob, { isLoading: loadingRestoreJob }] = useRestoreJobMutation();
-
-    const handleRemoveJob = async (id: string) => {
-        try {
-            const res = await deleteJob(id).unwrap();
-            if (res.status === 204) {
-                toast.success('Xoá thành công');
-            }
-        } catch (error: any) {
-            if (error.status === 400) {
-                toast.error(error.data.msg);
+    const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
+    const [agree, setAgree] = useState<boolean>(false);
+    const [id, setId] = useState<string>('');
+    useEffect(() => {
+        if (agree) {
+            if (id) {
+                deleteJob(id)
+                    .unwrap()
+                    .then(() => {
+                        toast.success('Xoá thành công!');
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting:', error);
+                        toast.error('Đã xảy ra lỗi khi xoá.');
+                    })
+                    .finally(() => setAgree(false));
             }
         }
-    };
+    }, [agree]);
 
     const handleRestoreJob = async (id: string) => {
         try {
@@ -96,13 +104,19 @@ const Item = ({ job }: { job: any }) => {
                     Khôi phục
                 </button>
                 <button
-                    onClick={() => handleRemoveJob(job._id)}
+                    onClick={() => {
+                        setOpenConfirmDelete(true);
+                        setId(job?._id);
+                    }}
                     className="py-2 px-4 text-white bg-red-700 rounded-lg hover:bg-black duration-300"
                     type="button"
                 >
                     Xoá
                 </button>
             </div>
+            {openConfirmDelete && (
+                <ConfirmDelete open={openConfirmDelete} onSetOpen={setOpenConfirmDelete} onSetAgree={setAgree} />
+            )}
         </div>
     );
 };

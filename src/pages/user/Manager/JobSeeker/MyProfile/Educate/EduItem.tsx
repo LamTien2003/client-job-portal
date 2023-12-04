@@ -8,6 +8,9 @@ import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import EditForm from './EditForm';
+import { toast } from 'react-toastify';
+import ConfirmDelete from '@/components/Dialog/ConfirmDelete';
+import Loader from '@/components/Loader/Loader';
 
 const EduItem = ({ data }: { data: Education[] }) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -15,27 +18,40 @@ const EduItem = ({ data }: { data: Education[] }) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const [education, setEducation] = useState<Education[]>([]);
     const [educateToEdit, setEducateToEdit] = useState<Education | null>(null);
+    const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
+    const [agree, setAgree] = useState<boolean>(false);
+    const [id, setId] = useState<string>('');
     useEffect(() => {
         if (isJobSeeker(currentUser)) {
             setEducation(currentUser.educate);
         }
     }, [currentUser]);
 
-    const [changeEdu] = useJobseekerChangeMeMutation();
+    const [changeEdu, { isLoading }] = useJobseekerChangeMeMutation();
 
-    const deleteItem = (dataId: string) => {
-        const itemToDelete = education.find((item) => item._id === dataId);
+    useEffect(() => {
+        if (agree) {
+            const itemToDelete = education.find((item) => item._id === id);
 
-        if (itemToDelete) {
-            const updatedEducation = education.filter((item) => item._id !== dataId);
-            const educationData: any = {
-                educate: updatedEducation,
-            };
+            if (itemToDelete) {
+                const updatedEducation = education.filter((item) => item._id !== id);
+                const educationData: any = {
+                    educate: updatedEducation,
+                };
 
-            changeEdu(educationData);
-            alert('Xoá thành công!');
+                changeEdu(educationData)
+                    .unwrap()
+                    .then(() => {
+                        toast.success('Xoá học vấn thành công!');
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting:', error);
+                        toast.error('Đã xảy ra lỗi khi xoá.');
+                    })
+                    .finally(() => setAgree(false));
+            }
         }
-    };
+    }, [agree]);
 
     const handleEdit = (dataId: string) => {
         const educationToEdit = education.find((exp) => exp._id === dataId);
@@ -49,6 +65,7 @@ const EduItem = ({ data }: { data: Education[] }) => {
             className="grid grid-cols-2 gap-5 mb:grid-cols-1 tb:grid-cols-1
         "
         >
+            {isLoading && <Loader />}
             {data.map((item, index) => {
                 const dateFrom = item.date.from
                     ? formatDateWithMonthAndYear(new Date(item.date.from).toISOString())
@@ -75,7 +92,10 @@ const EduItem = ({ data }: { data: Education[] }) => {
                             </button>
                             <button
                                 type="button"
-                                onClick={() => deleteItem(item._id)}
+                                onClick={() => {
+                                    setOpenConfirmDelete(true);
+                                    setId(item._id);
+                                }}
                                 className="text-red-600 hover:text-primary-100 duration-300"
                             >
                                 <RiDeleteBin6Line />
@@ -84,6 +104,9 @@ const EduItem = ({ data }: { data: Education[] }) => {
                     </div>
                 );
             })}
+            {openConfirmDelete && (
+                <ConfirmDelete open={openConfirmDelete} onSetOpen={setOpenConfirmDelete} onSetAgree={setAgree} />
+            )}
             <EditForm handleOpen={handleOpen} open={open} educateToEdit={educateToEdit} />
         </div>
     );

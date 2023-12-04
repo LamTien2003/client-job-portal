@@ -17,6 +17,7 @@ import { useJobseekerChangeMeMutation } from '@/services/jobseekerApiSlice';
 import DateField from '../components/DateField';
 import dayjs from 'dayjs';
 import { toast } from 'react-toastify';
+import Loader from '@/components/Loader/Loader';
 interface EditForm {
     handleOpen: () => void;
     open: boolean;
@@ -43,8 +44,8 @@ const validation = Yup.object().shape({
     dateFrom: Yup.date()
         .required('Từ ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent;
-            if (!dateTo) {
+            const { dateFrom } = this.parent;
+            if (!dateFrom) {
                 return true;
             }
             const dataNow = new Date();
@@ -177,6 +178,7 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
 
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
+            {isLoading && <Loader />}
             <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-2xl">
                 Cập nhật kinh nghiệm
             </DialogHeader>

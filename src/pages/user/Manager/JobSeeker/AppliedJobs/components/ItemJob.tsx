@@ -4,13 +4,18 @@ import { formatDate } from '@/utils/date';
 import { useRemoveJobApplyMutation } from '@/services/jobseekerApiSlice';
 import { toast } from 'react-toastify';
 import { formatNumberToVND } from '@/utils/number';
+import { useEffect, useState } from 'react';
+import ConfirmDelete from '@/components/Dialog/ConfirmDelete';
+import Loader from '@/components/Loader/Loader';
 const ItemJob = ({ job }: { job: JobApplicate }) => {
     const currentDate: Date = new Date();
 
     const jobCreateDate: Date = new Date(job?.job?.createdAt);
 
     const isToday = jobCreateDate.toDateString() === currentDate.toDateString();
-
+    const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
+    const [agree, setAgree] = useState<boolean>(false);
+    const [id, setId] = useState<string>('');
     const [removeJob, { isLoading }] = useRemoveJobApplyMutation();
 
     let displayDate = '';
@@ -24,17 +29,23 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
         displayDate = `${daysAgo} ngày trước`;
     }
 
-    const removeJobHandle = async (idJob: string) => {
-        try {
-            await removeJob(idJob).unwrap();
-
-            toast.success('Xoá thành công!');
-        } catch (error: any) {
-            if (error.status === 400) {
-                toast.error(error.data.msg);
+    useEffect(() => {
+        if (agree) {
+            if (id) {
+                removeJob(id)
+                    .unwrap()
+                    .then(() => {
+                        toast.success('Xoá thành công!');
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting:', error);
+                        toast.error('Đã xảy ra lỗi khi xoá.');
+                    })
+                    .finally(() => setAgree(false));
             }
         }
-    };
+    }, [agree]);
+
     let interviewDate;
     if (job.interviewDate) {
         interviewDate = formatDate(job.interviewDate);
@@ -43,6 +54,7 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
     const salary = formatNumberToVND(job?.job?.salary);
     return (
         <>
+            {isLoading && <Loader />}
             <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-8 mb:grid mb:grid-cols-2  tb:grid tb:grid-cols-2 lg:grid lg:grid-cols-2">
                 <div className="flex gap-4 w-[30%] items-center mb:w-full tb:w-full lg:w-full">
                     <img className="w-16 h-16 object-fit rounded-lg" src={job.company.photo} alt="company" />
@@ -96,7 +108,10 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                             <div className="py-1 px-3  border-primary-100 border-2 rounded-lg">Đang chờ</div>
 
                             <button
-                                onClick={() => removeJobHandle(job._id)}
+                                onClick={() => {
+                                    setOpenConfirmDelete(true);
+                                    setId(job?._id);
+                                }}
                                 className="py-1 px-3 text-white bg-red-700 rounded-lg hover:bg-black duration-300"
                             >
                                 {isLoading ? 'Đang xoá' : 'Xoá'}
@@ -108,6 +123,9 @@ const ItemJob = ({ job }: { job: JobApplicate }) => {
                         <div className="py-1 px-3 text-center text-white  rounded-lg bg-primary-100 ">Đã duyệt</div>
                     )}
                 </div>
+                {openConfirmDelete && (
+                    <ConfirmDelete open={openConfirmDelete} onSetOpen={setOpenConfirmDelete} onSetAgree={setAgree} />
+                )}
             </div>
         </>
     );

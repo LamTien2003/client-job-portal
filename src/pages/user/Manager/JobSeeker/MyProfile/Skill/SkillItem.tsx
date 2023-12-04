@@ -23,24 +23,26 @@ const SkillItem = ({ data }: { data: Skill[] }) => {
     const [changeSkill, { isLoading }] = useJobseekerChangeMeMutation();
 
     useEffect(() => {
-        const itemToDelete = skills.find((item) => item === skillName);
+        if (agree) {
+            const itemToDelete = skills.find((item) => item === skillName);
 
-        if (itemToDelete) {
-            const updatedSkills = skills.filter((item) => item !== skillName);
-            const skillsData: any = {
-                skills: updatedSkills,
-            };
+            if (itemToDelete) {
+                const updatedSkills = skills.filter((item) => item !== skillName);
+                const skillsData: any = {
+                    skills: updatedSkills,
+                };
 
-            changeSkill(skillsData)
-                .unwrap()
-                .then(() => {
-                    toast.success('Xoá kỹ năng thành công!');
-                })
-                .catch((error) => {
-                    console.error('Error deleting skill:', error);
-                    toast.error('Đã xảy ra lỗi khi xoá kỹ năng.');
-                })
-                .finally(() => setAgree(false));
+                changeSkill(skillsData)
+                    .unwrap()
+                    .then(() => {
+                        toast.success('Xoá kỹ năng thành công!');
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting skill:', error);
+                        toast.error('Đã xảy ra lỗi khi xoá kỹ năng.');
+                    })
+                    .finally(() => setAgree(false));
+            }
         }
     }, [agree]);
 
