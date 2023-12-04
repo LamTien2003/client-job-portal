@@ -16,6 +16,7 @@ import { Education } from '@/types/JobSeeker';
 import DateField from '../components/DateField';
 import TipForm from '../components/TipForm';
 import { toast } from 'react-toastify';
+import Loader from '@/components/Loader/Loader';
 interface FormEducation {
     toggleOpen: () => void;
 }
@@ -41,8 +42,8 @@ const validation = Yup.object().shape({
     dateFrom: Yup.date()
         .required('Ngày không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-            const { dateTo } = this.parent;
-            if (!dateTo) {
+            const { dateFrom } = this.parent;
+            if (!dateFrom) {
                 return true;
             }
             const dataNow = new Date();
@@ -141,6 +142,7 @@ const FormEducation = ({ toggleOpen }: FormEducation) => {
     });
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-2 pt-5">
+            {isLoading && <Loader />}
             <TipForm title="Cập nhật thông tin của bạn một cách chính xác!" />
 
             <div className="flex flex-col gap-6 border-b-2 pb-5 mb:gap-4">

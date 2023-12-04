@@ -8,6 +8,9 @@ import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import EditForm from './EditForm';
+import { toast } from 'react-toastify';
+import ConfirmDelete from '@/components/Dialog/ConfirmDelete';
+import Loader from '@/components/Loader/Loader';
 
 const ExpItem = ({ data }: { data: Experience[] }) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -15,27 +18,38 @@ const ExpItem = ({ data }: { data: Experience[] }) => {
     const currentUser = useSelector((state: RootState) => state.user.user);
     const [experiences, setExp] = useState<Experience[]>([]);
     const [experienceToEdit, setExperienceToEdit] = useState<Experience | null>(null);
+    const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
+    const [agree, setAgree] = useState<boolean>(false);
+    const [id, setId] = useState<string>('');
     useEffect(() => {
         if (isJobSeeker(currentUser)) {
             setExp(currentUser.experiences);
         }
     }, [currentUser]);
 
-    const [changeExp] = useJobseekerChangeMeMutation();
+    const [changeExp, { isLoading }] = useJobseekerChangeMeMutation();
+    useEffect(() => {
+        if (agree) {
+            const experienceToDelete = experiences.find((exp) => exp._id === id);
+            if (experienceToDelete) {
+                const updatedExperiences = experiences.filter((exp) => exp._id !== id);
+                const expData: any = {
+                    experiences: updatedExperiences,
+                };
 
-    const deleteExp = (dataId: string) => {
-        const experienceToDelete = experiences.find((exp) => exp._id === dataId);
-
-        if (experienceToDelete) {
-            const updatedExperiences = experiences.filter((exp) => exp._id !== dataId);
-            const expData: any = {
-                experiences: updatedExperiences,
-            };
-
-            changeExp(expData);
-            alert('Xoá thành công!');
+                changeExp(expData)
+                    .unwrap()
+                    .then(() => {
+                        toast.success('Xoá kinh nghiệm thành công!');
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting:', error);
+                        toast.error('Đã xảy ra lỗi khi xoá.');
+                    })
+                    .finally(() => setAgree(false));
+            }
         }
-    };
+    }, [agree]);
 
     const handleEdit = (dataId: string) => {
         const experienceToEdit = experiences.find((exp) => exp._id === dataId);
@@ -47,6 +61,7 @@ const ExpItem = ({ data }: { data: Experience[] }) => {
 
     return (
         <div className="grid grid-cols-2 gap-8 mb:grid-cols-1 tb:grid-cols-1">
+            {isLoading && <Loader />}
             {data.map((exp, index) => {
                 const dateFrom = exp.date.from ? formatDateWithMonthAndYear(new Date(exp.date.from).toISOString()) : '';
                 const dateTo = exp.date.to
@@ -72,7 +87,10 @@ const ExpItem = ({ data }: { data: Experience[] }) => {
                             </button>
                             <button
                                 type="button"
-                                onClick={() => deleteExp(exp._id)}
+                                onClick={() => {
+                                    setOpenConfirmDelete(true);
+                                    setId(exp._id);
+                                }}
                                 className="text-red-600 hover:text-primary-100 duration-300"
                             >
                                 <RiDeleteBin6Line />
@@ -81,7 +99,9 @@ const ExpItem = ({ data }: { data: Experience[] }) => {
                     </div>
                 );
             })}
-
+            {openConfirmDelete && (
+                <ConfirmDelete open={openConfirmDelete} onSetOpen={setOpenConfirmDelete} onSetAgree={setAgree} />
+            )}
             <EditForm handleOpen={handleOpen} open={open} experienceToEdit={experienceToEdit} />
         </div>
     );

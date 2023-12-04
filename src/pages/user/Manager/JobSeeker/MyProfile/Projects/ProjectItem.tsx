@@ -8,6 +8,9 @@ import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import EditForm from './EditForm';
+import ConfirmDelete from '@/components/Dialog/ConfirmDelete';
+import { toast } from 'react-toastify';
+import Loader from '@/components/Loader/Loader';
 
 const ProjectItem = ({ data }: { data: Project[] }) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -16,27 +19,40 @@ const ProjectItem = ({ data }: { data: Project[] }) => {
     const [projects, setProjects] = useState<Project[]>([]);
 
     const [projectToEdit, setProjectToEdit] = useState<Project | null>(null);
+    const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
+    const [agree, setAgree] = useState<boolean>(false);
+    const [id, setId] = useState<string>('');
+
     useEffect(() => {
         if (isJobSeeker(currentUser)) {
             setProjects(currentUser.projects);
         }
     }, [currentUser]);
 
-    const [changeEdu] = useJobseekerChangeMeMutation();
+    const [changeProject, { isLoading }] = useJobseekerChangeMeMutation();
+    useEffect(() => {
+        if (agree) {
+            const itemToDelete = projects.find((item) => item._id === id);
+            if (itemToDelete) {
+                const updatedProjects = projects.filter((item) => item._id !== id);
+                const projectsData: any = {
+                    projects: updatedProjects,
+                };
 
-    const deleteItem = (dataId: string) => {
-        const itemToDelete = projects.find((item) => item._id === dataId);
-
-        if (itemToDelete) {
-            const updatedProjects = projects.filter((item) => item._id !== dataId);
-            const projectsData: any = {
-                projects: updatedProjects,
-            };
-
-            changeEdu(projectsData);
-            alert('Xoá thành công!');
+                changeProject(projectsData)
+                    .unwrap()
+                    .then(() => {
+                        toast.success('Xoá dự án thành công!');
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting:', error);
+                        toast.error('Đã xảy ra lỗi khi xoá.');
+                    })
+                    .finally(() => setAgree(false));
+            }
         }
-    };
+    }, [agree]);
+
     const handleEdit = (dataId: string) => {
         const projectToEditValue = projects.find((item) => item._id === dataId);
         if (projectToEditValue) {
@@ -47,6 +63,7 @@ const ProjectItem = ({ data }: { data: Project[] }) => {
 
     return (
         <div className="grid grid-cols-2 gap-5 mb:grid-cols-1 tb:grid-cols-1">
+            {isLoading && <Loader />}
             {data.map((item, index) => {
                 const dateFrom = item.date.from
                     ? formatDateWithMonthAndYear(new Date(item.date.from).toISOString())
@@ -79,7 +96,10 @@ const ProjectItem = ({ data }: { data: Project[] }) => {
                             </button>
                             <button
                                 type="button"
-                                onClick={() => deleteItem(item._id)}
+                                onClick={() => {
+                                    setOpenConfirmDelete(true);
+                                    setId(item._id);
+                                }}
                                 className="text-red-600 hover:text-primary-100 duration-300"
                             >
                                 <RiDeleteBin6Line />
@@ -88,6 +108,9 @@ const ProjectItem = ({ data }: { data: Project[] }) => {
                     </div>
                 );
             })}
+            {openConfirmDelete && (
+                <ConfirmDelete open={openConfirmDelete} onSetOpen={setOpenConfirmDelete} onSetAgree={setAgree} />
+            )}
             <EditForm handleOpen={handleOpen} open={open} projectToEdit={projectToEdit} />
         </div>
     );

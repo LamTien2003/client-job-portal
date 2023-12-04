@@ -15,6 +15,7 @@ import { RootState } from '@/store/store';
 import { isJobSeeker } from '@/utils/helper';
 import DateField from '../components/DateField';
 import { toast } from 'react-toastify';
+import Loader from '@/components/Loader/Loader';
 interface FormExp {
     toggleOpen: () => void;
 }
@@ -42,8 +43,8 @@ const FormExp = ({ toggleOpen }: FormExp) => {
         dateFrom: Yup.date()
             .required('Ngày bắt đầu không được bỏ trống!')
             .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
-                const { dateTo } = this.parent;
-                if (!dateTo) {
+                const { dateFrom } = this.parent;
+                if (!dateFrom) {
                     return true;
                 }
                 const dataNow = new Date();
@@ -138,6 +139,7 @@ const FormExp = ({ toggleOpen }: FormExp) => {
 
     return (
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 border-t-2  pt-5">
+            {isLoading && <Loader />}
             <p className="font-family-text text-content-text text-sm font-medium italic">
                 Gợi ý: Mô tả công việc cụ thể, những kết quả và thành tựu đạt được có số liệu dẫn chứng
             </p>
