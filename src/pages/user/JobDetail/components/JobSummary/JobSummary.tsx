@@ -47,12 +47,9 @@ function JobSummary(props: Props) {
 
     useEffect(() => {
         if(job.applications?.length !== 0) {
-            console.log('hi')
             job.applications?.map(apply => {
                 if(apply.candicate.id === currentUser?.id) {
-                    console.log('ba')
                     setIsApplied(true)
-                } else {
                 }
             })
         } else {
