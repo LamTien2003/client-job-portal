@@ -1,4 +1,3 @@
-import images from "@/assets/images";
 import { ManageAdmin } from "@/components/Icons";
 import { RootState } from "@/store/store";
 import { useEffect, useState } from "react";

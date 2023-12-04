@@ -1,7 +1,6 @@
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { FormikTouched } from 'formik';
-import { PiHeadlightsFill } from 'react-icons/pi';
 
 type SelectFieldPropsType = {
     label: string;
