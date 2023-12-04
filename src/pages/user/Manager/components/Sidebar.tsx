@@ -19,7 +19,7 @@ const Sidebar = () => {
             />
             {jobSeeker && <TitleProfile title="Đơn ứng tuyển" path="jobseeker/applied-jobs" logo={<MdWorkOutline />} />}
             {jobSeeker && (
-                <TitleProfile title="Thêm CV" path="jobseeker/add-cv" logo={<MdOutlineMedicalInformation />} />
+                <TitleProfile title="Hồ sơ (CV)" path="jobseeker/add-cv" logo={<MdOutlineMedicalInformation />} />
             )}
             {company && <TitleProfile title="Công việc đã tạo" path="company/job-created" logo={<MdWorkOutline />} />}
 
