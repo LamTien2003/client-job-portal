@@ -9,8 +9,8 @@ import { hideLoading, showLoading } from '@/store/uiSlice';
 const ProtectedRoutes = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { data, isLoading, isFetching, isError, error } = useGetCurrentUserQuery(undefined, {
-        refetchOnMountOrArgChange: 500,
+    const { data, isLoading, isFetching, isError, error, isSuccess } = useGetCurrentUserQuery(undefined, {
+        refetchOnMountOrArgChange: true,
     });
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const ProtectedRoutes = () => {
             dispatch(showLoading());
             return;
         }
-        if (isError && !isFetching) {
+        if (isError && !isFetching && !isLoading && isSuccess) {
             alert((error as any)?.data?.msg);
             removeToken();
             dispatch(hideLoading());
