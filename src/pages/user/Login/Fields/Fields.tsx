@@ -15,7 +15,7 @@ function Fields ({type, label, id, name, value, onChange, onBlur, error, touched
         <div className=" flex flex-col mb-4">
             <label 
                 htmlFor={id}
-                className=" text-base font-medium mb-2"
+                className="text-content-title text-base font-medium mb-2"
             >
                 {label}
             </label>

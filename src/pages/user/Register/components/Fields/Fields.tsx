@@ -9,12 +9,14 @@ type FieldPropsType = {
     error: string | undefined;
     touched: boolean | undefined;
     placeholder: string;
+    isRequire: boolean
 };
-function Fields({ type, label, id, name, value, onChange, onBlur, error, touched, placeholder }: FieldPropsType) {
+function Fields({ type, label, id, name, value, onChange, onBlur, error, touched, placeholder, isRequire }: FieldPropsType) {
     return (
         <div className="w-1/2 flex flex-col p-2 tb:w-full mb:w-full">
-            <label htmlFor={id} className=" text-base font-medium mb-2">
+            <label htmlFor={id} className="text-content-title text-base font-medium mb-2">
                 {label}
+                {isRequire && <span className=" text-red-500"> * </span>}
             </label>
 
             <input

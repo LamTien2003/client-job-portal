@@ -115,6 +115,7 @@ function RegisterCompany() {
                         <form onSubmit={formik.handleSubmit}>
                             <div className="flex flex-wrap mt-4 tb:flex-col mb:flex-col ">
                                 <Fields
+                                    isRequire={true}
                                     type="text"
                                     label="Họ"
                                     id="firstName"
@@ -127,6 +128,7 @@ function RegisterCompany() {
                                     placeholder="Nhập họ"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="text"
                                     label="Tên"
                                     id="lastName"
@@ -139,6 +141,7 @@ function RegisterCompany() {
                                     placeholder="Nhập tên"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="text"
                                     label="Email"
                                     id="email"
@@ -151,6 +154,7 @@ function RegisterCompany() {
                                     placeholder="Nhập email"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="text"
                                     label="Số điện thoại"
                                     id="phoneNumber"
@@ -163,6 +167,7 @@ function RegisterCompany() {
                                     placeholder="Nhập số điện thoại"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="text"
                                     label="Tên công ty"
                                     id="companyName"
@@ -175,6 +180,7 @@ function RegisterCompany() {
                                     placeholder="Nhập tên công ty"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="number"
                                     label="Quy mô (từ)"
                                     id="companySizeFrom"
@@ -187,6 +193,7 @@ function RegisterCompany() {
                                     placeholder="Nhập số lượng thành viên ít nhất"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="number"
                                     label="Quy mô (đến)"
                                     id="companySizeTo"
@@ -199,6 +206,7 @@ function RegisterCompany() {
                                     placeholder="Nhập số lượng thành viên nhiều nhất"
                                 />
                                 <SelectCity
+                                    isRequire={true}
                                     label="Chọn tỉnh, thành"
                                     id="city"
                                     name="city"
@@ -210,6 +218,7 @@ function RegisterCompany() {
                                     districtByCity={setDistrict}
                                 />
                                 <SelectDistrict
+                                    isRequire={true}
                                     label="Chọn quận, huyện"
                                     id="district"
                                     name="district"
@@ -221,6 +230,7 @@ function RegisterCompany() {
                                     districtList={district}
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="text"
                                     label="Địa chỉ"
                                     id="address"
@@ -233,6 +243,7 @@ function RegisterCompany() {
                                     placeholder="Nhập địa chỉ"
                                 />
                                 <SelectDate
+                                    isRequire={true}
                                     label="EstablistDate"
                                     id="establishDate"
                                     value={formik.values.establishDate}
@@ -241,6 +252,7 @@ function RegisterCompany() {
                                     touched={formik.touched.establishDate}
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="password"
                                     label="Mật khẩu"
                                     id="password"
@@ -253,6 +265,7 @@ function RegisterCompany() {
                                     placeholder="Nhập mật khẩu"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type="password"
                                     label="Xác nhận mật khẩu"
                                     id="passwordConfirm"
@@ -265,6 +278,7 @@ function RegisterCompany() {
                                     placeholder="Nhập lại mật khẩu"
                                 />
                                 <Fields
+                                    isRequire={false}
                                     type="text"
                                     label="Mô tả công ty"
                                     id="description"

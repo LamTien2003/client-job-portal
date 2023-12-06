@@ -14,8 +14,9 @@ type SelectFieldPropsType = {
     error: any;
     touched: boolean | undefined | FormikTouched<Date> | any;
     districtByCity: (districtList: District[]) => void
+    isRequire: boolean
 };
-function SelectCity({ label, id, name, value, onChange, onBlur, error, touched, districtByCity }: SelectFieldPropsType) {
+function SelectCity({ label, id, name, value, onChange, onBlur, error, touched, districtByCity, isRequire }: SelectFieldPropsType) {
     const {data, isLoading: isLoadingLocation, isError: isErrorLocation} = useGetLocationQuery()
 
     const [cities, setCities] = useState<Location[]>([])
@@ -35,8 +36,9 @@ function SelectCity({ label, id, name, value, onChange, onBlur, error, touched, 
 
     return (
         <div className="w-1/2 flex flex-col p-2 tb:w-full mb:w-full">
-            <label htmlFor={id} className=" text-base font-medium">
+            <label htmlFor={id} className="text-content-title text-base font-medium">
                 {label}
+                {isRequire && <span className=" text-red-500"> * </span>}
             </label>
 
             <div className=" w-full h-[45.6px] border border-primary-200 rounded-lg mt-2">

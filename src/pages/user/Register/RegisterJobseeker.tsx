@@ -104,6 +104,7 @@ function RegisterJobseeker() {
                         <form onSubmit={formik.handleSubmit}>
                             <div className=" flex flex-wrap">
                                 <Fields
+                                    isRequire={true}
                                     type='text'
                                     label='Họ'
                                     id='firstName'
@@ -116,6 +117,7 @@ function RegisterJobseeker() {
                                     placeholder="Nhập họ"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type='text'
                                     label='Tên'
                                     id='lastName'
@@ -128,6 +130,7 @@ function RegisterJobseeker() {
                                     placeholder="Nhập tên"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type='text'
                                     label='Email'
                                     id='email'
@@ -140,6 +143,7 @@ function RegisterJobseeker() {
                                     placeholder="Nhập email"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type='text'
                                     label='Số điện thoại'
                                     id='phoneNumber'
@@ -152,6 +156,7 @@ function RegisterJobseeker() {
                                     placeholder="Nhập số điện thoại"
                                 />
                                 <SelectCity
+                                    isRequire={true}
                                     label='Chọn tỉnh, thành'
                                     id='city'
                                     name='city'
@@ -163,6 +168,7 @@ function RegisterJobseeker() {
                                     districtByCity={setDistrict}
                                 />
                                 <SelectDistrict
+                                    isRequire={true}
                                     label='Chọn quận, huyện'
                                     id='district'
                                     name='district'
@@ -174,6 +180,7 @@ function RegisterJobseeker() {
                                     districtList={district}
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type='text'
                                     label='Địa chỉ'
                                     id='address'
@@ -186,6 +193,7 @@ function RegisterJobseeker() {
                                     placeholder="Nhập phần địa chỉ"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type='password'
                                     label='Mật khẩu'
                                     id='password'
@@ -198,6 +206,7 @@ function RegisterJobseeker() {
                                     placeholder="Nhập mật khẩu"
                                 />
                                 <Fields
+                                    isRequire={true}
                                     type='password'
                                     label='Nhập lại mật khẩu'
                                     id='passwordConfirm'
@@ -210,6 +219,7 @@ function RegisterJobseeker() {
                                     placeholder="Nhập lại mật khẩu"
                                 />
                                 <Fields
+                                    isRequire={false}
                                     type='text'
                                     label='Giới thiệu'
                                     id='introduce'
