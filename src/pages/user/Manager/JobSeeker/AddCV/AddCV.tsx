@@ -71,6 +71,16 @@ const AddCV = () => {
             }
         },
     });
+
+    const removeCVHandler = async () => {
+        const data: any = {
+            cvImage: '',
+        };
+        const res = await addCV(data).unwrap();
+        if (res.status === 200) {
+            toast.success('Cập nhật CV thành công');
+        }
+    };
     return (
         <form
             onSubmit={formik.handleSubmit}
@@ -86,6 +96,16 @@ const AddCV = () => {
                     {cvImage ? 'Cập nhật' : 'Tải lên CV'}
                     <input name="photo" id="photo" className="hidden" type="file" onChange={handleFile} />
                 </label>
+                {!previewImage && cvImage && (
+                    <button
+                        type="button"
+                        onClick={removeCVHandler}
+                        className="flex p-2 border-2 rounded-md gap-2 items-center justify-center font-medium cursor-pointer border-red-800 text-red-800 hover:border-black hover:text-black duration-300 uppercase"
+                    >
+                        <MdDeleteOutline className="text-xl" />
+                        Xoá CV Của Bạn
+                    </button>
+                )}
                 {previewImage && (
                     <button
                         type="button"
@@ -93,20 +113,23 @@ const AddCV = () => {
                         className="flex p-2 border-2 rounded-md gap-2 items-center justify-center font-medium cursor-pointer border-red-800 text-red-800 hover:border-black hover:text-black duration-300 uppercase"
                     >
                         <MdDeleteOutline className="text-xl" />
-                        Xoá
+                        Xoá Ảnh
                     </button>
                 )}
 
-                <button
-                    type="submit"
-                    className="p-2 bg-primary-100 flex gap-1 items-center text-white rounded-md hover:bg-black duration-300 uppercase"
-                >
-                    <FaCheck />
-                    Đăng CV
-                </button>
+                {previewImage && (
+                    <button
+                        type="submit"
+                        className="p-2 bg-primary-100 flex gap-1 items-center text-white rounded-md hover:bg-black duration-300 uppercase"
+                    >
+                        <FaCheck />
+                        Lưu
+                    </button>
+                )}
             </div>
-
-            <img src={previewImage ? previewImage : cvImage} alt="avt" className="object-contain rounded-md" />
+            {(cvImage || previewImage) && (
+                <img src={previewImage || cvImage} alt="avt" className="object-contain rounded-md" />
+            )}
         </form>
     );
 };

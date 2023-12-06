@@ -10,7 +10,7 @@ const ProtectedRoutes = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { data, isLoading, isFetching, isError, error } = useGetCurrentUserQuery(undefined, {
-        refetchOnMountOrArgChange: 500,
+        refetchOnMountOrArgChange: true,
     });
 
     useEffect(() => {
@@ -18,15 +18,18 @@ const ProtectedRoutes = () => {
             dispatch(showLoading());
             return;
         }
-        if (isError && !isFetching) {
-            alert((error as any)?.data?.msg);
-            removeToken();
-            dispatch(hideLoading());
-            navigate('/login');
-            return;
-        }
+        const timer = setTimeout(() => {
+            if (isError && !isLoading) {
+                alert((error as any)?.data?.msg);
+                removeToken();
+                dispatch(hideLoading());
+                navigate('/login');
+                return;
+            }
+        }, 500);
         dispatch(hideLoading());
-    }, [data, dispatch, navigate, isLoading, isFetching, isError, error]);
+        return () => clearTimeout(timer);
+    }, [isLoading, isFetching, isError, error]);
 
     return data && !isFetching && !isLoading && <Outlet />;
 };
