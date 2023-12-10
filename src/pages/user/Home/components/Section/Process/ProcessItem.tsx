@@ -1,14 +1,16 @@
 import images from '@/assets/images';
+import { Link } from 'react-router-dom';
 type Process = {
     title: string;
     paragraph: string;
     image: string;
     arrow: string;
+    path: string;
 };
 
-const ProcessItem: React.FC<Process> = ({ title, paragraph, image, arrow }) => {
+const ProcessItem: React.FC<Process> = ({ title, paragraph, image, arrow, path }) => {
     return (
-        <div className="relative group">
+        <Link to={path} className="relative group">
             {arrow === 'up' && (
                 <img
                     className="absolute -top-7 group-hover:-top-5 duration-300 mb:hidden"
@@ -32,7 +34,7 @@ const ProcessItem: React.FC<Process> = ({ title, paragraph, image, arrow }) => {
                     alt={images.process.down}
                 />
             )}
-        </div>
+        </Link>
     );
 };
 

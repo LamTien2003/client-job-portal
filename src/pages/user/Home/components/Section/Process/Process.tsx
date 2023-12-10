@@ -7,6 +7,7 @@ const Process = () => {
                 title="Tạo tài khoản"
                 paragraph="Đăng ký tài khoản ứng viên trên JobHub."
                 image={images.process.accoutCreate}
+                path="/register/jobseeker"
                 arrow="up"
             />
 
@@ -14,6 +15,7 @@ const Process = () => {
                 title="Tạo sơ yếu lý lịch"
                 paragraph="Liệt kê các thông tin cá nhân vào hồ sơ."
                 image={images.process.resume}
+                path="/profile"
                 arrow="down"
             />
 
@@ -22,6 +24,7 @@ const Process = () => {
                 paragraph="Tìm kiếm công việc theo tiêu chí của cá nhân."
                 image={images.process.findJob}
                 arrow="up"
+                path="/job-listing"
             />
 
             <ProcessItem
@@ -29,6 +32,7 @@ const Process = () => {
                 paragraph="Sau khi chọn được việc hãy ứng tuyển vị trí."
                 image={images.process.jobApply}
                 arrow="down"
+                path="/company-listing"
             />
         </div>
     );
