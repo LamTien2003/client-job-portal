@@ -21,8 +21,7 @@ const Info = () => {
                     </div>
                     <div className="flex flex-col gap-2">
                         <div className="flex gap-2 text-2xl font-family-title font-title text-primary-100">
-                            <h6>{currentUser?.firstName}</h6>
-                            <h6>{currentUser?.lastName}</h6>
+                            {currentUser?.firstName} {currentUser?.lastName}
                         </div>
                         <div className="font-family-text flex items-center gap-2 text-content-title font-medium">
                             <MdEmail />
