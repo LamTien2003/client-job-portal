@@ -19,6 +19,7 @@ const Company = () => {
             setCompanies(data?.data?.data);
         }
     }, [data?.data?.data, isError, isLoading]);
+    console.log(companies);
 
     return (
         <div className="bg-[#D9F2F3]">
@@ -67,7 +68,7 @@ const Company = () => {
                     >
                         {companies.map((company, index) => (
                             <SwiperSlide key={index}>
-                                <CompanyItem logo={company.photo} />
+                                <CompanyItem logo={company.photo} id={company._id} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
