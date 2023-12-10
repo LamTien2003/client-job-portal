@@ -19,7 +19,6 @@ const Company = () => {
             setCompanies(data?.data?.data);
         }
     }, [data?.data?.data, isError, isLoading]);
-    console.log(companies);
 
     return (
         <div className="bg-[#D9F2F3]">
