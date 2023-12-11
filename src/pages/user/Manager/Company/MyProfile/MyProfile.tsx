@@ -3,7 +3,7 @@ import InfoCompany from './InfoCompany/InfoCompany';
 
 const MyProfile = () => {
     return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col">
             <Info />
             <InfoCompany />
         </div>

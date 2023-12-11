@@ -7,7 +7,7 @@ interface Card {
 const Card = ({ children, handleOpen }: Card) => {
     return (
         <div className="flex flex-col">
-            <div className="flex items-center justify-between p-5 bg-white rounded-md shadow-md border-t-4 border-primary-100">
+            <div className="flex items-center justify-between p-5 bg-white rounded-b-md shadow-md border-t-4 border-primary-100">
                 {children}
                 <button
                     onClick={handleOpen}
