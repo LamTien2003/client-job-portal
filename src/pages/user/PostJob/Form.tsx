@@ -6,7 +6,7 @@ import CustomField from './Field';
 import SelectSkills from './SelectSkills';
 import images from '@/assets/images';
 import FieldImages from './FieldImages';
-import { useCreateJobMutation } from '@/services/jobsApiSlice';
+import { useCreateJobMutation } from '@/services/companiesApiSlice';
 import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
 import { useEffect, useState } from 'react';
 import SelectType from './SelectType';
@@ -119,13 +119,13 @@ const FormPostJob = () => {
             try {
                 setIsFormSubmitted(true);
                 const res = await createJob(form).unwrap();
-                if (res.status === 200) {
-                    toast.success(res.data.msg);
-                }
                 setSkillValue([]);
                 setIsFormSubmitted(false);
                 formik.resetForm();
-                navigate('/profile/company/job-created');
+                if (res.status === 200) {
+                    toast.success(res.data.msg);
+                    navigate('/profile/company/job-created');
+                }
             } catch (error: any) {
                 if (error.status === 400) {
                     toast.error(error.data.msg);

@@ -3,6 +3,7 @@ import { apiSlice } from './apiSlice';
 
 import { ResponseApi } from '@/types/ResponseApi';
 import { buildQueryString } from '@/utils/helper';
+import Job from '@/types/Job';
 
 interface ParamsGetAllJob {
     q?: string;
@@ -83,6 +84,21 @@ export const companyApiSlice = apiSlice.injectEndpoints({
             },
 
             providesTags: () => [{ type: 'Companies' as const, id: 'LIST-JOB-CREATED' }],
+        }),
+        createJob: builder.mutation<ResponseApi<Job>, FormData>({
+            query(body) {
+                try {
+                    return {
+                        url: 'job',
+                        method: 'POST',
+                        body,
+                    };
+                } catch (error: any) {
+                    throw error.message;
+                }
+            },
+            invalidatesTags: (_result, error, _body) =>
+                error ? [] : [{ type: 'Companies' as const, id: 'LIST-JOB-CREATED' }],
         }),
         getJobDeleted: builder.query<ResponseApi<any[]>, ParamsGetAllJob>({
             query: (arg) => {
@@ -187,4 +203,5 @@ export const {
     useRestoreJobMutation,
     useAcceptJobMutation,
     useCancelJobMutation,
+    useCreateJobMutation,
 } = companyApiSlice;
