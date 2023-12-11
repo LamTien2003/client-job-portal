@@ -124,33 +124,34 @@ function Jobs() {
         }
     };
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'title', headerName: 'Tên công việc', width: 250 },
+        { field: 'id', headerName: 'ID', flex: 1 },
+        { field: 'title', headerName: 'Tên công việc', flex: 3 },
         {
             field: 'company',
             headerName: 'Công ty',
             description: 'Bạn có thể xem công ty!',
             sortable: true,
-            width: 200,
+            flex: 3,
         },
         {
             field: 'salary',
             headerName: 'Mức lương (VNĐ)',
             type: 'number',
-            width: 150,
+            align: 'left',
+            flex: 2,
         },
         {
             field: 'address',
             headerName: 'Địa chỉ',
             description: 'Bạn có thể xem tỉnh thành phố!',
             sortable: true,
-            width: 300,
+            flex: 3,
         },
         {
             field: 'state',
             headerName: 'Trạng thái',
             sortable: false,
-            width: 150,
+            flex: 2,
             renderCell: (params) =>
                 params.row.state ? (
                     <div className="flex items-center justify-center p-2 bg-primary-100 text-white font-medium rounded-lg w-28 shadow-md">
@@ -165,10 +166,11 @@ function Jobs() {
         {
             field: 'action',
             headerName: 'Hành động',
-            width: 120,
+            flex: 2,
+            align: 'center',
             sortable: false,
             renderCell: (params) => (
-                <div className="flex gap-4 ">
+                <div className="flex gap-4">
                     <button
                         className="bg-red-500 text-white px-2 py-1 rounded-lg text-lg hover:bg-red-200 hover:text-black duration-300"
                         onClick={() => deleteJobHandler(params.row.id)}
