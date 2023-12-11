@@ -11,7 +11,7 @@ export default interface User {
     lastName: string;
     email: string;
     phoneNumber: string;
-    gender: 'male' | 'female';
+    gender: 'male' | 'female' | 'others';
     photo: string;
     location: Location;
     follows: User[];
