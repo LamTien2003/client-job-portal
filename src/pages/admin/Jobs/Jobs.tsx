@@ -124,16 +124,21 @@ function Jobs() {
         }
     };
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', width: 150 },
+        { field: 'id', headerName: 'ID', width: 100 },
         { field: 'title', headerName: 'Tên công việc', width: 250 },
-
+        {
+            field: 'company',
+            headerName: 'Công ty',
+            description: 'Bạn có thể xem công ty!',
+            sortable: true,
+            width: 200,
+        },
         {
             field: 'salary',
             headerName: 'Mức lương (VNĐ)',
             type: 'number',
             width: 150,
         },
-
         {
             field: 'address',
             headerName: 'Địa chỉ',
@@ -144,6 +149,7 @@ function Jobs() {
         {
             field: 'state',
             headerName: 'Trạng thái',
+            sortable: false,
             width: 150,
             renderCell: (params) =>
                 params.row.state ? (
@@ -161,7 +167,6 @@ function Jobs() {
             headerName: 'Hành động',
             width: 120,
             sortable: false,
-
             renderCell: (params) => (
                 <div className="flex gap-4 ">
                     <button
@@ -186,6 +191,7 @@ function Jobs() {
     const rows = data.map((job) => ({
         id: job._id,
         title: job.title,
+        company: job.postedBy.companyName,
         salary: job.salary,
         address: `${job.postedBy.location.city}, ${job.postedBy.location.district}` || 'Unknown',
         state: job.isAccepted,
