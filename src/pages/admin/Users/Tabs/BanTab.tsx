@@ -64,7 +64,7 @@ function BanTab({setIsLoading}: {setIsLoading: (arg: boolean) => void}) {
     return (
         <>
             {isLoadingUnban && <Loader />}
-            <Box sx={{marginBottom: 10, width: '100%', height: 370}}>
+            <Box sx={{marginBottom: 10, width: '100%', minHeight: 400}}>
                 <DataGrid
                     columns={columns}
                     rows={bannedUserList}
@@ -72,7 +72,7 @@ function BanTab({setIsLoading}: {setIsLoading: (arg: boolean) => void}) {
                     pageSizeOptions={[5, 10, 25]}
                     paginationModel={paginationModel}
                     onPaginationModelChange={setPaginationModel}
-                    disableRowSelectionOnClick
+                    paginationMode="server"
                 />
             </Box>
         </>

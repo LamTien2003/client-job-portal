@@ -54,7 +54,7 @@ function CompanyGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:mr-2">
                                         <p className=" text-content-text font-medium text-base lg:text-sm mb:text-xs ">
                                             Quy mô: 
-                                            <span className=" text-content-title font-semibold ml-1">
+                                            <span className=" text-content-title font-medium ml-1">
                                                 {company.companySize.to} người
                                             </span>
                                         </p>
@@ -62,7 +62,7 @@ function CompanyGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:mr-2">
                                         <p className=" text-content-text font-medium text-base lg:text-sm mb:text-xs ">
                                             Thành lập: 
-                                            <span className=" text-content-title font-semibold ml-1">
+                                            <span className=" text-content-title font-medium ml-1">
                                                 {myEstablistDate}
                                             </span>
                                         </p>
@@ -70,7 +70,7 @@ function CompanyGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:mr-2">
                                         <p className=" text-content-text font-medium text-base lg:text-sm mb:text-xs ">
                                             Liên lạc: 
-                                            <span className=" text-content-title font-semibold ml-1">
+                                            <span className=" text-content-title font-medium ml-1">
                                                 {company.phoneNumber}
                                             </span>
                                         </p>
@@ -78,15 +78,15 @@ function CompanyGutter(props: Props) {
                                     <div className=" flex items-center mb-2 before:w-2 before:h-2 before:rounded-full before:bg-primary-100 before:mr-2">
                                         <p className=" text-content-text font-medium text-base lg:text-sm mb:text-xs ">
                                             Website: 
-                                            <span className=" text-content-title font-semibold ml-1">
-                                                {company.website || 'Cập nhật'}
+                                            <span className=" text-content-title font-medium ml-1">
+                                                {company.website || 'Đang cập nhật'}
                                             </span>
                                         </p>
                                     </div>
                                 </div>
                                 <div className=" mx-4 mt-5 mb-4 flex relative">
                                     <p className=" text-content-text text-base font-medium">
-                                        Số lượng: <span className=" text-primary-100 font-bold">22</span>
+                                        Đang tuyển: <span className=" text-primary-100 font-bold">{company.jobList ? (company.jobList.length + ' công việc') : 'Đang cập nhật'}</span>
                                     </p>
 
                                     <div className=" group bottom-0 right-0 absolute cursor-pointer ">

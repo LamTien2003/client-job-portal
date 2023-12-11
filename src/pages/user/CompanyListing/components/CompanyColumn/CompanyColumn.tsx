@@ -43,21 +43,21 @@ function CompanyColumn(props: Props) {
                                     </svg>
                                 </div>
                             </div>
-                            <div className=' flex items-center py-5 gap-[50px] xl:gap-[35px] lg:gap-[55px] tb:gap-[30px] mb:gap-[20px] '>
-                                <div className=' flex flex-col justify-start lg:w-[150px]'>
-                                    <div className=' w-[200px] flex flex-col items-start ml-[70px] mb-8 gap-1.5 xl:w-[180px] lg:w-[140px] tb:w-[170px] tb:mb-[92px] mb:w-[110px] mb:mb-[80px] '>
+                            <div className=' flex items-center gap-[50px] xl:gap-[35px] lg:gap-0 lg:flex-col lg:items-start tb:gap-0 tb:flex-col tb:items-start mb:gap-0 mb:flex-col mb:items-start '>
+                                <div className=' flex flex-col justify-start border-r border-r-primary-200 py-5 lg:w-[150px] lg:border-none lg:pt-5 lg:pb-2 tb:pt-5 tb:pb-2 mb:pt-5 mb:pb-2 tb:border-none mb:border-none '>
+                                    <div className=' w-[200px] flex flex-col items-start ml-[70px] mb-8 gap-1.5 xl:w-[180px] lg:w-full tb:w-full tb:mb-full mb:w-full '>
                                         <Link to={'/company-detail/' + company.id} className=' font-family-title text-lg text-content-title font-semibold duration-300 hover:text-primary-100 lg:text-base tb:text-base mb:text-base'>{company.companyName}</Link>
                                         <p className=' flex items-center text-content-text text-sm gap-2'>
                                             <img src='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/location.svg' />
                                             {company.location.city}
                                         </p>
                                     </div>
-                                    <p className=" text-content-text ml-2.5 mr-1.5 lg:text-[15px] tb:text-sm mb:text-sm ">
-                                        Số lượng tuyển: <span className=" text-primary-100 font-semibold">1</span>
+                                    <p className=" text-content-text ml-2.5 mr-1.5 lg:text-[15px] lg:hidden tb:hidden mb:hidden ">
+                                        Đang tuyển: <span className=" text-primary-100 font-semibold">{company.jobList ? (company.jobList.length + ' công việc') : 'Đang cập nhật'}</span>
                                     </p>
                                 </div>
-                                <div className=' flex flex-col items-center justify-center'>
-                                    <div className=' flex gap-[100px] mb-8 xl:gap-[35px] lg:gap-[25px] tb:flex-col tb:gap-1 mb:flex-col mb:gap-1.5 '>
+                                <div className=' flex flex-col items-center justify-center py-5 lg:flex-row lg:justify-between lg:w-full lg:px-5 lg:py-0 lg:pb-4 tb:items-start tb:px-5 tb:py-0 tb:pb-5 mb:items-start mb:px-5 mb:py-0 mb:pb-5 '>
+                                    <div className=' flex gap-[70px] mb-8 xl:gap-[35px] lg:gap-[15px] lg:mb-0 tb:flex-row tb:gap-[35px] tb:mb-[20px] mb:flex-col mb:mb-0 mb:gap-[6px] '>
                                         <div className=' flex flex-col gap-1.5'>
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
@@ -79,12 +79,12 @@ function CompanyColumn(props: Props) {
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
                                                 <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Website:</p>
-                                                <a href={company.website} className=' text-[15px] text-content-title font-medium duration-300 cursor-pointer hover:text-primary-100 lg:text-sm tb:text-sm mb:text-xs'>{company.website || 'https://example.com/'}</a>
+                                                <a href={company.website} className=' text-[15px] text-content-title font-medium duration-300 cursor-pointer hover:text-primary-100 lg:text-sm tb:text-sm mb:text-xs'>{company.website || 'Đang cập nhật'}</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div className=" group cursor-pointer ">
-                                        <div className=" border border-primary-100 pr-5 pl-5 pt-1 pb-1 rounded-md group duration-300 hover:bg-primary-100 right-0 mb:static mb:mt-3 mb:ml-2">
+                                        <div className=" border border-primary-100 pr-5 pl-5 pt-1 pb-1 rounded-md group duration-300 hover:bg-primary-100 right-0 mb:static mb:mt-4 ">
                                             <Link
                                                 to={'/company-detail/' + company.id}
                                                 className=" text-primary-100 flex items-center duration-300 group-hover:text-white group-hover:cursor-pointer "

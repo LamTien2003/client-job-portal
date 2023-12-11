@@ -9,10 +9,10 @@ function AboutCompany(props: Props) {
     const {data: company} = props
     return (
         <div className=" w-2/3 pr-3 lg:w-full tb:w-full mb:w-full">
-            <div className=" mb-10">
-                <h3 className=" text-content-title text-lg font-semibold mb-2">Mô tả về công ty</h3>
-                <p className=" text-base font-medium">
-                    {company?.description}
+            <div className=" mb-9">
+                <p className=" text-content-text text-base font-medium mb-3">
+                    <span className=" font-family-title text-content-title text-lg font-semibold mr-2">Mô tả công việc:</span>
+                    {company.description === '' ? 'Đang cập nhật' : company.description}
                 </p>
             </div>
             

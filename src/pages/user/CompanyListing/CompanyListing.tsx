@@ -7,6 +7,8 @@ import { useGetCompaniesQuery } from '@/services/companiesApiSlice';
 import Sidebar from './components/Sidebar/Sidebar';
 import { ListColumn, ListGutter } from '@/components/Icons';
 import Skeleton from '@/components/Loading/Skeleton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 function CompanyListing() {
     const [companyList, setCompanyList] = useState<Company[]>([])
@@ -27,6 +29,20 @@ function CompanyListing() {
     const handleFilter = (city: string) => {
         setCity(city)
         setPage(1)
+    }
+
+    const handleDecreasePage = () => {
+        if(page > 1) {
+            window.scrollTo(0, 0)
+            setPage(prev => prev - 1)
+        }
+    }
+
+    const handleIncreasePage = () => {
+        if(page < pageNumber) {
+            window.scrollTo(0, 0)
+            setPage(prev => prev + 1)
+        }
     }
 
     useEffect(() => {
@@ -75,16 +91,28 @@ function CompanyListing() {
                         {!isLoading && !isError && companyList && listStyle === 'column' && <CompanyColumn data={companyList} />}
                         {!isLoading && !isError && companyList && listStyle === 'gutter' && <CompanyGutter data={companyList} />}
                         <div className=' flex justify-center'>
+                            {pageNumber !== 1 && <div 
+                                className={page > 1 ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
+                                onClick={handleDecreasePage}
+                            >
+                                <FontAwesomeIcon icon={faChevronLeft} />
+                            </div>}
                             {pageNumber !== 1 && [...Array(pageNumber)].map((item, index) => (
                                 <div 
                                     key={index} 
-                                    className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' 
+                                    className={index + 1 === page ? ' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default' : ' flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'} 
                                     onClick={() => {
                                         window.scrollTo(0, 0)
                                         setPage(index + 1)
                                     }}>{item}{index + 1}
                                 </div>
                             ))}
+                            {pageNumber !== 1 && <div 
+                                className={page < pageNumber ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
+                                onClick={handleIncreasePage}
+                            >
+                                <FontAwesomeIcon icon={faChevronRight} />
+                            </div>}
                         </div>
                     </div>
                 </div>

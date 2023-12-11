@@ -88,7 +88,7 @@ function RegisterCompany() {
                         setToken(accessToken);
                         setcredentialsToken(accessToken)
                         setCurrentUser(user)
-                        navigate('/')
+                        navigate('/profile')
                     }
                 }
             } catch (error:any) {

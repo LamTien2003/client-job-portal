@@ -28,7 +28,7 @@ function CompanyDetail() {
     return (
         <>
             {isLoading && <Loader />}
-            <div className="selection:bg-primary-100 selection:text-white">
+            <div className=" font-family-text selection:bg-primary-100 selection:text-white">
                 {/* <Banner page="Company Detail" /> */}
 
                 <div className=" w-10/12 mt-[50px] mb-28 text-content-text mr-auto ml-auto">

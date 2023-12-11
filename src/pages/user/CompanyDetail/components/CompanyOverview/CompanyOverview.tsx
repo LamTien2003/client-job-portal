@@ -32,7 +32,7 @@ function CompanyOverview(props: Props) {
     return (
         <div className=" w-1/3 pl-3 lg:w-full tb:w-full mb:w-full">
             <div className=" w-full border border-[#eee] rounded pt-12 pb-12 pl-10 pr-10 mb-12">
-                <h3 className=" text-content-title text-lg font-semibold mb-6">Tổng quan thông tin:</h3>
+                <h3 className=" font-family-title text-content-title text-lg font-semibold mb-6">Tổng quan thông tin:</h3>
                 <div>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-[7px] before:absolute">
                         <p className=" text-base pl-3.5 font-medium">

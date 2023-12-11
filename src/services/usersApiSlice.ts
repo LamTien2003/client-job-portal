@@ -99,7 +99,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 return [];
             },
         }),
-
         updateMyPassword: builder.mutation<ResponseApi<MixinUser>, UpdateMyPassword>({
             query(body) {
                 try {

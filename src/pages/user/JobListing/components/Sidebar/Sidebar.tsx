@@ -58,7 +58,6 @@ function Sidebar(props: Props) {
                     <SalaryRange salaryChange={handleFilterSalary} />
 
                     <Location locationChange={handleFilterLocation} />
-
                 </div>
             </div>
         </div>

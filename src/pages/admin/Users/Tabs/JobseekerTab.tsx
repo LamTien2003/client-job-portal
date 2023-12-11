@@ -69,7 +69,7 @@ function JobseekerTab({setIsLoading}: {setIsLoading: (arg: boolean) => void}) {
                 pageSizeOptions={[5, 10, 25]}
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}
-                disableRowSelectionOnClick
+                paginationMode="server"
             />
         </Box>
     );

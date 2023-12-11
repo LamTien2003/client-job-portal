@@ -99,9 +99,12 @@ function Categories() {
         { field: 'actions', headerName: 'Hành động', type: 'actions', renderCell: (params: any) => <CategoryAction params={params} onChange={handleActiveChange} onDelete={handleDeleteCategory} /> },
     ];
 
+    console.log(paginationModel.page)
+    console.log(paginationModel.pageSize)
+
     return (
         <>
-            {(isLoadingAdd || isLoadingChange || isLoadingDelete) && <Loader />}
+            {(isLoadingCategory || isLoadingAdd || isLoadingChange || isLoadingDelete) && <Loader />}
             <div className=" font-family-text">
                 {formType === 'add' ? (
                     <Modal
@@ -127,7 +130,7 @@ function Categories() {
                     Thêm Danh Mục
                 </button>
 
-                <Box sx={{marginBottom: 10, width: '100%', minHeight: 500}}>
+                <Box sx={{marginBottom: 10, width: '100%', minHeight: 400}}>
                     <DataGrid
                         columns={columns}
                         rows={categoryList}
@@ -135,7 +138,7 @@ function Categories() {
                         pageSizeOptions={[5, 10, 25]}
                         paginationModel={paginationModel}
                         onPaginationModelChange={setPaginationModel}
-                        disableRowSelectionOnClick
+                        paginationMode="server"
                     />
                 </Box>
                 

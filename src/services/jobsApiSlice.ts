@@ -99,7 +99,7 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
                     method: 'POST',
                 };
             },
-            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: '' }]),
+            invalidatesTags: (_result, error, _body) => (error ? [] : [{ type: 'Jobs', id: 'LIST' }]),
         }),
         deleteJob: builder.mutation<ResponseApi<Job>, string>({
             query(id) {

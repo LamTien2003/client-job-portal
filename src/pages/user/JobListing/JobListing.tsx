@@ -9,6 +9,8 @@ import JobGutter from './components/JobGutter/JobGutter';
 import { ListColumn, ListGutter } from '@/components/Icons'
 import Skeleton from '@/components/Loading/Skeleton';
 import { useSearchParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 type filterObject = {
     idCat: string,
@@ -18,61 +20,64 @@ type filterObject = {
 const JobListing = () => {
     const [jobList, setJobList] = useState<Job[]>([]);
     const [totalJob, setTotalJob] = useState<number>(0)
-    const [filter, setFilter] = useState<filterObject>({idCat: '', salary: {min: 500000, max: 10000000}, city: ''})
+    const [filter, setFilter] = useState<filterObject>({idCat: '', salary: {min: 1000000, max: 10000000}, city: ''})
     const [listStyle, setListStyle] = useState<'column' | 'gutter'>('column');
     const [page, setPage] = useState<number>(1)
+
+    const pageNumber = totalJob && (totalJob % 5 === 0) ? (totalJob / 5) : Math.floor(totalJob / 5 + 1)
     
     const [searchParams] = useSearchParams()
     const q = searchParams.get('q')
-    const type = searchParams.get('type')
-    const p = searchParams.get('p')
 
     const { data, isLoading, isError } = useGetJobsQuery(
-        p ? {
+        (filter.idCat !== '' && (filter.city === '' || filter.city === 'allLocation')) ? {
+            q: q === null ? '' : q,
             page,
             limit: 5,
-            p: p
-        } : q ? type ? {
+            "salary[gte]": filter.salary.min,
+            "salary[lte]": filter.salary.max,
+            type: filter.idCat,
+        } : (filter.idCat !== '' && (filter.city !== '' && filter.city !== 'allLocation')) ? {
+            q: q === null ? '' : q,
             page,
             limit: 5,
-            q: q ? q : '',
-            type: type
+            "salary[gte]": filter.salary.min,
+            "salary[lte]": filter.salary.max,
+            type: filter.idCat,
+            p: filter.city,
+        } : (filter.idCat === '' && (filter.city !== '' && filter.city !== 'allLocation')) ? {
+            q: q === null ? '' : q,
+            page,
+            limit: 5,
+            "salary[gte]": filter.salary.min,
+            "salary[lte]": filter.salary.max,
+            p: filter.city,
         } : {
-            page,
-            limit: 5,
-            q: q,
-        } : type ? {
-            page,
-            limit: 5,
-            type: type
-        } : (filter.idCat === '' && filter.city === '') ? {
+            q: q === null ? '' : q,
             page,
             limit: 5,
             "salary[gte]": filter.salary.min,
             "salary[lte]": filter.salary.max,
-        } : (filter.idCat !== '' ? {
-            page,
-            limit: 5,
-            "salary[gte]": filter.salary.min,
-            "salary[lte]": filter.salary.max,
-            type: filter.idCat
-        } : (filter.city !== '' && filter.city === 'allLocation' ? {
-            page,
-            limit: 5,
-            "salary[gte]": filter.salary.min,
-            "salary[lte]": filter.salary.max,
-        } : {
-            page,
-            limit: 5,
-            "salary[gte]": filter.salary.min,
-            "salary[lte]": filter.salary.max,
-            p: filter.city
-        }))
+        }
     );
 
     const handleFilter = (filterObj: filterObject) => {
         setFilter(filterObj)
         setPage(1)
+    }
+
+    const handleDecreasePage = () => {
+        if(page > 1) {
+            window.scrollTo(0, 0)
+            setPage(prev => prev - 1)
+        }
+    }
+
+    const handleIncreasePage = () => {
+        if(page < pageNumber) {
+            window.scrollTo(0, 0)
+            setPage(prev => prev + 1)
+        }
     }
 
     useEffect(() => {
@@ -91,7 +96,9 @@ const JobListing = () => {
         scrollTo(0,0)
     }, [])
 
-    const pageNumber = totalJob && (totalJob % 5 === 0) ? (totalJob / 5) : Math.floor(totalJob / 5 + 1)
+    console.log(pageNumber)
+    console.log(page)
+    console.log(page < pageNumber)
 
     return (
         <>
@@ -117,16 +124,28 @@ const JobListing = () => {
                         {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} />}
                         {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} />}
                         <div className=' flex justify-center'>
+                            {pageNumber !== 1 && <div 
+                                className={page > 1 ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
+                                onClick={handleDecreasePage}
+                            >
+                                <FontAwesomeIcon icon={faChevronLeft} />
+                            </div>}
                             {pageNumber !== 1 && [...Array(pageNumber)].map((item, index) => (
                                 <div 
                                     key={index} 
-                                    className=' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-pointer' 
+                                    className={index + 1 === page ? ' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default' : ' flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'} 
                                     onClick={() => {
                                         window.scrollTo(0, 0)
                                         setPage(index + 1)
                                     }}>{item}{index + 1}
                                 </div>
                             ))}
+                            {pageNumber !== 1 && <div 
+                                className={page < pageNumber ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
+                                onClick={handleIncreasePage}
+                            >
+                                <FontAwesomeIcon icon={faChevronRight} />
+                            </div>}
                         </div>
                     </div>
                 </div>

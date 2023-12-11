@@ -1,11 +1,12 @@
 import { useGetCategoriesQuery } from '@/services/categoriesApiSlice';
 import Category from '@/types/Category';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 type Props = {
     categoryChange: (id: string) => void
 };
-function Category(props: Props) {
+function Category({categoryChange}: Props) {
 
     const { data, isLoading, isError } = useGetCategoriesQuery({});
     
@@ -13,12 +14,15 @@ function Category(props: Props) {
     const [check, setCheck] = useState<boolean>(false);
     const [isId, setIsId] = useState<string>('');
 
+    const [searchParams] = useSearchParams()
+    const type = searchParams.get('type')
+
     const handleCheck = (cat: Category) => {
         setIsId(cat.id);
         if (isId && isId === cat.id) {
             setCheck(!check);
         }
-        props.categoryChange(cat.id)
+        categoryChange(cat.id)
     };
 
     const handleCheckAll = (id: string) => {
@@ -26,12 +30,19 @@ function Category(props: Props) {
         if (isId && isId === id) {
             setCheck(!check);
         }
-        props.categoryChange('')
+        categoryChange('')
     }
 
     useEffect(() => {
         if (data?.data?.data && !isLoading && !isError) setCategory(data?.data?.data);
     }, [data?.data?.data, isLoading, isError]);
+
+    useEffect(() => {
+        if (type !== null) {
+            setIsId(type)
+            categoryChange(type)
+    }
+    }, [type]);
 
     return (
         <div className=" bg-white border-[#eee] border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">

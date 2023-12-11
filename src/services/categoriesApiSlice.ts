@@ -6,7 +6,7 @@ import { buildQueryString } from '@/utils/helper';
 
 export const categoriesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getCategories: builder.query<ResponseApi<Category[]>, {page?: number, limit?: number, q?:number}>({
+        getCategories: builder.query<ResponseApi<Category[]>, {page?: number, limit?: number, q?:string}>({
             query: (arg) => {
                 const query = buildQueryString(arg);
                 return {

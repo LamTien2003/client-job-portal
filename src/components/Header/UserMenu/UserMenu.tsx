@@ -44,10 +44,10 @@ function UserMenu(props: Props) {
                 <div className=" fill-primary-100">
                     <BellIcon />
                 </div>
-                <div className=" flex items-center justify-center w-[12px] h-[12px] text-[9px] text-white bg-primary-100 rounded-full top-0 right-0 absolute">5</div>
+                <div className=" flex items-center justify-center w-[12px] h-[12px] text-[9px] text-white bg-primary-100 rounded-full top-0 right-0 absolute">{currentUser?.notifications?.length}</div>
                     {dropDownNot && (
                         <div className=" w-[278.4px] flex flex-col bg-white rounded shadow-md top-[63px] right-0 absolute cursor-default">
-                            <p className=" text-center text-content-title font-family-title font-semibold p-[15px]">{currentUser.notifications.length} Thông báo</p>
+                            <p className=" text-center text-content-title font-family-title font-semibold p-[15px]">{currentUser?.notifications?.length} Thông báo</p>
                             <div className=" max-h-[300px] overflow-scroll">
                             {currentUser.notifications.map(notification => {
                                 const date = new Date(notification.createdAt)

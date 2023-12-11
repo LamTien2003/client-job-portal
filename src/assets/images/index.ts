@@ -63,11 +63,15 @@ import userFg from './userFg.png';
 import qc1 from './qc1.png'
 import qc2 from './qc2.png'
 import qc3 from './qc3.png'
+import qc4 from './qc4.png'
+import qc5 from './qc5.png'
 
 const images = {
     qc1,
     qc2,
     qc3,
+    qc4,
+    qc5,
     find,
     findWhite,
     filter,

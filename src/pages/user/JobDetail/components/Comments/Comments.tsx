@@ -1,8 +1,6 @@
 import { useGetJobQuery, usePostCommentMutation } from "@/services/jobsApiSlice";
 import { RootState } from "@/store/store";
 import Job from "@/types/Job";
-import { faHeart as faHearted } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +16,6 @@ function Comments({data: job}: {data: Job}) {
     const [currentJob, setCurrentJob] = useState<Job>()
     const [comment, setComment] = useState<string>('')
     const [isFocus, setIsFocus] = useState<boolean>(false)
-    // const [isReply, setIsReply] = useState<boolean>(false)
     const [limit, setLimit] = useState<number>(5)
 
     const navigate = useNavigate()
@@ -49,22 +46,6 @@ function Comments({data: job}: {data: Job}) {
         }
     }
 
-    // const toggleLikeComment = (id: string) => {
-    //     if((id === likeCmt.id) && (likeCmt.isLike === true)) {
-    //         return true
-    //     }   else {
-    //         return false
-    //     }
-    // }
-
-    // const handleLikeComment = (id:string) => {
-    //     if(likeCmt.id === '') {
-    //         setLikeCmt({id,isLike: !likeCmt.isLike })
-    //     } else {
-    //         setLikeCmt({id,isLike: true})
-    //     }
-    // }
-
     useEffect(() => {
         if(data?.data?.data && !isLoading && !isError) {
             setCurrentJob(data?.data?.data)
@@ -86,13 +67,6 @@ function Comments({data: job}: {data: Job}) {
                             <p className=" text-content-text font-medium">
                                 {cmt.content}
                             </p>
-                            <div className=" flex items-center mt-2">
-                                <div className="text-red-400 bg-transparent rounded-full py-0.5 px-1.5 duration-300 cursor-pointer hover:bg-gray-300">
-                                    <FontAwesomeIcon icon={faHearted} />
-                                </div>
-                                <p className=" text-sm text-content-text">465</p>
-                                <div className=" text-sm bg-transparent rounded-2xl py-1 px-2.5 duration-300 cursor-pointer ml-3 hover:bg-gray-300">Trả lời</div>
-                            </div>
                         </div>
                     </div>
                 )

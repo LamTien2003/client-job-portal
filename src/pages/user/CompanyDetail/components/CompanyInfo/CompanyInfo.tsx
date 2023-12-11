@@ -13,19 +13,19 @@ function CompanyInfo(props: Props) {
         <>
             <div className=" relative">
                 <img
-                    className=" w-full mr-auto ml-auto rounded-t-xl"
-                    src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/blog-dt-img.png"
+                    className=" w-full h-[320px] mr-auto ml-auto rounded-t-xl"
+                    src={company.coverPhoto}
                 />
                 <div className=" w-[90px] h-[90px] bg-[#f8f8f8] rounded -bottom-[45px] left-1/2 -translate-x-1/2 rotate-45 flex items-center justify-center absolute">
                     <img
-                        className=" rounded-full"
-                        src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/blog-dt-logo.png"
+                        className=" w-[60px] h-[60px] rounded-full -rotate-45"
+                        src={company.photo}
                     />
                 </div>
             </div>
             <div className=" w-full pt-[30px] pr-[30px] pl-[30px] pb-12 mr-auto ml-auto flex justify-between lg:flex-col tb:flex-col mb:flex-col">
                 <div className=" flex flex-col lg:mb-2 tb:mb-2 mb:mb-2">
-                    <h1 className=" text-content-title text-2xl font-semibold mb-2.5">{company.companyName}</h1>
+                    <h1 className=" text-content-title text-2xl font-family-title font-semibold mb-2.5">{company.companyName}</h1>
                     <div className=" flex mb:flex-col">
                         <div className=" flex">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/map-2.svg" />
@@ -47,7 +47,7 @@ function CompanyInfo(props: Props) {
                             <p className=" text-content-title font-medium text-base ml-2">Website:</p>
                         </div>
                         <a href={company.website} className=" text-[#0279cf] text-sm font-medium">
-                            {company.website ? company.website : 'Cập nhật'}
+                            {company.website ? company.website : 'Đang cập nhật'}
                         </a>
                     </div>
                     <div className=" ml-10 flex flex-col lg:flex-row lg:items-center lg:ml-0 tb:ml-[28px] mb:items-start mb:ml-0">

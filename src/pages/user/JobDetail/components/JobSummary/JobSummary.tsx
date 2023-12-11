@@ -35,19 +35,26 @@ function JobSummary(props: Props) {
         if(isjs) {
             const isConfirm = confirm('Bạn có chắc muốn apply công việc này?')
             if(isConfirm) {
-                const response = await applyJob(job.id)
+                try {
+                    const response = await applyJob(job.id).unwrap()
                 
-                if(response) {
-                    toast.success('Bạn đã apply job thành công!')
-                    setIsApplied(true)
+                    if(response.status === 200) {
+                        toast.success(response.data.msg)
+                        setIsApplied(true)
+                    }
+                } catch(err: any) {
+                    toast.error(err.data.msg)
                 }
+                
             }
         }
     }
 
     useEffect(() => {
-        if(job.applications?.length !== 0) {
+        console.log(job.applications)
+        if(job.applications?.length !== 0 && currentUser) {
             job.applications?.map(apply => {
+                console.log('hi')
                 if(apply.candicate.id === currentUser?.id) {
                     setIsApplied(true)
                 }
@@ -55,20 +62,26 @@ function JobSummary(props: Props) {
         } else {
             setIsApplied(false)
         }
-    }, [job.applications, job.countApplication])
+    }, )
 
     return (
         <div className=" w-1/3 pl-3 pr-3 lg:w-full tb:w-full mb:w-full ">
             {isjs ? !isApplied ? (
-                <div className=" mb-12 flex items-center justify-end">
-                    <button onClick={handleApply} className=" font-medium pt-2 pb-2 pl-7 pr-7 bg-primary-100 text-white rounded ml-8 duration-500 hover:bg-black xl:pl-3 xl:pr-3 xl:text-sm xl:ml-4 lg:pl-7 lg:pr-7 lg:text-base mb:pl-4 mb:pr-4">
+                <div className=" mb-6 flex items-center justify-end">
+                    <button onClick={handleApply} className=" w-full font-medium pt-2 pb-2 bg-primary-100 text-white rounded duration-500 hover:bg-black xl:text-sm lg:text-base ">
                         Ứng tuyển vị trí này
                     </button>
                 </div>
             ) : (
-                <div className=" mb-12 flex items-center justify-end">
-                    <button className=" font-medium pt-2 pb-2 pl-7 pr-7 bg-gray-300 text-content-text rounded ml-8 duration-500 cursor-default xl:pl-3 xl:pr-3 xl:text-sm xl:ml-4 lg:pl-7 lg:pr-7 lg:text-base mb:pl-4 mb:pr-4">
+                <div className=" mb-6 flex items-center justify-end">
+                    <button className=" w-full font-medium py-2 bg-gray-300 text-content-text rounded duration-500 cursor-default xl:text-sm lg:text-base">
                         Đã ứng tuyển
+                    </button>
+                </div>
+            ) : !currentUser ? (
+                <div className=" mb-6 flex items-center justify-end">
+                    <button onClick={handleApply} className=" w-full font-medium py-2 bg-primary-100 text-white rounded duration-500 hover:bg-black xl:text-sm lg:text-base">
+                        Ứng tuyển vị trí này
                     </button>
                 </div>
             ) : (
@@ -97,12 +110,12 @@ function JobSummary(props: Props) {
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
                     <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
-                        <span className=" text-content-title font-medium mr-2">Kinh nghiệm:</span>kinh nghiệm
+                        <span className=" text-content-title font-medium mr-2">Kĩ năng:</span>{job.skillsRequire.join(', ')}
                     </p>
                 </div>
                 <div className=" relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:mr-1.5 before:pr-2 before:top-2 before:absolute">
                     <p className=" text-content-text text-base font-medium mb-2.5 ml-4 ">
-                        <span className=" text-content-title font-medium mr-2">Kĩ năng:</span>{job.skillsRequire.join(', ')}
+                        <span className=" text-content-title font-medium mr-2">Lương:</span>{job.salary.toLocaleString('it')} vnđ
                     </p>
                 </div>
             </div>
