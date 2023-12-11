@@ -5,10 +5,7 @@ const Company = ({ company }: { company: StatisticTopCompany }) => {
         <div className="flex justify-between gap-6 bg-white shadow-lg rounded-lg p-2 items-center w-[31%]  font-family-text">
             <img className="w-16 h-16 object-cover rounded-lg" src={company?.company?.photo} alt="company" />
             <div className="w-full">
-                <div className="flex flex-col gap-1 ">
-                    <h5 className="font-medium text-primary-100 text-lg">{company?.company?.companyName}</h5>
-                    <p className="text-sm">{company?.company?.description}</p>
-                </div>
+                <h5 className="font-medium text-primary-100 text-lg">{company?.company?.companyName}</h5>
 
                 <div className="flex gap-2 items-center">
                     <h6 className="font-medium">Số lượng: </h6>

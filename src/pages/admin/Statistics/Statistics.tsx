@@ -8,7 +8,7 @@ function Statistics() {
         <div className="flex flex-col gap-8 pb-10">
             <Total />
 
-            <div className="flex justify-between gap-10">
+            <div className="flex justify-between gap-4">
                 <Chart />
                 <TopJob />
             </div>
