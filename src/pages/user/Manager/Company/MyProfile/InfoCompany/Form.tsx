@@ -86,7 +86,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                 const form = new FormData();
                 form.append('companyName', values.companyName);
                 form.append('description', values.description);
-                form.append('establishDate', values.establishDate);
+                form.append('establishDate', dateValue);
                 form.append('website', values.website);
                 form.append('companySize[from]', values.companySizeFrom);
                 form.append('companySize[to]', values.companySizeTo);
