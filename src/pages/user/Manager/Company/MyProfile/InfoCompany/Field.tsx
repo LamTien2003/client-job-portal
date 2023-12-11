@@ -8,7 +8,7 @@ interface CustomFieldProps {
     touched: boolean | undefined;
     icon: ReactNode;
     type?: string;
-    value?: string;
+    value?: string | number;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -36,7 +36,9 @@ const CustomField = ({
                 <div className="text-xl px-3">{icon}</div>
                 <input
                     name={fieldName}
-                    className="font-family-text w-full h-11 rounded-md py-2 outline-none bg-input"
+                    className={`font-family-text w-full h-11 rounded-md py-2 outline-none bg-input ${
+                        type === 'number' && 'pr-3'
+                    }`}
                     type={type ? type : 'text'}
                     placeholder={placeholder}
                     value={value}

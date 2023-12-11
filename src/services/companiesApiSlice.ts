@@ -13,7 +13,7 @@ interface ParamsGetAllJob {
     ['skillsRequire[in]']?: string[];
     sort?: string;
     p?: string;
-    d?: string
+    d?: string;
 }
 
 export const companyApiSlice = apiSlice.injectEndpoints({
@@ -44,7 +44,7 @@ export const companyApiSlice = apiSlice.injectEndpoints({
             query: (id) => `job/application/${id}`,
             providesTags: () => [{ type: 'Companies' as const, id: 'LIST-JOB-APPLICATION' }],
         }),
-        changeMe: builder.mutation<ResponseApi<Company>, Company>({
+        changeMe: builder.mutation<ResponseApi<Company>, Company | FormData>({
             query(body) {
                 try {
                     return {

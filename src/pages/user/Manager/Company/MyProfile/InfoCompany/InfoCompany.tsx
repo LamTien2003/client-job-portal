@@ -40,6 +40,12 @@ const InfoCompany = () => {
                         <span className="font-title text-content-title">Ngày thành lập:</span>
                         <h5 className="font-title text-primary-100 text-xl">{date}</h5>
                     </div>
+                    <div className="flex gap-2 items-center">
+                        <span className="font-title text-content-title">Quy mô:</span>
+                        <h5 className="font-title text-primary-100 text-xl">
+                            {company?.companySize.from} - {company?.companySize.to} thành viên
+                        </h5>
+                    </div>
 
                     <div className="flex gap-2 items-center">
                         <span className="font-title text-content-title">Website:</span>

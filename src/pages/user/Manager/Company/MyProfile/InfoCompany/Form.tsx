@@ -6,7 +6,7 @@ import { LuFactory } from 'react-icons/lu';
 import { BiLink } from 'react-icons/bi';
 import { TbFileDescription } from 'react-icons/tb';
 
-import CustomField from '../../../components/Field';
+import CustomField from './Field';
 import BtnBot from '../../../components/BtnBot';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
@@ -18,6 +18,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import Loader from '@/components/Loader/Loader';
 import { toast } from 'react-toastify';
+import CoverPhoto from './CoverPhoto';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -28,15 +29,23 @@ interface Values {
     description: string;
     establishDate: any;
     website: string;
+    companySizeFrom: string;
+    companySizeTo: string;
+    photo: string;
 }
 const initialValues: Values = {
     companyName: '',
     description: '',
     establishDate: '',
     website: 'Cập nhật sau',
+    companySizeFrom: '1',
+    companySizeTo: '1',
+    photo: '',
 };
 const validation = Yup.object().shape({
     companyName: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Họ không được bỏ trống!'),
+    companySizeFrom: Yup.number().required('Quy mô không được bỏ trống!').min(1, 'Số lượng không được nhỏ hơn 1'),
+    companySizeTo: Yup.number().required('Quy mô không được bỏ trống!').min(1, 'Số lượng không được nhỏ hơn 1'),
     description: Yup.string().max(500, 'Không được quá 500 kí tự!').required('Tên không được bỏ trống!'),
     establishDate: Yup.date()
         .required('Ngày thành lập không được bỏ trống!')
@@ -74,20 +83,28 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                 } else {
                     dateValue = values.establishDate;
                 }
+                const form = new FormData();
+                form.append('companyName', values.companyName);
+                form.append('description', values.description);
+                form.append('establishDate', values.establishDate);
+                form.append('website', values.website);
+                form.append('companySize[from]', values.companySizeFrom);
+                form.append('companySize[to]', values.companySizeTo);
+                form.append('coverPhoto', values.photo);
 
-                const data: any = {
-                    companyName: values.companyName,
-                    description: values.description,
-                    establishDate: dateValue,
-                    website: values.website,
-                };
-
-                await changeInfoCompany(data);
-                alert('Cập nhật thông tin thành công!');
+                const res = await changeInfoCompany(form).unwrap();
+                if (res.status === 200) {
+                    toast.success('Cập nhật thông tin thành công!');
+                }
                 formik.resetForm();
                 handleOpen();
             } catch (error: any) {
-                toast.error('Lỗi khi gửi form:', error);
+                if (error.status === 400) {
+                    toast.error('Lỗi!');
+                }
+                if (error.status === 500) {
+                    toast.error('Lỗi server!');
+                }
             }
         },
     });
@@ -104,9 +121,12 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                 description: company?.description || '',
                 establishDate: date || '',
                 website: company?.website || '',
+                companySizeFrom: company?.companySize.from || 1,
+                companySizeTo: company?.companySize.to || 1,
             });
         }
     }, [company]);
+
     const establishDateValue: any = dayjs(formik.values.establishDate);
     return (
         <Dialog size="lg" open={open} handler={handleOpen}>
@@ -114,6 +134,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
             <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Thông tin công ty</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
+                    <CoverPhoto formik={formik} />
                     <div className="grid grid-cols-2 w-full gap-6 mb:grid-cols-1 tb:grid-cols-1">
                         <CustomField
                             title="Tên công ty *"
@@ -125,6 +146,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             value={formik.values.companyName}
                             onChange={formik.handleChange}
                         />
+
                         <CustomField
                             title="Mô tả *"
                             fieldName="description"
@@ -133,6 +155,28 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                             icon={<TbFileDescription />}
                             placeholder="Nhập mô tả"
                             value={formik.values.description}
+                            onChange={formik.handleChange}
+                        />
+                        <CustomField
+                            title="Quy mô (Từ) *"
+                            fieldName="companySizeFrom"
+                            error={formik.errors.companySizeFrom}
+                            touched={formik.touched.companySizeFrom}
+                            icon={<LuFactory />}
+                            placeholder="Nhập tên công ty của bạn"
+                            value={formik.values.companySizeFrom}
+                            onChange={formik.handleChange}
+                            type="number"
+                        />
+                        <CustomField
+                            title="Quy mô (Đến) *"
+                            fieldName="companySizeTo"
+                            type="number"
+                            error={formik.errors.companySizeTo}
+                            touched={formik.touched.companySizeTo}
+                            icon={<LuFactory />}
+                            placeholder="Nhập tên công ty của bạn"
+                            value={formik.values.companySizeTo}
                             onChange={formik.handleChange}
                         />
 
