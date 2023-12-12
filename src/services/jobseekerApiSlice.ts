@@ -34,6 +34,14 @@ export const jobseekerApiSlice = apiSlice.injectEndpoints({
                 return [{ type: 'JobSeeker' as const, id: 'LIST' }];
             },
         }),
+        getDetailJobseeker: builder.query<ResponseApi<JobSeeker>, string>({
+            query(id) {
+                return {
+                    url: `jobseeker/${id}`,
+                };
+            },
+            providesTags: () => [{ type: 'JobSeeker' as const, id: 'LIST' }],
+        }),
         JobseekerChangeMe: builder.mutation<ResponseApi<JobSeeker>, JobSeeker | FormData>({
             query(body) {
                 try {
@@ -85,4 +93,5 @@ export const {
     useJobseekerChangeMeMutation,
     useGetMyApplicationQuery,
     useRemoveJobApplyMutation,
+    useGetDetailJobseekerQuery,
 } = jobseekerApiSlice;

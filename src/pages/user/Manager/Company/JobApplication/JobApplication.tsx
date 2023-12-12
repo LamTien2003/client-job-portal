@@ -10,7 +10,10 @@ const JobApplication = () => {
     const [query, setQuery] = useState({ page: page, limit: 4 });
     const [total, setTotal] = useState<number>(0);
     const [jobApplycation, setJobApplycation] = useState<any[]>([]);
-    const { data, isLoading, isError } = useGetJobApplicationQuery(id!);
+    const { data, isLoading, isError } = useGetJobApplicationQuery({
+        id,
+        query,
+    });
 
     useEffect(() => {
         if (!isLoading && !isError && data?.data?.data) {

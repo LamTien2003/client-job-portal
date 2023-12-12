@@ -4,6 +4,7 @@ import { useCancelJobMutation } from '@/services/companiesApiSlice';
 import { toast } from 'react-toastify';
 import images from '@/assets/images';
 import Loader from '@/components/Loader/Loader';
+import DetailProfileCan from './DetailProfileCan/DetailProfileCan';
 
 const Item = ({ candicate }: { candicate: any }) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -47,6 +48,13 @@ const Item = ({ candicate }: { candicate: any }) => {
                                     {candicate.candicate.gender === 'others' && 'Khác'}
                                 </p>
                             </div>
+                            {candicate.status === 'accepted' && (
+                                <div className="  text-primary-100 font-medium">Đã duyệt</div>
+                            )}
+
+                            {candicate.status === 'pending' && (
+                                <div className="  text-[#7307C9]  font-medium">Chưa duyệt</div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -68,14 +76,8 @@ const Item = ({ candicate }: { candicate: any }) => {
                         ) : (
                             <p>Chưa có CV</p>
                         )}
+                        <DetailProfileCan id={candicate.candicate._id} />
 
-                        {candicate.status === 'accepted' && (
-                            <div className="  text-primary-100 font-medium">Đã duyệt</div>
-                        )}
-
-                        {candicate.status === 'pending' && (
-                            <div className="  text-[#7307C9]  font-medium">Chưa duyệt</div>
-                        )}
                         {candicate.status === 'canceled' && <div className="text-[#c90707] font-medium">Từ chối</div>}
                     </div>
                 </div>
@@ -90,6 +92,7 @@ const Item = ({ candicate }: { candicate: any }) => {
                             >
                                 Chấp nhận
                             </button>
+
                             <button
                                 onClick={() => cancelJobHandle(candicate.id)}
                                 className="bg-red-400 p-2 rounded-md text-white font-semibold hover:bg-black duration-200"

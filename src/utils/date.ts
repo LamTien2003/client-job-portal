@@ -42,7 +42,7 @@ export const formatDateWithDayMonthYear = (dateValue: Date) => {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    const dateString: string = `${day}/${month}/${year}`;
+    const dateString: string = `${month}/${year}`;
 
     return dateString;
 };
