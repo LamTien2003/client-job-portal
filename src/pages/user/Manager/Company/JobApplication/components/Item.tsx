@@ -4,7 +4,7 @@ import { useCancelJobMutation } from '@/services/companiesApiSlice';
 import { toast } from 'react-toastify';
 import images from '@/assets/images';
 import Loader from '@/components/Loader/Loader';
-import DetailProfileCan from './DetailProfileCan';
+import DetailProfileCan from './DetailProfileCan/DetailProfileCan';
 
 const Item = ({ candicate }: { candicate: any }) => {
     const [open, setOpen] = useState<boolean>(false);

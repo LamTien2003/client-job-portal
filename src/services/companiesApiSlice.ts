@@ -41,8 +41,13 @@ export const companyApiSlice = apiSlice.injectEndpoints({
             query: (id) => `company/${id}`,
             providesTags: () => [{ type: 'Companies' as const, id: '' }],
         }),
-        getJobApplication: builder.query<ResponseApi<any>, string>({
-            query: (id) => `job/application/${id}`,
+        getJobApplication: builder.query<ResponseApi<any>, { id?: string; query: ParamsGetAllJob }>({
+            query: ({ id, query }) => {
+                const queryParams = buildQueryString(query);
+                return {
+                    url: `job/application/${id}?${queryParams && queryParams}`,
+                };
+            },
             providesTags: () => [{ type: 'Companies' as const, id: 'LIST-JOB-APPLICATION' }],
         }),
         changeMe: builder.mutation<ResponseApi<Company>, Company | FormData>({
