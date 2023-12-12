@@ -91,13 +91,13 @@ function CompanyListing() {
                         {!isLoading && !isError && companyList && listStyle === 'column' && <CompanyColumn data={companyList} />}
                         {!isLoading && !isError && companyList && listStyle === 'gutter' && <CompanyGutter data={companyList} />}
                         <div className=' flex justify-center'>
-                            {pageNumber !== 1 && <div 
+                            {pageNumber !== 1 && companyList.length < 6 && <div 
                                 className={page > 1 ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
                                 onClick={handleDecreasePage}
                             >
                                 <FontAwesomeIcon icon={faChevronLeft} />
                             </div>}
-                            {pageNumber !== 1 && [...Array(pageNumber)].map((item, index) => (
+                            {pageNumber !== 1 && companyList.length < 6 && [...Array(pageNumber)].map((item, index) => (
                                 <div 
                                     key={index} 
                                     className={index + 1 === page ? ' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default' : ' flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'} 
@@ -107,7 +107,7 @@ function CompanyListing() {
                                     }}>{item}{index + 1}
                                 </div>
                             ))}
-                            {pageNumber !== 1 && <div 
+                            {pageNumber !== 1 && companyList.length < 6 && <div 
                                 className={page < pageNumber ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
                                 onClick={handleIncreasePage}
                             >

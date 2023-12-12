@@ -81,24 +81,22 @@ const JobListing = () => {
     }
 
     useEffect(() => {
-        if (!isLoading && !isError && data?.data?.data) {
-            setJobList(data?.data?.data);
+        if(!isLoading && !isError && data?.data?.data) {
+            setJobList(data?.data?.data)
         }
-    }, [data?.data?.data, isError, isLoading]);
+    }, [jobList, totalJob, data?.data?.data, isLoading, isError])
 
     useEffect(() => {
-        if (!isLoading && !isError && typeof data?.data?.totalItems === 'number') {
+        if(!isLoading && !isError && typeof data?.data?.totalItems === 'number') {
             setTotalJob(data?.data?.totalItems)
         }
-    }, [data?.data?.totalItems , isError, isLoading]);
+    }, [jobList, totalJob, data?.data?.data, data?.data?.totalItems, isLoading, isError])
 
     useLayoutEffect(() => {
         scrollTo(0,0)
     }, [])
 
-    console.log(pageNumber)
-    console.log(page)
-    console.log(page < pageNumber)
+    console.log(jobList)
 
     return (
         <>
@@ -124,13 +122,13 @@ const JobListing = () => {
                         {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} />}
                         {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} />}
                         <div className=' flex justify-center'>
-                            {pageNumber !== 1 && <div 
+                            {pageNumber !== 1 && jobList.length < 6 && <div 
                                 className={page > 1 ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
                                 onClick={handleDecreasePage}
                             >
                                 <FontAwesomeIcon icon={faChevronLeft} />
                             </div>}
-                            {pageNumber !== 1 && [...Array(pageNumber)].map((item, index) => (
+                            {pageNumber !== 1 && jobList.length < 6 && [...Array(pageNumber)].map((item, index) => (
                                 <div 
                                     key={index} 
                                     className={index + 1 === page ? ' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default' : ' flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'} 
@@ -140,7 +138,7 @@ const JobListing = () => {
                                     }}>{item}{index + 1}
                                 </div>
                             ))}
-                            {pageNumber !== 1 && <div 
+                            {pageNumber !== 1 && jobList.length < 6 && <div 
                                 className={page < pageNumber ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
                                 onClick={handleIncreasePage}
                             >
