@@ -1,106 +1,123 @@
-import { Box, Modal } from "@mui/material";
-import { useEffect, useState } from "react";
-import AddForm from "./Forms/AddForm";
-import ChangeForm from "./Forms/ChangeForm";
-import Category from "@/types/Category";
-import { useGetCategoriesQuery ,useAddCategoryMutation, useChangeCategoryMutation, useDeleteCategoryMutation } from "@/services/categoriesApiSlice";
-import CategoryAction from "./CategoryActions/CategoryActions";
-import { DataGrid } from "@mui/x-data-grid";
-import { toast } from "react-toastify";
-import Loader from "@/components/Loader/Loader";
+import { Box, Modal } from '@mui/material';
+import { useEffect, useState } from 'react';
+import AddForm from './Forms/AddForm';
+import ChangeForm from './Forms/ChangeForm';
+import Category from '@/types/Category';
+import {
+    useGetCategoriesQuery,
+    useAddCategoryMutation,
+    useChangeCategoryMutation,
+    useDeleteCategoryMutation,
+} from '@/services/categoriesApiSlice';
+import CategoryAction from './CategoryActions/CategoryActions';
+import { DataGrid } from '@mui/x-data-grid';
+import { toast } from 'react-toastify';
+import Loader from '@/components/Loader/Loader';
 
 function Categories() {
-
-    const [categoryList, setCategoryList] = useState<Category[]>([])
-    const [categoryCount, setCategoryCount] = useState<number>(0)
+    const [categoryList, setCategoryList] = useState<Category[]>([]);
+    const [categoryCount, setCategoryCount] = useState<number>(0);
     const [paginationModel, setPaginationModel] = useState({
         page: 0,
-        pageSize: 5
-    })
+        pageSize: 5,
+    });
 
-    const [activeForm, setActiveForm] = useState<boolean>(false)
-    const [formType, setFormType] = useState<string>('')
+    const [activeForm, setActiveForm] = useState<boolean>(false);
+    const [formType, setFormType] = useState<string>('');
 
-    const [category, setCategory] = useState<Category | undefined>()
+    const [category, setCategory] = useState<Category | undefined>();
 
-    const {data: dataCategory, isLoading: isLoadingCategory, isError: isErrorCategory} = useGetCategoriesQuery({page: paginationModel.page + 1, limit: paginationModel.pageSize})
-    const [addCategory, { isLoading: isLoadingAdd}] = useAddCategoryMutation()
-    const [changeCategory, {isLoading: isLoadingChange}] = useChangeCategoryMutation()
-    const [deleteCategory, {isLoading: isLoadingDelete}] = useDeleteCategoryMutation()
+    const {
+        data: dataCategory,
+        isLoading: isLoadingCategory,
+        isError: isErrorCategory,
+    } = useGetCategoriesQuery({ page: paginationModel.page + 1, limit: paginationModel.pageSize });
+    const [addCategory, { isLoading: isLoadingAdd }] = useAddCategoryMutation();
+    const [changeCategory, { isLoading: isLoadingChange }] = useChangeCategoryMutation();
+    const [deleteCategory, { isLoading: isLoadingDelete }] = useDeleteCategoryMutation();
 
     const handleAddCategory = async (categoryName: string) => {
-        const isConfirm = confirm('Bạn có chắc muốn thêm danh mục này?')
-        if(isConfirm) {
-            setActiveForm(false)
+        const isConfirm = confirm('Bạn có chắc muốn thêm danh mục này?');
+        if (isConfirm) {
+            setActiveForm(false);
             try {
-                const response = await addCategory({categoryName}).unwrap()
-                if(response.status === 200) {
-                    toast.success(response.data.msg)
+                const response = await addCategory({ categoryName }).unwrap();
+                if (response.status === 200) {
+                    toast.success(response.data.msg);
                 }
-            } catch(err:any) {
-                toast.error(err.data.msg)
+            } catch (err: any) {
+                toast.error(err.data.msg);
             }
         }
-    }
+    };
 
     const handleActiveChange = (id: string) => {
-        const categoryById = categoryList.filter(item => item.id === id)
-        setCategory(categoryById[0])
-        setActiveForm(true)
-        setFormType('change')
-    }
+        const categoryById = categoryList.filter((item) => item.id === id);
+        setCategory(categoryById[0]);
+        setActiveForm(true);
+        setFormType('change');
+    };
 
     const handleChangeCategory = async (category: Category) => {
-        const isConfirm = confirm('Bạn có chắc muốn thay đổi danh mục này?')
-        if(isConfirm) {
-            setActiveForm(false)
+        const isConfirm = confirm('Bạn có chắc muốn thay đổi danh mục này?');
+        if (isConfirm) {
+            setActiveForm(false);
             try {
-                const response = await changeCategory(category).unwrap()
-                if(response.status === 200) {
-                    toast.success(response.data.msg)
+                const response = await changeCategory(category).unwrap();
+                if (response.status === 200) {
+                    toast.success(response.data.msg);
                 }
-            } catch(err:any) {
-                toast.error(err.data.msg)
+            } catch (err: any) {
+                toast.error(err.data.msg);
             }
         }
-    }
+    };
 
     const handleDeleteCategory = async (id: string) => {
-        const isConfirm = confirm('Bạn có chắc muốn xóa danh mục này?')
-        if(isConfirm) {
+        const isConfirm = confirm('Bạn có chắc muốn xóa danh mục này?');
+        if (isConfirm) {
             try {
-                const response = await deleteCategory(id).unwrap()
-                if(response.status === 200) {
-                    toast.success(response.data.msg)
+                const response = await deleteCategory(id).unwrap();
+                if (response.status === 200) {
+                    toast.success(response.data.msg);
                 }
-            } catch(err:any) {
-                toast.error(err.data.msg)
+            } catch (err: any) {
+                toast.error(err.data.msg);
             }
         }
-    }
+    };
 
     useEffect(() => {
-        if(dataCategory?.data?.data && !isLoadingCategory && !isErrorCategory) {
-            setCategoryList(dataCategory?.data?.data)
+        if (dataCategory?.data?.data && !isLoadingCategory && !isErrorCategory) {
+            setCategoryList(dataCategory?.data?.data);
         }
-    }, [dataCategory?.data?.data, isLoadingCategory, isErrorCategory])
+    }, [dataCategory?.data?.data, isLoadingCategory, isErrorCategory]);
 
     useEffect(() => {
-        if(dataCategory?.data?.totalItems && !isLoadingCategory && !isErrorCategory) {
-            setCategoryCount(dataCategory?.data?.totalItems)
+        if (dataCategory?.data?.totalItems && !isLoadingCategory && !isErrorCategory) {
+            setCategoryCount(dataCategory?.data?.totalItems);
         }
-    }, [dataCategory?.data?.totalItems, isLoadingCategory, isErrorCategory])
+    }, [dataCategory?.data?.totalItems, isLoadingCategory, isErrorCategory]);
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 300},
+        { field: 'id', headerName: 'ID', width: 300 },
         { field: 'categoryName', headerName: 'Tên danh mục', width: 240 },
-        { field: 'isHotCategory', headerName: 'Độ hot danh mục', width: 240, renderCell: (params: any) => <>{params.row.isHotCategory === true ? 'Đang hot' : 'Không hot'}</> },
-        { field: 'totalJobs', headerName: 'Tổng công việc', width: 240},
-        { field: 'actions', headerName: 'Hành động', type: 'actions', renderCell: (params: any) => <CategoryAction params={params} onChange={handleActiveChange} onDelete={handleDeleteCategory} /> },
+        {
+            field: 'isHotCategory',
+            headerName: 'Độ hot danh mục',
+            width: 240,
+            renderCell: (params: any) => <>{params.row.isHotCategory === true ? 'Đang hot' : 'Không hot'}</>,
+        },
+        { field: 'totalJobs', headerName: 'Tổng công việc', width: 240 },
+        {
+            field: 'actions',
+            headerName: 'Hành động',
+            type: 'actions',
+            renderCell: (params: any) => (
+                <CategoryAction params={params} onChange={handleActiveChange} onDelete={handleDeleteCategory} />
+            ),
+        },
     ];
-
-    console.log(paginationModel.page)
-    console.log(paginationModel.pageSize)
 
     return (
         <>
@@ -119,18 +136,18 @@ function Categories() {
                         onClose={() => setActiveForm(false)}
                     />
                 )}
-                
-                <button 
+
+                <button
                     className=" w-[250px] font-family-title font-semibold text-xl text-primary-100 bg-white rounded-md border-2 border-primary-100 mb-[30px] py-2 duration-300 hover:text-white hover:bg-primary-100"
                     onClick={() => {
-                        setActiveForm(true)
-                        setFormType('add')
-                    }} 
+                        setActiveForm(true);
+                        setFormType('add');
+                    }}
                 >
                     Thêm Danh Mục
                 </button>
 
-                <Box sx={{marginBottom: 10, width: '100%', minHeight: 400}}>
+                <Box sx={{ marginBottom: 10, width: '100%', minHeight: 400 }}>
                     <DataGrid
                         columns={columns}
                         rows={categoryList}
@@ -141,10 +158,9 @@ function Categories() {
                         paginationMode="server"
                     />
                 </Box>
-                
             </div>
         </>
     );
 }
- 
+
 export default Categories;

@@ -21,10 +21,10 @@ const Sidebar = () => {
             {jobSeeker && (
                 <TitleProfile title="Hồ sơ (CV)" path="jobseeker/add-cv" logo={<MdOutlineMedicalInformation />} />
             )}
+            {company && <TitleProfile title="Thêm công việc" path="company/post-job" logo={<IoBagAddOutline />} />}
             {company && <TitleProfile title="Công việc đã tạo" path="company/job-created" logo={<MdWorkOutline />} />}
 
             {company && <TitleProfile title="Thùng rác" path="company/job-deleted" logo={<MdOutlineDelete />} />}
-            {company && <TitleProfile title="Thêm công việc" path="company/post-job" logo={<IoBagAddOutline />} />}
 
             <TitleProfile title="Đổi mật khẩu" path="/profile/updateMyPassword" logo={<RiLockPasswordLine />} />
         </div>

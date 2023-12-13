@@ -106,8 +106,6 @@ const JobListing = () => {
         scrollTo(0, 0);
     }, []);
 
-    console.log(jobList);
-
     return (
         <>
             <Banner page="Tìm việc" />
