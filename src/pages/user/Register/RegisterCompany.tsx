@@ -244,7 +244,7 @@ function RegisterCompany() {
                                 />
                                 <SelectDate
                                     isRequire={true}
-                                    label="EstablistDate"
+                                    label="Ngày thành lập"
                                     id="establishDate"
                                     value={formik.values.establishDate}
                                     onChange={formik.setFieldValue}

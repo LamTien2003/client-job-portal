@@ -46,7 +46,7 @@ function Category({categoryChange}: Props) {
 
     return (
         <div className=" bg-white border-[#eee] border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">
-            <h3 className=" font-family-title text-content-title font-semibold text-lg mb-2 lg:text-lg">Tìm việc theo ngành</h3>
+            <h3 className=" font-family-title text-primary-100 font-semibold text-lg mb-2 lg:text-lg">Lọc theo ngành</h3>
             <div className=" max-h-64 overflow-scroll">
                 <div className=" mb-2 flex relative">
                     <div className=" flex items-center cursor-pointer">

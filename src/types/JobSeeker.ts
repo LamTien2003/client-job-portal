@@ -43,7 +43,8 @@ export interface Project {
     };
     isWorking: boolean;
 }
-export type Skill = 'ReactJS' | 'NodeJS' | 'PHP' | 'Java' | 'Javascript' | 'Golang' | 'React-native' | 'Python';
+export type Skill = string;
+// export type Skill = 'ReactJS' | 'NodeJS' | 'PHP' | 'Java' | 'Javascript' | 'Golang' | 'React-native' | 'Python';
 
 export interface JobApplicate {
     _id: string;

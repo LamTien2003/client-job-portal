@@ -13,7 +13,7 @@ function CompanyInfo(props: Props) {
         <>
             <div className=" relative">
                 <img
-                    className=" w-full h-[320px] mr-auto ml-auto rounded-t-xl"
+                    className=" w-full min-h-[320px] max-h-[400px] object-cover mr-auto ml-auto rounded-t-xl"
                     src={company.coverPhoto}
                 />
                 <div className=" w-[90px] h-[90px] bg-[#f8f8f8] rounded -bottom-[45px] left-1/2 -translate-x-1/2 rotate-45 flex items-center justify-center absolute">
@@ -53,7 +53,7 @@ function CompanyInfo(props: Props) {
                     <div className=" ml-10 flex flex-col lg:flex-row lg:items-center lg:ml-0 tb:ml-[28px] mb:items-start mb:ml-0">
                         <div className=" mb-3 flex lg:mb-0">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/share-icon.svg" />
-                            <p className=" text-content-title font-medium text-base ml-2">Follow Company:</p>
+                            <p className=" text-content-title font-medium text-base ml-2">Theo dõi công ty:</p>
                         </div>
                         <div className=" flex ">
                             <FontAwesomeIcon className=" mr-3" icon={faFacebookF} />

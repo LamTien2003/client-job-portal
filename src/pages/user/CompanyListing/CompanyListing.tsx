@@ -10,26 +10,33 @@ import Skeleton from '@/components/Loading/Skeleton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+type filterObject = {
+    name: string,
+    city: string,
+}
 function CompanyListing() {
     const [companyList, setCompanyList] = useState<Company[]>([])
     const [totalCompany, setTotalCompany] = useState<number>(0)
     const [city, setCity] = useState<string>('')
+    const [filter, setFilter] = useState<filterObject>({name: '', city: ''})
     const [page, setPage] = useState<number>(1);
     const [listStyle, setListStyle] = useState('column');
 
-    const { data, isLoading, isError } = useGetCompaniesQuery((city !== '' && city === 'allLocation') ? {
+    const { data, isLoading, isError } = useGetCompaniesQuery((filter.city !== '' && filter.city === 'allLocation') ? {
+        q: filter.name,
         page,
         limit: 5
     } : {
+        q: filter.name,
         page,
         limit: 5,
-        p: city
+        p: filter.city
     });
 
-    const handleFilter = (city: string) => {
-        setCity(city)
-        setPage(1)
-    }
+    const handleFilter = (filterObj: filterObject) => {
+        setFilter(filterObj);
+        setPage(1);
+    };
 
     const handleDecreasePage = () => {
         if(page > 1) {

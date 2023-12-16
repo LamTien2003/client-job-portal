@@ -12,7 +12,7 @@ function AboutCompany(props: Props) {
             <div className=" mb-9">
                 <p className=" text-content-text text-base font-medium mb-3">
                     <span className=" font-family-title text-content-title text-lg font-semibold mr-2">Mô tả công việc:</span>
-                    {company.description === '' ? 'Đang cập nhật' : company.description}
+                    <p className=" whitespace-pre-line">{company.description === '' ? 'Đang cập nhật' : company.description}</p>
                 </p>
             </div>
             

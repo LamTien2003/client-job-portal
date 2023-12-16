@@ -8,67 +8,93 @@ import JobColumn from './components/JobColumn/JobColumn';
 import JobGutter from './components/JobGutter/JobGutter';
 import { ListColumn, ListGutter } from '@/components/Icons';
 import Skeleton from '@/components/Loading/Skeleton';
-import { useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 type filterObject = {
+    name: string;
     idCat: string;
     salary: { min: number; max: number };
     city: string;
+    skills: string[]
 };
 const JobListing = () => {
     const [jobList, setJobList] = useState<Job[]>([]);
     const [totalJob, setTotalJob] = useState<number>(0);
     const [filter, setFilter] = useState<filterObject>({
+        name: '',
         idCat: '',
         salary: { min: 1000000, max: 10000000 },
         city: '',
+        skills: [],
     });
     const [listStyle, setListStyle] = useState<'column' | 'gutter'>('column');
     const [page, setPage] = useState<number>(1);
 
     const pageNumber = totalJob && totalJob % 5 === 0 ? totalJob / 5 : Math.floor(totalJob / 5 + 1);
 
-    const [searchParams] = useSearchParams();
-    const q = searchParams.get('q');
-
     const { data, isLoading, isError } = useGetJobsQuery(
-        filter.idCat !== '' && (filter.city === '' || filter.city === 'allLocation')
-            ? {
-                  q: q === null ? '' : q,
-                  page,
-                  limit: 5,
-                  'salary[gte]': filter.salary.min,
-                  'salary[lte]': filter.salary.max,
-                  type: filter.idCat,
-              }
-            : filter.idCat !== '' && filter.city !== '' && filter.city !== 'allLocation'
-            ? {
-                  q: q === null ? '' : q,
-                  page,
-                  limit: 5,
-                  'salary[gte]': filter.salary.min,
-                  'salary[lte]': filter.salary.max,
-                  type: filter.idCat,
-                  p: filter.city,
-              }
-            : filter.idCat === '' && filter.city !== '' && filter.city !== 'allLocation'
-            ? {
-                  q: q === null ? '' : q,
-                  page,
-                  limit: 5,
-                  'salary[gte]': filter.salary.min,
-                  'salary[lte]': filter.salary.max,
-                  p: filter.city,
-              }
-            : {
-                  q: q === null ? '' : q,
-                  page,
-                  limit: 5,
-                  'salary[gte]': filter.salary.min,
-                  'salary[lte]': filter.salary.max,
-              },
+        filter.idCat !== '' && filter.city !== '' && filter.skills.length !== 0 ? {
+            q: filter.name,
+            page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+            type: filter.idCat,
+            p: filter.city,
+            "skillsRequire[in]": filter.skills
+        } : filter.idCat !== '' && filter.city !== '' && filter.skills.length === 0 ? {
+            q: filter.name,
+            page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+            type: filter.idCat,
+            p: filter.city,
+        } : filter.idCat !== '' && filter.city === '' && filter.skills.length !== 0 ? {
+            q: filter.name,
+            page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+            type: filter.idCat,
+            "skillsRequire[in]": filter.skills
+        } : filter.idCat === '' && filter.city !== '' && filter.skills.length !== 0 ? {
+            q: filter.name,
+            page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+            p: filter.city,
+            "skillsRequire[in]": filter.skills
+        } : filter.idCat !== '' && filter.city === '' && filter.skills.length === 0 ? {
+            q: filter.name,
+            page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+            type: filter.idCat,
+        } : filter.idCat === '' && filter.city !== '' && filter.skills.length === 0 ? {
+            q: filter.name,
+            page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+            p: filter.city,
+        } : filter.idCat === '' && filter.city === '' && filter.skills.length !== 0 ? {
+            q: filter.name,
+            page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+            "skillsRequire[in]": filter.skills
+        } : {
+            q: filter.name,
+            page,
+            limit: 5,
+            'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
+        },
     );
 
     const handleFilter = (filterObj: filterObject) => {

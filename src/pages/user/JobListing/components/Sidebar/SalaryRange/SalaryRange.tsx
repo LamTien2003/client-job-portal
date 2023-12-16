@@ -24,9 +24,9 @@ function SalaryRange({salaryChange}: Props) {
 
     return (
         <div className=" bg-white border-[#eee] border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">
-            <h3 className=" text-content-title font-family-title font-semibold text-lg mb-2 lg:text-lg">Tìm theo khoảng lương (vnđ)</h3>
+            <h3 className=" font-family-title text-primary-100 font-semibold text-lg mb-2 lg:text-lg">Lọc theo khoảng lương</h3>
             <p>
-                {rangeMin.toLocaleString('IT')} - {rangeMax.toLocaleString('IT')}
+                {rangeMin.toLocaleString('IT')} - {rangeMax.toLocaleString('IT')} đ
             </p>
             <Slider step={1000000} range min={1000000} max={100000000} onChange={handleChange} />
             <div className=" max-h-64 overflow-scroll"></div>
