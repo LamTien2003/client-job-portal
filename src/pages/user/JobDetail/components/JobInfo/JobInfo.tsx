@@ -52,7 +52,7 @@ function JobInfo(props: Props) {
                                 src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/company-2.svg"
                             />
                             <p className=" text-content-text text-base font-normal ml-5">
-                                <span className=" text-content-title font-medium mr-1.5">Job Type:</span>fulltime
+                                <span className=" text-content-title font-medium mr-1.5">Job Type:</span>full time
                             </p>
                         </div>
                         <div className=" flex items-center relative">

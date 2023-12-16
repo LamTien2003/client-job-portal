@@ -13,6 +13,7 @@ import { useLayoutEffect, useState } from "react";
 import { District } from "@/types/Location";
 import SelectDistrict from "./components/SelectDistrict/SelectDistrict";
 import SelectCity from "./components/SelectCity/SelectCity";
+import TextArea from './components/Textarea/Textarea';
 
 const initialValues = {
     type: 'jobseeker',
@@ -218,9 +219,8 @@ function RegisterJobseeker() {
                                     touched={formik.touched.passwordConfirm}
                                     placeholder="Nhập lại mật khẩu"
                                 />
-                                <Fields
+                                <TextArea
                                     isRequire={false}
-                                    type='text'
                                     label='Giới thiệu'
                                     id='introduce'
                                     name='introduce'

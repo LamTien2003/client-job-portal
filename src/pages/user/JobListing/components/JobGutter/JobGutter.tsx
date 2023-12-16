@@ -19,7 +19,7 @@ function JobGutter(props: Props) {
                         <div key={job._id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full mb:w-full ">
                             <div className=" min-h-[550px] xl:min-h-[535px] lg:min-h-[490px] tb:min-h-[600px] mb:min-h-[550px] border-[#eee] border rounded p-4 relative">
                                 <img
-                                    className=" w-full rounded "
+                                    className=" w-full h-[240px] object-cover rounded tb:w-full"
                                     src={job.postedBy.coverPhoto}
                                 />
                                 <div className=" mt-5 mb-5 flex items-center">
@@ -72,7 +72,7 @@ function JobGutter(props: Props) {
                                 </div>
                                 <div className=" flex items-center justify-between bottom-5 left-5 right-5 absolute">
                                     <div className=" text-content-title text-sm font-medium bg-gray-300 rounded-3xl py-1.5 px-6 lg:text-xs mb:px-4 mb:py-[5px] mb:text-xs ">
-                                        Fulltime
+                                        Full time
                                     </div>
 
                                     <div className=" group cursor-pointer ">

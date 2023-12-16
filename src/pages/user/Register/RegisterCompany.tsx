@@ -13,6 +13,7 @@ import SelectDistrict from './components/SelectDistrict/SelectDistrict';
 import { toast } from 'react-toastify';
 import { useLayoutEffect, useState } from 'react';
 import { District } from '@/types/Location';
+import TextArea from './components/Textarea/Textarea';
 
 const initialValues = {
     type: 'company',
@@ -277,9 +278,8 @@ function RegisterCompany() {
                                     touched={formik.touched.passwordConfirm}
                                     placeholder="Nhập lại mật khẩu"
                                 />
-                                <Fields
+                                <TextArea
                                     isRequire={false}
-                                    type="text"
                                     label="Mô tả công ty"
                                     id="description"
                                     name="description"
