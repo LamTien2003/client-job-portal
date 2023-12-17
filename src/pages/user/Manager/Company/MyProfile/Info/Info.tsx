@@ -23,7 +23,7 @@ const Info = () => {
     return (
         <div className="mb-8">
             {coverPhoto && (
-                <img className="w-full h-[100px] rounded-t-md object-cover" src={coverPhoto} alt="coverPhoto" />
+                <img className="w-full h-[180px] rounded-t-md object-cover" src={coverPhoto} alt="coverPhoto" />
             )}
             <Card handleOpen={handleOpen}>
                 <div className="flex items-center gap-4">

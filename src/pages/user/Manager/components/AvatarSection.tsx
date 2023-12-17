@@ -23,7 +23,11 @@ const AvatarSection = ({ formik }: { formik: any }) => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-2">
-            <img src={previewImage ? previewImage : currentUser?.photo} alt="avt" className="w-24 h-24 rounded-full" />
+            <img
+                src={previewImage ? previewImage : currentUser?.photo}
+                alt="avt"
+                className="w-24 h-24 rounded-full object-fit"
+            />
             <div className="flex gap-6">
                 <div>
                     <label
@@ -33,7 +37,7 @@ const AvatarSection = ({ formik }: { formik: any }) => {
                         <div className="text-xl">
                             <AiOutlineCamera />
                         </div>
-                        Cập nhật
+                        Cập nhật ảnh đại diện
                     </label>
                     <input name="photo" id="photo" className="hidden" type="file" onChange={handleFile} />
                 </div>
