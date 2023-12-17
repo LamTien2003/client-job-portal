@@ -11,27 +11,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 type filterObject = {
-    name: string,
-    city: string,
-}
+    name: string;
+    city: string;
+};
 function CompanyListing() {
-    const [companyList, setCompanyList] = useState<Company[]>([])
-    const [totalCompany, setTotalCompany] = useState<number>(0)
-    const [city, setCity] = useState<string>('')
-    const [filter, setFilter] = useState<filterObject>({name: '', city: ''})
+    const [companyList, setCompanyList] = useState<Company[]>([]);
+    const [totalCompany, setTotalCompany] = useState<number>(0);
+    const [city, setCity] = useState<string>('');
+    const [filter, setFilter] = useState<filterObject>({ name: '', city: '' });
     const [page, setPage] = useState<number>(1);
-    const [listStyle, setListStyle] = useState('column');
+    const [listStyle, setListStyle] = useState('gutter');
 
-    const { data, isLoading, isError } = useGetCompaniesQuery((filter.city !== '' && filter.city === 'allLocation') ? {
-        q: filter.name,
-        page,
-        limit: 5
-    } : {
-        q: filter.name,
-        page,
-        limit: 5,
-        p: filter.city
-    });
+    const { data, isLoading, isError } = useGetCompaniesQuery(
+        filter.city !== '' && filter.city === 'allLocation'
+            ? {
+                  q: filter.name,
+                  page,
+                  limit: 5,
+              }
+            : {
+                  q: filter.name,
+                  page,
+                  limit: 5,
+                  p: filter.city,
+              },
+    );
 
     const handleFilter = (filterObj: filterObject) => {
         setFilter(filterObj);
@@ -39,36 +43,36 @@ function CompanyListing() {
     };
 
     const handleDecreasePage = () => {
-        if(page > 1) {
-            window.scrollTo(0, 0)
-            setPage(prev => prev - 1)
+        if (page > 1) {
+            window.scrollTo(0, 0);
+            setPage((prev) => prev - 1);
         }
-    }
+    };
 
     const handleIncreasePage = () => {
-        if(page < pageNumber) {
-            window.scrollTo(0, 0)
-            setPage(prev => prev + 1)
+        if (page < pageNumber) {
+            window.scrollTo(0, 0);
+            setPage((prev) => prev + 1);
         }
-    }
+    };
 
     useEffect(() => {
-        if(!isLoading && !isError && data?.data?.data) {
-            setCompanyList(data?.data?.data)
+        if (!isLoading && !isError && data?.data?.data) {
+            setCompanyList(data?.data?.data);
         }
-    }, [data?.data?.data, isLoading, isError])
+    }, [data?.data?.data, isLoading, isError]);
 
     useEffect(() => {
-        if(!isLoading && !isError && typeof data?.data?.totalItems === 'number') {
-            setTotalCompany(data?.data?.totalItems)
+        if (!isLoading && !isError && typeof data?.data?.totalItems === 'number') {
+            setTotalCompany(data?.data?.totalItems);
         }
-    }, [data?.data?.data, data?.data?.totalItems, isLoading, isError])
+    }, [data?.data?.data, data?.data?.totalItems, isLoading, isError]);
 
     useLayoutEffect(() => {
-        scrollTo(0,0)
-    }, [])
+        scrollTo(0, 0);
+    }, []);
 
-    const pageNumber = totalCompany && (totalCompany % 5 === 0) ? (totalCompany / 5) : Math.floor(totalCompany / 5 + 1)
+    const pageNumber = totalCompany && totalCompany % 5 === 0 ? totalCompany / 5 : Math.floor(totalCompany / 5 + 1);
 
     return (
         <div className=" font-family-text selection:bg-primary-100 selection:text-white mb-[30px]">
@@ -76,13 +80,16 @@ function CompanyListing() {
 
             <div className=" max-w-7xl ml-auto mr-auto pt-[50px] flex justify-between xl:ml-7 xl:mr-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:flex-col tb:max-w-3xl mb:flex-col mb:max-w-2xl">
                 {/* job sidebar */}
-                
-                    <Sidebar filter={handleFilter} />
+
+                <Sidebar filter={handleFilter} />
 
                 {/* list */}
                 <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 lg:mx-auto tb:w-11/12 mb:w-11/12 mb:mx-auto">
                     <div className=" mb-6 pl-3 pr-3 flex justify-between lg:flex-col">
-                        <p className="text-content-text font-medium pt-2 pb-2">Đang hiển thị <span className=' text-primary-100 font-semibold'>{totalCompany}</span> công ty</p>
+                        <p className="text-content-text font-medium pt-2 pb-2">
+                            Đang hiển thị <span className=" text-primary-100 font-semibold">{totalCompany}</span> công
+                            ty
+                        </p>
                         <div>
                             <button className=" mr-5 ml-7" onClick={() => setListStyle('gutter')}>
                                 <ListGutter color={listStyle} />
@@ -94,32 +101,63 @@ function CompanyListing() {
                     </div>
                     <div>
                         {/* item */}
-                        {isLoading && [...Array(5)].map((item, index) => <div key={index} className=' mb-7'><Skeleton />{item}</div>)}
-                        {!isLoading && !isError && companyList && listStyle === 'column' && <CompanyColumn data={companyList} />}
-                        {!isLoading && !isError && companyList && listStyle === 'gutter' && <CompanyGutter data={companyList} />}
-                        <div className=' flex justify-center'>
-                            {pageNumber !== 1 && companyList.length < 6 && <div 
-                                className={page > 1 ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
-                                onClick={handleDecreasePage}
-                            >
-                                <FontAwesomeIcon icon={faChevronLeft} />
-                            </div>}
-                            {pageNumber !== 1 && companyList.length < 6 && [...Array(pageNumber)].map((item, index) => (
-                                <div 
-                                    key={index} 
-                                    className={index + 1 === page ? ' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default' : ' flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'} 
-                                    onClick={() => {
-                                        window.scrollTo(0, 0)
-                                        setPage(index + 1)
-                                    }}>{item}{index + 1}
+                        {isLoading &&
+                            [...Array(5)].map((item, index) => (
+                                <div key={index} className=" mb-7">
+                                    <Skeleton />
+                                    {item}
                                 </div>
                             ))}
-                            {pageNumber !== 1 && companyList.length < 6 && <div 
-                                className={page < pageNumber ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
-                                onClick={handleIncreasePage}
-                            >
-                                <FontAwesomeIcon icon={faChevronRight} />
-                            </div>}
+                        {!isLoading && !isError && companyList && listStyle === 'column' && (
+                            <CompanyColumn data={companyList} />
+                        )}
+                        {!isLoading && !isError && companyList && listStyle === 'gutter' && (
+                            <CompanyGutter data={companyList} />
+                        )}
+                        <div className=" flex justify-center">
+                            {pageNumber !== 1 && companyList.length < 6 && (
+                                <div
+                                    className={
+                                        page > 1
+                                            ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
+                                            : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'
+                                    }
+                                    onClick={handleDecreasePage}
+                                >
+                                    <FontAwesomeIcon icon={faChevronLeft} />
+                                </div>
+                            )}
+                            {pageNumber !== 1 &&
+                                companyList.length < 6 &&
+                                [...Array(pageNumber)].map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className={
+                                            index + 1 === page
+                                                ? ' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default'
+                                                : ' flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
+                                        }
+                                        onClick={() => {
+                                            window.scrollTo(0, 0);
+                                            setPage(index + 1);
+                                        }}
+                                    >
+                                        {item}
+                                        {index + 1}
+                                    </div>
+                                ))}
+                            {pageNumber !== 1 && companyList.length < 6 && (
+                                <div
+                                    className={
+                                        page < pageNumber
+                                            ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
+                                            : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'
+                                    }
+                                    onClick={handleIncreasePage}
+                                >
+                                    <FontAwesomeIcon icon={faChevronRight} />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
