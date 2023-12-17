@@ -1,6 +1,8 @@
 import { useGetJobQuery, usePostCommentMutation } from "@/services/jobsApiSlice";
 import { RootState } from "@/store/store";
 import Job from "@/types/Job";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -73,7 +75,15 @@ function Comments({data: job}: {data: Job}) {
             })}
             {currentJob && currentJob?.comments.length > limit && <p className=" text-content-title font-semibold cursor-pointer hover:underline" onClick={() => setLimit(prev => prev + 5)}>Xem thêm bình luận</p>}
             <div className=" flex items-start ">
-                <img className=" w-12 h-12 rounded-full mr-3" src={currentUser?.photo} />
+                {
+                    currentUser ? (
+                        <img className=" w-12 h-12 rounded-full mr-3" src={currentUser?.photo} />
+                    ) : (
+                        <div className=" flex items-center justify-center w-12 h-12 text-gray-600 bg-gray-300 rounded-full mr-3">
+                            <FontAwesomeIcon icon={faUser} />
+                        </div>
+                    )
+                }
                 <div className=" flex flex-col w-full">
                     <input 
                         className=" w-full text-content-text py-1 outline-none" 

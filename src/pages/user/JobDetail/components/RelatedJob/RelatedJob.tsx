@@ -15,12 +15,7 @@ function RelatedJob({data}: {data: Job}) {
                 <img className=" w-[50px] h-[50px] rounded-full mr-5" src={data.photosJob[0] ? data.photosJob[0] : data.photosJob[1]} />
                 <div className=" w-full flex flex-col border-b border-[#eee] pb-3">
                     <h3 className=" font-family-title text-content-title text-lg font-semibold mb-1">{data.title}</h3>
-                    <p className=" text-sm">Full Time</p>
-                </div>
-                <div className=" group right-0 top-3 absolute cursor-pointer">
-                    <div className=" w-7 h-7 rounded-full border border-primary-100 flex justify-center items-center duration-300 group-hover:bg-primary-100">
-                        <FontAwesomeIcon className=" text-primary-100 text-sm duration-300 group-hover:text-white" icon={faBookmarkRegular} />
-                    </div>
+                    <p className=" text-sm">Full time</p>
                 </div>
             </div>
             <div className=" bg-white pt-5 pb-5 pr-5 pl-5 flex flex-col">

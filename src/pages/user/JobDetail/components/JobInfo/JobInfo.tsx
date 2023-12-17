@@ -11,7 +11,7 @@ function JobInfo(props: Props) {
             <div className=" border-b border-[#eee] pt-6 pb-6 pr-4 rounded-b-lg pl-4 mb-8 flex justify-between bg-[#f8f8f8] mb:flex-col">
                 <div className=" flex mb:mb-7">
                     <div className=" flex items-center ">
-                        <img className=" w-10 rounded-full mr-2.5 " src={job.photosJob[0]} />
+                        <img className=" w-10 h-10 rounded-full mr-2.5 " src={job.postedBy.photo} />
                         <div className=" flex flex-col">
                             <h3 className=" text-content-title font-family-title text-lg font-semibold cursor-pointer duration-300 hover:text-primary-100 ">
                                 {job.title}

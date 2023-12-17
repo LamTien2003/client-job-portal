@@ -18,7 +18,7 @@ function JobColumn(props: Props) {
                             <div key={job._id} className=' flex items-center border border-[#AEF0F2] rounded p-[20px] mb-6 tb:flex-col tb:items-start mb:flex-col mb:items-start '>
                                 <img
                                     className=" w-[52px] h-[52px] rounded-full mr-4 lg:w-12"
-                                    src={job.photosJob[0] ? job.photosJob[0] : job.photosJob[1]}
+                                    src={job.postedBy.photo}
                                 />
                                 <div className=" flex flex-col w-[240px] tb:mt-2 mb:mt-2">
                                     <Link to={`/job-detail/${job._id}`} className=" font-family-title text-content-title text-lg font-semibold cursor-pointer pb-1 duration-300 hover:text-primary-100 lg:text-base tb:text-2xl mb:text-xl ">

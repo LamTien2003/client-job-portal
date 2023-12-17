@@ -25,7 +25,7 @@ function JobGutter(props: Props) {
                                 <div className=" mt-5 mb-5 flex items-center">
                                     <img
                                         className=" w-10 h-10 rounded-full mr-3"
-                                        src={job.photosJob[0]}
+                                        src={job.postedBy.photo}
                                     />
                                     <div className="flex flex-col">
                                         <Link to={'/job-detail/' + job._id} className=" text-content-title font-semibold text-lg duration-300 hover:text-primary-100 xl:text-base mb:text-cb">
