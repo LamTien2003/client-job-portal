@@ -100,19 +100,20 @@ function Categories() {
     }, [dataCategory?.data?.totalItems, isLoadingCategory, isErrorCategory]);
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 300 },
-        { field: 'categoryName', headerName: 'Tên danh mục', width: 240 },
+        { field: 'id', headerName: 'ID', flex: 2 },
+        { field: 'categoryName', headerName: 'Tên danh mục', flex: 2 },
         {
             field: 'isHotCategory',
             headerName: 'Độ hot danh mục',
-            width: 240,
+            flex: 2,
             renderCell: (params: any) => <>{params.row.isHotCategory === true ? 'Đang hot' : 'Không hot'}</>,
         },
-        { field: 'totalJobs', headerName: 'Tổng công việc', width: 240 },
+        { field: 'totalJobs', headerName: 'Tổng công việc', flex: 1 },
         {
             field: 'actions',
             headerName: 'Hành động',
             type: 'actions',
+            flex: 1,
             renderCell: (params: any) => (
                 <CategoryAction params={params} onChange={handleActiveChange} onDelete={handleDeleteCategory} />
             ),
@@ -149,6 +150,14 @@ function Categories() {
 
                 <Box sx={{ marginBottom: 10, width: '100%', minHeight: 400 }}>
                     <DataGrid
+                        style={{
+                            borderRadius: 10,
+                            padding: 10,
+                            backgroundColor: 'white',
+                            borderColor: '#d9d9d9',
+                            borderWidth: 2,
+                            fontFamily: `'Work Sans', sans-serif`,
+                        }}
                         columns={columns}
                         rows={categoryList}
                         rowCount={categoryCount}

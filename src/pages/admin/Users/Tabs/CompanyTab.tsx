@@ -51,19 +51,27 @@ function CompanyTab({setIsLoading}: {setIsLoading: (arg: boolean) => void}) {
     }, [isLoadingBan])
 
     const columns = [
-        { field: 'photo', headerName: 'Ảnh', width: 90, renderCell: (params: any) => <Avatar src={params.row.photo} /> },
-        { field: 'companyName', headerName: 'Tên công ty', width: 130 },
-        { field: 'location', headerName: 'Trụ sở chính ở', width: 150, renderCell: (params: any) => <>{params.row.location.city}</> },
-        { field: 'email', headerName: 'Email', width: 230 },
-        { field: 'phoneNumber', headerName: 'Số điện thoại', width: 150 },
-        { field: 'establishDate', headerName: 'Ngày thành lập', width: 150, renderCell: (params: any) => new Intl.DateTimeFormat('en-US', ).format(new Date(params.row.establishDate)) },
-        { field: 'createdAt', headerName: 'Ngày tham gia', width: 150, renderCell: (params: any) => new Intl.DateTimeFormat('en-US', ).format(new Date(params.row.createdAt)) },
-        { field: 'actions', headerName: 'Hành động', type: 'actions', width: 100, renderCell: (params: any) => <UserActions params={params} onAction={handleAction} actionType="ban" title='Cấm doanh nghiệp này'/> },
+        { field: 'photo', headerName: 'Ảnh', flex: 1, renderCell: (params: any) => <Avatar src={params.row.photo} /> },
+        { field: 'companyName', headerName: 'Tên công ty', flex: 3 },
+        { field: 'location', headerName: 'Trụ sở chính ở', flex: 3, renderCell: (params: any) => <>{params.row.location.city}</> },
+        { field: 'email', headerName: 'Email', flex: 3 },
+        { field: 'phoneNumber', headerName: 'Số điện thoại', flex: 2 },
+        { field: 'establishDate', headerName: 'Ngày thành lập', flex: 2, renderCell: (params: any) => new Intl.DateTimeFormat('en-US', ).format(new Date(params.row.establishDate)) },
+        { field: 'createdAt', headerName: 'Ngày tham gia', flex: 2, renderCell: (params: any) => new Intl.DateTimeFormat('en-US', ).format(new Date(params.row.createdAt)) },
+        { field: 'actions', headerName: 'Hành động', type: 'actions', flex: 2, renderCell: (params: any) => <UserActions params={params} onAction={handleAction} actionType="ban" title='Cấm doanh nghiệp này'/> },
     ];
 
     return (
         <Box sx={{marginBottom: 10, width: '100%', minHeight: 400}}>
             <DataGrid
+                style={{
+                    borderRadius: 10,
+                    padding: 10,
+                    backgroundColor: 'white',
+                    borderColor: '#d9d9d9',
+                    borderWidth: 2,
+                    fontFamily: `'Work Sans', sans-serif`,
+                }}
                 columns={columns}
                 rows={companyList}
                 rowCount={companyCount}

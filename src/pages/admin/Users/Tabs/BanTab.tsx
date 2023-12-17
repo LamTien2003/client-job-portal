@@ -50,15 +50,15 @@ function BanTab({setIsLoading}: {setIsLoading: (arg: boolean) => void}) {
     }, [isLoadingUnban])
 
     const columns = [
-        { field: 'photo', headerName: 'Ảnh', width: 90, renderCell: (params: any) => <Avatar src={params.row.photo} /> },
-        { field: 'firstName', headerName: 'Họ', width: 100 },
-        { field: 'lastName', headerName: 'Tên', width: 100 },
-        { field: 'email', headerName: 'Email', width: 200 },
-        { field: 'phoneNumber', headerName: 'Số điện thoại', width:  130 },
-        { field: 'location', headerName: 'Vị trí', width: 170, renderCell: (params: any) => <>{params.row.location.city}</> },
-        { field: 'createdAt', headerName: 'Ngày tham gia', width: 140, renderCell: (params: any) => new Intl.DateTimeFormat('en-US', ).format(new Date(params.row.createdAt)) },
-        { field: 'role', headerName: 'Loại người dùng', width: 140, renderCell: (params: any) => <>{params.row.companyName ? 'Doanh nghiệp' : 'Người tìm việc'}</> },
-        { field: 'actions', headerName: 'Hành động', type: 'actions', width: 90, renderCell: (params: any) => <UserActions params={params} actionType="unban" onAction={handleAction} title='Bỏ cấm người dùng này'/> },
+        { field: 'photo', headerName: 'Ảnh', flex: 1, renderCell: (params: any) => <Avatar src={params.row.photo} /> },
+        { field: 'firstName', headerName: 'Họ', flex: 1 },
+        { field: 'lastName', headerName: 'Tên', flex: 2 },
+        { field: 'email', headerName: 'Email', flex: 3 },
+        { field: 'phoneNumber', headerName: 'Số điện thoại', flex: 2 },
+        { field: 'location', headerName: 'Vị trí', flex: 3, renderCell: (params: any) => <>{params.row.location.city}</> },
+        { field: 'createdAt', headerName: 'Ngày tham gia', flex: 2, renderCell: (params: any) => new Intl.DateTimeFormat('en-US', ).format(new Date(params.row.createdAt)) },
+        { field: 'role', headerName: 'Loại người dùng', flex: 1, renderCell: (params: any) => <>{params.row.companyName ? 'Doanh nghiệp' : 'Người tìm việc'}</> },
+        { field: 'actions', headerName: 'Hành động', type: 'actions', flex: 2, renderCell: (params: any) => <UserActions params={params} actionType="unban" onAction={handleAction} title='Bỏ cấm người dùng này'/> },
     ];
 
     return (
@@ -66,6 +66,14 @@ function BanTab({setIsLoading}: {setIsLoading: (arg: boolean) => void}) {
             {isLoadingUnban && <Loader />}
             <Box sx={{marginBottom: 10, width: '100%', minHeight: 400}}>
                 <DataGrid
+                    style={{
+                        borderRadius: 10,
+                        padding: 10,
+                        backgroundColor: 'white',
+                        borderColor: '#d9d9d9',
+                        borderWidth: 2,
+                        fontFamily: `'Work Sans', sans-serif`,
+                    }}
                     columns={columns}
                     rows={bannedUserList}
                     rowCount={bannedUserCount}

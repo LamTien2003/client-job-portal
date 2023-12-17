@@ -50,19 +50,27 @@ function JobseekerTab({setIsLoading}: {setIsLoading: (arg: boolean) => void}) {
     }, [isLoadingBan])
 
     const columns = [
-        { field: 'photo', headerName: 'Ảnh', width: 90, renderCell: (params: any) => <Avatar src={params.row.photo} /> },
-        { field: 'firstName', headerName: 'Họ', width: 120 },
-        { field: 'lastName', headerName: 'Tên', width: 120 },
-        { field: 'gender', headerName: 'Giới tính', width: 130, renderCell: (params: any) => params.row.gender === 'male' ? 'Nam' : 'Nữ'},
-        { field: 'email', headerName: 'Email', width: 230 },
-        { field: 'phoneNumber', headerName: 'Số điện thoại', width: 160 },
-        { field: 'createdAt', headerName: 'Tham gia vào ngày', width: 180, renderCell: (params: any) => new Intl.DateTimeFormat('en-US', ).format(new Date(params.row.createdAt)) },
-        { field: 'actions', headerName: 'Hành động', type: 'actions', width: 100, renderCell: (params: any) => <UserActions params={params} onAction={handleAction} actionType="ban" title='Cấm người dùng này'/> },
+        { field: 'photo', headerName: 'Ảnh', flex: 1, renderCell: (params: any) => <Avatar src={params.row.photo} /> },
+        { field: 'firstName', headerName: 'Họ', flex: 1 },
+        { field: 'lastName', headerName: 'Tên', flex: 2 },
+        { field: 'gender', headerName: 'Giới tính', flex: 2, renderCell: (params: any) => params.row.gender === 'male' ? 'Nam' : 'Nữ'},
+        { field: 'email', headerName: 'Email', flex: 3 },
+        { field: 'phoneNumber', headerName: 'Số điện thoại', flex: 2 },
+        { field: 'createdAt', headerName: 'Tham gia vào ngày', flex: 2, renderCell: (params: any) => new Intl.DateTimeFormat('en-US', ).format(new Date(params.row.createdAt)) },
+        { field: 'actions', headerName: 'Hành động', type: 'actions', flex: 2, renderCell: (params: any) => <UserActions params={params} onAction={handleAction} actionType="ban" title='Cấm người dùng này'/> },
     ];
 
     return (
         <Box sx={{marginBottom: 10, width: '100%', minHeight: 400}}>
             <DataGrid
+                style={{
+                    borderRadius: 10,
+                    padding: 10,
+                    backgroundColor: 'white',
+                    borderColor: '#d9d9d9',
+                    borderWidth: 2,
+                    fontFamily: `'Work Sans', sans-serif`,
+                }}
                 columns={columns}
                 rows={jobseekerList}
                 rowCount={jobseekerCount}
