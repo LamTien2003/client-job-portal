@@ -50,7 +50,8 @@ const validation = Yup.object().shape({
     type: Yup.string().required('type không được bỏ trống!'),
     salary: Yup.number()
         .typeError('Lương phải là số')
-        .min(0, 'Lương phải lớn hơn hoặc bằng 0')
+        .min(1, 'Lương phải lớn hơn hoặc bằng 1')
+        .max(100000000, 'Lương không được quá 100 triệu!')
         .required('Lương không được bỏ trống!'),
     deadline: Yup.date()
         .min(new Date(), 'Không được chọn ngày hôm nay và ở quá khứ!')
