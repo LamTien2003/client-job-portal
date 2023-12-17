@@ -4,7 +4,6 @@ import { useFormik } from 'formik';
 
 import { LuFactory } from 'react-icons/lu';
 import { BiLink } from 'react-icons/bi';
-import { TbFileDescription } from 'react-icons/tb';
 
 import CustomField from './Field';
 import BtnBot from '../../../components/BtnBot';
@@ -19,6 +18,7 @@ import dayjs from 'dayjs';
 import Loader from '@/components/Loader/Loader';
 import { toast } from 'react-toastify';
 import CoverPhoto from './CoverPhoto';
+import Textarea from './Textarea';
 interface FormInfo {
     handleOpen: () => void;
     open: boolean;
@@ -133,9 +133,9 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
             {isLoading && <Loader />}
             <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Thông tin công ty</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
-                <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">
+                <DialogBody divider className="flex flex-col items-center justify-center gap-2 px-8">
                     <CoverPhoto formik={formik} />
-                    <div className="grid grid-cols-2 w-full gap-6 mb:grid-cols-1 tb:grid-cols-1">
+                    <div className="grid grid-cols-2 w-full gap-6 mb:grid-cols-1 tb:grid-cols-1 font-medium text-content-title">
                         <CustomField
                             title="Tên công ty *"
                             fieldName="companyName"
@@ -148,39 +148,17 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                         />
 
                         <CustomField
-                            title="Mô tả *"
-                            fieldName="description"
-                            error={formik.errors.description}
-                            touched={formik.touched.description}
-                            icon={<TbFileDescription />}
-                            placeholder="Nhập mô tả"
-                            value={formik.values.description}
-                            onChange={formik.handleChange}
-                        />
-                        <CustomField
-                            title="Quy mô (Từ) *"
-                            fieldName="companySizeFrom"
-                            error={formik.errors.companySizeFrom}
-                            touched={formik.touched.companySizeFrom}
-                            icon={<LuFactory />}
-                            placeholder="Nhập tên công ty của bạn"
-                            value={formik.values.companySizeFrom}
-                            onChange={formik.handleChange}
-                            type="number"
-                        />
-                        <CustomField
-                            title="Quy mô (Đến) *"
-                            fieldName="companySizeTo"
-                            type="number"
-                            error={formik.errors.companySizeTo}
-                            touched={formik.touched.companySizeTo}
-                            icon={<LuFactory />}
-                            placeholder="Nhập tên công ty của bạn"
-                            value={formik.values.companySizeTo}
+                            title="Website"
+                            fieldName="website"
+                            error={formik.errors.website}
+                            touched={formik.touched.website}
+                            icon={<BiLink />}
+                            placeholder="Nhập link website"
+                            value={formik.values.website}
                             onChange={formik.handleChange}
                         />
 
-                        <div className="flex flex-col gap-1 w-full">
+                        <div className="flex flex-col gap-1 w-full ">
                             <h5 className="font-bold text-primary-100">Ngày thành lập *</h5>
                             <DatePicker
                                 views={['year', 'month', 'day']}
@@ -197,18 +175,41 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
                                 </div>
                             ) : null}
                         </div>
-
-                        <CustomField
-                            title="Website"
-                            fieldName="website"
-                            error={formik.errors.website}
-                            touched={formik.touched.website}
-                            icon={<BiLink />}
-                            placeholder="Nhập link website"
-                            value={formik.values.website}
-                            onChange={formik.handleChange}
-                        />
+                        <div className="flex gap-6 mb:flex-col tb:flex-col">
+                            <CustomField
+                                title="Quy mô (Từ) *"
+                                fieldName="companySizeFrom"
+                                error={formik.errors.companySizeFrom}
+                                touched={formik.touched.companySizeFrom}
+                                icon={<LuFactory />}
+                                placeholder="Nhập tên công ty của bạn"
+                                value={formik.values.companySizeFrom}
+                                onChange={formik.handleChange}
+                                type="number"
+                            />
+                            <CustomField
+                                title="Quy mô (Đến) *"
+                                fieldName="companySizeTo"
+                                type="number"
+                                error={formik.errors.companySizeTo}
+                                touched={formik.touched.companySizeTo}
+                                icon={<LuFactory />}
+                                placeholder="Nhập tên công ty của bạn"
+                                value={formik.values.companySizeTo}
+                                onChange={formik.handleChange}
+                            />
+                        </div>
                     </div>
+                    <Textarea
+                        title="Mô tả *"
+                        fieldName="description"
+                        placeholder="Nhập mô tả công việc"
+                        error={formik.errors.description}
+                        touched={formik.touched.description}
+                        value={formik.values.description}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
                 </DialogBody>
                 <DialogFooter className="px-8">
                     <BtnBot isLoading={isLoading} toggleOpen={handleOpen} />

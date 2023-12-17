@@ -32,7 +32,7 @@ const CoverPhoto = ({ formik }: { formik: any }) => {
     return (
         <div className="flex flex-col items-center justify-center gap-2">
             {(coverPhoto || previewImage) && (
-                <img src={previewImage || coverPhoto} alt="avt" className="w-80  object-cover rounded-md" />
+                <img src={previewImage || coverPhoto} alt="avt" className="w-80 h-32 object-cover rounded-md" />
             )}
 
             <div className="flex gap-6">
@@ -44,7 +44,7 @@ const CoverPhoto = ({ formik }: { formik: any }) => {
                         <div className="text-xl">
                             <AiOutlineCamera />
                         </div>
-                        Cập nhật
+                        Cập nhật ảnh bìa
                     </label>
                     <input name="photo" id="photo" className="hidden" type="file" onChange={handleFile} />
                 </div>

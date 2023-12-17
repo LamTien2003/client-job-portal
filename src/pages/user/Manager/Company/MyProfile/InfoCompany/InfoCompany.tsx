@@ -27,28 +27,23 @@ const InfoCompany = () => {
             <Card handleOpen={handleOpen}>
                 <div className="flex flex-col gap-4 text-content-title font-family-title">
                     <div className="flex gap-2 items-center">
-                        <span className="font-title text-content-title">Tên công ty:</span>
-                        <h5 className="font-title text-primary-100 text-xl">{company?.companyName}</h5>
+                        <span className="font-title text-primary-100">Tên công ty:</span>
+                        <h5 className="font-medium text-content-title text-xl">{company?.companyName}</h5>
                     </div>
 
                     <div className="flex gap-2 items-center">
-                        <span className="font-title text-content-title">Mô tả:</span>
-                        <h5 className="font-title text-primary-100 text-xl">{company?.description}</h5>
-                    </div>
-
-                    <div className="flex gap-2 items-center">
-                        <span className="font-title text-content-title">Ngày thành lập:</span>
-                        <h5 className="font-title text-primary-100 text-xl">{date}</h5>
+                        <span className="font-title text-primary-100">Ngày thành lập:</span>
+                        <h5 className="font-medium text-content-title text-xl">{date}</h5>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <span className="font-title text-content-title">Quy mô:</span>
-                        <h5 className="font-title text-primary-100 text-xl">
+                        <span className="font-title text-primary-100">Quy mô:</span>
+                        <h5 className="font-medium text-content-title text-xl">
                             {company?.companySize.from} - {company?.companySize.to} thành viên
                         </h5>
                     </div>
 
                     <div className="flex gap-2 items-center">
-                        <span className="font-title text-content-title">Website:</span>
+                        <span className="font-title text-primary-100">Website:</span>
                         <a
                             className="text-primary-100 font-medium underline text-lg"
                             href={company?.website}
@@ -56,6 +51,12 @@ const InfoCompany = () => {
                         >
                             {company?.website ? 'Xem chi tiết' : 'Công ty chưa có website'}
                         </a>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <span className="font-title text-primary-100">Mô tả:</span>
+                        <div className="whitespace-pre-line font-medium text-content-title text-lg">
+                            {company?.description}
+                        </div>
                     </div>
                 </div>
             </Card>
