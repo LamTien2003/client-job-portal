@@ -14,6 +14,7 @@ function Search({searchChange}: {searchChange: (name: string) => void}) {
     const handleSearch = () => {
         searchChange(name)
         setResult(name)
+        setName('')
     }
 
     const handleUnSearch = () => {
@@ -35,7 +36,8 @@ function Search({searchChange}: {searchChange: (name: string) => void}) {
             <div className=" max-w-full flex">
                 <input
                     type="text"
-                    className=" w-4/5 text-content-title border border-primary-100 rounded-l-md py-1 px-3 outline-none"
+                    placeholder="Bạn tìm gì..."
+                    className=" w-4/5 text-content-title text-sm border border-primary-100 rounded-l-md py-1 px-3 outline-none"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />

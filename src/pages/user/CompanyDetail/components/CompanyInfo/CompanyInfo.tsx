@@ -27,13 +27,13 @@ function CompanyInfo(props: Props) {
                 <div className=" flex flex-col lg:mb-2 tb:mb-2 mb:mb-2">
                     <h1 className=" text-content-title text-2xl font-family-title font-semibold mb-2.5">{company.companyName}</h1>
                     <div className=" flex mb:flex-col">
-                        <div className=" flex">
+                        <div className=" flex mb:mb-1">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/map-2.svg" />
-                            <p className=" text-sm font-medium ml-2">{company.location.city}</p>
+                            <p className=" font-medium ml-2">{company.location.city}</p>
                         </div>
                         <div className=" flex ml-7 mb:ml-0 ">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/category-2.svg" />
-                            <p className=" text-sm font-medium ml-2">
+                            <p className=" font-medium ml-2">
                                 <span className=" text-content-title mr-1.5">Quy mô:</span>
                                 {`${company.companySize.from} - ${company.companySize.to} thành viên`}
                             </p>
@@ -46,11 +46,11 @@ function CompanyInfo(props: Props) {
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/web-5.svg" />
                             <p className=" text-content-title font-medium text-base ml-2">Website:</p>
                         </div>
-                        <a href={company.website} className=" text-[#0279cf] text-sm font-medium">
+                        <a href={company.website} className=" text-[#0279cf] text-sm font-medium underline">
                             {company.website ? company.website : 'Đang cập nhật'}
                         </a>
                     </div>
-                    <div className=" ml-10 flex flex-col lg:flex-row lg:items-center lg:ml-0 tb:ml-[28px] mb:items-start mb:ml-0">
+                    <div className=" ml-10 flex flex-col lg:flex-row lg:items-center lg:ml-0 tb:ml-0 tb:mt-2 mb:items-start mb:ml-0">
                         <div className=" mb-3 flex lg:mb-0">
                             <img src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/share-icon.svg" />
                             <p className=" text-content-title font-medium text-base ml-2">Theo dõi công ty:</p>

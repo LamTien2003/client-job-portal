@@ -24,7 +24,7 @@ function SalaryRange({salaryChange}: Props) {
 
     return (
         <div className=" bg-white border-[#eee] border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">
-            <h3 className=" font-family-title text-primary-100 font-semibold text-lg mb-2 lg:text-lg">Lọc theo khoảng lương</h3>
+            <h3 className=" font-family-title text-primary-100 font-semibold text-lg mb-2 lg:text-lg">Mức lương</h3>
             <p>
                 {rangeMin.toLocaleString('IT')} - {rangeMax.toLocaleString('IT')} đ
             </p>

@@ -10,19 +10,22 @@ function Search({searchChange}: {searchChange: (name: string) => void}) {
     const handleSearch = () => {
         searchChange(name)
         setResult(name)
+        setName('')
     }
 
     const handleUnSearch = () => {
         searchChange('')
         setResult('')
     }
+
     return (
         <div className="flex flex-col bg-white border-[#eee] border rounded-md pt-5 pb-5 pl-6 pr-3 mb-5">
             <h3 className=" font-family-title text-primary-100 font-semibold text-lg mb-2 lg:text-lg">Tìm kiếm tên</h3>
             <div className=" max-w-full flex">
                 <input
                     type="text"
-                    className=" w-4/5 text-content-title border border-primary-100 rounded-l-md py-1 px-3 outline-none"
+                    placeholder="Bạn tìm gì..."
+                    className=" w-4/5 text-content-title text-sm border border-primary-100 rounded-l-md py-1 px-3 outline-none"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />

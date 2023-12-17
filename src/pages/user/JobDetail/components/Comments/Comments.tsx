@@ -54,7 +54,7 @@ function Comments({data: job}: {data: Job}) {
 
     return (
         <div className=' flex flex-col w-10/12 mx-auto mb-12 gap-[30px]'>
-            <h2 className=' font-family-title text-2xl font-semibold'>{currentJob?.comments.length} bình luận</h2>
+            <h2 className=' font-family-title text-2xl font-semibold lg:mt-6 tb:mt-6 mb:mt-6'>{currentJob?.comments.length} bình luận</h2>
             
             {currentJob?.comments?.slice(0, limit).map((cmt, index) => {
                 return (

@@ -56,35 +56,35 @@ function CompanyColumn(props: Props) {
                                         Đang tuyển: <span className=" text-primary-100 font-semibold">{company.jobList ? (company.jobList.length + ' công việc') : 'Đang cập nhật'}</span>
                                     </p>
                                 </div>
-                                <div className=' flex flex-col items-center justify-center py-5 lg:flex-row lg:justify-between lg:w-full lg:px-5 lg:py-0 lg:pb-4 tb:items-start tb:px-5 tb:py-0 tb:pb-5 mb:items-start mb:px-5 mb:py-0 mb:pb-5 '>
-                                    <div className=' flex gap-[70px] mb-8 xl:gap-[35px] lg:gap-[15px] lg:mb-0 tb:flex-row tb:gap-[35px] tb:mb-[20px] mb:flex-col mb:mb-0 mb:gap-[6px] '>
+                                <div className=' w-full flex flex-col py-5 lg:flex-row lg:justify-between lg:w-full lg:px-5 lg:py-0 lg:pb-4 tb:items-start tb:px-5 tb:py-0 tb:pb-5 mb:items-start mb:px-5 mb:py-0 mb:pb-5 '>
+                                    <div className=' flex gap-[40px] mb-8 xl:gap-[10px] lg:gap-[10px] lg:mb-0 tb:flex-row tb:gap-[35px] tb:mb-[20px] mb:flex-col mb:mb-0 mb:gap-[6px] '>
                                         <div className=' flex flex-col gap-1.5'>
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
-                                                <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Quy mô:</p>
-                                                <span className=' text-[15px] text-content-title font-medium lg:text-sm tb:text-sm mb:text-xs'>{company.companySize.to} người</span>
+                                                <p className=' text-[15px] text-content-text mx-1.5 xl:text-sm tb:text-sm mb:text-xs'>Quy mô:</p>
+                                                <span className=' text-[15px] text-content-title font-medium lg:text-sm tb:text-sm mb:text-xs'>{company.companySize.from} - {company.companySize.to} người</span>
                                             </div>
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
-                                                <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Thành lập:</p>
+                                                <p className=' text-[15px] text-content-text mx-1.5 xl:text-sm tb:text-sm mb:text-xs'>Thành lập:</p>
                                                 <span className=' text-[15px] text-content-title font-medium lg:text-sm tb:text-sm mb:text-xs'>{myEstablishDate}</span>
                                             </div>
                                         </div>
-                                        <div className=' flex flex-col gap-1.5 pl-[30px] tb:pl-0 mb:pl-0 '>
+                                        <div className=' flex flex-col gap-1.5 pl-[10px] tb:pl-0 mb:pl-0 '>
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
-                                                <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Liên lạc:</p>
+                                                <p className=' text-[15px] text-content-text mx-1.5 xl:text-sm tb:text-sm mb:text-xs'>Liên lạc:</p>
                                                 <span className=' text-[15px] text-content-title font-medium underline lg:text-sm tb:text-sm mb:text-xs'>{company.phoneNumber}</span>
                                             </div>
                                             <div className=' flex items-center'>
                                                 <div className=' w-[10px] h-[10px] bg-primary-100 rounded-full lg:w-[7px] lg:h-[7px]'></div>
-                                                <p className=' text-[15px] text-content-text mx-1.5 lg:text-sm tb:text-sm mb:text-xs'>Website:</p>
-                                                <a href={company.website} className=' text-[15px] text-content-title font-medium duration-300 cursor-pointer hover:text-primary-100 lg:text-sm tb:text-sm mb:text-xs'>{company.website || 'Đang cập nhật'}</a>
+                                                <p className=' text-[15px] text-content-text mx-1.5 xl:text-sm tb:text-sm mb:text-xs'>Website:</p>
+                                                <a href={company.website} className=' text-[15px] text-content-title font-medium underline duration-300 cursor-pointer hover:text-primary-100 lg:text-sm tb:text-sm mb:text-xs'>{company.website || 'Đang cập nhật'}</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className=" group cursor-pointer ">
-                                        <div className=" border border-primary-100 pr-5 pl-5 pt-1 pb-1 rounded-md group duration-300 hover:bg-primary-100 right-0 mb:static mb:mt-4 ">
+                                    <div className=" flex items-center justify-center pr-[150px] lg:pr-0 lg:justify-normal tb:items-start tb:pr-0 tb:justify-normal mb:items-start mb:pr-0 mb:justify-normal ">
+                                        <div className=" w-[112px] flex border border-primary-100 pr-5 pl-5 pt-1 pb-1 rounded-md group duration-300 cursor-pointer hover:bg-primary-100 right-0 mb:static mb:mt-4 ">
                                             <Link
                                                 to={'/company-detail/' + company.id}
                                                 className=" text-primary-100 flex items-center duration-300 group-hover:text-white group-hover:cursor-pointer "
