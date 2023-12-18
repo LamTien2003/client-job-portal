@@ -37,63 +37,64 @@ const JobListing = () => {
         filter.idCat !== '' && filter.city !== '' && filter.skills.length !== 0 ? {
             q: filter.name,
             page,
-            limit: 5,
+            limit: 6,
             'salary[gte]': filter.salary.min,
             'salary[lte]': filter.salary.max,
+            sort: '-createdAt',
             type: filter.idCat,
             p: filter.city,
             "skillsRequire[in]": filter.skills
         } : filter.idCat !== '' && filter.city !== '' && filter.skills.length === 0 ? {
             q: filter.name,
             page,
-            limit: 5,
+            limit: 6,
             'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
+            sort: '-createdAt',
             type: filter.idCat,
             p: filter.city,
         } : filter.idCat !== '' && filter.city === '' && filter.skills.length !== 0 ? {
             q: filter.name,
             page,
-            limit: 5,
+            limit: 6,
             'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
+            sort: '-createdAt',
             type: filter.idCat,
             "skillsRequire[in]": filter.skills
         } : filter.idCat === '' && filter.city !== '' && filter.skills.length !== 0 ? {
             q: filter.name,
             page,
-            limit: 5,
+            limit: 6,
             'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
+            sort: '-createdAt',
             p: filter.city,
             "skillsRequire[in]": filter.skills
         } : filter.idCat !== '' && filter.city === '' && filter.skills.length === 0 ? {
             q: filter.name,
             page,
-            limit: 5,
+            limit: 6,
             'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
+            sort: '-createdAt',
             type: filter.idCat,
         } : filter.idCat === '' && filter.city !== '' && filter.skills.length === 0 ? {
             q: filter.name,
             page,
-            limit: 5,
+            limit: 6,
             'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
+            sort: '-createdAt',
             p: filter.city,
         } : filter.idCat === '' && filter.city === '' && filter.skills.length !== 0 ? {
             q: filter.name,
             page,
-            limit: 5,
+            limit: 6,
             'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
+            sort: '-createdAt',
             "skillsRequire[in]": filter.skills
         } : {
             q: filter.name,
             page,
-            limit: 5,
+            limit: 6,
             'salary[gte]': filter.salary.min,
-            'salary[lte]': filter.salary.max,
+            sort: '-createdAt',
         },
     );
 
@@ -163,7 +164,7 @@ const JobListing = () => {
                         {!isLoading && !isError && jobList && listStyle === 'column' && <JobColumn data={jobList} />}
                         {!isLoading && !isError && jobList && listStyle === 'gutter' && <JobGutter data={jobList} />}
                         <div className=" flex justify-center">
-                            {pageNumber !== 1 && jobList.length < 6 && (
+                            {pageNumber !== 1 && jobList.length < 7 && (
                                 <div
                                     className={
                                         page > 1
@@ -176,7 +177,7 @@ const JobListing = () => {
                                 </div>
                             )}
                             {pageNumber !== 1 &&
-                                jobList.length < 6 &&
+                                jobList.length < 7 &&
                                 [...Array(pageNumber)].map((item, index) => (
                                     <div
                                         key={index}
@@ -194,7 +195,7 @@ const JobListing = () => {
                                         {index + 1}
                                     </div>
                                 ))}
-                            {pageNumber !== 1 && jobList.length < 6 && (
+                            {pageNumber !== 1 && jobList.length < 7 && (
                                 <div
                                     className={
                                         page < pageNumber

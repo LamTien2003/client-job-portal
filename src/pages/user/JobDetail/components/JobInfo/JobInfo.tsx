@@ -1,4 +1,5 @@
 import Job from '@/types/Job';
+import { Link } from 'react-router-dom';
 type Props = {
     data: Job;
 };
@@ -16,9 +17,9 @@ function JobInfo(props: Props) {
                             <h3 className=" text-content-title font-family-title text-lg font-semibold cursor-pointer duration-300 hover:text-primary-100 ">
                                 {job.title}
                             </h3>
-                            <p className=" text-content-text text-sm font-medium duration-300 lg:text-sm">
+                            <Link to={'/company-detail/' + job.postedBy.id} className=" text-content-text text-sm font-medium duration-300 hover:text-primary-100 lg:text-sm">
                                 {job.postedBy.companyName}
-                            </p>
+                            </Link>
                         </div>
                     </div>
                 </div>

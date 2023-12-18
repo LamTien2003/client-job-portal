@@ -48,7 +48,7 @@ function RegisterJobseeker() {
             city: Yup.string().required('Tỉnh, thành không được để trống'),
             district: Yup.string().required('Quận, huyện không được để trống'),
             phoneNumber: Yup.string().required('Số điện thoại không được để trống').matches(PHONEREGEX, 'Số điện thoại phải đúng định dạng'),
-            introduce: Yup.string().max(250, 'Giới thiệu chỉ tối đa 250 kí tự'),
+            introduce: Yup.string().max(1500, 'Giới thiệu chỉ tối đa 1500 kí tự'),
             password: Yup.string().required('Mật khẩu không được để trống').min(8, 'Mật khẩu phải có ít nhất 8 ký tự'),
             passwordConfirm: Yup.string().required('Nhập lại mật khẩu không được để trống').oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
         }),

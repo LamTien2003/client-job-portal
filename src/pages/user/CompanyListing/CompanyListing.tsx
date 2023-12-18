@@ -17,19 +17,20 @@ type filterObject = {
 function CompanyListing() {
     const [companyList, setCompanyList] = useState<Company[]>([])
     const [totalCompany, setTotalCompany] = useState<number>(0)
-    const [city, setCity] = useState<string>('')
     const [filter, setFilter] = useState<filterObject>({name: '', city: ''})
     const [page, setPage] = useState<number>(1);
     const [listStyle, setListStyle] = useState('column');
 
+    const pageNumber = totalCompany && totalCompany % 5 === 0 ? totalCompany / 5 : Math.floor(totalCompany / 5 + 1);
+
     const { data, isLoading, isError } = useGetCompaniesQuery((filter.city !== '' && filter.city === 'allLocation') ? {
         q: filter.name,
         page,
-        limit: 5
+        limit: 6
     } : {
         q: filter.name,
         page,
-        limit: 5,
+        limit: 6,
         p: filter.city
     });
 
@@ -68,8 +69,7 @@ function CompanyListing() {
         scrollTo(0,0)
     }, [])
 
-    const pageNumber = totalCompany && (totalCompany % 5 === 0) ? (totalCompany / 5) : Math.floor(totalCompany / 5 + 1)
-
+    console.log(pageNumber)
     return (
         <div className=" font-family-text selection:bg-primary-100 selection:text-white mb-[30px]">
             <Banner page="Tìm công ty" />
@@ -98,13 +98,13 @@ function CompanyListing() {
                         {!isLoading && !isError && companyList && listStyle === 'column' && <CompanyColumn data={companyList} />}
                         {!isLoading && !isError && companyList && listStyle === 'gutter' && <CompanyGutter data={companyList} />}
                         <div className=' flex justify-center'>
-                            {pageNumber !== 1 && companyList.length < 6 && <div 
+                            {pageNumber !== 1 && companyList.length < 7 && <div 
                                 className={page > 1 ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
                                 onClick={handleDecreasePage}
                             >
                                 <FontAwesomeIcon icon={faChevronLeft} />
                             </div>}
-                            {pageNumber !== 1 && companyList.length < 6 && [...Array(pageNumber)].map((item, index) => (
+                            {pageNumber !== 1 && companyList.length < 7 && [...Array(pageNumber)].map((item, index) => (
                                 <div 
                                     key={index} 
                                     className={index + 1 === page ? ' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default' : ' flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'} 
@@ -114,7 +114,7 @@ function CompanyListing() {
                                     }}>{item}{index + 1}
                                 </div>
                             ))}
-                            {pageNumber !== 1 && companyList.length < 6 && <div 
+                            {pageNumber !== 1 && companyList.length < 7 && <div 
                                 className={page < pageNumber ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer' : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'} 
                                 onClick={handleIncreasePage}
                             >

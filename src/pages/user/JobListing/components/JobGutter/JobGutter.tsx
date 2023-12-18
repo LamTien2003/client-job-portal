@@ -17,7 +17,7 @@ function JobGutter(props: Props) {
                     const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                     return (
                         <div key={job._id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full mb:w-full ">
-                            <div className=" min-h-[550px] xl:min-h-[535px] lg:min-h-[490px] tb:min-h-[600px] mb:min-h-[550px] border-[#eee] border rounded p-4 relative">
+                            <div className="border-[#eee] border rounded p-4 relative">
                                 <img
                                     className=" w-full h-[240px] object-cover rounded tb:w-full"
                                     src={job.postedBy.coverPhoto}
@@ -53,9 +53,9 @@ function JobGutter(props: Props) {
                                     </div>
                                     <div className=" flex items-center mb-2 relative">
                                         <div className=' w-2 h-2 rounded-full bg-primary-200 left-0 top-[9px] absolute mb:top-[4.5px]'></div>
-                                        <p className=" text-content-text font-medium text-base ml-[14px] lg:text-sm mb:text-xs ">
+                                        <p className=" text-content-text font-medium text-base ml-[14px] overflow-hidden text-ellipsis whitespace-nowrap block lg:text-sm mb:text-xs ">
                                             Kĩ năng yêu cầu: 
-                                            <span className=" text-content-title font-medium ml-1">
+                                            <span className=" text-content-title font-medium ml-1 ">
                                                 {job.skillsRequire.join(', ')}
                                             </span>
                                         </p>
@@ -70,7 +70,7 @@ function JobGutter(props: Props) {
                                         </p>
                                     </div>
                                 </div>
-                                <div className=" flex items-center justify-between bottom-5 left-5 right-5 absolute">
+                                <div className=" flex items-center justify-between mt-5">
                                     <div className=" text-content-title text-sm font-medium bg-gray-300 rounded-3xl py-1.5 px-6 lg:text-xs mb:px-4 mb:py-[5px] mb:text-xs ">
                                         Full time
                                     </div>

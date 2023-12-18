@@ -7,6 +7,7 @@ interface Props {
 
 function CompanyColumn(props: Props) {
     const { data: companyList } = props;
+    console.log('column')
     return (
         <>
             {companyList.length === 0 && 'Hiện danh mục này chưa có công ty nào'}

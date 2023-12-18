@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetJobQuery, useGetJobsQuery } from '@/services/jobsApiSlice';
 import 'swiper/css';
@@ -22,6 +22,8 @@ function JobDetail() {
 
     const { id } = useParams();
 
+    const imgRef = useRef<HTMLImageElement>(null)
+
     const { data, isLoading, isError } = useGetJobQuery(id!);
     const {
         data: jobRelate,
@@ -41,6 +43,15 @@ function JobDetail() {
         }
     }, [isLoadingJobRelate, isErrorJobRelate, jobRelate?.data?.data]);
 
+    useEffect(() => {
+        let handlerClickOutside = (e:any) => {
+            if(!imgRef.current?.contains(e.target)) {
+                setIsImgDetail(false)
+            }
+        }
+        document.addEventListener('mousedown', handlerClickOutside)
+    }, [imgRef])
+
     useLayoutEffect(() => {
         scrollTo(0, 0);
     }, []);
@@ -51,7 +62,7 @@ function JobDetail() {
             {isLoading && <Loader />}
             {isImgDetail && (
                 <div className=' w-full h-[100vh] bg-[rgba(0,0,0,0.5)] top-0 left-0 fixed z-50'>
-                    <div className=' w-full h-full mx-auto '>
+                    <div className=' flex items-center justify-center  w-full h-full mx-auto '>
                         <div onClick={() => setIsImgDetail(false)} className=' flex items-center justify-center w-[100px] h-[60px] text-4xl text-gray-500 bg-[rgba(0,0,0,.6)] rounded-md absolute top-0 right-0 z-50 cursor-pointer hover:bg-[rgba(0,0,0,.4)]'>
                             <FontAwesomeIcon icon={faXmark} />
                         </div>
@@ -61,8 +72,8 @@ function JobDetail() {
                         >
                             {job?.photosJob.map((data, index) => {
                                 return (
-                                    <SwiperSlide className=' flex items-center justify-center w-[80%%] h-auto' key={index}>
-                                        <img className=' w-[80%] h-full rounded-md ' src={data} />
+                                    <SwiperSlide className=' flex items-center justify-center ' key={index}>
+                                        <img ref={imgRef} className=' rounded-md object-cover ' src={data} />
                                     </SwiperSlide>
                                 );
                             })}

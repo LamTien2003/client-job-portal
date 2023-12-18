@@ -50,7 +50,7 @@ function RegisterCompany() {
             district: Yup.string().required('Quận, huyện không được để trống'),
             phoneNumber: Yup.string().required('Số điện thoại không được để trống').matches(PHONEREGEX, 'Số điện thoại phải đúng định dạng'),
             companyName: Yup.string().required('Tên công ty không được để trống').min(2, 'Tên công ty phải tối thiểu 2 kí tự').max(100, 'Tên công ty chỉ tối đa 100 kí tự'),
-            description: Yup.string().max(500, 'Mô tả chỉ tối đa 500 kí tự'),
+            description: Yup.string().max(1500, 'Mô tả chỉ tối đa 1500 kí tự'),
             EstablishDate: Yup.date().typeError('Hãy chọn ngày thành lập'),
             companySizeFrom: Yup.number().typeError('Chỉ được nhập số').required('companysizefrom không được để trống').min(1, 'Số lượng bắt đầu quy mô công ty phải có ít nhất 1 người'),
             companySizeTo: Yup.number().typeError('Chỉ được nhập số').required('companysizeto không được để trống').moreThan(Yup.ref('companySizeFrom'), 'Phải ít hơn số lượng trước'),
