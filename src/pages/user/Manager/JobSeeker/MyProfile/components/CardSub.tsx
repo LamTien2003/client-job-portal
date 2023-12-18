@@ -38,7 +38,7 @@ const CardSub = ({ title, sub, children, toggleOpen, open, data, type }: Card) =
             <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-2">
                     <h6 className="font-family-title text-xl font-title text-primary-100">{title}</h6>
-                    <p className="font-family-text text-content-text font-medium">{sub}</p>
+                    <p className="whitespace-pre-line font-family-text text-content-text font-medium">{sub}</p>
                 </div>
 
                 <button

@@ -46,7 +46,7 @@ const validation = Yup.object().shape({
     companyName: Yup.string().max(100, 'Không được quá 100 kí tự!').required('Họ không được bỏ trống!'),
     companySizeFrom: Yup.number().required('Quy mô không được bỏ trống!').min(1, 'Số lượng không được nhỏ hơn 1'),
     companySizeTo: Yup.number().required('Quy mô không được bỏ trống!').min(1, 'Số lượng không được nhỏ hơn 1'),
-    description: Yup.string().max(500, 'Không được quá 500 kí tự!').required('Tên không được bỏ trống!'),
+    description: Yup.string().max(1500, 'Không được quá 1500 kí tự!').required('Tên không được bỏ trống!'),
     establishDate: Yup.date()
         .required('Ngày thành lập không được bỏ trống!')
         .test('date-range', 'Không được chọn ngày ở tương lai!', function (value) {
