@@ -1,7 +1,4 @@
 import { Link } from 'react-router-dom';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import Company from '@/types/Company';
 
 interface Props {
@@ -18,7 +15,7 @@ function CompanyGutter(props: Props) {
                 const date = new Date(company.establishDate)
                 const myEstablistDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                 return (
-                    <div key={company.id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full ">
+                    <div key={company._id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full ">
                             <div className=" border-[#eee] border rounded relative">
                                 <img
                                     className=" w-full h-[240px] object-cover rounded tb:w-full"
@@ -28,7 +25,7 @@ function CompanyGutter(props: Props) {
                                 <div className=" px-4 mt-5 mb-5 flex items-center justify-between">
                                     <div className=' flex items-center'>
                                         <img
-                                            className=" w-10 h-10 rounded-full mr-3"
+                                            className=" w-10 h-10 rounded-full mr-3 object-cover"
                                             src={company.photo}
                                         />
                                         <div className="flex flex-col">

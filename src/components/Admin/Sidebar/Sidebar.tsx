@@ -7,10 +7,6 @@ type SidebarProps = {
     isActiveSidebar: boolean
 }
 function Sidebar(props: SidebarProps) {
-
-    const myURL = window.location.href
-    const page = new URL(myURL)
-
     return (
         props.isActiveSidebar ? (
             <div className=" w-[300px] h-[100vh] font-family-text text-white bg-primary-100 rounded-r-[10px] mr-[30px] duration-300 left-0 fixed">

@@ -68,7 +68,7 @@ function UserMenu(props: Props) {
                     )}
             </div>
             <div ref={menuRef} className=" flex items-center justify-center w-[40px] h-[40px] relative" onClick={() => setDropDownMenu(!dropDownMenu)}>
-                <img className=" w-full h-full rounded-full cursor-pointer" src={currentUser.photo} />
+                <img className=" w-full h-full rounded-full cursor-pointer object-cover" src={currentUser.photo} />
 
                 {dropDownMenu && (
                     <div className=' flex flex-col shadow-md top-[66px] right-0 absolute'>

@@ -8,7 +8,6 @@ interface Props {
 function JobGutter(props: Props) {
     const { data: jobList } = props;
 
-    console.log(jobList)
     return (
         <>
             {jobList.length === 0 && 'Hiện đang không có công việc nào.'}
@@ -25,7 +24,7 @@ function JobGutter(props: Props) {
                                 />
                                 <div className=" mt-5 mb-5 flex items-center">
                                     <img
-                                        className=" w-10 h-10 rounded-full mr-3"
+                                        className=" w-10 h-10 rounded-full mr-3 object-cover"
                                         src={job.postedBy.photo}
                                     />
                                     <div className="flex flex-col">

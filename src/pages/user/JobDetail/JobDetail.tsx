@@ -55,8 +55,6 @@ function JobDetail() {
     useLayoutEffect(() => {
         scrollTo(0, 0);
     }, []);
-    console.log(isImgDetail);
-    console.log(job?.photosJob)
 
     return (
         <>
@@ -122,7 +120,7 @@ function JobDetail() {
                                             className=" max-w-[20%] max-h-[200px] cursor-pointer"
                                             key={index}
                                         >
-                                            <img className=" w-full h-full rounded-md " src={data} />
+                                            <img className=" w-[300px] h-[200px] rounded-md " src={data} />
                                         </SwiperSlide>
                                     );
                                 })}
@@ -143,13 +141,17 @@ function JobDetail() {
                                 breakpoints={{
                                     0: {
                                         spaceBetween: 10,
-                                        slidesPerView: 2,
+                                        slidesPerView: 1,
                                     },
                                     870: {
                                         spaceBetween: 20,
                                         slidesPerView: 2,
                                     },
-                                    1400: {
+                                    1500: {
+                                        spaceBetween: 30,
+                                        slidesPerView: 3,
+                                    },
+                                    1912: {
                                         spaceBetween: 30,
                                         slidesPerView: 4,
                                     },
