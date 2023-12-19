@@ -26,13 +26,13 @@ const Info = () => {
                 <img className="w-full h-[180px] rounded-t-md object-cover" src={coverPhoto} alt="coverPhoto" />
             )}
             <Card handleOpen={handleOpen}>
-                <div className="flex items-center gap-4">
-                    <img className="w-20  h-20 object-cover rounded-full" src={currentUser?.photo} alt="avt" />
-                    <div className="flex flex-col gap-2">
-                        <div className="flex gap-2 text-2xl font-family-title font-title text-primary-100">
+                <div className="flex items-center gap-4 w-full">
+                    <img className="w-20 h-20 object-cover rounded-full" src={currentUser?.photo} alt="avt" />
+                    <div className="flex flex-col gap-2 w-full">
+                        <div className="flex gap-2 text-2xl font-family-title font-title text-primary-100 w-full">
                             {currentUser?.firstName} {currentUser?.lastName}
                         </div>
-                        <div className="flex items-center gap-2 text-content-title font-medium">
+                        <div className="flex items-center gap-2 text-content-title font-medium w-full">
                             <MdEmail />
                             <p className="font-family-text">{currentUser?.email}</p>
                         </div>

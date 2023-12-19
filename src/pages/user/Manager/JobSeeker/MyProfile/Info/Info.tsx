@@ -15,12 +15,10 @@ const Info = () => {
     return (
         <>
             <Card handleOpen={handleOpen}>
-                <div className="flex items-center gap-4 mb:flex-col">
-                    <div className="w-full flex justify-start">
-                        <img className="w-20 h-20 object-cover rounded-full" src={currentUser?.photo} alt="avt" />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <div className="flex gap-2 text-2xl font-family-title font-title text-primary-100">
+                <div className="flex items-center gap-4 mb:flex-col w-full">
+                    <img className="w-20 h-20 object-cover rounded-full" src={currentUser?.photo} alt="avt" />
+                    <div className="flex flex-col gap-2 justify-start w-full">
+                        <div className="flex gap-2 text-2xl font-family-title font-title text-primary-100 ">
                             {currentUser?.firstName} {currentUser?.lastName}
                         </div>
                         <div className="font-family-text flex items-center gap-2 text-content-title font-medium">

@@ -42,11 +42,11 @@ const DetailProfileCan = ({ id }: { id: string }) => {
         <Box
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 600 }}
             role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
+            onClick={toggleDrawer(anchor, true)}
+            onKeyDown={toggleDrawer(anchor, true)}
             className="flex flex-col gap-1 font-family-text"
         >
-            <div className="p-3 font-semibold uppercase text-xl font-family-title text-center  bg-primary-100 text-white ">
+            <div className="p-3 font-semibold uppercase text-xl font-family-title text-center bg-primary-100 text-white ">
                 Thông tin ứng viên
             </div>
             <div className="flex flex-col p-3 gap-4">
