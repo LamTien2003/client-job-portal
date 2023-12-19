@@ -6,10 +6,11 @@ interface Props {
     data: Job[];
 }
 function JobColumn(props: Props) {
+    console.log(props.data)
     return (
         <div className=" mb-7 flex">
             <div className=' w-9/12 mr-3 lg:w-full tb:w-full mb:w-full'>
-                {props.data.length === 0 && 'Hiện đang không có công việc nào theo yêu cầu của bạn.'}
+                {props.data.length === 0 && 'Hiện đang không có công việc nào.'}
                 {props.data?.map((job) => {
                     const date = new Date(job.deadline)
                     const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 

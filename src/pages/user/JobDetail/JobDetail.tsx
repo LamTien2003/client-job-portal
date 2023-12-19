@@ -18,7 +18,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 function JobDetail() {
     const [job, setJob] = useState<Job>();
     const [jobByCategory, setJobByCategory] = useState<Job[]>([]);
-    const [isImgDetail, setIsImgDetail] = useState<boolean>(false)
+    const [isImgDetail, setIsImgDetail] = useState<boolean>(false);
 
     const { id } = useParams();
 
@@ -55,7 +55,8 @@ function JobDetail() {
     useLayoutEffect(() => {
         scrollTo(0, 0);
     }, []);
-    console.log(isImgDetail)
+    console.log(isImgDetail);
+    console.log(job?.photosJob)
 
     return (
         <>
@@ -90,11 +91,9 @@ function JobDetail() {
                         {!isLoading && !isError && job && <JobSummary data={job} />}
                     </div>
 
-                    {!isLoading && !isError && job && <Comments data={job} />}
-                    
                     <div className=" w-10/12 mb-10 mx-auto">
                         <h1 className=" font-family-title text-content-title text-2xl font-semibold mb-10">
-                            Xem thư viện công ty:
+                            Hình ảnh về công việc:
                         </h1>
                         {job?.photosJob.length === 0 ? (
                             <div>Không có hình ảnh nào về công ty hiện tại</div>
@@ -118,14 +117,20 @@ function JobDetail() {
                             >
                                 {job?.photosJob.map((data, index) => {
                                     return (
-                                        <SwiperSlide onClick={() => setIsImgDetail(!isImgDetail)} className=' max-w-[20%] max-h-[200px] cursor-pointer' key={index}>
-                                            <img className=' w-full h-full rounded-md ' src={data} />
+                                        <SwiperSlide
+                                            onClick={() => setIsImgDetail(!isImgDetail)}
+                                            className=" max-w-[20%] max-h-[200px] cursor-pointer"
+                                            key={index}
+                                        >
+                                            <img className=" w-full h-full rounded-md " src={data} />
                                         </SwiperSlide>
                                     );
                                 })}
                             </Swiper>
                         )}
                     </div>
+
+                    {!isLoading && !isError && job && <Comments data={job} />}
 
                     <div className=" w-10/12 mx-auto">
                         <h1 className=" font-family-title text-content-title text-2xl font-semibold mb-10">

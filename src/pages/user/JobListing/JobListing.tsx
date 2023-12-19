@@ -16,7 +16,7 @@ type filterObject = {
     idCat: string;
     salary: { min: number; max: number };
     city: string;
-    skills: string[]
+    skills: string[];
 };
 const JobListing = () => {
     const [jobList, setJobList] = useState<Job[]>([]);
@@ -28,7 +28,7 @@ const JobListing = () => {
         city: '',
         skills: [],
     });
-    const [listStyle, setListStyle] = useState<'column' | 'gutter'>('column');
+    const [listStyle, setListStyle] = useState<'column' | 'gutter'>('gutter');
     const [page, setPage] = useState<number>(1);
 
     const pageNumber = totalJob && totalJob % 5 === 0 ? totalJob / 5 : Math.floor(totalJob / 5 + 1);
@@ -133,6 +133,8 @@ const JobListing = () => {
         scrollTo(0, 0);
     }, []);
 
+    console.log(pageNumber)
+
     return (
         <>
             <Banner page="Tìm việc" />
@@ -155,7 +157,7 @@ const JobListing = () => {
                     </div>
                     <div className="flex flex-col h-full justify-between mb-10">
                         {isLoading &&
-                            [...Array(5)].map((item, index) => (
+                            [...Array(6)].map((item, index) => (
                                 <div key={index} className=" mb-7">
                                     <Skeleton />
                                     {item}

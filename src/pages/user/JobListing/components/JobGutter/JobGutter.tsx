@@ -8,9 +8,10 @@ interface Props {
 function JobGutter(props: Props) {
     const { data: jobList } = props;
 
+    console.log(jobList)
     return (
         <>
-            {jobList.length === 0 && 'Hiện đang không có công việc nào theo yêu cầu của bạn.'}
+            {jobList.length === 0 && 'Hiện đang không có công việc nào.'}
             <div className=" flex flex-wrap tb:flex-col mb:flex-col ">
                 {jobList?.map((job) => {
                     const date = new Date(job.deadline)
