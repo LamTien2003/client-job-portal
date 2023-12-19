@@ -10,7 +10,7 @@ const FeaturesItem = ({ job, path }: { job: Job; path: string }) => {
 
     return (
         <NavLink to={path} className="group">
-            <div className="bg-white  rounded-r pt-9 pb-9 pr-6 pl-6 border-l-4 border-primary-blur group-hover:border-primary-100 font-family-text shadow-md">
+            <div className="bg-white  rounded-r pt-9 pb-9 pr-6 pl-6 border-l-4 border-primary-blur group-hover:border-primary-100 font-family-text shadow-md h-72">
                 <div className=" flex items-center mb-5 relative h-1/4">
                     <img className="w-[52px] h-[52px] object-cover rounded-full mr-5" src={job.postedBy.photo} />
                     <div className="w-full flex flex-col  pb-3">
