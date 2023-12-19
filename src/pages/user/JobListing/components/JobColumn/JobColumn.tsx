@@ -6,7 +6,6 @@ interface Props {
     data: Job[];
 }
 function JobColumn(props: Props) {
-    console.log(props.data)
     return (
         <div className=" mb-7 flex">
             <div className=' w-9/12 mr-3 lg:w-full tb:w-full mb:w-full'>
@@ -18,7 +17,7 @@ function JobColumn(props: Props) {
                         return (
                             <div key={job._id} className=' flex items-center border border-[#AEF0F2] rounded p-[20px] mb-6 tb:flex-col tb:items-start mb:flex-col mb:items-start '>
                                 <img
-                                    className=" w-[52px] h-[52px] rounded-full mr-4 lg:w-12"
+                                    className=" w-[52px] h-[52px] rounded-full mr-4 object-cover lg:w-12"
                                     src={job.postedBy.photo}
                                 />
                                 <div className=" flex flex-col w-[240px] tb:mt-2 mb:mt-2">

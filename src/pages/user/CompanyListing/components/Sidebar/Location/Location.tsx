@@ -42,7 +42,7 @@ function Location({locationChange}: {locationChange: (city: string) => void}) {
                 </div>
                 {cities?.map(city => {
                     return (
-                        <div className=" mb-2 flex relative">
+                        <div key={city.code} className=" mb-2 flex relative">
                             <div className=" flex items-center cursor-pointer">
                                 <input
                                     id={city.codename}

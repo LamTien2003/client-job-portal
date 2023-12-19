@@ -7,7 +7,6 @@ interface Props {
 
 function CompanyColumn(props: Props) {
     const { data: companyList } = props;
-    console.log(companyList)
     return (
         <>
             {companyList.length === 0 && 'Hiện danh mục này chưa có công ty nào'}
@@ -15,11 +14,11 @@ function CompanyColumn(props: Props) {
                 const date = new Date(company.establishDate);
                 const myEstablishDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
                 return (
-                    <div key={company.id} className=" w-full border border-[#AEF0F2] rounded-md pl-5 pb-5 mb-6">
+                    <div key={company._id} className=" w-full border border-[#AEF0F2] rounded-md pl-5 pb-5 mb-6">
                         <div className=" flex flex-col bg-[#E7F4F5] relative">
                             <div className=" flex items-center">
                                 <div className=" flex justify-center items-end w-[60px] h-[100px] bg-[#9CEAEC] -top-[10px] left-0 absolute">
-                                    <img className=" w-[45px] h-[45px] rounded-full mb-[20px] " src={company.photo} />
+                                    <img className=" w-[45px] h-[45px] rounded-full mb-[20px] object-cover " src={company.photo} />
                                 </div>
                                 <div className=" -left-2 -top-[10px] absolute">
                                     <svg

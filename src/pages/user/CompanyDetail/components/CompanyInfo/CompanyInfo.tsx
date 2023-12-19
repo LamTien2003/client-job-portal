@@ -18,7 +18,7 @@ function CompanyInfo(props: Props) {
                 />
                 <div className=" w-[90px] h-[90px] bg-[#f8f8f8] rounded -bottom-[45px] left-1/2 -translate-x-1/2 rotate-45 flex items-center justify-center absolute">
                     <img
-                        className=" w-[60px] h-[60px] rounded-full -rotate-45"
+                        className=" w-[70px] h-[70px] rounded-full -rotate-45 object-cover"
                         src={company.photo}
                     />
                 </div>

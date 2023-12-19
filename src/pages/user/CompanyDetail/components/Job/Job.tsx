@@ -1,7 +1,5 @@
 import images from '@/assets/images';
 import Company from '@/types/Company';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 type Props = {
@@ -27,7 +25,7 @@ function Job(props: Props) {
                                 <div className=" flex flex-col relative">
                                     <div className=" mb-[30px] flex items-center relative lg:flex-col lg:items-start tb:flex-col tb:items-start mb:flex-col mb:items-start">
                                         <div className=" flex items-center lg:flex-col lg:items-start lg:mb-8">
-                                            <img className=" w-[52px] h-[52px] rounded-full mr-2.5 lg:mb-3" src={company.photo} />
+                                            <img className=" w-[52px] h-[52px] rounded-full mr-2.5 object-cover lg:mb-3" src={company.photo} />
                                             <div className=" flex flex-col">
                                                 <Link to={'/job-detail/' + job.id} className=" text-content-title text-lg font-semibold mb-0.5 duration-300 cursor-pointer hover:text-primary-100">
                                                     {job.title}
