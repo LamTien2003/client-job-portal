@@ -12,7 +12,7 @@ function Category({categoryChange}: Props) {
     
     const [category, setCategory] = useState<Category[]>([]);
     const [check, setCheck] = useState<boolean>(false);
-    const [isId, setIsId] = useState<string>('');
+    const [isId, setIsId] = useState<string>('all');
 
     const [searchParams] = useSearchParams()
     const type = searchParams.get('type')

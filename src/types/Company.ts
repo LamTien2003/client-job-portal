@@ -10,4 +10,5 @@ export default interface Company extends User {
     website: string;
     jobList: Job[];
     coverPhoto: string;
+    totalJobCreated: number
 }

@@ -3,7 +3,7 @@ import { Location } from "@/types/Location";
 import { useEffect, useState } from "react";
 
 function Location({locationChange}: {locationChange: (city: string) => void}) {
-    const [id, setId] = useState<string>('')
+    const [id, setId] = useState<string>('allLocation')
     const [cities, setCities] = useState<Location[]>([])
 
     const {data, isLoading, isError} = useGetProvincesQuery()

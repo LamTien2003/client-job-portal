@@ -9,9 +9,9 @@ function RelatedJob({data}: {data: Job}) {
     return (
         <div className=" bg-[#fdf9f9] rounded-r pt-6 pb-6 pr-6 pl-6 border-l-4 border-primary-100 ">
             <div className=" flex items-start mb-5 relative">
-                <img className=" w-[50px] h-[50px] rounded-full mr-5 object-cover" src={data.photosJob[0] ? data.photosJob[0] : data.photosJob[1]} />
+                <img className=" w-[50px] h-[50px] rounded-full mr-5 object-cover" src={data.postedBy.photo} />
                 <div className=" w-full flex flex-col border-b border-[#eee] pb-3">
-                    <h3 className=" w-[250px] font-family-title text-content-title text-lg font-semibold mb-1 overflow-hidden text-ellipsis whitespace-nowrap block ">{data.title}</h3>
+                    <h3 className=" w-[250px] font-family-title text-content-title text-lg font-semibold mb-1 overflow-hidden text-ellipsis whitespace-nowrap block duration-300 cursor-pointer hover:text-primary-100 ">{data.title}</h3>
                     <p className=" text-sm">Full time</p>
                 </div>
             </div>

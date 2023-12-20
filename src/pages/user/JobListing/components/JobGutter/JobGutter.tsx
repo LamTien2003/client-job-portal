@@ -16,8 +16,8 @@ function JobGutter(props: Props) {
                     const date = new Date(job.deadline)
                     const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                     return (
-                        <div key={job._id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full mb:w-full ">
-                            <div className="border-[#eee] border rounded p-4 relative">
+                        <Link to={'/job-detail/' + job._id} key={job._id} className=" w-6/12 pl-3 pr-3 mb-6 cursor-default tb:w-full mb:w-full ">
+                            <div className="border-[#eee] border rounded p-4 relative duration-300 cursor-pointer hover:border-primary-100">
                                 <img
                                     className=" w-full h-[240px] object-cover rounded tb:w-full"
                                     src={job.postedBy.coverPhoto}
@@ -88,7 +88,7 @@ function JobGutter(props: Props) {
                                     
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>

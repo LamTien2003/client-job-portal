@@ -15,13 +15,13 @@ function JobColumn(props: Props) {
                     const mydeadline = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                     if(job.isAccepted === true) {
                         return (
-                            <div key={job._id} className=' flex items-center border border-[#AEF0F2] rounded p-[20px] mb-6 tb:flex-col tb:items-start mb:flex-col mb:items-start '>
+                            <Link to={'/job-detail/' + job._id} key={job._id} className=' flex items-center border border-[#eee] rounded p-[20px] mb-6 duration-300 cursor-pointer hover:border-primary-100 tb:flex-col tb:items-start mb:flex-col mb:items-start '>
                                 <img
                                     className=" w-[52px] h-[52px] rounded-full mr-4 object-cover lg:w-12"
                                     src={job.postedBy.photo}
                                 />
                                 <div className=" flex flex-col w-[240px] tb:mt-2 mb:mt-2">
-                                    <Link to={`/job-detail/${job._id}`} className=" font-family-title text-content-title text-lg font-semibold cursor-pointer pb-1 duration-300 hover:text-primary-100 lg:text-base tb:text-2xl mb:text-xl ">
+                                    <Link to={`/job-detail/${job._id}`} className=" w-full font-family-title text-content-title text-lg font-semibold cursor-pointer pb-1 duration-300 overflow-hidden text-ellipsis whitespace-nowrap hover:text-primary-100 lg:text-base tb:text-2xl mb:text-xl ">
                                         {job.title}
                                     </Link>
                                     <div className=' flex items-center'>
@@ -37,7 +37,7 @@ function JobColumn(props: Props) {
                                     <p className=' text-content-text'>Mức lương: <span className=' text-content-title font-medium'>{job.salary.toLocaleString('it')} vnđ</span> / tháng</p>
                                     <p className=' text-content-text'>Thời hạn: <span className=' text-content-title font-medium'>{mydeadline}</span></p>
                                 </div>
-                            </div>
+                            </Link>
                         );
                     }
                     

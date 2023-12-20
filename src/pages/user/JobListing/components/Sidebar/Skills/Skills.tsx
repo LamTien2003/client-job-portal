@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetSkillsQuery } from "@/services/utilsApiSlice";
 
 function Skills({skillsChange}: {skillsChange: (skills: string[]) => void}) {
-    const [isAll, setIsAll] = useState<boolean>()
+    const [isAll, setIsAll] = useState<boolean>(true)
     const [checkedList, setCheckedList] = useState<string[]>([])
     const [skills, setSkills] = useState<string[]>([])
 

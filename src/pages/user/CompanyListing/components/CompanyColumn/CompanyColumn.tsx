@@ -1,5 +1,5 @@
 import Company from '@/types/Company';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface Props {
     data: Company[];
@@ -7,6 +7,7 @@ interface Props {
 
 function CompanyColumn(props: Props) {
     const { data: companyList } = props;
+    const navigate = useNavigate()
     return (
         <>
             {companyList.length === 0 && 'Hiện danh mục này chưa có công ty nào'}
@@ -14,7 +15,7 @@ function CompanyColumn(props: Props) {
                 const date = new Date(company.establishDate);
                 const myEstablishDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
                 return (
-                    <div key={company._id} className=" w-full border border-[#AEF0F2] rounded-md pl-5 pb-5 mb-6">
+                    <div onClick={() => {navigate('/company-detail/' + company._id)}} key={company._id} className=" w-full border border-[#AEF0F2] rounded-md pl-5 pb-5 mb-6 duration-300 cursor-pointer hover:border-primary-100">
                         <div className=" flex flex-col bg-[#E7F4F5] relative">
                             <div className=" flex items-center">
                                 <div className=" flex justify-center items-end w-[60px] h-[100px] bg-[#9CEAEC] -top-[10px] left-0 absolute">
@@ -46,14 +47,14 @@ function CompanyColumn(props: Props) {
                             <div className=' flex items-center gap-[50px] xl:gap-[35px] lg:gap-0 lg:flex-col lg:items-start tb:gap-0 tb:flex-col tb:items-start mb:gap-0 mb:flex-col mb:items-start '>
                                 <div className=' flex flex-col justify-start border-r border-r-primary-200 py-5 lg:w-[150px] lg:border-none lg:pt-5 lg:pb-2 tb:pt-5 tb:pb-2 mb:pt-5 mb:pb-2 tb:border-none mb:border-none '>
                                     <div className=' w-[200px] flex flex-col items-start ml-[70px] mb-8 gap-1.5 xl:w-[180px] lg:w-full tb:w-full tb:mb-full mb:w-full '>
-                                        <Link to={'/company-detail/' + company.id} className=' font-family-title text-lg text-content-title font-semibold duration-300 hover:text-primary-100 lg:text-base tb:text-base mb:text-base'>{company.companyName}</Link>
+                                        <Link to={'/company-detail/' + company.id} className=' w-[180px] font-family-title text-lg text-content-title font-semibold duration-300 overflow-hidden text-ellipsis whitespace-nowrap block hover:text-primary-100 lg:text-base tb:text-base mb:text-base'>{company.companyName}</Link>
                                         <p className=' flex items-center text-content-text text-sm gap-2'>
                                             <img src='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/location.svg' />
                                             {company.location.city}
                                         </p>
                                     </div>
                                     <p className=" text-content-text ml-2.5 mr-1.5 lg:text-[15px] lg:hidden tb:hidden mb:hidden ">
-                                        Đang tuyển: <span className=" text-primary-100 font-semibold">{company.jobList ? (company.jobList.length + ' công việc') : 'Đang cập nhật'}</span>
+                                        Đang tuyển: <span className=" text-primary-100 font-semibold">{company.totalJobCreated} (công việc)</span>
                                     </p>
                                 </div>
                                 <div className=' w-full flex flex-col py-5 lg:flex-row lg:justify-between lg:w-full lg:px-5 lg:py-0 lg:pb-4 tb:items-start tb:px-5 tb:py-0 tb:pb-5 mb:items-start mb:px-5 mb:py-0 mb:pb-5 '>
