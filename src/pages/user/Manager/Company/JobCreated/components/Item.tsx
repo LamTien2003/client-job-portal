@@ -34,7 +34,7 @@ const Item = ({ job }: { job: Job }) => {
     const deadline = formatDate(job.deadline);
     const salary = formatNumberToVND(job.salary);
     return (
-        <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-4 mb:grid mb:grid-cols-2  tb:grid tb:grid-cols-2 lg:grid lg:grid-cols-2">
+        <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-4 mb:grid mb:grid-cols-1 tb:grid tb:grid-cols-2 lg:grid lg:grid-cols-2 mb:text-sm">
             {isLoading && <Loader />}
             <div className="flex gap-4 w-[35%] items-center mb:w-full tb:w-full lg:w-full">
                 <img
@@ -88,7 +88,7 @@ const Item = ({ job }: { job: Job }) => {
                         setOpenConfirmDelete(true);
                         setId(job?._id);
                     }}
-                    className="py-2 px-4 text-white bg-red-700 rounded-lg hover:bg-black duration-300"
+                    className="py-2 px-4 text-white bg-red-700 rounded-lg hover:bg-black duration-300 mb:w-1/2"
                 >
                     Xoá
                 </button>

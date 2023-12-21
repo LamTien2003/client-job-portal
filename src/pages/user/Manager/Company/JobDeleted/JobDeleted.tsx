@@ -31,7 +31,7 @@ const JobDeleted = () => {
     return (
         <>
             {data?.data?.data?.length === 0 && (
-                <div className="font-family-text text-center border border-primary-100 p-5 text-xl">
+                <div className="font-family-text text-center border border-primary-100 p-5 text-xl mb:text-lg mb:p-3 rounded-md">
                     Thùng rác rỗng!
                 </div>
             )}

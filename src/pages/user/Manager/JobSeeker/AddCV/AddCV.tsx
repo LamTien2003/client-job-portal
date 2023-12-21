@@ -87,7 +87,7 @@ const AddCV = () => {
             className="flex flex-col items-center justify-center gap-4 bg-white p-6 rounded-md shadow-lg font-family-text"
         >
             {isLoading && <Loader />}
-            <div className="flex items-center gap-6 font-semibold uppercase">
+            <div className="flex items-center gap-6 font-semibold uppercase mb:flex-col">
                 <label
                     htmlFor="photo"
                     className="flex p-2 border-2 rounded-md gap-2 items-center justify-center font-medium cursor-pointer border-primary-100 text-primary-100 hover:border-black hover:text-black duration-300"

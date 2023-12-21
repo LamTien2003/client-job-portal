@@ -11,7 +11,7 @@ const RecruitersItem = ({ company, path }: { company: Company; path: string }) =
             to={path}
             className="flex flex-col rounded-md border-primary-200 border-[2px] hover:border-primary-100 duration-300"
         >
-            <div className="flex justify-evenly items-center py-4 pr-20 bg-[#E5F6F7]">
+            <div className="flex justify-evenly items-center py-4 pr-20 bg-[#E5F6F7] gap-2 mb:px-2">
                 <img className="rounded-full w-[60px] h-[60px]" src={company.photo} alt="logo" />
                 <div className="flex flex-col gap-1">
                     <h5 className="text-content-title text-lg font-semibold">{company.companyName}</h5>

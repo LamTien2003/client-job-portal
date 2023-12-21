@@ -48,7 +48,7 @@ const Item = ({ job }: { job: any }) => {
     const salary = formatNumberToVND(job.salary);
     const isLoading = loadingDeleteJob || loadingRestoreJob;
     return (
-        <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-4  mb:grid mb:grid-cols-2  tb:grid tb:grid-cols-2 lg:grid lg:grid-cols-2">
+        <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-4  mb:grid mb:grid-cols-1  tb:grid tb:grid-cols-2 lg:grid lg:grid-cols-2 mb:text-sm">
             {isLoading && <Loader />}
             <div className="flex gap-4 w-[35%] items-center mb:w-full tb:w-full lg:w-full">
                 <img
@@ -95,7 +95,7 @@ const Item = ({ job }: { job: any }) => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-2 font-medium w-[12%] justify-end text-sm mb:w-[70%] tb:w-[60%] lg:w-1/3">
+            <div className="flex flex-col gap-2 font-medium w-[12%] justify-end text-sm mb:w-full mb:flex-row mb:justify-center tb:w-[60%] lg:w-1/3">
                 <button
                     onClick={() => handleRestoreJob(job._id)}
                     className="py-2 px-4 text-white bg-primary-100 rounded-lg hover:bg-black duration-300"

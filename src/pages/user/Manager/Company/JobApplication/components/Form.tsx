@@ -72,7 +72,7 @@ const FormAcceptJob = ({ handleOpen, open, id }: FormAcceptJob) => {
             {isLoading && <Loader />}
             <DialogHeader>Thông tin phỏng vấn</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
-                <DialogBody divider className="grid grid-cols-2 items-center justify-between gap-8">
+                <DialogBody divider className="grid grid-cols-2 items-center justify-between gap-8 mb:grid-cols-1">
                     <div className="flex flex-col gap-1 w-full">
                         <h5 className="font-bold text-primary-100">Ngày phỏng vấn *</h5>
                         <DatePicker

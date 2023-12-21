@@ -33,7 +33,7 @@ const JobCreated = () => {
     return (
         <>
             {data?.data?.data?.length === 0 && (
-                <div className="font-family-text text-center border border-primary-100 p-5 text-xl">
+                <div className="font-family-text text-center border border-primary-100 p-5 text-xl mb:text-lg mb:p-3">
                     <p>Bạn chưa tạo công việc nào!</p>
                 </div>
             )}
