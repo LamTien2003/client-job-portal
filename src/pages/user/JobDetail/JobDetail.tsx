@@ -101,17 +101,21 @@ function JobDetail() {
                                     0: {
                                         slidesPerView: 1,
                                     },
-                                    870: {
+                                    600: {
                                         spaceBetween: 20,
-                                        slidesPerView: 1,
+                                        slidesPerView: 2,
+                                    },
+                                    1000: {
+                                        spaceBetween: 20,
+                                        slidesPerView: 3,
                                     },
                                     1500: {
                                         spaceBetween: 30,
-                                        slidesPerView: 3,
+                                        slidesPerView: 4,
                                     },
                                     1912: {
                                         spaceBetween: 30,
-                                        slidesPerView: 4,
+                                        slidesPerView: 5,
                                     },
                                 }}
                                 // modules={[Pagination, Navigation]}

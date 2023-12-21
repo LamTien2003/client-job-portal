@@ -28,16 +28,19 @@ function JobColumn(props: Props) {
                                         <p className=" text-content-text text-sm cursor-pointer mr-3 duration-300 hover:text-primary-100 lg:text-sm tb:text-base mb:text-base">
                                             {job.postedBy.location.city}
                                         </p>
-                                        <div className=' flex items-center'>
+                                        <div className=' flex items-center xl:hidden lg:hidden tb:hidden mb:hidden'>
                                             <div className=' w-[8px] h-[8px] rounded-full bg-[#F3E8C1] mr-1'></div>
                                             <p className=' text-content-title text-xs font-medium tb:text-base mb:text-base'>Full time</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className=' w-px h-[50px] bg-[#AEF0F2] mx-[30px] tb:hidden mb:hidden '></div>
-                                <div className=' flex flex-col tb:mt-2 tb:text-lg mb:mt-2'>
+                                <div className=' flex flex-col tb:mt-2 tb:text-lg mb:mt-2 tb:gap-[10px] mb:gap-[10px]'>
                                     <p className=' text-content-text'>Mức lương: <span className=' text-content-title font-medium'>{job.salary.toLocaleString('it')}đ</span></p>
                                     <p className=' text-content-text'>Thời hạn: <span className=' text-content-title font-medium'>{mydeadline}</span></p>
+                                    <div className=' hidden tb:flex mb:flex'>
+                                        <div className=' px-5 py-1 text-primary-100 border border-primary-100 bg-transparent rounded-md duration-300 hover:bg-primary-100 hover:text-white'>Xem thêm</div>
+                                    </div>
                                 </div>
                             </Link>
                         );

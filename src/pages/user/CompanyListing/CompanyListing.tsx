@@ -21,7 +21,7 @@ function CompanyListing() {
     const [page, setPage] = useState<number>(1);
     const [listStyle, setListStyle] = useState('gutter');
 
-    const pageNumber = totalCompany && totalCompany % 5 === 0 ? totalCompany / 5 : Math.floor(totalCompany / 5 + 1);
+    const pageNumber = totalCompany && totalCompany % 6 === 0 ? totalCompany / 6 : Math.floor(totalCompany / 6 + 1);
 
     const { data, isLoading, isError } = useGetCompaniesQuery((filter.city !== '' && filter.city === 'allLocation') ? {
         q: filter.name,

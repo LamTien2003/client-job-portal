@@ -22,49 +22,43 @@ function CompanyOverview(props: Props) {
     ];
 
     const date = new Date(company.establishDate);
-    const myDateString =
-        (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) +
-        ' ' +
-        monthsArray[date.getMonth() - 1] +
-        ', ' +
-        date.getFullYear();
-
+    const myEstablishDate = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`
     return (
         <div className=" w-1/3 pl-3 lg:w-full tb:w-full mb:w-full">
-            <div className=" w-full border border-[#eee] rounded pt-12 pb-12 pl-10 pr-10 mb-12">
+            <div className=" w-full border border-[#eee] rounded py-12 px-10 mb-12 mb:py-5 mb:px-4">
                 <h3 className=" font-family-title text-content-title text-lg font-semibold mb-6">Tổng quan thông tin:</h3>
-                <div>
+                <div className=' w-full'>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-[7px] before:absolute">
-                        <p className=" text-base pl-3.5 font-medium">
+                        <p className=" text-base pl-3.5 font-medium mb:text-sm mb:flex mb:flex-col">
                             <span className=" text-content-title font-medium mr-1.5">Tên công ty:</span>
-                            {company.companyName}
+                            <p>{company.companyName}</p>
                         </p>
                     </div>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-[7px] before:absolute">
-                        <p className=" text-base pl-3.5 font-medium"><span className=" text-content-title font-medium mr-1.5">Trụ sở chính:</span>{company.location.city}</p>
+                        <p className=" text-base pl-3.5 font-medium mb:text-sm mb:flex mb:flex-col"><span className=" text-content-title font-medium mr-1.5">Trụ sở chính:</span>{company.location.city}</p>
                     </div>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-[7px] before:absolute">
-                        <p className=" text-base pl-3.5 font-medium">
+                        <p className=" text-base pl-3.5 font-medium mb:text-sm mb:flex mb:flex-col">
                             <span className=" text-content-title font-medium mr-1.5">Ngày thành lập:</span>
-                            {myDateString}
+                            <p>{myEstablishDate}</p>
                         </p>
                     </div>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-[7px] before:absolute">
-                        <p className=" text-base pl-3.5 font-medium">
+                        <p className=" text-base pl-3.5 font-medium mb:text-sm mb:flex mb:flex-col">
                             <span className=" text-content-title font-medium mr-1.5">Quy mô:</span>{' '}
-                            {company.companySize.from + ' - ' + company.companySize.to} (người)
+                            <p>{company.companySize.from + ' - ' + company.companySize.to} (người)</p>
                         </p>
                     </div>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-[7px] before:absolute">
-                        <p className=" text-base pl-3.5 font-medium">
+                        <p className=" text-base pl-3.5 font-medium overflow-hidden text-ellipsis whitespace-nowrap mb:text-sm mb:flex mb:flex-col">
                             <span className=" text-content-title font-medium mr-1.5">Email:</span>
-                            {company.email}
+                            <p className=' w-full overflow-hidden text-ellipsis whitespace-nowrap'>{company.email}</p>
                         </p>
                     </div>
                     <div className=" mb-2.5 flex relative before:w-2 before:h-2 before:rounded-full before:bg-primary-blur before:left-0 before:top-[7px] before:absolute">
-                        <p className=" text-base pl-3.5 font-medium">
+                        <p className=" text-base pl-3.5 font-medium mb:text-sm mb:flex mb:flex-col">
                             <span className=" text-content-title font-medium mr-1.5">Đang đăng tuyển:</span>
-                            {company.jobList.length} công việc
+                            <p>{company.jobList.length} công việc</p>
                         </p>
                     </div>
                 </div>

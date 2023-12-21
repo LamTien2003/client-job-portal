@@ -18,13 +18,13 @@ function Job(props: Props) {
                         const date = new Date(job.deadline)
                         const myDeadline = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
                         return (
-                            <div key={company._id} className=' w-full flex xl:flex-col lg:flex-col tb:flex-col mb:flex-col border-[#eee] border p-[30px] duration-300 cursor-pointer hover:border-primary-100 '>
+                            <Link to={'/job-detail/' + job._id} key={company._id} className=' w-full flex xl:flex-col lg:flex-col tb:flex-col mb:flex-col border-[#eee] border p-[30px] mb:p-[20px] duration-300 cursor-pointer hover:border-primary-100 '>
                                 <div className='flex flex-col items-start justify-between gap-[40px] mr-[40px] '>
-                                    <div className=' flex items-center gap-[20px]'>
-                                        <img className=' w-[52px] h-[52px] rounded-full object-cover' src={company.photo} />
+                                    <div className=' flex items-center gap-[20px] mb:gap-[15px] mb:flex-col mb:items-start'>
+                                        <img className=' w-[52px] h-[52px] rounded-full object-cover mb:w-[40px] mb:h-[40px]' src={company.photo} />
                                         <div className=' flex flex-col gap-[10px]'>
-                                            <h2 className=' w-[200px] text-xl font-family-title font-semibold overflow-hidden text-ellipsis whitespace-nowrap'>{job.title}</h2>
-                                            <p className=' text-content-text text-sm'>{company.companyName}</p>
+                                            <h2 className=' w-[200px] mb:w-full mb:whitespace-pre-wrap text-xl font-family-title font-semibold overflow-hidden text-ellipsis whitespace-nowrap tb:text=base mb:text-base'>{job.title}</h2>
+                                            <p className=' mb:w-[170px] text-content-text text-sm'>{company.companyName}</p>
                                         </div>
                                     </div>
                                     <div className=" flex xl:hidden lg:hidden tb:hidden mb:hidden ">
@@ -39,25 +39,25 @@ function Job(props: Props) {
                                 <div className=' flex flex-col justify-center items-center gap-[40px] xl:items-start lg:items-start tb:items-start mb:items-start xl:gap-[20px] lg:gap-[20px] tb:gap-[20px] mb:gap-[20px] '>
                                     <div className=' flex items-center gap-[50px] xl:gap-[50px] xl:mt-[20px] lg:mt-[20px] lg:flex-col lg:gap-[4px] lg:items-start tb:flex-col tb:mt-[20px] tb:items-start tb:gap-[4px] mb:flex-col mb:mt-[20px] mb:items-start mb:gap-[4px] '>
                                         <div className=' flex flex-col gap-[4px]'>
-                                            <div className=' flex items-center gap-[10px] '>
-                                                <div className='w-[10px] h-[10px] bg-primary-100 rounded-full'></div>
+                                            <div className=' flex items-center gap-[10px] mb:gap-[6px] mb:hidden '>
+                                                <div className='w-[10px] h-[10px] mb:w-[6px] mb:h-[6px] bg-primary-100 rounded-full'></div>
                                                 <p className=' text-content-text text-sm'>Địa điểm: </p>
                                                 <h3 className=' text-content-title text-sm font-medium'>{company.location.city}</h3>
                                             </div>
-                                            <div className=' flex items-center gap-[10px] '>
-                                                <div className='w-[10px] h-[10px] bg-primary-100 rounded-full'></div>
+                                            <div className=' flex items-center gap-[10px] mb:gap-[6px] '>
+                                                <div className='w-[10px] h-[10px] mb:w-[6px] mb:h-[6px] bg-primary-100 rounded-full'></div>
                                                 <p className=' text-content-text text-sm'>Lương: </p>
-                                                <h3 className=' text-content-title text-sm font-medium'>{job.salary.toLocaleString('it')}đ / tháng</h3>
+                                                <h3 className=' text-content-title text-sm font-medium'>{job.salary.toLocaleString('it')}đ<p className=' mb:hidden'> / tháng</p></h3>
                                             </div>
                                         </div>
                                         <div className=' flex flex-col gap-[4px]'>
-                                            <div className=' flex items-center gap-[10px] '>
-                                                <div className='w-[10px] h-[10px] bg-primary-100 rounded-full'></div>
-                                                <p className=' text-content-text text-sm'>Hạn úng tuyển: </p>
+                                            <div className=' flex items-center gap-[10px] mb:gap-[6px] '>
+                                                <div className='w-[10px] h-[10px] mb:w-[6px] mb:h-[6px] bg-primary-100 rounded-full'></div>
+                                                <p className=' text-content-text text-sm'>Thời hạn: </p>
                                                 <h3 className=' text-content-title text-sm font-medium'>{myDeadline}</h3>
                                             </div>
-                                            <div className=' flex items-center gap-[10px] '>
-                                                <div className='w-[10px] h-[10px] bg-primary-100 rounded-full'></div>
+                                            <div className=' flex items-center gap-[10px] mb:gap-[6px] mb:hidden '>
+                                                <div className='w-[10px] h-[10px] mb:w-[6px] mb:h-[6px] bg-primary-100 rounded-full'></div>
                                                 <p className=' text-content-text text-sm'>Trạng thái: </p>
                                                 <h3 className=' text-content-title text-sm font-medium'>{job.available === true ? 'Đang tuyển dụng' : 'Không còn tuyển dụng'}</h3>
                                             </div>
@@ -76,7 +76,7 @@ function Job(props: Props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         );
                     })}
                 </div>

@@ -29,9 +29,9 @@ const Header = () => {
 
     return (
         <>
-            <div className=' flex w-full items-center font-family-text text-content-title bg-white px-[50px] xl:px-[30px] fixed z-20'>
-                <Link to={'/'} className=' border-r border-[#f1f1f1] mr-[95px] '>
-                    <img className='w-[140px] py-[10px] xl:w-[100px] xl:mr-[65px] lg:py-2.5' src={images.logo.logoBlack} />
+            <div className=' flex w-full items-center font-family-text text-content-title bg-white top-0 px-[50px] xl:px-[32px] fixed z-20 mb:h-[70px] lg:px-[32px] tb:px-[32px] mb:px-[32px] '>
+                <Link to={'/'} className=' mr-[95px] mb:mr-10 '>
+                    <img className='w-[140px] py-[10px] xl:w-[100px] xl:mr-[65px] lg:py-2.5 mb:w-[100px]' src={images.logo.logoBlack} />
                 </Link>
 
                 <div className=' w-full flex items-center justify-between z-20 lg:justify-end tb:justify-end mb:justify-end'>
@@ -39,7 +39,6 @@ const Header = () => {
                     {user && token ? <UserMenu user={user} logout={handleLogout} /> : <NonLoginMenu />}
                 </div>
             </div>
-            <div className=' w-px h-[84px] xl:h-[62px] lg:h-[66px] tb:h-[61px] mb:h-[57px]'></div>
         </>
     );
 };

@@ -22,9 +22,9 @@ function JobGutter(props: Props) {
                                     className=" w-full h-[240px] object-cover rounded tb:w-full"
                                     src={job.postedBy.coverPhoto}
                                 />
-                                <div className=" mt-5 mb-5 flex items-center">
+                                <div className=" mt-5 mb-5 flex items-center mb:flex-col mb:items-start">
                                     <img
-                                        className=" w-10 h-10 rounded-full mr-3 object-cover"
+                                        className=" w-10 h-10 rounded-full mr-3 object-cover mb:mx-auto"
                                         src={job.postedBy.photo}
                                     />
                                     <div className="w-full flex flex-col">
@@ -34,7 +34,7 @@ function JobGutter(props: Props) {
                                         <div className=" font-family-title text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start lg:flex-col lg:items-start tb:flex-row mb:flex-col mb:items-start mb:text-xs ">
                                             {job.postedBy.companyName}
                                             <div className=" h-3.5 w-px bg-content-title mr-2.5 ml-2.5 xl:hidden lg:hidden tb:hidden mb:hidden"></div>
-                                            <p className=" text-content-title font-semibold flex tb:ml-10 mb:text-xs mb:ml-0 ">
+                                            <p className=" text-content-title font-semibold flex tb:ml-10 mb:text-xs mb:ml-0 mb:mt-1 ">
                                                 Thời hạn <span className=" font-medium">: {mydeadline}</span>{' '}
                                             </p>
                                         </div>
@@ -71,7 +71,7 @@ function JobGutter(props: Props) {
                                     </div>
                                 </div>
                                 <div className=" flex items-center justify-between mt-5">
-                                    <div className=" text-content-title text-sm font-medium bg-gray-300 rounded-3xl py-1.5 px-6 lg:text-xs mb:px-4 mb:py-[5px] mb:text-xs ">
+                                    <div className=" text-content-title text-sm font-medium bg-gray-300 rounded-3xl py-1.5 px-6 lg:text-xs mb:px-4 mb:py-[5px] mb:text-xs mb:hidden ">
                                         Full time
                                     </div>
 

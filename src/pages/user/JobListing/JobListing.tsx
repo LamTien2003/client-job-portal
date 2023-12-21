@@ -31,7 +31,7 @@ const JobListing = () => {
     const [listStyle, setListStyle] = useState<'column' | 'gutter'>('gutter');
     const [page, setPage] = useState<number>(1);
 
-    const pageNumber = totalJob && totalJob % 5 === 0 ? totalJob / 5 : Math.floor(totalJob / 5 + 1);
+    const pageNumber = totalJob && totalJob % 6 === 0 ? totalJob / 6 : Math.floor(totalJob / 6 + 1);
 
     const { data, isLoading, isError } = useGetJobsQuery(
         filter.idCat !== '' && filter.city !== '' && filter.skills.length !== 0 ? {
@@ -168,8 +168,8 @@ const JobListing = () => {
                                 <div
                                     className={
                                         page > 1
-                                            ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
-                                            : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'
+                                            ? 'flex justify-center items-center w-10 h-10 mb:w-7 mb:h-7 mb:text-base text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
+                                            : ' flex justify-center items-center w-10 h-10 mb:w-7 mb:h-7 mb:text-base text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'
                                     }
                                     onClick={handleDecreasePage}
                                 >
@@ -183,8 +183,8 @@ const JobListing = () => {
                                         key={index}
                                         className={
                                             index + 1 === page
-                                                ? ' flex justify-center items-center w-10 h-10 text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default'
-                                                : ' flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
+                                                ? ' flex justify-center items-center w-10 h-10 mb:w-7 mb:h-7 mb:text-base text-white text-lg font-semibold bg-primary-100 rounded-full mr-2 ml-2 cursor-default'
+                                                : ' flex justify-center items-center w-10 h-10 mb:w-7 mb:h-7 mb:text-base text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
                                         }
                                         onClick={() => {
                                             window.scrollTo(0, 0);
@@ -199,8 +199,8 @@ const JobListing = () => {
                                 <div
                                     className={
                                         page < pageNumber
-                                            ? 'flex justify-center items-center w-10 h-10 text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
-                                            : ' flex justify-center items-center w-10 h-10 text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'
+                                            ? 'flex justify-center items-center w-10 h-10 mb:w-7 mb:h-7 mb:text-base text-primary-100 text-lg font-semibold border-2 border-primary-100 rounded-full mr-2 ml-2 cursor-pointer'
+                                            : ' flex justify-center items-center w-10 h-10 mb:w-7 mb:h-7 mb:text-base text-content-text text-lg font-semibold bg-gray-400 rounded-full mr-2 ml-2 cursor-default'
                                     }
                                     onClick={handleIncreasePage}
                                 >
