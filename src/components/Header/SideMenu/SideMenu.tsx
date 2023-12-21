@@ -32,9 +32,6 @@ function SideMenu({sideMenu, setSideMenu}: Props) {
                 <Link to={'/company-listing'} className=" flex items-center justify-between py-[10px] duration-300">
                     <p className=" text-sm duration-300 hover:text-primary-100">Tìm công ty</p>
                 </Link>
-                <Link to={'/blogs'} className=" flex items-center justify-between py-[10px]">
-                    <p className=" text-sm duration-300 hover:text-primary-100">Tin tức</p>
-                </Link>
                 <Link to={'/contact'} className=" flex items-center justify-between py-[10px]">
                     <p className=" text-sm duration-300 hover:text-primary-100">Liên hệ</p>
                 </Link>

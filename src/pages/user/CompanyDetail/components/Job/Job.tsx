@@ -41,25 +41,25 @@ function Job(props: Props) {
                                         <div className=' flex flex-col gap-[4px]'>
                                             <div className=' flex items-center gap-[10px] '>
                                                 <div className='w-[10px] h-[10px] bg-primary-100 rounded-full'></div>
-                                                <p className=' text-content-text'>Địa điểm: </p>
-                                                <h3 className=' text-content-title font-medium'>{company.location.city}</h3>
+                                                <p className=' text-content-text text-sm'>Địa điểm: </p>
+                                                <h3 className=' text-content-title text-sm font-medium'>{company.location.city}</h3>
                                             </div>
                                             <div className=' flex items-center gap-[10px] '>
                                                 <div className='w-[10px] h-[10px] bg-primary-100 rounded-full'></div>
-                                                <p className=' text-content-text'>Lương: </p>
-                                                <h3 className=' text-content-title font-medium'>{job.salary.toLocaleString('it')}đ / tháng</h3>
+                                                <p className=' text-content-text text-sm'>Lương: </p>
+                                                <h3 className=' text-content-title text-sm font-medium'>{job.salary.toLocaleString('it')}đ / tháng</h3>
                                             </div>
                                         </div>
                                         <div className=' flex flex-col gap-[4px]'>
                                             <div className=' flex items-center gap-[10px] '>
                                                 <div className='w-[10px] h-[10px] bg-primary-100 rounded-full'></div>
-                                                <p className=' text-content-text'>Hạn úng tuyển: </p>
-                                                <h3 className=' text-content-title font-medium'>{myDeadline}</h3>
+                                                <p className=' text-content-text text-sm'>Hạn úng tuyển: </p>
+                                                <h3 className=' text-content-title text-sm font-medium'>{myDeadline}</h3>
                                             </div>
                                             <div className=' flex items-center gap-[10px] '>
                                                 <div className='w-[10px] h-[10px] bg-primary-100 rounded-full'></div>
-                                                <p className=' text-content-text'>Trạng thái: </p>
-                                                <h3 className=' text-content-title font-medium'>{job.available === true ? 'Đang tuyển dụng' : 'Không còn tuyển dụng'}</h3>
+                                                <p className=' text-content-text text-sm'>Trạng thái: </p>
+                                                <h3 className=' text-content-title text-sm font-medium'>{job.available === true ? 'Đang tuyển dụng' : 'Không còn tuyển dụng'}</h3>
                                             </div>
                                         </div>
                                     </div>

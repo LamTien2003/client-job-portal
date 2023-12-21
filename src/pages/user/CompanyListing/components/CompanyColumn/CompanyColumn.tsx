@@ -47,7 +47,7 @@ function CompanyColumn(props: Props) {
                             <div className=' flex items-center gap-[50px] xl:gap-[35px] lg:gap-0 lg:flex-col lg:items-start tb:gap-0 tb:flex-col tb:items-start mb:gap-0 mb:flex-col mb:items-start '>
                                 <div className=' flex flex-col justify-start border-r border-r-primary-200 py-5 lg:w-[150px] lg:border-none lg:pt-5 lg:pb-2 tb:pt-5 tb:pb-2 mb:pt-5 mb:pb-2 tb:border-none mb:border-none '>
                                     <div className=' w-[200px] flex flex-col items-start ml-[70px] mb-8 gap-1.5 xl:w-[180px] lg:w-full tb:w-full tb:mb-full mb:w-full '>
-                                        <Link to={'/company-detail/' + company.id} className=' w-[180px] font-family-title text-lg text-content-title font-semibold duration-300 overflow-hidden text-ellipsis whitespace-nowrap block hover:text-primary-100 lg:text-base tb:text-base mb:text-base'>{company.companyName}</Link>
+                                        <Link to={'/company-detail/' + company.id} className=' w-[180px] font-family-title text-lg text-content-title font-semibold duration-300 overflow-hidden text-ellipsis whitespace-nowrap lg:overflow-visible tb:overflow-visible mb:overflow-visible block hover:text-primary-100 lg:text-base tb:text-base mb:text-base'>{company.companyName}</Link>
                                         <p className=' flex items-center text-content-text text-sm gap-2'>
                                             <img src='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/location.svg' />
                                             {company.location.city}

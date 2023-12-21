@@ -71,8 +71,8 @@ function JobDetail() {
                         >
                             {job?.photosJob.map((data, index) => {
                                 return (
-                                    <SwiperSlide className=' flex items-center justify-center ' key={index}>
-                                        <img ref={imgRef} className=' rounded-md object-cover ' src={data} />
+                                    <SwiperSlide className=' w-full h-full flex items-center justify-center ' key={index}>
+                                        <img ref={imgRef} className=' flex items-center justify-center rounded-md object-cover ' src={data} />
                                     </SwiperSlide>
                                 );
                             })}
@@ -99,16 +99,19 @@ function JobDetail() {
                             <Swiper
                                 breakpoints={{
                                     0: {
-                                        spaceBetween: 20,
-                                        slidesPerView: 2,
+                                        slidesPerView: 1,
                                     },
                                     870: {
                                         spaceBetween: 20,
-                                        slidesPerView: 4,
+                                        slidesPerView: 1,
                                     },
-                                    1400: {
-                                        spaceBetween: 20,
-                                        slidesPerView: 5,
+                                    1500: {
+                                        spaceBetween: 30,
+                                        slidesPerView: 3,
+                                    },
+                                    1912: {
+                                        spaceBetween: 30,
+                                        slidesPerView: 4,
                                     },
                                 }}
                                 // modules={[Pagination, Navigation]}
@@ -117,10 +120,10 @@ function JobDetail() {
                                     return (
                                         <SwiperSlide
                                             onClick={() => setIsImgDetail(!isImgDetail)}
-                                            className=" max-w-[20%] max-h-[200px] cursor-pointer"
+                                            className=" cursor-pointer"
                                             key={index}
                                         >
-                                            <img className=" w-[300px] h-[200px] rounded-md " src={data} />
+                                            <img className="w-full h-[180px] rounded-md object-cover" src={data} />
                                         </SwiperSlide>
                                     );
                                 })}

@@ -27,8 +27,8 @@ function JobGutter(props: Props) {
                                         className=" w-10 h-10 rounded-full mr-3 object-cover"
                                         src={job.postedBy.photo}
                                     />
-                                    <div className="flex flex-col">
-                                        <Link to={'/job-detail/' + job._id} className=" text-content-title font-semibold text-lg duration-300 hover:text-primary-100 xl:text-base mb:text-cb">
+                                    <div className="w-full flex flex-col">
+                                        <Link to={'/job-detail/' + job._id} className=" w-[90%] text-content-title font-semibold text-lg overflow-hidden text-ellipsis whitespace-nowrap duration-300 hover:text-primary-100 xl:text-base mb:text-cb">
                                             {job.title}
                                         </Link>
                                         <div className=" font-family-title text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start lg:flex-col lg:items-start tb:flex-row mb:flex-col mb:items-start mb:text-xs ">

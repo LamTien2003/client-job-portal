@@ -15,24 +15,24 @@ function CompanyGutter(props: Props) {
                 const date = new Date(company.establishDate)
                 const myEstablistDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() 
                 return (
-                    <Link to={'/company-detail/' + company._id} key={company._id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full cursor-default ">
+                    <Link to={'/company-detail/' + company._id} key={company._id} className=" w-6/12 pl-3 pr-3 mb-6 tb:w-full mb:w-full cursor-default ">
                         <div className=" border-[#eee] border rounded relative duration-300 cursor-pointer hover:border-primary-100">
                             <img
                                 className=" w-full h-[240px] object-cover rounded tb:w-full"
                                 src={company.coverPhoto}
                                 // src='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/bg/job-list-1.png'
                             />
-                            <div className=" px-4 mt-5 mb-5 flex items-center justify-between">
-                                <div className=' flex items-center'>
+                            <div className=" w-full px-4 mt-5 mb-5 flex items-center justify-between">
+                                <div className=' w-full flex items-center'>
                                     <img
                                         className=" w-10 h-10 rounded-full mr-3 object-cover"
                                         src={company.photo}
                                     />
-                                    <div className="flex flex-col">
-                                        <Link to={'/company-detail/'+ company.id} className=" text-content-title font-semibold text-lg duration-300 hover:text-primary-100 xl:text-base mb:text-cb">
+                                    <div className="flex flex-col w-full">
+                                        <Link to={'/company-detail/'+ company.id} className="w-[90%] block text-content-title font-semibold text-lg overflow-hidden text-ellipsis whitespace-nowrap duration-300 hover:text-primary-100 mb:text-base">
                                             {company.companyName}
                                         </Link>
-                                        <div className=" text-content-text text-sm font-medium flex items-center xl:flex-col xl:items-start tb:flex-row mb:text-xs ">
+                                        <div className=" text-content-text text-sm font-medium flex items-center tb:flex-row mb:text-xs ">
                                             <img className=' mr-1.5' src='https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/location.svg' />
                                             {company.location.city}
                                         </div>
@@ -73,13 +73,13 @@ function CompanyGutter(props: Props) {
                                     </p>
                                 </div>
                             </div>
-                            <div className=" mx-4 mt-5 mb-4 flex relative">
+                            <div className=" mx-4 mt-5 mb-4 flex items-center justify-between relative lg:flex-col lg:items-start lg:gap-[20px] mb:flex-col mb:items-start mb:gap-[10px]">
                                 <p className=" text-content-text text-base font-medium">
-                                    Đang tuyển: <span className=" text-primary-100 font-bold">{company.totalJobCreated} (công việc)</span>
+                                    Đang tuyển: <span className=" text-primary-100 font-bold lg:text-sm">{company.totalJobCreated} (công việc)</span>
                                 </p>
 
-                                <div className=" group bottom-0 right-0 absolute cursor-pointer ">
-                                    <div className=" border border-primary-100 pr-5 pl-5 pt-1 pb-1 rounded-md group duration-300 hover:bg-primary-100 right-0 mb:static mb:mt-3 mb:ml-2">
+                                <div className=" group cursor-pointer ">
+                                    <div className=" border border-primary-100 px-3 pt-1 pb-1 rounded-md group duration-300 hover:bg-primary-100 right-0 ">
                                         <Link
                                             to={'/company-detail/' + company.id}
                                             className=" text-primary-100 flex items-center duration-300 group-hover:text-white group-hover:cursor-pointer "

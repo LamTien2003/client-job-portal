@@ -23,7 +23,7 @@ function CompanyInfo(props: Props) {
                     />
                 </div>
             </div>
-            <div className=" w-full pt-[30px] pr-[30px] pl-[30px] pb-12 mr-auto ml-auto flex justify-between lg:flex-col tb:flex-col mb:flex-col">
+            <div className=" w-full pt-[30px] pr-[30px] pl-[30px] pb-12 mr-auto ml-auto flex justify-between lg:flex-col lg:mt-[50px] tb:mt-[50px] mb:mt-[50px] tb:flex-col mb:flex-col">
                 <div className=" flex flex-col lg:mb-2 tb:mb-2 mb:mb-2">
                     <h1 className=" text-content-title text-2xl font-family-title font-semibold mb-2.5">{company.companyName}</h1>
                     <div className=" flex mb:flex-col">
