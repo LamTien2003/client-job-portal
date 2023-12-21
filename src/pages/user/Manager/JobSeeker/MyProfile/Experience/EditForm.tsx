@@ -177,9 +177,9 @@ const EditForm = ({ handleOpen, open, experienceToEdit }: EditForm) => {
     const dateToValue: any = dayjs(formik.values.dateTo);
 
     return (
-        <Dialog size="lg" open={open} handler={handleOpen}>
+        <Dialog size="lg" open={open} handler={handleOpen} className="overflow-y-auto max-h-screen">
             {isLoading && <Loader />}
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-2xl">
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-xl">
                 Cập nhật kinh nghiệm
             </DialogHeader>
             <form onSubmit={formik.handleSubmit}>

@@ -171,8 +171,8 @@ const EditForm = ({ handleOpen, open, certificateToEdit }: EditForm) => {
     const dateToValue: any = dayjs(formik.values.dateTo);
 
     return (
-        <Dialog size="lg" open={open} handler={handleOpen}>
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-2xl">
+        <Dialog size="lg" open={open} handler={handleOpen} className="overflow-y-auto max-h-screen">
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-xl">
                 Cập nhật chứng chỉ
             </DialogHeader>
             <form onSubmit={formik.handleSubmit}>

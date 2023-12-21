@@ -55,25 +55,25 @@ const Form = ({ handleOpen, open }: FormIntro) => {
         <>
             <Dialog className="rounded-sm" size="lg" open={open} handler={handleOpen}>
                 {isLoading && <Loader />}
-                <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">
+                <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-xl mb:px-3">
                     Giới thiệu bản thân
                 </DialogHeader>
                 <form onSubmit={formik.handleSubmit}>
-                    <DialogBody divider className="p-8">
+                    <DialogBody divider className="p-8 mb:p-3">
                         <div className="flex gap-2 mb-5 text-lg mb:flex-col">
-                            <div className="flex items-center gap-2 text-primary-100 font-title font-family-text tb:items-start lg:items-start">
-                                <div className="text-2xl">
+                            <div className="flex items-center gap-2 text-primary-100 font-title font-family-text tb:items-start lg:items-start mb:text-base">
+                                <div className="text-2xl mb:text-xl">
                                     <MdTipsAndUpdates />
                                 </div>
                                 Mẹo:
                             </div>
-                            <p className="text-content-text font-normal font-family-text mb:text-base">
+                            <p className="text-content-text font-normal font-family-text mb:text-sm">
                                 Tóm tắt kinh nghiệm chuyên môn, chú ý làm nổi bật các kỹ năng và điểm mạnh.
                             </p>
                         </div>
                         <textarea
                             disabled={isLoading}
-                            className="font-family-text font-medium border-primary-100 border-2 outline-none w-full p-3 rounded-md"
+                            className="font-family-text font-medium border-primary-100 border-2 outline-none w-full p-3 rounded-md mb:text-sm"
                             name="introduce"
                             value={formik.values.introduce}
                             onBlur={formik.handleBlur}
@@ -84,7 +84,9 @@ const Form = ({ handleOpen, open }: FormIntro) => {
 
                         <div className="mt-1 text-content-text font-semibold font-family-text mb:text-sm">
                             {formik.touched.introduce && formik.errors.introduce ? (
-                                <div className="text-red-500 text-sm font-family-text">{formik.errors.introduce}</div>
+                                <div className="text-red-500 text-sm font-family-text mb:text-sm">
+                                    {formik.errors.introduce}
+                                </div>
                             ) : null}
                         </div>
                     </DialogBody>
