@@ -24,9 +24,9 @@ function JobSummary(props: Props) {
     const isjs = isJobSeeker(currentUser);
 
     const dateStart = new Date(job.createdAt);
-    const startDate = dateStart.getDate() + ' / ' + (dateStart.getMonth() + 1) + ' / ' + dateStart.getFullYear();
+    const startDate = dateStart.getDate() + '/' + (dateStart.getMonth() + 1) + '/' + dateStart.getFullYear();
     const dateEnd = new Date(job.deadline);
-    const endDate = dateEnd.getDate() + ' / ' + (dateEnd.getMonth() + 1) + ' / ' + dateEnd.getFullYear();
+    const endDate = dateEnd.getDate() + '/' + (dateEnd.getMonth() + 1) + '/' + dateEnd.getFullYear();
 
     const handleApply = async () => {
         if (!currentUser) {

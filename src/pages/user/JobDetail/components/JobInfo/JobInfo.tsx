@@ -9,12 +9,12 @@ function JobInfo(props: Props) {
     return (
         <div className=" w-2/3 pl-3 pr-3 lg:w-full tb:w-full mb:w-full ">
             <div className=" h-1.5 bg-primary-100 rounded-t-lg"></div>
-            <div className=" border-b border-[#eee] pt-6 pb-6 pr-4 rounded-b-lg pl-4 mb-8 flex justify-between bg-[#f8f8f8] mb:flex-col">
-                <div className=" flex mb:mb-7">
-                    <div className=" flex items-center ">
-                        <img className=" w-10 h-10 rounded-full mr-2.5 object-cover " src={job.postedBy.photo} />
-                        <div className=" flex flex-col">
-                            <h3 className=" text-content-title font-family-title text-lg font-semibold cursor-pointer duration-300 hover:text-primary-100 ">
+            <div className=" border-b border-[#eee] pt-6 pb-6 pr-4 rounded-b-lg pl-4 mb-8 flex items-center justify-between bg-[#f8f8f8] xl:flex-col xl:items-start lg:flex-col lg:items-start tb:flex-col tb:items-start mb:items-start mb:flex-col">
+                <div className=" w-full flex xl:mb-7 lg:mb-7 tb:mb-7 mb:mb-7">
+                    <div className=" w-full flex items-center mb:flex-col mb:items-start ">
+                        <img className=" w-10 h-10 rounded-full mr-2.5 object-cover mb:mx-auto " src={job.postedBy.photo} />
+                        <div className=" w-full flex flex-col">
+                            <h3 className=" w-[220px] xl:w-full lg:w-full tb:w-full mb:w-full text-content-title font-family-title text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer duration-300 hover:text-primary-100 ">
                                 {job.title}
                             </h3>
                             <Link to={'/company-detail/' + job.postedBy.id} className=" text-content-text text-sm font-medium duration-300 hover:text-primary-100 lg:text-sm">
@@ -31,18 +31,16 @@ function JobInfo(props: Props) {
                                 src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/map-2.svg"
                             />
                             <p className=" text-content-text text-base font-normal ml-4">
-                                <span className=" text-content-title font-medium mr-1.5">Địa điểm:</span>
                                 {job.postedBy.location.city}
                             </p>
                         </div>
                         <div className=" flex items-center relative">
                             <img
                                 className=" mr-1.5 top-[5px] absolute"
-                                src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/category-2.svg"
+                                src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/salary-2.svg"
                             />
                             <p className=" text-content-text text-base font-normal ml-5">
-                                <span className=" text-content-title font-medium mr-1.5">Ngành:</span>
-                                {job.type.categoryName}
+                                {job.salary.toLocaleString('it')}vnđ / tháng
                             </p>
                         </div>
                     </div>
@@ -59,11 +57,11 @@ function JobInfo(props: Props) {
                         <div className=" flex items-center relative">
                             <img
                                 className=" mr-1.5 top-[5px] absolute"
-                                src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/salary-2.svg"
+                                src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/category-2.svg"
                             />
                             <p className=" text-content-text text-base font-normal ml-5">
-                                <span className=" text-content-title font-medium mr-1.5">Lương:</span>
-                                {job.salary.toLocaleString('it')}vnđ / tháng
+                                <span className=" text-content-title font-medium mr-1.5">Ngành:</span>
+                                {job.type.categoryName}
                             </p>
                         </div>
                     </div>
