@@ -9,8 +9,13 @@ import { useApproveJobMutation, useDeleteJobMutation } from '@/services/jobsApiS
 import { toast } from 'react-toastify';
 import { AiFillDelete } from 'react-icons/ai';
 import Loader from '@/components/Loader/Loader';
+import ConfirmDelete from '@/components/Dialog/ConfirmDelete';
+
 function Jobs() {
     const [data, setData] = useState<Job[]>([]);
+    const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
+    const [agree, setAgree] = useState<boolean>(false);
+    const [id, setId] = useState<string>('');
     const [page, setPage] = useState<number>(1);
 
     const [total, setTotal] = useState<number>(0);
@@ -100,16 +105,22 @@ function Jobs() {
         setSearchValue(event.target.value);
     };
 
-    const deleteJobHandler = async (id: string) => {
-        try {
-            await deleteJob(id);
-            toast.success('Xoá thành công!');
-        } catch (error: any) {
-            if (error.status === 400) {
-                toast.error(error.data.msg);
+    useEffect(() => {
+        if (agree) {
+            if (id) {
+                deleteJob(id)
+                    .unwrap()
+                    .then(() => {
+                        toast.success('Xoá thành công!');
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting:', error);
+                        toast.error('Đã xảy ra lỗi khi xoá.');
+                    })
+                    .finally(() => setAgree(false));
             }
         }
-    };
+    }, [agree]);
 
     const approveJobHandler = async (id: string) => {
         try {
@@ -173,7 +184,10 @@ function Jobs() {
                 <div className="flex gap-4">
                     <button
                         className="bg-red-500 text-white px-2 py-1 rounded-lg text-lg hover:bg-red-200 hover:text-black duration-300"
-                        onClick={() => deleteJobHandler(params.row.id)}
+                        onClick={() => {
+                            setOpenConfirmDelete(true);
+                            setId(params.row.id);
+                        }}
                     >
                         <AiFillDelete />
                     </button>
@@ -274,6 +288,9 @@ function Jobs() {
                     pageSizeOptions={[3, 7, 9, 12, 14]}
                 />
             </div>
+            {openConfirmDelete && (
+                <ConfirmDelete open={openConfirmDelete} onSetOpen={setOpenConfirmDelete} onSetAgree={setAgree} />
+            )}
         </div>
     );
 }
