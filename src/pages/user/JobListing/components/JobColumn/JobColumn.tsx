@@ -28,10 +28,6 @@ function JobColumn(props: Props) {
                                         <p className=" text-content-text text-sm cursor-pointer mr-3 duration-300 hover:text-primary-100 lg:text-sm tb:text-base mb:text-base">
                                             {job.postedBy.location.city}
                                         </p>
-                                        <div className=' flex items-center xl:hidden lg:hidden tb:hidden mb:hidden'>
-                                            <div className=' w-[8px] h-[8px] rounded-full bg-[#F3E8C1] mr-1'></div>
-                                            <p className=' text-content-title text-xs font-medium tb:text-base mb:text-base'>Full time</p>
-                                        </div>
                                     </div>
                                 </div>
                                 <div className=' w-px h-[50px] bg-[#AEF0F2] mx-[30px] tb:hidden mb:hidden '></div>

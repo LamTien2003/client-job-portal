@@ -6,6 +6,8 @@ type Props = {
 function JobInfo(props: Props) {
     const { data: job } = props;
 
+    const date = new Date(job.deadline)
+    const myDeadline = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`
     return (
         <div className=" w-2/3 pl-3 pr-3 lg:w-full tb:w-full mb:w-full ">
             <div className=" h-1.5 bg-primary-100 rounded-t-lg"></div>
@@ -51,7 +53,7 @@ function JobInfo(props: Props) {
                                 src="https://demo-egenslab.b-cdn.net/html/jobes/preview/assets/images/icon/company-2.svg"
                             />
                             <p className=" text-content-text text-base font-normal ml-5">
-                                <span className=" text-content-title font-medium mr-1.5">Loại:</span>Full time
+                                <span className=" text-content-title font-medium mr-1.5">Thời hạn:</span>{myDeadline}
                             </p>
                         </div>
                         <div className=" flex items-center relative">

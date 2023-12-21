@@ -12,7 +12,7 @@ function RelatedJob({data}: {data: Job}) {
                 <img className=" w-[50px] h-[50px] rounded-full mr-5 object-cover mb:mx-auto mb:mb-5" src={data.postedBy.photo} />
                 <div className=" w-full flex flex-col border-b border-[#eee] pb-3">
                     <h3 className=" w-[250px] tb:w-full mb:w-full font-family-title text-content-title text-lg font-semibold mb-1 overflow-hidden text-ellipsis whitespace-nowrap block duration-300 cursor-pointer hover:text-primary-100 ">{data.title}</h3>
-                    <p className=" text-sm">Full time</p>
+                    <p className=" text-sm">{data.postedBy.companyName}</p>
                 </div>
             </div>
             <div className=" bg-white pt-5 pb-5 pr-5 pl-5 flex flex-col">

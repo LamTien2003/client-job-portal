@@ -71,10 +71,6 @@ function JobGutter(props: Props) {
                                     </div>
                                 </div>
                                 <div className=" flex items-center justify-between mt-5">
-                                    <div className=" text-content-title text-sm font-medium bg-gray-300 rounded-3xl py-1.5 px-6 lg:text-xs mb:px-4 mb:py-[5px] mb:text-xs mb:hidden ">
-                                        Full time
-                                    </div>
-
                                     <div className=" group cursor-pointer ">
                                         <div className=" border border-primary-100 pr-5 pl-5 pt-1 pb-1 rounded-md group duration-300 hover:bg-primary-100 right-0 ">
                                             <Link
