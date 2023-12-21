@@ -12,6 +12,7 @@ import Experiences from './Experiences';
 import Projects from './Projects';
 import Certificate from './Certificate';
 import Introduce from './Introduce';
+import { MdClose } from 'react-icons/md';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -40,18 +41,28 @@ const DetailProfileCan = ({ id }: { id: string }) => {
 
     const list = (anchor: Anchor) => (
         <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 600 }}
+            // sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 100 }}
             role="presentation"
             onClick={toggleDrawer(anchor, true)}
             onKeyDown={toggleDrawer(anchor, true)}
-            className="flex flex-col gap-1 font-family-text"
+            className="flex flex-col gap-1 font-family-text w-[600px] mb:w-full"
         >
-            <div className="p-3 font-semibold uppercase text-xl font-family-title text-center bg-primary-100 text-white ">
+            <div className="flex items-center gap-2 justify-between p-3 font-semibold uppercase text-xl font-family-title text-center bg-primary-100 text-white ">
                 Thông tin ứng viên
+                <button
+                    onClick={(event) => {
+                        event.stopPropagation(); // Ngăn chặn sự kiện lan truyền đến div cha
+                        toggleDrawer(anchor, false)(event);
+                    }}
+                    className="p-1 bg-red-300 rounded-lg text-red-800 hover:bg-red-400 duration-200 "
+                >
+                    <MdClose />
+                </button>
             </div>
+
             <div className="flex flex-col p-3 gap-4">
                 <ContactInfo info={info} />
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-6 mb:grid-cols-1">
                     <Introduce info={info} />
                     <Skills info={info} />
                     <Educate info={info} />
@@ -69,7 +80,7 @@ const DetailProfileCan = ({ id }: { id: string }) => {
         <div>
             {isLoading && <Loader />}
             <button
-                className="p-2 text-primary-100 font-semibold border-2 border-primary-100 rounded-md hover:text-blue-800  hover:border-blue-800  duration-300"
+                className="p-2 text-primary-100 font-semibold border-2 border-primary-100 rounded-md hover:text-blue-800  hover:border-blue-800  duration-300 mb:text-sm mb:p-1"
                 onClick={toggleDrawer(anchor, true)}
             >
                 Xem thông tin

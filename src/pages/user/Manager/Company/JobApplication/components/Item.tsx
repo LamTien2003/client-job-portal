@@ -24,7 +24,7 @@ const Item = ({ candicate }: { candicate: any }) => {
     };
     return (
         <>
-            <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-4 mb:grid mb:grid-cols-2  ">
+            <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-lg font-family-text gap-4 mb:grid mb:grid-cols-1">
                 {isLoading && <Loader />}
                 <div className="flex gap-4 w-[40%] items-center mb:w-full tb:w-full ">
                     <img
@@ -33,8 +33,8 @@ const Item = ({ candicate }: { candicate: any }) => {
                         alt="company"
                     />
 
-                    <div className="flex gap-6 ">
-                        <div className="flex flex-col gap-2">
+                    <div className="flex gap-6">
+                        <div className="flex flex-col gap-2 mb:gap-1">
                             <div className="flex gap-2">
                                 <span className="font-title text-content-title">Họ tên:</span>
                                 <p>{candicate.candicate.firstName}</p>
@@ -60,7 +60,7 @@ const Item = ({ candicate }: { candicate: any }) => {
                 </div>
                 <div className="flex  gap-4 w-[30%] items-center mb:w-full tb:w-full ">
                     <img
-                        className="w-16 h-16 bg-[#fba555] p-3 rounded-lg object-contain"
+                        className="w-16 h-16 mb:w-14 mb:h-14 bg-[#fba555] p-3 rounded-lg object-contain"
                         src={images.logo.userFg}
                         alt={images.logo.userFg}
                     />
@@ -84,7 +84,7 @@ const Item = ({ candicate }: { candicate: any }) => {
 
                 <div className="flex flex-col gap-2 font-medium w-[20%] justify-end mb:w-full tb:w-full ">
                     {candicate.status === 'pending' ? (
-                        <div className="flex flex-col gap-2 mb:flex-row">
+                        <div className="flex flex-col gap-2 mb:flex-row mb:w-full mb:justify-end mb:text-sm">
                             <button
                                 onClick={handleOpen}
                                 className="bg-blue-400 p-2 rounded-md text-white font-semibold hover:bg-black duration-200"

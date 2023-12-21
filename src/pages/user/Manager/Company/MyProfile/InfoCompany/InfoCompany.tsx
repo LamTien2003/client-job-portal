@@ -25,19 +25,19 @@ const InfoCompany = () => {
     return (
         <>
             <Card handleOpen={handleOpen}>
-                <div className="flex flex-col gap-4 text-content-title font-family-title">
+                <div className="flex flex-col gap-4 text-content-title font-family-title mb:text-sm">
                     <div className="flex gap-2 items-center">
                         <span className="font-title text-primary-100">Tên công ty:</span>
-                        <h5 className="font-medium text-content-title text-xl">{company?.companyName}</h5>
+                        <h5 className="font-medium text-content-title text-xl  mb:text-sm">{company?.companyName}</h5>
                     </div>
 
                     <div className="flex gap-2 items-center">
                         <span className="font-title text-primary-100">Ngày thành lập:</span>
-                        <h5 className="font-medium text-content-title text-xl">{date}</h5>
+                        <h5 className="font-medium text-content-title text-xl mb:text-sm">{date}</h5>
                     </div>
                     <div className="flex gap-2 items-center">
                         <span className="font-title text-primary-100">Quy mô:</span>
-                        <h5 className="font-medium text-content-title text-xl">
+                        <h5 className="font-medium text-content-title text-xl mb:text-sm">
                             {company?.companySize.from} - {company?.companySize.to} thành viên
                         </h5>
                     </div>
@@ -45,7 +45,7 @@ const InfoCompany = () => {
                     <div className="flex gap-2 items-center">
                         <span className="font-title text-primary-100">Website:</span>
                         <a
-                            className="text-primary-100 font-medium underline text-lg"
+                            className="text-primary-100 font-medium underline text-lg mb:text-sm"
                             href={company?.website}
                             target="_blank"
                         >
@@ -54,7 +54,7 @@ const InfoCompany = () => {
                     </div>
                     <div className="flex flex-col gap-2">
                         <span className="font-title text-primary-100">Mô tả:</span>
-                        <div className="whitespace-pre-line font-medium text-content-title text-lg">
+                        <div className="whitespace-pre-line font-medium text-content-title text-lg mb:text-sm">
                             {company?.description}
                         </div>
                     </div>

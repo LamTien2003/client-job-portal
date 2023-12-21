@@ -249,7 +249,7 @@ const FormPostJob = () => {
             <div className="flex justify-center">
                 <button
                     type="submit"
-                    className="w-1/2 mt-10 text-sm font-semibold text-white rounded-md uppercase py-3 px-8 bg-primary-100 hover:bg-black duration-300"
+                    className="w-1/2 mt-10 text-sm font-semibold text-white rounded-md uppercase py-3 px-8 bg-primary-100 hover:bg-black duration-300 mb:w-full"
                     disabled={isLoading || isFormSubmitted}
                 >
                     {isLoading ? 'Đang đăng ...' : 'Đăng công việc'}
