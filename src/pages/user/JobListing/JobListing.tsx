@@ -139,13 +139,13 @@ const JobListing = () => {
             <div className=" max-w-7xl font-family-text ml-auto mr-auto pt-[50px] flex justify-between xl:mx-7 xl:max-w-7xl lg:max-w-4xl lg:flex-col lg:ml-auto lg:mr-auto tb:flex-col tb:max-w-3xl mb:flex-col mb:max-w-2xl">
                 <Sidebar filter={handleFilter} />
                 <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:mx-auto lg:mx-auto tb:mx-auto mb:mx-auto lg:pr-0 lg:w-10/12 tb:w-10/12 mb:w-11/12">
-                    <div className=" mb-6 pl-3 pr-3 flex items-center justify-between">
+                    <div className=" mb-6 pl-3 pr-3 flex items-center justify-between mb:flex-col mb:items-start">
                         <p className="text-content-text font-medium pt-2 pb-2">
                             Đang hiển thị <span className=" text-primary-100 font-semibold">{jobList.length}</span> công
                             việc
                         </p>
                         <div>
-                            <button className=" mr-5 ml-7" onClick={() => setListStyle('gutter')}>
+                            <button className=" mr-5 ml-7 mb:ml-0" onClick={() => setListStyle('gutter')}>
                                 <ListGutter color={listStyle} />
                             </button>
                             <button onClick={() => setListStyle('column')}>

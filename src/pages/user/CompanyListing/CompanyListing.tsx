@@ -80,13 +80,13 @@ function CompanyListing() {
 
                 {/* list */}
                 <div className=" w-3/4 ml-3 mr-3 flex flex-col xl:ml-auto xl:mr-auto lg:pr-0 lg:w-10/12 lg:mx-auto tb:w-10/12 tb:mx-auto mb:w-11/12 mb:mx-auto">
-                    <div className=" mb-6 pl-3 pr-3 flex justify-between ">
+                    <div className=" mb-6 pl-3 pr-3 flex justify-between mb:flex-col mb:items-start ">
                         <p className="text-content-text font-medium pt-2 pb-2">
                             Đang hiển thị <span className=" text-primary-100 font-semibold">{totalCompany}</span> công
                             ty
                         </p>
                         <div className=' flex items-center'>
-                            <button className=" mr-5 ml-7" onClick={() => setListStyle('gutter')}>
+                            <button className=" mr-5 ml-7 mb:ml-0" onClick={() => setListStyle('gutter')}>
                                 <ListGutter color={listStyle} />
                             </button>
                             <button onClick={() => setListStyle('column')}>
