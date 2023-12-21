@@ -124,7 +124,7 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
     }, [isLoading]);
 
     return (
-        <Dialog size="lg" open={open} handler={handleOpen}>
+        <Dialog size="lg" open={open} handler={handleOpen} className="overflow-y-auto max-h-screen">
             <DialogHeader className="px-8 bg-primary-200 text-2xl font-family-title">Thông tin cá nhân</DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-4 px-8">

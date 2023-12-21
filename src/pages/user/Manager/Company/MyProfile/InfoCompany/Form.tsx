@@ -129,9 +129,11 @@ const FormInfo = ({ handleOpen, open }: FormInfo) => {
 
     const establishDateValue: any = dayjs(formik.values.establishDate);
     return (
-        <Dialog size="lg" open={open} handler={handleOpen}>
+        <Dialog size="lg" open={open} handler={handleOpen} className="overflow-y-auto max-h-screen">
             {isLoading && <Loader />}
-            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title">Thông tin công ty</DialogHeader>
+            <DialogHeader className="px-8 bg-primary-200 text-3xl font-family-title mb:text-xl">
+                Thông tin công ty
+            </DialogHeader>
             <form onSubmit={formik.handleSubmit}>
                 <DialogBody divider className="flex flex-col items-center justify-center gap-2 px-8">
                     <CoverPhoto formik={formik} />
