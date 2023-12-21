@@ -24,7 +24,7 @@ const JobListing = () => {
     const [filter, setFilter] = useState<filterObject>({
         name: '',
         idCat: '',
-        salary: { min: 1000000, max: 10000000 },
+        salary: { min: 1000000, max: 100000000 },
         city: '',
         skills: [],
     });
@@ -49,6 +49,7 @@ const JobListing = () => {
             page,
             limit: 6,
             'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
             sort: '-createdAt',
             type: filter.idCat,
             p: filter.city,
@@ -57,6 +58,7 @@ const JobListing = () => {
             page,
             limit: 6,
             'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
             sort: '-createdAt',
             type: filter.idCat,
             "skillsRequire[in]": filter.skills
@@ -65,6 +67,7 @@ const JobListing = () => {
             page,
             limit: 6,
             'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
             sort: '-createdAt',
             p: filter.city,
             "skillsRequire[in]": filter.skills
@@ -73,6 +76,7 @@ const JobListing = () => {
             page,
             limit: 6,
             'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
             sort: '-createdAt',
             type: filter.idCat,
         } : filter.idCat === '' && filter.city !== '' && filter.skills.length === 0 ? {
@@ -80,6 +84,7 @@ const JobListing = () => {
             page,
             limit: 6,
             'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
             sort: '-createdAt',
             p: filter.city,
         } : filter.idCat === '' && filter.city === '' && filter.skills.length !== 0 ? {
@@ -87,6 +92,7 @@ const JobListing = () => {
             page,
             limit: 6,
             'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
             sort: '-createdAt',
             "skillsRequire[in]": filter.skills
         } : {
@@ -94,6 +100,7 @@ const JobListing = () => {
             page,
             limit: 6,
             'salary[gte]': filter.salary.min,
+            'salary[lte]': filter.salary.max,
             sort: '-createdAt',
         },
     );
@@ -132,6 +139,9 @@ const JobListing = () => {
     useLayoutEffect(() => {
         scrollTo(0, 0);
     }, []);
+
+    console.log(filter.salary.min)
+    console.log(filter.salary.max)
 
     return (
         <>

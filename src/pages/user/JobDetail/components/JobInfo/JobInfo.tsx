@@ -17,7 +17,7 @@ function JobInfo(props: Props) {
                             <h3 className=" w-[220px] xl:w-full lg:w-full tb:w-full mb:w-full text-content-title font-family-title text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer duration-300 hover:text-primary-100 ">
                                 {job.title}
                             </h3>
-                            <Link to={'/company-detail/' + job.postedBy.id} className=" text-content-text text-sm font-medium duration-300 hover:text-primary-100 lg:text-sm">
+                            <Link to={'/company-detail/' + job.postedBy.id} className=" w-full overflow-hidden text-ellipsis whitespace-nowrap text-content-text text-sm font-medium duration-300 hover:text-primary-100 lg:text-sm">
                                 {job.postedBy.companyName}
                             </Link>
                         </div>
