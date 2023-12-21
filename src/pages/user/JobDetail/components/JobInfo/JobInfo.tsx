@@ -10,8 +10,8 @@ function JobInfo(props: Props) {
         <div className=" w-2/3 pl-3 pr-3 lg:w-full tb:w-full mb:w-full ">
             <div className=" h-1.5 bg-primary-100 rounded-t-lg"></div>
             <div className=" border-b border-[#eee] pt-6 pb-6 pr-4 rounded-b-lg pl-4 mb-8 flex items-center justify-between bg-[#f8f8f8] xl:flex-col xl:items-start lg:flex-col lg:items-start tb:flex-col tb:items-start mb:items-start mb:flex-col">
-                <div className=" w-[220px] xl:w-full lg:w-full tb:w-full flex xl:mb-7 lg:mb-7 tb:mb-7 mb:mb-7">
-                    <div className=" flex items-center mb:flex-col mb:items-start ">
+                <div className=" w-[220px] xl:w-full lg:w-full tb:w-full mb:w-full flex xl:mb-7 lg:mb-7 tb:mb-7 mb:mb-7">
+                    <div className="w-[220px] xl:w-full lg:w-full tb:w-full mb:w-full flex items-center mb:flex-col mb:items-start ">
                         <img className=" w-10 h-10 rounded-full mr-2.5 object-cover mb:mx-auto " src={job.postedBy.photo} />
                         <div className=" mb:w-full flex flex-col">
                             <h3 className=" w-[220px] xl:w-full lg:w-full tb:w-full mb:w-full text-content-title font-family-title text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer duration-300 hover:text-primary-100 ">
